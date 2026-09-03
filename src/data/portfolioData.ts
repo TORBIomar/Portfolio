@@ -46,8 +46,7 @@ export const PROJECTS_DATA: Project[] = [
       { label: "Processing", value: "Off-Thread Workers" }
     ],
     techStack: ["React", "Three.js", "OpenCascade.js", "TypeScript", "Tailwind CSS"],
-    githubUrl: "https://github.com/TORBIomar",
-    liveUrl: "https://github.com/TORBIomar",
+    githubUrl: "https://github.com/TORBIomar/3D-CAD-LASER-CUTTING",
     architectureDetails: {
       overview: "Combines an OpenCascade.js WebAssembly geometry engine with Three.js rendering. Heavy boundary representation (BREP) calculations and STEP exports run in background Web Workers to maintain interactive framerates.",
       keyDecisions: [
@@ -80,7 +79,6 @@ export const PROJECTS_DATA: Project[] = [
     ],
     techStack: ["Spring Boot", "React", "Gemini API", "ChromaDB", "MySQL", "REST APIs", "Tailwind CSS"],
     githubUrl: "https://github.com/TORBIomar",
-    liveUrl: "https://github.com/TORBIomar",
     architectureDetails: {
       overview: "Layered backend architecture separating relational document metadata (MySQL) from high-dimensional vector embeddings (ChromaDB), coordinated with Google Gemini API for generative context synthesis.",
       keyDecisions: [
@@ -112,8 +110,7 @@ export const PROJECTS_DATA: Project[] = [
       { label: "Frontend", value: "React + Tailwind" }
     ],
     techStack: ["Spring Boot", "React", "MySQL", "Tailwind CSS", "REST APIs", "TypeScript"],
-    githubUrl: "https://github.com/TORBIomar",
-    liveUrl: "https://github.com/TORBIomar",
+    githubUrl: "https://github.com/TORBIomar/RecruitmentPlatform",
     architectureDetails: {
       overview: "Built upon SOLID principles and clean architecture. Spring Boot domain services govern candidate lifecycle transitions with strict transactional boundaries and audit logs.",
       keyDecisions: [
@@ -146,7 +143,6 @@ export const PROJECTS_DATA: Project[] = [
     ],
     techStack: ["Spotify API", "JavaScript", "TypeScript", "React", "Tailwind CSS"],
     githubUrl: "https://github.com/TORBIomar",
-    liveUrl: "https://github.com/TORBIomar",
     architectureDetails: {
       overview: "Single-page utility utilizing Spotify's REST endpoints with asynchronous pagination queues and mathematical Fisher-Yates shuffle arrays.",
       keyDecisions: [
