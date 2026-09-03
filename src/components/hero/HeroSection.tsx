@@ -35,7 +35,7 @@ export const HeroSection: React.FC = () => {
                 {PERSONAL_INFO.role}
               </div>
               <h1 className="text-3xl sm:text-4xl xl:text-5xl font-mono font-bold tracking-tight text-foreground leading-[1.15]">
-                Engineering <span className="text-accent underline decoration-accent/40 decoration-wavy underline-offset-8">Scalable Full-Stack Systems</span> & Modern Web Platforms.
+                Engineering <span className="text-accent">Scalable Full-Stack Systems</span> & Modern Web Platforms.
               </h1>
             </div>
 
