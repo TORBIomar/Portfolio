@@ -1,0 +1,136 @@
+import React from 'react';
+import { ArrowRight, Briefcase, Server, Code2, Database, FileText } from 'lucide-react';
+import { PERSONAL_INFO } from '../../data/portfolioData';
+import { Button } from '../common/Button';
+import { TerminalWidget } from './TerminalWidget';
+
+export const HeroSection: React.FC = () => {
+  return (
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden tech-grid-pattern border-b border-border/60">
+      {/* Background radial gradient spotlight */}
+      <div 
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-accent/5 rounded-full blur-[120px] pointer-events-none" 
+        aria-hidden="true"
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* Left Column: Value Proposition & Engineering Narrative */}
+          <div className="lg:col-span-7 space-y-6">
+            
+            {/* Live Availability Telemetry Chip */}
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-card border border-border shadow-sm text-xs font-mono">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span>
+              </span>
+              <span className="text-foreground font-medium">Status:</span>
+              <span className="text-emerald-400 font-semibold">{PERSONAL_INFO.status}</span>
+            </div>
+
+            {/* Main Engineering Heading & Role Subtitle */}
+            <div className="space-y-2.5">
+              <div className="inline-block text-xs sm:text-sm font-mono font-bold text-accent tracking-wider uppercase bg-accent-subtle border border-accent-border px-3 py-1 rounded-md">
+                {PERSONAL_INFO.role}
+              </div>
+              <h1 className="text-4xl sm:text-5xl xl:text-6xl font-mono font-bold tracking-tight text-foreground leading-[1.15]">
+                Engineering <span className="text-accent underline decoration-accent/40 decoration-wavy underline-offset-8">Scalable Full-Stack Systems</span> & Modern Web Platforms.
+              </h1>
+            </div>
+
+            {/* Concrete Narrative Paragraph */}
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl font-sans">
+              I am <strong className="text-foreground font-semibold">{PERSONAL_INFO.name}</strong>, a {PERSONAL_INFO.role} at EMSI Rabat (2022 – Present). 
+              Experienced in architecting scalable web platforms, secure REST APIs with Spring Boot, database-backed systems, and modern interactive applications using clean, modular code.
+            </p>
+
+            {/* Quick Competency Badges */}
+            <div className="flex flex-wrap items-center gap-3 pt-1 text-xs font-mono text-slate-300">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-card/80 border border-border">
+                <Server className="w-3.5 h-3.5 text-accent" />
+                <span>Backend & REST APIs (Spring Boot, Django, Laravel)</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-card/80 border border-border">
+                <Code2 className="w-3.5 h-3.5 text-accent" />
+                <span>Modern Frontend (React, TypeScript, Tailwind)</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-card/80 border border-border">
+                <Database className="w-3.5 h-3.5 text-accent" />
+                <span>Databases & AI (Oracle, MySQL, ChromaDB, Gemini)</span>
+              </div>
+            </div>
+
+            {/* High Visibility CTAs */}
+            <div className="flex flex-wrap items-center gap-4 pt-4">
+              <a href="#projects" className="cursor-pointer">
+                <Button 
+                  variant="primary" 
+                  size="lg"
+                  icon={<ArrowRight className="w-4 h-4" />}
+                  iconPosition="right"
+                >
+                  Explore Featured Projects
+                </Button>
+              </a>
+
+              <a href="#experience" className="cursor-pointer">
+                <Button 
+                  variant="secondary" 
+                  size="lg"
+                  icon={<Briefcase className="w-4 h-4 text-accent" />}
+                >
+                  View Experience
+                </Button>
+              </a>
+
+              <a 
+                href={PERSONAL_INFO.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cursor-pointer"
+              >
+                <Button
+                  variant="outline"
+                  size="lg"
+                  icon={<FileText className="w-4 h-4 text-accent" />}
+                >
+                  Download CV
+                </Button>
+              </a>
+            </div>
+
+            {/* Production metrics bar */}
+            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-border/80 max-w-lg">
+              <div>
+                <div className="text-2xl font-mono font-bold text-accent">Full-Stack</div>
+                <div className="text-xs text-muted-foreground font-mono mt-0.5">Web Platforms & APIs</div>
+              </div>
+              <div>
+                <div className="text-2xl font-mono font-bold text-foreground">Spring Boot</div>
+                <div className="text-xs text-muted-foreground font-mono mt-0.5">Enterprise Architecture</div>
+              </div>
+              <div>
+                <div className="text-2xl font-mono font-bold text-foreground">EMSI Rabat</div>
+                <div className="text-xs text-muted-foreground font-mono mt-0.5">IIR (2022 – Present)</div>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Column: Interactive Terminal Preview */}
+          <div className="lg:col-span-5 w-full">
+            <div className="relative">
+              {/* Outer tech badge */}
+              <div className="absolute -top-3 right-4 px-2.5 py-0.5 rounded bg-accent text-background font-mono text-[10px] font-bold tracking-wider uppercase z-20 shadow-sm">
+                Live Dev Terminal
+              </div>
+              <TerminalWidget />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+};
