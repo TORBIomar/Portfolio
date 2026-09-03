@@ -78,7 +78,7 @@ export const PROJECTS_DATA: Project[] = [
       { label: "Architecture", value: "Modular REST" }
     ],
     techStack: ["Spring Boot", "React", "Gemini API", "ChromaDB", "MySQL", "REST APIs", "Tailwind CSS"],
-    githubUrl: "https://github.com/TORBIomar",
+    githubUrl: "https://github.com/TORBIomar/Virtual-Library",
     architectureDetails: {
       overview: "Layered backend architecture separating relational document metadata (MySQL) from high-dimensional vector embeddings (ChromaDB), coordinated with Google Gemini API for generative context synthesis.",
       keyDecisions: [
@@ -122,34 +122,35 @@ export const PROJECTS_DATA: Project[] = [
     }
   },
   {
-    id: "true-shuffler",
-    title: "True Shuffler",
-    subtitle: "Fair Randomization Music Playback Utility for Spotify",
+    id: "onssa-stock-management",
+    title: "ONSSA — Inventory & Stock Management System",
+    subtitle: "Internal Logistics, Inventory Tracking & Administrative Workflow System",
     category: "systems",
-    featured: false,
-    summary: "Music playback utility interacting directly with Spotify APIs, programmed with fair Fisher-Yates randomization algorithms and pagination logic for expansive playlists.",
-    description: "Overcomes Spotify's repetitive shuffle bias. Connects directly to user accounts via Spotify Web API, paginates through large playlists beyond standard API response limits, and applies true uniform randomization.",
+    featured: true,
+    summary: "Enterprise inventory and asset management platform developed during software engineering internship at ONSSA. Streamlines internal stock tracking, supplies allocation, and administrative approval workflows.",
+    description: "Engineered for the Office National de Sécurité Sanitaire des Produits Alimentaires (ONSSA) to digitalize and modernize regional administrative workflows. Centralizes asset allocations, office equipment tracking, inventory restock alerts, and automated requisition reporting with transactional consistency.",
     architecturalHighlights: [
-      "Developed a music playback utility interacting directly with Spotify APIs and user library data",
-      "Programmed fair randomization algorithms (Fisher-Yates) and pagination logic for large playlists and music libraries",
-      "Engineered asynchronous batch requests with rate-limit backoff handling",
-      "Client-side OAuth 2.0 PKCE authentication with zero credential persistence"
+      "Architected an internal inventory and supply management system to streamline ONSSA logistical operations",
+      "Designed normalized relational schemas and database procedures for audit tracking and inventory movements",
+      "Implemented automated stock threshold alerts, entry/exit logs, and administrative reporting dashboards",
+      "Structured modular MVC architecture ensuring maintainability and reliable role-based operational permissions"
     ],
     metrics: [
-      { label: "Shuffle Logic", value: "Fisher-Yates" },
-      { label: "Random Bias", value: "0% (Uniform)" },
-      { label: "API Integration", value: "Spotify Web API" },
-      { label: "Security", value: "OAuth 2.0 PKCE" }
+      { label: "Deployment", value: "ONSSA Division" },
+      { label: "Architecture", value: "Modular MVC" },
+      { label: "Database", value: "Relational SQL" },
+      { label: "Integrity", value: "ACID Transactions" }
     ],
-    techStack: ["Spotify API", "JavaScript", "TypeScript", "React", "Tailwind CSS"],
-    githubUrl: "https://github.com/TORBIomar",
+    techStack: ["PHP", "MySQL", "JavaScript", "Bootstrap", "HTML5/CSS3", "REST APIs"],
+    githubUrl: "https://github.com/TORBIomar/ONSSA-Stock-Management",
     architectureDetails: {
-      overview: "Single-page utility utilizing Spotify's REST endpoints with asynchronous pagination queues and mathematical Fisher-Yates shuffle arrays.",
+      overview: "Modular MVC backend architecture with relational persistence layer handling asset categorization, stock movements, and approval lifecycles.",
       keyDecisions: [
-        "Adopted Proof Key for Code Exchange (PKCE) OAuth flow for secure client-side token exchanges.",
-        "Implemented sequential batch fetching to handle Spotify API's 100-track per-request rate limit smoothly."
+        "Implemented ACID-compliant transactions across inventory dispatches to eliminate stock count discrepancies.",
+        "Designed normalized relational schema with foreign key constraints tracking historical entry and exit events.",
+        "Built customizable report generation for administrative auditing and inventory reorder planning."
       ],
-      performanceBottlenecksResolved: "Handled extensive user libraries with zero UI freeze by chunking shuffle calculations in requestAnimationFrame blocks."
+      performanceBottlenecksResolved: "Indexed inventory lookup tables to ensure immediate search response across multi-category asset catalogs."
     }
   }
 ];
