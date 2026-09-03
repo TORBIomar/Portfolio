@@ -5,17 +5,17 @@ import { SectionHeading } from '../common/SectionHeading';
 
 export const ExperienceSection: React.FC = () => {
   return (
-    <section id="experience" className="py-24 border-b border-border/70 scroll-mt-20">
+    <section id="experience" className="py-14 sm:py-16 border-b border-border/70 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <SectionHeading
           badge="Career Milestones"
-          title="Production Engineering Track Record"
-          subtitle="A timeline of technical leadership, distributed infrastructure scaling, and measurable engineering impact across fintech, streaming, and enterprise SaaS."
+          title="Internships & Engineering Progression"
+          subtitle="Practical experience gained through two software development internships and academic software engineering capstones."
         />
 
         {/* Timeline Container */}
-        <div className="relative border-l-2 border-slate-700/60 ml-4 sm:ml-6 pl-6 sm:pl-8 space-y-12">
+        <div className="relative border-l-2 border-slate-700/60 ml-4 sm:ml-6 pl-6 sm:pl-8 space-y-6">
           {EXPERIENCES_DATA.map((item) => (
             <div key={item.id} className="relative group">
               
@@ -23,12 +23,12 @@ export const ExperienceSection: React.FC = () => {
               <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-card border-2 border-accent group-hover:bg-accent group-hover:scale-125 transition-all duration-200" />
 
               {/* Experience Card */}
-              <div className="bg-card rounded-2xl border border-border p-6 sm:p-8 space-y-5 hover:border-slate-500/80 transition-all duration-200 hover:shadow-card-elevated">
+              <div className="bg-card rounded-2xl border border-border p-5 sm:p-6 space-y-3.5 hover:border-slate-500/80 transition-all duration-200 hover:shadow-card-elevated">
                 
                 {/* Header: Role & Period */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-border/60">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2.5 border-b border-border/60">
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-mono font-bold text-foreground">
+                    <h3 className="text-lg sm:text-xl font-mono font-bold text-foreground">
                       {item.role}
                     </h3>
                     <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono text-muted-foreground mt-1">

@@ -10,10 +10,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
   return (
     <article className="group rounded-xl bg-card border border-border hover:border-slate-500/80 transition-all duration-300 flex flex-col justify-between overflow-hidden hover:shadow-card-elevated">
       {/* Card Header & Category Bar */}
-      <div className="p-6 sm:p-7 space-y-4">
+      <div className="p-5 sm:p-6 space-y-3.5">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-1 rounded bg-muted text-accent font-mono text-xs font-semibold uppercase tracking-wider border border-border">
+            <span className="px-2.5 py-0.5 rounded bg-muted text-accent font-mono text-[11px] font-semibold uppercase tracking-wider border border-border">
               {project.category}
             </span>
             {project.featured && (
@@ -29,16 +29,16 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
 
         {/* Title & Subtitle */}
         <div>
-          <h3 className="text-xl sm:text-2xl font-mono font-bold text-foreground group-hover:text-accent transition-colors">
+          <h3 className="text-lg sm:text-xl font-mono font-bold text-foreground group-hover:text-accent transition-colors">
             {project.title}
           </h3>
-          <p className="text-xs sm:text-sm font-mono text-muted-foreground mt-1">
+          <p className="text-xs sm:text-sm font-mono text-muted-foreground mt-0.5">
             {project.subtitle}
           </p>
         </div>
 
         {/* Summary */}
-        <p className="text-sm text-slate-300 leading-relaxed font-sans">
+        <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans line-clamp-3">
           {project.summary}
         </p>
 
@@ -72,7 +72,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
       </div>
 
       {/* Card Footer: Tech Stack & Actions */}
-      <div className="p-6 pt-0 sm:p-7 sm:pt-0 space-y-5 mt-auto">
+      <div className="p-5 pt-0 sm:p-6 sm:pt-0 space-y-3.5 mt-auto">
         {/* Tech Stack Chips */}
         <div className="flex flex-wrap gap-1.5">
           {project.techStack.map((tech) => (

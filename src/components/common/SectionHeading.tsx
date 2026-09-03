@@ -18,16 +18,16 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   const isCenter = align === 'center';
 
   return (
-    <div className={`mb-12 ${isCenter ? 'text-center max-w-2xl mx-auto' : 'max-w-3xl'} ${className}`}>
-      <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-md bg-muted/60 border border-slate-700/60 text-accent font-mono text-xs font-semibold uppercase tracking-wider mb-4 ${isCenter ? 'mx-auto' : ''}`}>
+    <div className={`mb-8 ${isCenter ? 'text-center max-w-2xl mx-auto' : 'max-w-3xl'} ${className}`}>
+      <div className={`inline-flex items-center gap-2 px-2.5 py-0.5 rounded-md bg-muted/60 border border-slate-700/60 text-accent font-mono text-xs font-semibold uppercase tracking-wider mb-2.5 ${isCenter ? 'mx-auto' : ''}`}>
         <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
         {badge}
       </div>
-      <h2 className="text-3xl sm:text-4xl font-mono font-bold tracking-tight text-foreground">
+      <h2 className="text-2xl sm:text-3xl font-mono font-bold tracking-tight text-foreground">
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-3 text-base sm:text-lg text-muted-foreground leading-relaxed">
+        <p className="mt-2 text-sm sm:text-base text-muted-foreground leading-relaxed">
           {subtitle}
         </p>
       )}

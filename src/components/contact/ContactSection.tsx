@@ -48,22 +48,22 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 border-b border-border/70 scroll-mt-20 relative">
+    <section id="contact" className="py-14 sm:py-16 border-b border-border/70 scroll-mt-20 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <SectionHeading
           badge="Direct Inquiries"
           title="Initiate Technical Dialogue"
-          subtitle="Whether you require 3D CAD Web development, Spring Boot backend microservices, or full-stack software engineering, connect directly."
+          subtitle="Whether you require Spring Boot backend engineering, scalable web platforms, or full-stack software development, connect directly."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
           {/* Left Column: Direct Contact & Availability (5 Cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-4">
             
             {/* Status Card */}
-            <div className="bg-card rounded-2xl border border-border p-6 sm:p-7 space-y-5">
+            <div className="bg-card rounded-2xl border border-border p-5 sm:p-6 space-y-4">
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 rounded-full bg-accent animate-pulse" />
                 <span className="font-mono text-xs font-bold text-accent uppercase tracking-wider">
@@ -202,8 +202,8 @@ export const ContactSection: React.FC = () => {
           </div>
 
           {/* Right Column: Contact Message Form (7 Cols) */}
-          <div className="lg:col-span-7 bg-card rounded-2xl border border-border p-6 sm:p-8">
-            <div className="mb-6">
+          <div className="lg:col-span-7 bg-card rounded-2xl border border-border p-5 sm:p-6">
+            <div className="mb-4">
               <h3 className="font-mono text-xl font-bold text-foreground">
                 Send Direct Inquiry
               </h3>
