@@ -13,7 +13,7 @@ export const PERSONAL_INFO = {
   github: "https://github.com/TORBIomar",
   linkedin: "https://www.linkedin.com/in/omar-torbi-b8340933a/",
   instagram: "https://www.instagram.com/omar.torbi",
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "/CV-OMAR TORBI.pdf",
   education: "Engineering Degree in Computer Engineering and Networks (IIR) — École Marocaine des Sciences de l’Ingénieur (EMSI), Rabat (2022 – Present)",
   spokenLanguages: [
     { name: "Arabic", level: "Native" },
