@@ -146,4 +146,4 @@ The project is configured for one-click deployments to **Vercel** with SPA routi
 
 * **Email:** [torbi.dev@outlook.com](https://www.google.com/search?q=mailto%3Atorbi.dev%40outlook.com)
 * **GitHub:** [@your-github-handle](https://github.com/TORBIomar)
-* **LinkedIn:** [Omar Torbi](https://linkedin.com/)
+* **LinkedIn:** [Omar Torbi](https://www.linkedin.com/in/torbiomar/)
