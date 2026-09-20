@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, Copy, Check, Send, Github, Linkedin, Instagram, Ar
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { SectionHeading } from '../common/SectionHeading';
 import { Button } from '../common/Button';
+import { sound } from '../../utils/sound';
 
 export const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -18,12 +19,14 @@ export const ContactSection: React.FC = () => {
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PERSONAL_INFO.email);
+    sound.playSuccess();
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2500);
   };
 
   const handleCopyPhone = () => {
     navigator.clipboard.writeText(PERSONAL_INFO.phone);
+    sound.playSuccess();
     setCopiedPhone(true);
     setTimeout(() => setCopiedPhone(false), 2500);
   };
@@ -33,37 +36,40 @@ export const ContactSection: React.FC = () => {
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setStatus('error');
       setErrorMessage('Please fill in all required fields (Name, Email, and Message).');
+      sound.playLaser();
       return;
     }
 
+    sound.playClick();
     setStatus('submitting');
     setErrorMessage('');
 
-    // Simulate direct mail dispatch
+    // Simulate direct secure dispatch
     setTimeout(() => {
+      sound.playSuccess();
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setStatus('idle'), 5000);
+      setTimeout(() => setStatus('idle'), 6000);
     }, 1200);
   };
 
   return (
-    <section id="contact" className="py-14 sm:py-16 border-b border-border/70 scroll-mt-20 relative">
+    <section id="contact" className="py-20 sm:py-28 border-b border-white/10 scroll-mt-16 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <SectionHeading
           badge="Direct Inquiries"
-          title="Initiate Technical Dialogue"
+          title="Initiate Technical Dialogue & Collaboration"
           subtitle="Whether you require Spring Boot backend engineering, scalable web platforms, or full-stack software development, connect directly."
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Direct Contact & Availability (5 Cols) */}
-          <div className="lg:col-span-5 space-y-4">
+          <div className="lg:col-span-5 space-y-6">
             
             {/* Status Card */}
-            <div className="bg-card rounded-2xl border border-border p-5 sm:p-6 space-y-4">
+            <div className="bg-[#0b0f19] rounded-2xl border border-white/10 p-6 sm:p-7 space-y-5 shadow-xl">
               <div className="flex items-center gap-3">
                 <div className="w-3 h-3 rounded-full bg-accent animate-pulse" />
                 <span className="font-mono text-xs font-bold text-accent uppercase tracking-wider">
@@ -75,13 +81,13 @@ export const ContactSection: React.FC = () => {
                 {PERSONAL_INFO.availabilityDetails}
               </h3>
 
-              <div className="space-y-2 pt-1 font-sans text-xs text-muted-foreground">
+              <div className="space-y-2.5 pt-1 font-sans text-xs text-muted-foreground">
                 <div className="flex items-center gap-2 text-slate-300">
                   <MapPin className="w-4 h-4 text-accent shrink-0" />
                   <span>{PERSONAL_INFO.location}</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-300">
-                  <GraduationCap className="w-4 h-4 text-accent shrink-0" />
+                  <GraduationCap className="w-4 h-4 text-cyan shrink-0" />
                   <span>{PERSONAL_INFO.education}</span>
                 </div>
               </div>
@@ -91,7 +97,7 @@ export const ContactSection: React.FC = () => {
                 <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider block mb-2">
                   Direct Verified Email
                 </label>
-                <div className="flex items-center justify-between p-3 rounded-xl bg-[#121927] border border-slate-800">
+                <div className="flex items-center justify-between p-3 rounded-xl bg-[#0e1422] border border-white/5">
                   <div className="flex items-center gap-2.5 overflow-hidden">
                     <Mail className="w-4 h-4 text-accent shrink-0" />
                     <a
@@ -104,7 +110,7 @@ export const ContactSection: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleCopyEmail}
-                    className="p-2 rounded-lg bg-card text-muted-foreground hover:text-foreground hover:bg-slate-700 transition-colors cursor-pointer shrink-0 ml-2"
+                    className="p-2 rounded-lg bg-white/5 text-muted-foreground hover:text-foreground hover:bg-white/10 transition-colors cursor-pointer shrink-0 ml-2"
                     title="Copy email to clipboard"
                     aria-label="Copy email address"
                   >
@@ -112,7 +118,7 @@ export const ContactSection: React.FC = () => {
                   </button>
                 </div>
                 {copiedEmail && (
-                  <p className="text-xs font-mono text-emerald-400 mt-1.5 animate-fadeIn">
+                  <p className="text-xs font-mono text-accent mt-1.5 animate-in fade-in">
                     ✓ Email copied to clipboard!
                   </p>
                 )}
@@ -123,7 +129,7 @@ export const ContactSection: React.FC = () => {
                 <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider block mb-2">
                   Direct Phone / WhatsApp
                 </label>
-                <div className="flex items-center justify-between p-3 rounded-xl bg-[#121927] border border-slate-800">
+                <div className="flex items-center justify-between p-3 rounded-xl bg-[#0e1422] border border-white/5">
                   <div className="flex items-center gap-2.5 overflow-hidden">
                     <Phone className="w-4 h-4 text-accent shrink-0" />
                     <a
@@ -136,7 +142,7 @@ export const ContactSection: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleCopyPhone}
-                    className="p-2 rounded-lg bg-card text-muted-foreground hover:text-foreground hover:bg-slate-700 transition-colors cursor-pointer shrink-0 ml-2"
+                    className="p-2 rounded-lg bg-white/5 text-muted-foreground hover:text-foreground hover:bg-white/10 transition-colors cursor-pointer shrink-0 ml-2"
                     title="Copy phone to clipboard"
                     aria-label="Copy phone number"
                   >
@@ -144,14 +150,14 @@ export const ContactSection: React.FC = () => {
                   </button>
                 </div>
                 {copiedPhone && (
-                  <p className="text-xs font-mono text-emerald-400 mt-1.5 animate-fadeIn">
+                  <p className="text-xs font-mono text-accent mt-1.5 animate-in fade-in">
                     ✓ Phone number copied to clipboard!
                   </p>
                 )}
               </div>
 
               {/* Social Channels */}
-              <div className="pt-3 border-t border-border/60 space-y-2">
+              <div className="pt-3 border-t border-white/10 space-y-2">
                 <span className="font-mono text-xs text-muted-foreground uppercase tracking-wider block">
                   Professional Channels
                 </span>
@@ -160,7 +166,8 @@ export const ContactSection: React.FC = () => {
                     href={PERSONAL_INFO.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between p-2 rounded-lg bg-muted/50 hover:bg-muted border border-border text-slate-300 hover:text-foreground transition-colors cursor-pointer"
+                    onClick={() => sound.playClick()}
+                    className="flex items-center justify-between p-2.5 rounded-xl bg-[#0e1422] hover:bg-white/5 border border-white/5 text-slate-300 hover:text-foreground transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-1.5">
                       <Github className="w-3.5 h-3.5 text-accent" />
@@ -173,10 +180,11 @@ export const ContactSection: React.FC = () => {
                     href={PERSONAL_INFO.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between p-2 rounded-lg bg-muted/50 hover:bg-muted border border-border text-slate-300 hover:text-foreground transition-colors cursor-pointer"
+                    onClick={() => sound.playClick()}
+                    className="flex items-center justify-between p-2.5 rounded-xl bg-[#0e1422] hover:bg-white/5 border border-white/5 text-slate-300 hover:text-foreground transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-1.5">
-                      <Linkedin className="w-3.5 h-3.5 text-accent" />
+                      <Linkedin className="w-3.5 h-3.5 text-cyan" />
                       <span>LinkedIn</span>
                     </span>
                     <ArrowUpRight className="w-3 h-3 text-muted-foreground" />
@@ -186,10 +194,11 @@ export const ContactSection: React.FC = () => {
                     href={PERSONAL_INFO.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between p-2 rounded-lg bg-muted/50 hover:bg-muted border border-border text-slate-300 hover:text-foreground transition-colors cursor-pointer"
+                    onClick={() => sound.playClick()}
+                    className="flex items-center justify-between p-2.5 rounded-xl bg-[#0e1422] hover:bg-white/5 border border-white/5 text-slate-300 hover:text-foreground transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-1.5">
-                      <Instagram className="w-3.5 h-3.5 text-accent" />
+                      <Instagram className="w-3.5 h-3.5 text-amber" />
                       <span>Insta</span>
                     </span>
                     <ArrowUpRight className="w-3 h-3 text-muted-foreground" />
@@ -202,112 +211,123 @@ export const ContactSection: React.FC = () => {
           </div>
 
           {/* Right Column: Contact Message Form (7 Cols) */}
-          <div className="lg:col-span-7 bg-card rounded-2xl border border-border p-5 sm:p-6">
-            <div className="mb-4">
-              <h3 className="font-mono text-xl font-bold text-foreground">
-                Send Direct Inquiry
+          <div className="lg:col-span-7 bg-[#0b0f19] rounded-2xl border border-white/10 p-6 sm:p-7 shadow-xl">
+            <div className="mb-6">
+              <h3 className="font-mono text-xl font-bold text-foreground flex items-center gap-2">
+                <span>Dispatch Direct Transmission</span>
+                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               </h3>
               <p className="font-mono text-xs text-muted-foreground mt-1">
-                Typical response time: Within 24 hours.
+                Direct route to inbox. Guaranteed response within 24 hours.
               </p>
             </div>
 
             {/* Status Alert Banner */}
             {status === 'success' && (
-              <div className="mb-6 p-4 rounded-xl bg-emerald-950/30 border border-accent/50 text-emerald-300 text-xs font-mono flex items-start gap-3">
+              <div className="mb-6 p-4 rounded-xl bg-emerald-950/30 border border-accent/50 text-accent text-xs font-mono flex items-start gap-3">
                 <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                 <div>
                   <div className="font-bold">Transmission Successfully Received</div>
-                  <div className="mt-0.5 text-slate-300">
-                    Thank you for reaching out, Omar Torbi will review your message and reply promptly.
+                  <div className="mt-0.5 text-slate-300 font-sans">
+                    Thank you for reaching out, Omar Torbi will review your inquiry and reply promptly.
                   </div>
                 </div>
               </div>
             )}
 
             {status === 'error' && (
-              <div className="mb-6 p-4 rounded-xl bg-red-950/30 border border-red-800/50 text-red-300 text-xs font-mono">
+              <div className="mb-6 p-4 rounded-xl bg-rose-950/30 border border-rose-800/50 text-rose-300 text-xs font-mono">
                 {errorMessage}
               </div>
             )}
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label htmlFor="name" className="font-mono text-xs text-muted-foreground">
-                    Your Name <span className="text-accent">*</span>
+                  <label htmlFor="name" className="text-muted-foreground">
+                    Sender Name <span className="text-accent">*</span>
                   </label>
                   <input
                     id="name"
                     type="text"
                     required
-                    placeholder="e.g., Sarah Chen"
+                    placeholder="e.g., Alex Vance"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#121927] border border-slate-800 text-sm font-sans text-foreground placeholder:text-slate-600 focus-visible:ring-2 focus-visible:ring-accent"
+                    onChange={(e) => {
+                      sound.playKey();
+                      setFormData({ ...formData, name: e.target.value });
+                    }}
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#0e1422] border border-white/10 text-foreground placeholder:text-muted-foreground/60 outline-none focus:border-accent/60"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label htmlFor="email" className="font-mono text-xs text-muted-foreground">
-                    Your Email <span className="text-accent">*</span>
+                  <label htmlFor="email" className="text-muted-foreground">
+                    Return Email Address <span className="text-accent">*</span>
                   </label>
                   <input
                     id="email"
                     type="email"
                     required
-                    placeholder="sarah@company.com"
+                    placeholder="alex@example.com"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg bg-[#121927] border border-slate-800 text-sm font-sans text-foreground placeholder:text-slate-600 focus-visible:ring-2 focus-visible:ring-accent"
+                    onChange={(e) => {
+                      sound.playKey();
+                      setFormData({ ...formData, email: e.target.value });
+                    }}
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#0e1422] border border-white/10 text-foreground placeholder:text-muted-foreground/60 outline-none focus:border-accent/60"
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label htmlFor="subject" className="font-mono text-xs text-muted-foreground">
-                  Project Domain / Role
+                <label htmlFor="subject" className="text-muted-foreground">
+                  Subject / Topic
                 </label>
                 <input
                   id="subject"
                   type="text"
-                  placeholder="e.g., 3D CAD Web Development, Spring Boot Backend Engineering"
+                  placeholder="Full-Stack Opportunity / Software Architecture Consulting"
                   value={formData.subject}
-                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#121927] border border-slate-800 text-sm font-sans text-foreground placeholder:text-slate-600 focus-visible:ring-2 focus-visible:ring-accent"
+                  onChange={(e) => {
+                    sound.playKey();
+                    setFormData({ ...formData, subject: e.target.value });
+                  }}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#0e1422] border border-white/10 text-foreground placeholder:text-muted-foreground/60 outline-none focus:border-accent/60"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label htmlFor="message" className="font-mono text-xs text-muted-foreground">
-                  Message Details <span className="text-accent">*</span>
+                <label htmlFor="message" className="text-muted-foreground">
+                  Transmission Body <span className="text-accent">*</span>
                 </label>
                 <textarea
                   id="message"
                   required
-                  rows={5}
-                  placeholder="Share details regarding your technical requirements, project timeline, or role description..."
+                  rows={4}
+                  placeholder="Describe your project, timeline, or engineering opportunity..."
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-[#121927] border border-slate-800 text-sm font-sans text-foreground placeholder:text-slate-600 focus-visible:ring-2 focus-visible:ring-accent resize-y"
+                  onChange={(e) => {
+                    sound.playKey();
+                    setFormData({ ...formData, message: e.target.value });
+                  }}
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#0e1422] border border-white/10 text-foreground placeholder:text-muted-foreground/60 outline-none focus:border-accent/60 font-sans text-sm resize-none"
                 />
               </div>
 
-              <div className="pt-2">
-                <Button
-                  type="submit"
-                  variant="primary"
-                  size="md"
-                  disabled={status === 'submitting'}
-                  icon={<Send className="w-4 h-4" />}
-                  className="w-full sm:w-auto"
-                >
-                  {status === 'submitting' ? 'Transmitting Message...' : 'Send Message'}
-                </Button>
-              </div>
+              <Button
+                type="submit"
+                variant="primary"
+                size="md"
+                disabled={status === 'submitting'}
+                className="w-full justify-center"
+                icon={<Send className="w-4 h-4" />}
+                iconPosition="right"
+              >
+                {status === 'submitting' ? 'Transmitting Data...' : 'Transmit Message (RPC)'}
+              </Button>
             </form>
-
           </div>
 
         </div>

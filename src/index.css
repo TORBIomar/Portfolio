@@ -1,48 +1,89 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-primary: #1E293B;
-  --color-on-primary: #FFFFFF;
-  --color-secondary: #334155;
-  --color-on-secondary: #FFFFFF;
-  --color-accent: #22C55E;
-  --color-on-accent: #0F172A;
-  --color-background: #0F172A;
-  --color-foreground: #F8FAFC;
-  --color-card: #1B2336;
-  --color-card-foreground: #F8FAFC;
-  --color-muted: #272F42;
-  --color-muted-foreground: #94A3B8;
-  --color-border: #334155;
-  --color-ring: #22C55E;
+  --color-background: #08090E;
+  --color-foreground: #F4F6FB;
+  --color-accent: #00FF9D;
+  --color-cyan: #00E5FF;
+  --color-amber: #FFB800;
+  --color-card: #0E131F;
+  --color-border: rgba(255, 255, 255, 0.08);
 }
 
-/* Custom smooth scrollbar */
+html {
+  background-color: #08090E;
+  color: #F4F6FB;
+  color-scheme: dark;
+}
+
+body {
+  background-color: #08090E;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Subtle Anti-Slop Tactile Noise Texture */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+/* Technical Blueprint Grid Background */
+.tech-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+}
+
+.tech-dot-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Laser Glow Utilities */
+.glow-accent {
+  text-shadow: 0 0 16px rgba(0, 255, 157, 0.5);
+}
+
+.glow-cyan {
+  text-shadow: 0 0 16px rgba(0, 229, 255, 0.5);
+}
+
+.glow-box-accent {
+  box-shadow: 0 0 30px -5px rgba(0, 255, 157, 0.3);
+}
+
+.glow-box-cyan {
+  box-shadow: 0 0 30px -5px rgba(0, 229, 255, 0.3);
+}
+
+/* Custom Smooth Precision Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0F172A;
+  background: #08090E;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #00FF9D;
 }
 
-/* Focus styles for strict WCAG AA keyboard accessibility */
+/* Focus styles for keyboard accessibility */
 :focus-visible {
-  outline: 2px solid var(--color-accent) !important;
+  outline: 2px solid #00FF9D !important;
   outline-offset: 2px !important;
 }
 
@@ -56,19 +97,43 @@
   }
 }
 
-/* Technical grid background pattern */
-.tech-grid-pattern {
-  background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(51, 65, 85, 0.15) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(51, 65, 85, 0.15) 1px, transparent 1px);
+/* Scanline Overlay for Vintage Terminal Visuals */
+.scanline-effect {
+  position: relative;
+}
+.scanline-effect::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  z-index: 2;
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
 }
 
-.radar-sweep {
-  background: conic-gradient(from 0deg at 50% 50%, rgba(34, 197, 94, 0.15) 0deg, transparent 60deg, transparent 360deg);
+/* Tactical Corner Brackets */
+.corner-brackets {
+  position: relative;
 }
-
-/* Glow effects */
-.glow-accent {
-  text-shadow: 0 0 12px rgba(34, 197, 94, 0.4);
+.corner-brackets::before,
+.corner-brackets::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: #00FF9D;
+  pointer-events: none;
+}
+.corner-brackets::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid #00FF9D;
+  border-left: 2px solid #00FF9D;
+}
+.corner-brackets::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid #00FF9D;
+  border-right: 2px solid #00FF9D;
 }

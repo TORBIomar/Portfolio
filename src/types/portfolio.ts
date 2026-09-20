@@ -1,4 +1,4 @@
-export type ProjectCategory = 'all' | 'backend' | 'fullstack' | 'systems' | 'frontend';
+export type ProjectCategory = 'all' | 'ai-backend' | 'backend-data' | 'data-algorithms' | 'data-systems' | 'systems-frontend' | 'backend' | 'fullstack' | 'systems' | 'frontend';
 
 export interface ProjectMetric {
   label: string;
@@ -9,7 +9,7 @@ export interface Project {
   id: string;
   title: string;
   subtitle: string;
-  category: 'backend' | 'fullstack' | 'systems' | 'frontend';
+  category: ProjectCategory;
   summary: string;
   description: string;
   architecturalHighlights: string[];
@@ -54,21 +54,3 @@ export interface ExperienceItem {
   technologies: string[];
 }
 
-export interface ClusterNodeState {
-  id: string;
-  name: string;
-  ip: string;
-  role: 'LEADER' | 'FOLLOWER' | 'CANDIDATE' | 'OFFLINE';
-  status: 'healthy' | 'syncing' | 'down';
-  term: number;
-  commitIndex: number;
-  latencyMs: number;
-  cpuLoadPercent: number;
-}
-
-export interface TelemetryLog {
-  id: string;
-  timestamp: string;
-  level: 'INFO' | 'WARN' | 'HEARTBEAT' | 'ELECT';
-  message: string;
-}
