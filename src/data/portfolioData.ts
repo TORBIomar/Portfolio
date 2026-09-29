@@ -2,26 +2,30 @@ import { Project, SkillCategory, ExperienceItem } from '../types/portfolio';
 
 export const PERSONAL_INFO = {
   name: "Omar Torbi",
-  role: "Computer Engineering Student | Software Engineer",
-  tagline: "Computer Engineering & Networks student at EMSI Rabat specializing in scalable backend architectures (Spring Boot), AI-powered vector discovery (Gemini & ChromaDB), relational/NoSQL data systems, and cloud DevOps.",
-  summary: "Computer Engineering and Networks student with a strong software engineering profile across backend architectures, distributed systems, AI integrations, data engineering, and DevOps. Experienced in building scalable web platforms, secure REST APIs with Spring Boot, vector search RAG pipelines using ChromaDB and Google Gemini API, and containerized deployment workflows with Docker and Linux. Combines analytical problem-solving, modular architecture principles, and product-oriented execution to deliver reliable, high-throughput software solutions.",
+  role: "Computer Engineering Student | Software & DevOps Engineer",
+  titleDisplay: "Software & DevOps Engineer",
+  tagline: "Computer Engineering & Networks student at EMSI Rabat specializing in robust backend architectures (Spring Boot), cloud DevOps & containerization (Docker, Linux), and AI-powered vector retrieval systems (Gemini & ChromaDB).",
+  summary: "Computer Engineering and Networks student at EMSI Rabat with a rigorous software engineering and DevOps profile. Experienced in building enterprise REST services with Spring Boot, orchestrating containerized deployments with multi-stage Docker builds and Linux, engineering vector retrieval RAG pipelines with ChromaDB and Google Gemini API, and optimizing relational schemas across PostgreSQL, Oracle DB, and MySQL. Driven by clean code, modular architecture principles, and reproducible delivery.",
   status: "Available for new opportunities",
-  availabilityDetails: "Open to Software Engineering, Backend (Spring Boot), AI/Data, and DevOps Roles",
-  location: "Rabat / Béni Mellal, Morocco",
+  availabilityDetails: "Available for End-of-Studies (PFE) Internships (2026/2027) & Full-Time Software / DevOps Roles",
+  location: "Rabat / Casablanca / Remote, Morocco",
+  targetRoles: ["Software Engineer", "Backend Engineer", "DevOps Engineer", "Cloud & Systems Engineer"],
+  workAuthorization: "Moroccan Citizen — Immediate work authorization; open to hybrid, remote, and international visa sponsorship",
   email: "torbi.dev@outlook.com",
   phone: "+212 612892619",
+  whatsappUrl: "https://wa.me/212612892619",
   github: "https://github.com/TORBIomar",
   linkedin: "https://www.linkedin.com/in/omar-torbi-b8340933a/",
   instagram: "https://www.instagram.com/omar.torbi",
   resumeUrl: "/CV-OMAR TORBI.pdf",
   education: "Engineering Degree in Computer Engineering and Networks (IIR) — École Marocaine des Sciences de l’Ingénieur (EMSI), Rabat (2022 – Present)",
   spokenLanguages: [
-    { name: "Arabic", level: "Native" },
-    { name: "French", level: "Professional" },
-    { name: "English", level: "Professional" }
+    { name: "French", level: "Professional / Fluent" },
+    { name: "English", level: "Professional / Fluent" },
+    { name: "Arabic", level: "Native" }
   ],
-  interests: ["AI & Vector RAG", "Distributed Systems & Cloud", "Database Architecture", "DevOps & Reliability", "Fitness & Football"],
-  coreStrengths: ["Problem Solving", "Cross-Functional Teamwork", "Fast Learning & Adaptability", "Agile Methodologies", "Technical Documentation"]
+  interests: ["Cloud Infrastructure & DevOps", "Distributed Systems & Spring Boot", "AI & Vector RAG", "Database Architecture", "Fitness & Football"],
+  coreStrengths: ["System Architecture Design", "Problem Solving & Algorithmic Rigor", "Containerization & Linux Ops", "Fast Learning & Adaptability", "Agile Execution & Documentation"]
 };
 
 export const PROJECTS_DATA: Project[] = [

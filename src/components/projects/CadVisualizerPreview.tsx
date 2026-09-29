@@ -69,9 +69,9 @@ export const CadVisualizerPreview: React.FC = () => {
       ctx.fillStyle = bodyGrad;
       ctx.fillRect(xStart, -radius, tubeLength, radius * 2);
 
-      // Wireframe contour lines
+      // Wireframe contour lines (silver/white)
       ctx.lineWidth = 1;
-      ctx.strokeStyle = 'rgba(0, 229, 255, 0.35)';
+      ctx.strokeStyle = 'rgba(226, 232, 240, 0.25)';
 
       for (let i = 0; i < numSegments; i++) {
         const segAngle = angle + (i / numSegments) * Math.PI * 2;
@@ -80,7 +80,7 @@ export const CadVisualizerPreview: React.FC = () => {
 
         if (z > -0.2) {
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(0, 229, 255, ${Math.max(0.1, (z + 1) * 0.25)})`;
+          ctx.strokeStyle = `rgba(226, 232, 240, ${Math.max(0.08, (z + 1) * 0.2)})`;
           ctx.moveTo(xStart, y);
           ctx.lineTo(xEnd, y);
           ctx.stroke();
@@ -91,11 +91,11 @@ export const CadVisualizerPreview: React.FC = () => {
       const drawCap = (x: number, isFront: boolean) => {
         ctx.beginPath();
         ctx.ellipse(x, 0, radius * 0.35, radius, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = isFront ? '#00FF9D' : 'rgba(0, 255, 157, 0.4)';
+        ctx.strokeStyle = isFront ? '#FFFFFF' : 'rgba(255, 255, 255, 0.35)';
         ctx.lineWidth = isFront ? 2 : 1;
         ctx.stroke();
         if (isFront) {
-          ctx.fillStyle = 'rgba(0, 255, 157, 0.08)';
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
           ctx.fill();
         }
       };
@@ -109,7 +109,7 @@ export const CadVisualizerPreview: React.FC = () => {
       // Laser beam path (slot cut)
       ctx.beginPath();
       ctx.ellipse(cutX, 0, radius * 0.3, radius * 0.75, 0, 0, Math.PI * 2);
-      ctx.strokeStyle = '#00E5FF';
+      ctx.strokeStyle = '#FF6B00';
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
@@ -119,16 +119,24 @@ export const CadVisualizerPreview: React.FC = () => {
         const nozzleY = -radius - 35;
         const targetY = -radius + 2;
 
-        // Laser beam line
+        // Laser beam line (Intense industrial orange core)
         ctx.beginPath();
         ctx.moveTo(nozzleX, nozzleY);
         ctx.lineTo(nozzleX, targetY);
-        ctx.strokeStyle = '#00FF9D';
+        ctx.strokeStyle = '#FF6B00';
         ctx.lineWidth = 2.5;
-        ctx.shadowColor = '#00FF9D';
-        ctx.shadowBlur = 12;
+        ctx.shadowColor = '#FF6B00';
+        ctx.shadowBlur = 16;
         ctx.stroke();
         ctx.shadowBlur = 0;
+
+        // Inner beam white core
+        ctx.beginPath();
+        ctx.moveTo(nozzleX, nozzleY);
+        ctx.lineTo(nozzleX, targetY);
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.lineWidth = 1;
+        ctx.stroke();
 
         // Nozzle graphic
         ctx.fillStyle = '#334155';
@@ -140,7 +148,7 @@ export const CadVisualizerPreview: React.FC = () => {
         ctx.closePath();
         ctx.fill();
 
-        // Emit cutting sparks
+        // Emit cutting sparks (High-energy fiery orange)
         if (isPlaying && Math.random() < 0.85) {
           for (let s = 0; s < 3; s++) {
             sparksRef.current.push({
@@ -150,7 +158,7 @@ export const CadVisualizerPreview: React.FC = () => {
               vy: Math.random() * 4 + 1,
               life: 1,
               maxLife: Math.random() * 20 + 15,
-              color: Math.random() > 0.4 ? '#00FF9D' : '#FFB800',
+              color: Math.random() > 0.4 ? '#FF6B00' : Math.random() > 0.5 ? '#FFA05C' : '#FFFFFF',
             });
           }
         }
@@ -227,26 +235,26 @@ export const CadVisualizerPreview: React.FC = () => {
   };
 
   return (
-    <div className="rounded-xl bg-[#090d16] border border-white/10 overflow-hidden font-mono text-xs">
+    <div className="rounded-xl bg-[#07080B] border border-white/10 overflow-hidden font-mono text-xs">
       {/* Top Telemetry Header */}
-      <div className="flex items-center justify-between px-3 py-2 bg-[#0d121e] border-b border-white/10">
+      <div className="flex items-center justify-between px-3 py-2 bg-[#0A0B0F] border-b border-white/10">
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-accent animate-ping" />
+          <div className="w-2 h-2 rounded-full bg-[#FF6B00] beacon-orange" />
           <span className="font-bold text-slate-200">WEB CAD SIMULATOR</span>
-          <span className="text-[10px] text-cyan px-1.5 py-0.2 rounded bg-cyan/10 border border-cyan/20">
+          <span className="text-[10px] text-slate-300 px-1.5 py-0.2 rounded bg-white/5 border border-white/10">
             OpenCascade.js / Wasm
           </span>
         </div>
         <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
           <span>KERF: 0.15mm</span>
-          <span className="text-accent flex items-center gap-1">
-            <CheckCircle2 className="w-3 h-3" /> STEP Validated
+          <span className="text-white flex items-center gap-1">
+            <CheckCircle2 className="w-3 h-3 text-[#FF6B00]" /> STEP Validated
           </span>
         </div>
       </div>
 
       {/* Interactive 3D Canvas Viewport */}
-      <div className="relative h-48 sm:h-56 bg-[#060910] cursor-grab active:cursor-grabbing flex items-center justify-center">
+      <div className="relative h-48 sm:h-56 bg-[#050507] cursor-grab active:cursor-grabbing flex items-center justify-center">
         <canvas
           ref={canvasRef}
           width={460}
@@ -256,34 +264,37 @@ export const CadVisualizerPreview: React.FC = () => {
 
         {/* Drag Hint Watermark */}
         <div className="absolute bottom-2 left-3 text-[10px] text-muted-foreground pointer-events-none flex items-center gap-1">
-          <RotateCw className="w-3 h-3 text-cyan" />
+          <RotateCw className="w-3 h-3 text-slate-400" />
           <span>Drag to inspect 3D tube geometry</span>
         </div>
 
         {/* Status Chip */}
-        <div className="absolute top-2 right-3 text-[10px] px-2 py-0.5 rounded bg-black/60 border border-white/10 text-slate-300">
-          Laser: {laserActive ? 'ENGAGED 1.5kW' : 'OFF'}
+        <div className="absolute top-2 right-3 text-[10px] px-2 py-0.5 rounded bg-black/70 border border-white/10">
+          <span className="text-slate-400">Laser: </span>
+          <span className={laserActive ? "text-[#FF6B00] font-bold" : "text-slate-400"}>
+            {laserActive ? 'ENGAGED 1.5kW' : 'OFF'}
+          </span>
         </div>
       </div>
 
       {/* Bottom Interactive Controls */}
-      <div className="p-3 bg-[#0d121e] border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
+      <div className="p-3 bg-[#0A0B0F] border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
         {/* Play / Laser toggle buttons */}
         <div className="flex items-center gap-2">
           <button
             onClick={togglePlay}
             className="px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-foreground border border-white/10 flex items-center gap-1.5 cursor-pointer transition-colors"
           >
-            {isPlaying ? <Pause className="w-3 h-3 text-amber" /> : <Play className="w-3 h-3 text-accent" />}
+            {isPlaying ? <Pause className="w-3 h-3 text-slate-400" /> : <Play className="w-3 h-3 text-white" />}
             <span>{isPlaying ? 'Freeze' : 'Rotate'}</span>
           </button>
 
           <button
             onClick={toggleLaser}
-            className={`px-2.5 py-1.5 rounded-lg border flex items-center gap-1.5 cursor-pointer transition-colors ${
+            className={`px-2.5 py-1.5 rounded-lg border flex items-center gap-1.5 cursor-pointer transition-all ${
               laserActive
-                ? 'bg-accent/10 border-accent/40 text-accent'
-                : 'bg-white/5 border-white/10 text-muted-foreground'
+                ? 'bg-[#FF6B00]/15 border-[#FF6B00]/50 text-[#FF6B00] shadow-[0_0_12px_rgba(255,107,0,0.25)]'
+                : 'bg-white/5 border-white/10 text-muted-foreground hover:text-white'
             }`}
           >
             <Zap className="w-3 h-3" />
@@ -295,7 +306,7 @@ export const CadVisualizerPreview: React.FC = () => {
         <div className="space-y-1">
           <div className="flex justify-between text-[10px] text-muted-foreground">
             <span>Diameter</span>
-            <span className="text-cyan font-bold">{diameter} mm</span>
+            <span className="text-[#FF6B00] font-bold">{diameter} mm</span>
           </div>
           <input
             type="range"
@@ -306,7 +317,7 @@ export const CadVisualizerPreview: React.FC = () => {
               sound.playHover();
               setDiameter(Number(e.target.value));
             }}
-            className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#00FF9D]"
+            className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#FF6B00]"
             aria-label="Adjust tube diameter"
           />
         </div>
@@ -315,7 +326,7 @@ export const CadVisualizerPreview: React.FC = () => {
         <div className="space-y-1">
           <div className="flex justify-between text-[10px] text-muted-foreground">
             <span>Speed (RPM)</span>
-            <span className="text-accent font-bold">{rotationSpeed.toFixed(1)}x</span>
+            <span className="text-slate-200 font-bold">{rotationSpeed.toFixed(1)}x</span>
           </div>
           <input
             type="range"
@@ -327,7 +338,7 @@ export const CadVisualizerPreview: React.FC = () => {
               sound.playHover();
               setRotationSpeed(Number(e.target.value));
             }}
-            className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#00E5FF]"
+            className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#FF6B00]"
             aria-label="Adjust rotation speed"
           />
         </div>

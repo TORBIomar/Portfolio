@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, Github, Linkedin, Instagram, Menu, X, Volume2, VolumeX, Search, Clock } from 'lucide-react';
+import { Terminal, Github, Linkedin, Menu, X, Volume2, VolumeX, Search, Clock, Sun, Moon } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { sound } from '../../utils/sound';
+import { useTheme } from '../../context/ThemeContext';
+import { ScrambleText } from '../common/ScrambleText';
 
 interface NavbarProps {
   onOpenCommandPalette?: () => void;
+  onOpenRecruiterDossier?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
+  const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isAudioMuted, setIsAudioMuted] = useState(sound.isMuted());
@@ -22,12 +26,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   }, []);
 
   useEffect(() => {
-    // Sound engine subscription
     return sound.onMuteChange((muted) => setIsAudioMuted(muted));
   }, []);
 
   useEffect(() => {
-    // Real-time Morocco time (Africa/Casablanca, GMT+1)
     const updateTime = () => {
       try {
         const timeStr = new Intl.DateTimeFormat('en-GB', {
@@ -50,137 +52,122 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
   }, []);
 
   const navLinks = [
-    { label: "Projects", href: "#projects" },
-    { label: "Skills Matrix", href: "#skills" },
-    { label: "Experience", href: "#experience" },
-    { label: "Contact", href: "#contact" }
+    { num: '01.', label: 'About', href: '#about' },
+    { num: '02.', label: 'Capabilities', href: '#skills' },
+    { num: '03.', label: 'Experiences', href: '#experience' },
+    { num: '04.', label: 'FAQ', href: '#faq' },
   ];
-
-  const toggleSound = () => {
-    sound.toggleMute();
-  };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         isScrolled
-          ? 'bg-[#08090e]/90 backdrop-blur-md border-b border-white/10 shadow-xl py-3'
+          ? 'bg-white/80 dark:bg-black/80 backdrop-blur-xl border-b border-black/5 dark:border-white/10 shadow-sm py-2.5 sm:py-3'
           : 'bg-transparent border-b border-transparent py-4 sm:py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         
-        {/* Brand Terminal Identifier */}
+        {/* Brand Terminal Identifier with ScrambleText */}
         <a
           href="#"
           onClick={() => sound.playClick()}
-          className="flex items-center gap-2.5 group cursor-pointer rounded-md p-1 focus-visible:ring-2 focus-visible:ring-accent"
+          className="flex items-center gap-2.5 group cursor-pointer rounded-full p-1 focus-visible:ring-2 focus-visible:ring-[#FF6B00] transition-transform duration-300 ease-out hover:scale-102"
           aria-label="Omar Torbi Portfolio Home"
         >
-          <div className="w-8 h-8 rounded-lg bg-[#0e1422] border border-white/10 flex items-center justify-center text-accent group-hover:border-accent/60 group-hover:shadow-[0_0_12px_rgba(0,255,157,0.3)] transition-all">
+          <div className="w-8 h-8 rounded-full bg-black/5 dark:bg-white/[0.06] border border-black/10 dark:border-white/10 flex items-center justify-center text-[#FF6B00] group-hover:border-[#FF6B00]/70 group-hover:shadow-[0_0_15px_rgba(255,107,0,0.3)] transition-all duration-300 ease-out">
             <Terminal className="w-4 h-4" />
           </div>
-          <div className="font-mono text-sm tracking-tight font-bold text-foreground">
-            <span>omar</span>
-            <span className="text-accent">.torbi</span>
-            <span className="text-muted-foreground font-normal text-xs ml-1.5 hidden sm:inline-block">/sys</span>
+          <div className="font-mono text-sm tracking-tight font-bold text-neutral-900 dark:text-white flex items-center">
+            <ScrambleText text="omar" scrambleOnHover autoPlay={false} speed={25} />
+            <span className="text-[#FF6B00]">.torbi</span>
+            <span className="text-neutral-400 dark:text-neutral-500 font-normal text-xs ml-1.5 hidden sm:inline-block">/software-devops</span>
           </div>
         </a>
 
         {/* Real-time Telemetry: Morocco Local Clock + Availability */}
-        <div className="hidden lg:flex items-center gap-4 text-xs font-mono text-muted-foreground">
+        <div className="hidden xl:flex items-center gap-3 text-xs font-mono text-neutral-500 dark:text-neutral-400">
           {/* Real time clock */}
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0e1422]/80 border border-white/10">
-            <Clock className="w-3.5 h-3.5 text-cyan" />
-            <span className="text-slate-300">RBT [GMT+1]:</span>
-            <span className="text-foreground font-semibold">{moroccoTime || '14:00:00'}</span>
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.04] border border-black/10 dark:border-white/10">
+            <Clock className="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-300" />
+            <span className="text-neutral-500 dark:text-neutral-400">RBT [GMT+1]:</span>
+            <span className="text-neutral-900 dark:text-neutral-100 font-semibold">{moroccoTime || '16:00:00'}</span>
           </div>
 
-          {/* Availability badge */}
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/25 text-accent font-medium">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-            </span>
-            <span>{PERSONAL_INFO.status}</span>
+          {/* Availability badge with smooth beacon */}
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF6B00]/10 border border-[#FF6B00]/30 text-neutral-900 dark:text-white font-medium shadow-[0_0_12px_rgba(255,107,0,0.12)]">
+            <span className="w-2 h-2 rounded-full bg-[#FF6B00] beacon-orange"></span>
+            <span className="text-xs font-semibold">{PERSONAL_INFO.status}</span>
           </div>
         </div>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1" aria-label="Main Navigation">
+        {/* Desktop Navigation Links with Numbered Prefixes & Smooth Hover */}
+        <nav className="hidden lg:flex items-center gap-1 font-mono text-[11px] uppercase tracking-wider" aria-label="Main Navigation">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
-              className="px-3 py-1.5 text-xs font-mono text-slate-300 hover:text-foreground hover:bg-white/5 rounded-md transition-colors cursor-pointer"
+              className="group px-3 py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition-all duration-300 ease-out cursor-pointer"
             >
-              {link.label}
+              <span className="text-[#FF6B00]/60 group-hover:text-[#FF6B00] font-bold mr-1.5 transition-colors duration-300">{link.num}</span>
+              <span>{link.label}</span>
             </a>
           ))}
         </nav>
 
-        {/* Actions Bar (Search, Audio, Socials) */}
-        <div className="flex items-center gap-2">
+        {/* Top Action Buttons Cluster (Unified Heights & Smooth Spring Physics) */}
+        <div className="flex items-center gap-2.5">
           
-          {/* Command Palette Trigger Button */}
-          {onOpenCommandPalette && (
+          {/* Integrated Frosted Utility Dock (Theme, Search ⌘K, Audio) */}
+          <div className="flex items-center p-0.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/10 dark:border-white/10 backdrop-blur-md transition-all duration-300">
+            {/* Theme Toggle */}
             <button
-              onClick={() => {
-                sound.playClick();
-                onOpenCommandPalette();
-              }}
-              className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-[#0e1422] border border-white/10 text-muted-foreground hover:text-foreground hover:border-accent/40 transition-colors font-mono text-xs cursor-pointer"
-              title="Open Command Palette (⌘K)"
-              aria-label="Open Command Palette"
+              onClick={toggleTheme}
+              className="w-8 h-8 rounded-full flex items-center justify-center text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 ease-out hover:scale-105 active:scale-95 cursor-pointer"
+              title={theme === 'dark' ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              aria-label={theme === 'dark' ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
-              <Search className="w-3.5 h-3.5 text-accent" />
-              <kbd className="hidden sm:inline-block px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-[10px]">
-                ⌘K
-              </kbd>
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-[#FF6B00]" /> : <Moon className="w-4 h-4 text-neutral-700" />}
             </button>
-          )}
 
-          {/* Audio Synthesizer Toggle */}
-          <button
-            onClick={toggleSound}
-            className={`p-2 rounded-lg border transition-all cursor-pointer ${
-              isAudioMuted
-                ? 'bg-transparent border-white/10 text-muted-foreground hover:text-foreground'
-                : 'bg-accent/10 border-accent/30 text-accent shadow-[0_0_10px_rgba(0,255,157,0.2)]'
-            }`}
-            title={isAudioMuted ? "Unmute sound effects" : "Mute sound effects"}
-            aria-label={isAudioMuted ? "Unmute audio effects" : "Mute audio effects"}
-          >
-            {isAudioMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 animate-pulse" />}
-          </button>
+            {/* Command Palette Trigger Button */}
+            {onOpenCommandPalette && (
+              <>
+                <div className="h-3.5 w-px bg-black/10 dark:bg-white/10 mx-0.5" />
+                <button
+                  onClick={() => {
+                    sound.playClick();
+                    onOpenCommandPalette();
+                  }}
+                  className="flex items-center gap-1.5 px-2.5 h-8 rounded-full text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 ease-out hover:scale-105 active:scale-95 font-mono text-xs cursor-pointer"
+                  title="Open Command Palette (⌘K)"
+                  aria-label="Open Command Palette"
+                >
+                  <Search className="w-3.5 h-3.5 text-[#FF6B00]" />
+                  <kbd className="hidden sm:inline-block px-1.5 py-0.2 rounded bg-black/5 dark:bg-white/10 border border-black/5 dark:border-white/10 text-[10px] font-mono text-neutral-500 dark:text-neutral-400">
+                    ⌘K
+                  </kbd>
+                </button>
+              </>
+            )}
 
-          {/* GitHub link */}
-          <a
-            href={PERSONAL_INFO.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            onMouseEnter={() => sound.playHover()}
-            onClick={() => sound.playClick()}
-            className="hidden sm:flex p-2 text-muted-foreground hover:text-foreground hover:bg-white/5 border border-transparent hover:border-white/10 rounded-lg transition-all cursor-pointer"
-            aria-label="GitHub Profile"
-          >
-            <Github className="w-4 h-4" />
-          </a>
-
-          {/* LinkedIn link */}
-          <a
-            href={PERSONAL_INFO.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            onMouseEnter={() => sound.playHover()}
-            onClick={() => sound.playClick()}
-            className="hidden sm:flex p-2 text-muted-foreground hover:text-foreground hover:bg-white/5 border border-transparent hover:border-white/10 rounded-lg transition-all cursor-pointer"
-            aria-label="LinkedIn Profile"
-          >
-            <Linkedin className="w-4 h-4" />
-          </a>
+            {/* Audio Synthesizer Toggle */}
+            <div className="h-3.5 w-px bg-black/10 dark:bg-white/10 mx-0.5" />
+            <button
+              onClick={() => sound.toggleMute()}
+              className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ease-out hover:scale-105 active:scale-95 cursor-pointer ${
+                isAudioMuted
+                  ? 'text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-black/5 dark:hover:bg-white/10'
+                  : 'text-[#FF6B00] bg-[#FF6B00]/15 shadow-[0_0_12px_rgba(255,107,0,0.25)]'
+              }`}
+              title={isAudioMuted ? "Unmute audio effects" : "Mute audio effects"}
+              aria-label={isAudioMuted ? "Unmute audio effects" : "Mute audio effects"}
+            >
+              {isAudioMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+            </button>
+          </div>
 
           {/* Mobile Menu Hamburger */}
           <button
@@ -188,7 +175,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
               sound.playClick();
               setMobileMenuOpen(!mobileMenuOpen);
             }}
-            className="md:hidden p-2 text-muted-foreground hover:text-foreground rounded-lg border border-white/10"
+            className="lg:hidden w-9 h-9 flex items-center justify-center text-neutral-800 dark:text-neutral-200 hover:text-[#FF6B00] rounded-full border border-black/10 dark:border-white/10 bg-black/5 dark:bg-white/5 cursor-pointer transition-all duration-200 active:scale-95"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -198,10 +185,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0a0d16] border-b border-white/10 px-4 pt-3 pb-5 space-y-3 font-mono text-xs animate-in slide-in-from-top-3">
-          <div className="flex items-center justify-between pb-2 border-b border-white/10 text-muted-foreground">
+        <div className="lg:hidden bg-white/95 dark:bg-black/95 backdrop-blur-2xl border-b border-black/10 dark:border-white/10 px-5 pt-4 pb-6 space-y-4 font-mono text-xs animate-in slide-in-from-top-3 duration-300 shadow-2xl">
+          <div className="flex items-center justify-between pb-3 border-b border-black/10 dark:border-white/10 text-neutral-500">
             <span>RBT GMT+1: {moroccoTime}</span>
-            <span className="text-accent">{PERSONAL_INFO.status}</span>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#FF6B00] beacon-orange"></span>
+              <span className="text-[#FF6B00] font-semibold">{PERSONAL_INFO.status}</span>
+            </div>
           </div>
 
           <div className="space-y-1">
@@ -213,36 +203,27 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                   sound.playClick();
                   setMobileMenuOpen(false);
                 }}
-                className="block px-3 py-2 rounded-lg text-slate-300 hover:text-foreground hover:bg-white/5 transition-colors"
+                className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-neutral-700 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-200 active:scale-98"
               >
-                {link.label}
+                <span className="text-[#FF6B00] font-bold">{link.num}</span>
+                <span className="text-sm font-semibold">{link.label}</span>
               </a>
             ))}
           </div>
 
-          <div className="pt-2 border-t border-white/10 flex items-center justify-between">
+          <div className="pt-3 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-accent">
+              <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-[#FF6B00] p-1.5 transition-colors">
                 <Github className="w-4 h-4" />
               </a>
-              <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-accent">
+              <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-[#FF6B00] p-1.5 transition-colors">
                 <Linkedin className="w-4 h-4" />
-              </a>
-              <a href={PERSONAL_INFO.instagram} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-accent">
-                <Instagram className="w-4 h-4" />
               </a>
             </div>
 
-            <button
-              onClick={() => {
-                toggleSound();
-                setMobileMenuOpen(false);
-              }}
-              className="text-muted-foreground hover:text-foreground flex items-center gap-1"
-            >
-              {isAudioMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-accent" />}
-              <span>{isAudioMuted ? 'Muted' : 'Audio On'}</span>
-            </button>
+            <span className="font-mono text-[11px] text-neutral-400 dark:text-neutral-500">
+              omar.torbi © 2026
+            </span>
           </div>
         </div>
       )}

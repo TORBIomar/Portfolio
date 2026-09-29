@@ -52,8 +52,8 @@ export const HeroCanvas: React.FC = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // Create Data/Vector Nodes
-    const nodeCount = Math.min(70, Math.floor(width / 26));
+    // Create Data/Vector Nodes (optimized count for smooth performance)
+    const nodeCount = Math.min(36, Math.max(20, Math.floor(width / 38)));
     const nodes: DataNode[] = [];
     const types: DataNode['type'][] = ['vector', 'db', 'service', 'ai'];
 
@@ -61,9 +61,9 @@ export const HeroCanvas: React.FC = () => {
       nodes.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        radius: Math.random() * 2 + 2,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
+        radius: i % 5 === 0 ? 3 : Math.random() * 1.5 + 1.8,
         type: types[i % types.length],
         clusterId: i % 4,
         pulse: Math.random() * Math.PI * 2,
@@ -72,21 +72,21 @@ export const HeroCanvas: React.FC = () => {
 
     // Packets streaming between nodes
     const packets: DataPacket[] = [];
-    for (let p = 0; p < 18; p++) {
+    for (let p = 0; p < 12; p++) {
       const from = Math.floor(Math.random() * nodeCount);
       const to = (from + 1 + Math.floor(Math.random() * 4)) % nodeCount;
       packets.push({
         fromNode: from,
         toNode: to,
         progress: Math.random(),
-        speed: 0.004 + Math.random() * 0.008,
+        speed: 0.005 + Math.random() * 0.007,
       });
     }
 
     let lastTime = performance.now();
 
     const render = (time: number) => {
-      const dt = Math.min((time - lastTime) / 1000, 0.1);
+      const dt = Math.min((time - lastTime) / 1000, 0.05);
       lastTime = time;
 
       ctx.clearRect(0, 0, width, height);
@@ -96,7 +96,7 @@ export const HeroCanvas: React.FC = () => {
         const n = nodes[i];
         n.x += n.vx * 60 * dt;
         n.y += n.vy * 60 * dt;
-        n.pulse += dt * 2.5;
+        n.pulse += dt * 2.2;
 
         // Wrap boundaries
         if (n.x < 0) n.x = width;
@@ -104,21 +104,24 @@ export const HeroCanvas: React.FC = () => {
         if (n.y < 0) n.y = height;
         if (n.y > height) n.y = 0;
 
-        // Mouse gravity / repulsion
+        // Mouse interaction (fast squared distance check)
         if (mouseRef.current.active) {
           const dx = n.x - mouseRef.current.x;
           const dy = n.y - mouseRef.current.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 180 && dist > 1) {
-            const force = (180 - dist) / 180;
-            n.x += (dx / dist) * force * 10;
-            n.y += (dy / dist) * force * 10;
+          const distSq = dx * dx + dy * dy;
+          const threshold = 170;
+          if (distSq < threshold * threshold && distSq > 4) {
+            const dist = Math.sqrt(distSq);
+            const force = (threshold - dist) / threshold;
+            n.x += (dx / dist) * force * 7;
+            n.y += (dy / dist) * force * 7;
           }
         }
       }
 
-      // Draw Connections (Cosine Vectors / Data Bus)
+      // Draw Connections (Cosine Vectors / Data Bus) - Optimized distSq
       const maxDist = networkMode === 'vector' ? 140 : networkMode === 'pipeline' ? 120 : 160;
+      const maxDistSq = maxDist * maxDist;
 
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
@@ -126,56 +129,57 @@ export const HeroCanvas: React.FC = () => {
           const b = nodes[j];
           const dx = a.x - b.x;
           const dy = a.y - b.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
 
-          if (dist < maxDist) {
-            const alpha = (1 - dist / maxDist) * 0.25;
+          if (distSq < maxDistSq) {
+            const dist = Math.sqrt(distSq);
+            const alpha = (1 - dist / maxDist) * 0.22;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
 
             if (networkMode === 'vector') {
-              // Cosine vector styling
-              ctx.strokeStyle = a.clusterId === b.clusterId ? `rgba(0, 255, 157, ${alpha * 1.5})` : `rgba(0, 229, 255, ${alpha * 0.8})`;
+              ctx.strokeStyle = a.clusterId === b.clusterId 
+                ? `rgba(255, 107, 0, ${alpha * 1.6})` 
+                : `rgba(203, 213, 225, ${alpha * 0.8})`;
               ctx.lineWidth = a.clusterId === b.clusterId ? 1 : 0.6;
             } else if (networkMode === 'pipeline') {
-              // Data pipeline stream
-              ctx.strokeStyle = `rgba(0, 229, 255, ${alpha * 1.2})`;
-              ctx.lineWidth = 0.8;
-            } else {
-              // Cloud cluster network
-              ctx.strokeStyle = `rgba(255, 184, 0, ${alpha * 1.2})`;
+              ctx.strokeStyle = `rgba(226, 232, 240, ${alpha * 1.1})`;
               ctx.lineWidth = 0.75;
+            } else {
+              ctx.strokeStyle = `rgba(148, 163, 184, ${alpha * 1.0})`;
+              ctx.lineWidth = 0.65;
             }
             ctx.stroke();
           }
         }
       }
 
-      // Draw Streaming Data Packets
-      packets.forEach((p) => {
-        p.progress += p.speed;
-        if (p.progress >= 1) {
-          p.progress = 0;
-          p.fromNode = Math.floor(Math.random() * nodes.length);
-          p.toNode = (p.fromNode + 1 + Math.floor(Math.random() * 5)) % nodes.length;
+      // Draw Streaming Data Packets (High-energy Orange)
+      for (let p = 0; p < packets.length; p++) {
+        const pkt = packets[p];
+        pkt.progress += pkt.speed;
+        if (pkt.progress >= 1) {
+          pkt.progress = 0;
+          pkt.fromNode = Math.floor(Math.random() * nodes.length);
+          pkt.toNode = (pkt.fromNode + 1 + Math.floor(Math.random() * 4)) % nodes.length;
         }
 
-        const a = nodes[p.fromNode];
-        const b = nodes[p.toNode];
-        const px = a.x + (b.x - a.x) * p.progress;
-        const py = a.y + (b.y - a.y) * p.progress;
+        const a = nodes[pkt.fromNode];
+        const b = nodes[pkt.toNode];
+        const px = a.x + (b.x - a.x) * pkt.progress;
+        const py = a.y + (b.y - a.y) * pkt.progress;
 
         ctx.beginPath();
-        ctx.arc(px, py, 1.8, 0, Math.PI * 2);
-        ctx.fillStyle = networkMode === 'vector' ? '#00FF9D' : networkMode === 'pipeline' ? '#00E5FF' : '#FFB800';
-        ctx.shadowColor = ctx.fillStyle;
+        ctx.arc(px, py, 2, 0, Math.PI * 2);
+        ctx.fillStyle = '#FF6B00';
+        ctx.shadowColor = '#FF6B00';
         ctx.shadowBlur = 8;
         ctx.fill();
         ctx.shadowBlur = 0;
-      });
+      }
 
-      // Draw Pulse Waves on Click
+      // Draw Pulse Waves on Click (Orange radiant ripple)
       for (let i = pulseWavesRef.current.length - 1; i >= 0; i--) {
         const wave = pulseWavesRef.current[i];
         wave.radius += 180 * dt;
@@ -183,7 +187,7 @@ export const HeroCanvas: React.FC = () => {
 
         ctx.beginPath();
         ctx.arc(wave.x, wave.y, wave.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = networkMode === 'vector' ? `rgba(0, 255, 157, ${wave.alpha * 0.6})` : `rgba(0, 229, 255, ${wave.alpha * 0.6})`;
+        ctx.strokeStyle = `rgba(255, 107, 0, ${wave.alpha * 0.7})`;
         ctx.lineWidth = 1.5;
         ctx.stroke();
 
@@ -192,30 +196,30 @@ export const HeroCanvas: React.FC = () => {
         }
       }
 
-      // Draw Nodes
+      // Draw Nodes (Silver, White, & Orange focal nodes)
       for (let i = 0; i < nodes.length; i++) {
         const n = nodes[i];
-        const pulse = Math.sin(n.pulse) * 0.25 + 0.75;
+        const pulse = Math.sin(n.pulse) * 0.2 + 0.8;
         const r = n.radius * pulse;
 
         ctx.beginPath();
         ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
 
         if (n.type === 'ai') {
-          ctx.fillStyle = '#00FF9D';
-          ctx.shadowColor = 'rgba(0, 255, 157, 0.7)';
+          ctx.fillStyle = '#FF6B00';
+          ctx.shadowColor = 'rgba(255, 107, 0, 0.7)';
         } else if (n.type === 'db') {
-          ctx.fillStyle = '#00E5FF';
-          ctx.shadowColor = 'rgba(0, 229, 255, 0.7)';
-        } else if (n.type === 'service') {
           ctx.fillStyle = '#FFFFFF';
-          ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
+          ctx.shadowColor = 'rgba(255, 255, 255, 0.6)';
+        } else if (n.type === 'service') {
+          ctx.fillStyle = '#CBD5E1';
+          ctx.shadowColor = 'rgba(203, 213, 225, 0.4)';
         } else {
-          ctx.fillStyle = '#FFB800';
-          ctx.shadowColor = 'rgba(255, 184, 0, 0.7)';
+          ctx.fillStyle = '#94A3B8';
+          ctx.shadowColor = 'rgba(148, 163, 184, 0.4)';
         }
 
-        ctx.shadowBlur = 8;
+        ctx.shadowBlur = 6;
         ctx.fill();
         ctx.shadowBlur = 0;
       }
@@ -278,12 +282,12 @@ export const HeroCanvas: React.FC = () => {
       />
 
       {/* Mode Switcher HUD */}
-      <div className="absolute bottom-4 right-4 z-20 hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0d111a]/85 border border-white/10 backdrop-blur-md text-[11px] font-mono text-slate-300 shadow-lg">
-        <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-        <span className="text-muted-foreground">Topology:</span>
+      <div className="absolute bottom-4 right-4 z-20 hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0A0B0F]/90 border border-white/10 backdrop-blur-md text-[11px] font-mono text-slate-300 shadow-xl">
+        <span className="w-2 h-2 rounded-full bg-[#FF6B00] beacon-orange" />
+        <span className="text-slate-400">Topology:</span>
         <button
           onClick={cycleMode}
-          className="text-accent hover:text-cyan font-semibold transition-colors uppercase tracking-wider cursor-pointer"
+          className="text-white hover:text-[#FF6B00] font-semibold transition-colors uppercase tracking-wider cursor-pointer"
           title="Click to cycle interactive data network topology"
         >
           [{networkMode === 'vector' ? 'Vector RAG Space' : networkMode === 'pipeline' ? 'Data Pipeline' : 'Cloud Cluster'}]

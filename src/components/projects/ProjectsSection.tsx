@@ -36,26 +36,26 @@ export const ProjectsSection: React.FC = () => {
   });
 
   return (
-    <section id="projects" className="py-20 sm:py-28 border-b border-white/10 scroll-mt-16 relative">
+    <section id="projects" className="py-20 sm:py-28 border-b border-black/10 dark:border-white/10 scroll-mt-16 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Heading */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <SectionHeading
-            badge="Engineering Portfolio"
-            title="Featured Production Systems & Architecture"
+            badge="02. Production Platforms"
+            title="ENGINEERED SYSTEMS"
             subtitle="Deep-dive into production-grade applications across WebGL CAD kernels, enterprise Spring Boot services, and AI RAG systems."
             className="mb-0"
           />
 
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0e1422] border border-white/10 text-xs font-mono text-muted-foreground self-start md:self-auto shrink-0">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-[#0B0C10] border border-neutral-200/80 dark:border-white/10 text-xs font-mono text-neutral-600 dark:text-muted-foreground self-start md:self-auto shrink-0 shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-[#FF6B00] beacon-orange" />
             <span>{filteredProjects.length} Systems Active</span>
           </div>
         </div>
 
         {/* Filter Controls & Search Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 bg-[#0a0e18] p-2.5 rounded-2xl border border-white/10">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 bg-white dark:bg-[#0B0C10] p-2.5 rounded-2xl border border-neutral-200/80 dark:border-white/10 shadow-sm">
           {/* Category Tabs */}
           <div className="flex flex-wrap items-center gap-1.5 w-full sm:w-auto">
             {categories.map((cat) => {
@@ -69,8 +69,8 @@ export const ProjectsSection: React.FC = () => {
                   }}
                   className={`px-3.5 py-1.5 rounded-xl font-mono text-xs transition-all cursor-pointer ${
                     isActive
-                      ? 'bg-accent text-background font-bold shadow-[0_0_15px_rgba(0,255,157,0.3)]'
-                      : 'text-slate-400 hover:text-foreground hover:bg-white/5'
+                      ? 'bg-gradient-to-r from-[#FF6B00] to-[#FF8533] text-white font-bold shadow-[0_0_16px_rgba(255,107,0,0.35)]'
+                      : 'text-neutral-600 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
                   }`}
                 >
                   {cat.label}
@@ -81,7 +81,7 @@ export const ProjectsSection: React.FC = () => {
 
           {/* Search Input */}
           <div className="relative w-full sm:w-64">
-            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
+            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-400" />
             <input
               type="text"
               value={searchQuery}
@@ -89,8 +89,8 @@ export const ProjectsSection: React.FC = () => {
                 sound.playKey();
                 setSearchQuery(e.target.value);
               }}
-              placeholder="Filter by tech (e.g. Three.js)..."
-              className="w-full bg-[#101524] border border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs font-mono text-foreground placeholder-muted-foreground outline-none focus:border-accent/50"
+              placeholder="Filter by tech (e.g. Spring Boot)..."
+              className="w-full bg-neutral-100 dark:bg-[#07080B] border border-black/5 dark:border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs font-mono text-neutral-900 dark:text-foreground placeholder-neutral-400 dark:placeholder-muted-foreground outline-none focus:border-[#FF6B00]/60 transition-colors"
               aria-label="Filter projects by technology"
             />
           </div>
@@ -109,7 +109,7 @@ export const ProjectsSection: React.FC = () => {
 
         {/* Empty state */}
         {filteredProjects.length === 0 && (
-          <div className="py-20 text-center space-y-3 bg-[#0a0e18] rounded-2xl border border-white/10">
+          <div className="py-20 text-center space-y-3 bg-[#0B0C10] rounded-2xl border border-white/10">
             <Code2 className="w-8 h-8 mx-auto text-muted-foreground opacity-40" />
             <div className="text-sm font-mono text-muted-foreground">
               No systems match query "{searchQuery}"
@@ -119,7 +119,7 @@ export const ProjectsSection: React.FC = () => {
                 setSelectedCategory('all');
                 setSearchQuery('');
               }}
-              className="text-xs font-mono text-accent hover:underline cursor-pointer"
+              className="text-xs font-mono text-white hover:underline cursor-pointer"
             >
               Reset Filters
             </button>

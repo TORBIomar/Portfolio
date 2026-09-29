@@ -37,18 +37,18 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/60 dark:bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
       onClick={() => {
         sound.playClick();
         onClose();
       }}
     >
       <div
-        className="relative w-full max-w-3xl max-h-[88vh] overflow-y-auto bg-[#0d121e] border border-white/10 rounded-2xl shadow-2xl p-6 sm:p-8 text-foreground flex flex-col font-sans"
+        className="relative w-full max-w-3xl max-h-[88vh] overflow-y-auto bg-white dark:bg-[#0A0B0F] border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl p-6 sm:p-8 text-neutral-900 dark:text-foreground flex flex-col font-sans"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Hairline Accent Line */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-cyan to-accent" />
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF6B00] to-transparent" />
 
         {/* Close Button */}
         <button
@@ -56,7 +56,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             sound.playClick();
             onClose();
           }}
-          className="absolute top-5 right-5 p-2 rounded-xl bg-white/5 text-muted-foreground hover:text-foreground hover:bg-white/10 transition-colors cursor-pointer"
+          className="absolute top-5 right-5 p-2 rounded-xl bg-black/5 dark:bg-white/5 text-neutral-500 dark:text-muted-foreground hover:text-neutral-900 dark:hover:text-foreground hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer"
           aria-label="Close dialog"
         >
           <X className="w-5 h-5" />
@@ -65,23 +65,23 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         {/* Header */}
         <div className="space-y-2 pr-10">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded bg-surface-subtle text-accent font-mono text-xs font-semibold uppercase tracking-wider border border-accent/25">
+            <span className="px-2.5 py-0.5 rounded bg-[#FF6B00]/10 text-neutral-900 dark:text-white font-mono text-xs font-semibold uppercase tracking-wider border border-[#FF6B00]/30">
               {project.category}
             </span>
-            <span className="text-xs font-mono text-muted-foreground">
+            <span className="text-xs font-mono text-neutral-500 dark:text-muted-foreground">
               ARCH_SPEC // v3.4
             </span>
           </div>
-          <h2 id="modal-title" className="text-2xl sm:text-3xl font-mono font-bold text-foreground">
+          <h2 id="modal-title" className="text-2xl sm:text-3xl font-mono font-bold text-neutral-900 dark:text-foreground">
             {project.title}
           </h2>
-          <p className="text-sm font-mono text-accent">
+          <p className="text-sm font-mono text-neutral-600 dark:text-slate-300">
             {project.subtitle}
           </p>
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex items-center gap-2 border-b border-white/10 mt-6 pb-2">
+        <div className="flex items-center gap-2 border-b border-black/10 dark:border-white/10 mt-6 pb-2">
           {[
             { id: 'architecture', label: 'System Overview', icon: <Network className="w-3.5 h-3.5" /> },
             { id: 'decisions', label: 'Engineering Decisions', icon: <Cpu className="w-3.5 h-3.5" /> },
@@ -97,8 +97,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 }}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-accent/15 text-accent border border-accent/30 font-semibold'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-white/5'
+                    ? 'bg-[#FF6B00]/15 text-[#FF6B00] border border-[#FF6B00]/40 font-semibold shadow-[0_0_12px_rgba(255,107,0,0.15)]'
+                    : 'text-neutral-500 dark:text-muted-foreground hover:text-neutral-900 dark:hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5'
                 }`}
               >
                 {tab.icon}
@@ -113,21 +113,21 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           {activeTab === 'architecture' && (
             <div className="space-y-4">
               <div className="space-y-2">
-                <h3 className="font-mono text-xs uppercase tracking-wider text-muted-foreground font-semibold flex items-center gap-2">
-                  <Network className="w-4 h-4 text-accent" />
+                <h3 className="font-mono text-xs uppercase tracking-wider text-neutral-500 dark:text-muted-foreground font-semibold flex items-center gap-2">
+                  <Network className="w-4 h-4 text-[#FF6B00]" />
                   <span>Architecture Overview</span>
                 </h3>
-                <p className="text-slate-300 leading-relaxed font-sans bg-[#090d16] p-4 rounded-xl border border-white/5">
+                <p className="text-neutral-700 dark:text-slate-300 leading-relaxed font-sans bg-neutral-50 dark:bg-[#06070A] p-4 rounded-xl border border-black/5 dark:border-white/5">
                   {project.architectureDetails.overview}
                 </p>
               </div>
 
               <div className="space-y-2">
-                <h3 className="font-mono text-xs uppercase tracking-wider text-amber font-semibold flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 text-amber" />
+                <h3 className="font-mono text-xs uppercase tracking-wider text-neutral-800 dark:text-slate-300 font-semibold flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-[#FF6B00]" />
                   <span>Bottlenecks & Latency Resolutions</span>
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans bg-amber-950/20 border border-amber-800/40 p-4 rounded-xl">
+                <p className="text-xs sm:text-sm text-neutral-700 dark:text-slate-300 leading-relaxed font-sans bg-neutral-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/10 p-4 rounded-xl">
                   {project.architectureDetails.performanceBottlenecksResolved}
                 </p>
               </div>
@@ -136,15 +136,15 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
           {activeTab === 'decisions' && (
             <div className="space-y-3">
-              <h3 className="font-mono text-xs uppercase tracking-wider text-muted-foreground font-semibold flex items-center gap-2">
-                <Cpu className="w-4 h-4 text-cyan" />
+              <h3 className="font-mono text-xs uppercase tracking-wider text-neutral-500 dark:text-muted-foreground font-semibold flex items-center gap-2">
+                <Cpu className="w-4 h-4 text-[#FF6B00]" />
                 <span>Critical Architectural Decisions</span>
               </h3>
               <div className="space-y-2.5">
                 {project.architectureDetails.keyDecisions.map((decision, idx) => (
-                  <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl bg-[#090d16] border border-white/5">
-                    <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                    <span className="text-xs sm:text-sm text-slate-300">{decision}</span>
+                  <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl bg-neutral-50 dark:bg-[#06070A] border border-black/5 dark:border-white/5">
+                    <CheckCircle2 className="w-4 h-4 text-[#FF6B00] shrink-0 mt-0.5" />
+                    <span className="text-xs sm:text-sm text-neutral-700 dark:text-slate-300">{decision}</span>
                   </div>
                 ))}
               </div>
@@ -155,14 +155,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             <div className="space-y-5">
               {/* Verified Benchmarks */}
               <div className="space-y-2">
-                <h3 className="font-mono text-xs uppercase tracking-wider text-muted-foreground font-semibold">
+                <h3 className="font-mono text-xs uppercase tracking-wider text-neutral-500 dark:text-muted-foreground font-semibold">
                   Production Telemetry Benchmarks
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                   {project.metrics.map((m, idx) => (
-                    <div key={idx} className="bg-[#090d16] p-3 rounded-xl border border-white/5 text-center">
-                      <div className="text-[11px] text-muted-foreground font-mono">{m.label}</div>
-                      <div className="text-sm sm:text-base font-mono font-bold text-accent mt-1">{m.value}</div>
+                    <div key={idx} className="bg-neutral-50 dark:bg-[#06070A] p-3 rounded-xl border border-black/5 dark:border-white/5 text-center">
+                      <div className="text-[11px] text-neutral-500 dark:text-muted-foreground font-mono">{m.label}</div>
+                      <div className="text-sm sm:text-base font-mono font-bold text-[#FF6B00] mt-1">{m.value}</div>
                     </div>
                   ))}
                 </div>
@@ -170,14 +170,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
               {/* Technologies Utilized */}
               <div className="space-y-2">
-                <h3 className="font-mono text-xs uppercase tracking-wider text-muted-foreground font-semibold">
+                <h3 className="font-mono text-xs uppercase tracking-wider text-neutral-500 dark:text-muted-foreground font-semibold">
                   Technologies Utilized
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 rounded-md bg-[#101524] text-slate-200 font-mono text-xs border border-white/5"
+                      className="px-3 py-1 rounded-md bg-neutral-100 dark:bg-[#0F1016] text-neutral-800 dark:text-slate-200 font-mono text-xs border border-black/5 dark:border-white/5"
                     >
                       {tech}
                     </span>
@@ -189,7 +189,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         </div>
 
         {/* Modal Footer Controls */}
-        <div className="mt-8 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+        <div className="mt-8 pt-4 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             {project.liveUrl && (
               <a
@@ -209,7 +209,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
               rel="noopener noreferrer"
               onClick={() => sound.playClick()}
             >
-              <Button variant="outline" size="sm" icon={<Github className="w-4 h-4 text-cyan" />}>
+              <Button variant="outline" size="sm" icon={<Github className="w-4 h-4 text-white" />}>
                 Source Repository
               </Button>
             </a>

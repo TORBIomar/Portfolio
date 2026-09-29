@@ -11,19 +11,19 @@ export const SkillsSection: React.FC = () => {
   const getCategoryIcon = (iconName: string) => {
     switch (iconName) {
       case 'Terminal':
-        return <Terminal className="w-4 h-4 text-accent" />;
+        return <Terminal className="w-4 h-4 text-white" />;
       case 'Cpu':
-        return <Cpu className="w-4 h-4 text-accent" />;
+        return <Cpu className="w-4 h-4 text-white" />;
       case 'Layout':
-        return <Layout className="w-4 h-4 text-accent" />;
+        return <Layout className="w-4 h-4 text-white" />;
       case 'Cloud':
-        return <Cloud className="w-4 h-4 text-accent" />;
+        return <Cloud className="w-4 h-4 text-white" />;
       case 'Box':
-        return <Box className="w-4 h-4 text-accent" />;
+        return <Box className="w-4 h-4 text-white" />;
       case 'Layers':
-        return <Layers className="w-4 h-4 text-accent" />;
+        return <Layers className="w-4 h-4 text-white" />;
       default:
-        return <Layers className="w-4 h-4 text-accent" />;
+        return <Layers className="w-4 h-4 text-white" />;
     }
   };
 
@@ -51,26 +51,53 @@ export const SkillsSection: React.FC = () => {
   const totalSkillsCount = SKILL_CATEGORIES.reduce((acc, cat) => acc + cat.skills.length, 0);
 
   return (
-    <section id="skills" className="py-20 sm:py-28 border-b border-white/10 scroll-mt-16 relative">
+    <section id="skills" className="py-20 sm:py-28 border-b border-black/10 dark:border-white/10 scroll-mt-16 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <SectionHeading
-            badge="Engineering Arsenal"
-            title="Technical Competencies & Systems Matrix"
+            badge="03. Technical Domains"
+            title="CORE CAPABILITIES"
             subtitle="Organized across core languages, enterprise backend frameworks, modern frontend, databases, and systems."
             className="mb-0"
           />
 
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0e1422] border border-white/10 text-xs font-mono text-muted-foreground self-start md:self-auto shrink-0">
-            <Sparkles className="w-3.5 h-3.5 text-accent" />
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-[#0B0C10] border border-neutral-200/80 dark:border-white/10 text-xs font-mono text-neutral-600 dark:text-muted-foreground self-start md:self-auto shrink-0 shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#FF6B00]" />
             <span>{totalSkillsCount} Production Competencies</span>
           </div>
         </div>
 
+        {/* Core Domains Overview Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <div className="p-6 rounded-2xl bg-white dark:bg-[#111111] border border-neutral-200/80 dark:border-white/10 shadow-sm hover:border-[#FF6B00]/40 transition-colors">
+            <div className="text-[#FF6B00] font-mono text-xs font-bold mb-2">01 / ARCHITECTURE</div>
+            <h3 className="text-lg font-mono font-bold text-neutral-900 dark:text-white mb-2">Backend & Distributed Systems</h3>
+            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-sans">
+              Spring Boot REST services, stateless JWT security, ACID transaction safety, JPA Hibernate tuning, and relational schema optimization across Oracle & Postgres.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-white dark:bg-[#111111] border border-neutral-200/80 dark:border-white/10 shadow-sm hover:border-[#FF6B00]/40 transition-colors">
+            <div className="text-[#FF6B00] font-mono text-xs font-bold mb-2">02 / VECTOR AI</div>
+            <h3 className="text-lg font-mono font-bold text-neutral-900 dark:text-white mb-2">Applied AI & Vector RAG</h3>
+            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-sans">
+              ChromaDB HNSW cosine similarity search, asynchronous document chunking pipelines, and Google Gemini API contextual synthesis with verified citation accuracy.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-white dark:bg-[#111111] border border-neutral-200/80 dark:border-white/10 shadow-sm hover:border-[#FF6B00]/40 transition-colors">
+            <div className="text-[#FF6B00] font-mono text-xs font-bold mb-2">03 / DELIVERY</div>
+            <h3 className="text-lg font-mono font-bold text-neutral-900 dark:text-white mb-2">DevOps & Cloud Systems</h3>
+            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed font-sans">
+              Multi-stage Alpine Docker containerization, Linux administration, CI/CD automated testing, and predictable deployment reproducibility.
+            </p>
+          </div>
+        </div>
+
         {/* Filter Bar & Search */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 bg-[#0a0e18] p-2.5 rounded-2xl border border-white/10">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 bg-white dark:bg-[#0B0C10] p-2.5 rounded-2xl border border-neutral-200/80 dark:border-white/10 shadow-sm">
           {/* Category Tabs */}
           <div className="flex flex-wrap items-center gap-1.5 w-full sm:w-auto">
             <button
@@ -80,8 +107,8 @@ export const SkillsSection: React.FC = () => {
               }}
               className={`px-3.5 py-1.5 rounded-xl font-mono text-xs transition-all cursor-pointer ${
                 activeCategory === 'all'
-                  ? 'bg-accent text-background font-bold shadow-[0_0_15px_rgba(0,255,157,0.3)]'
-                  : 'text-slate-400 hover:text-foreground hover:bg-white/5'
+                  ? 'bg-gradient-to-r from-[#FF6B00] to-[#FF8533] text-white font-bold shadow-[0_0_16px_rgba(255,107,0,0.35)]'
+                  : 'text-neutral-600 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
               }`}
             >
               All Disciplines
@@ -95,8 +122,8 @@ export const SkillsSection: React.FC = () => {
                 }}
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-mono text-xs transition-all cursor-pointer ${
                   activeCategory === cat.id
-                    ? 'bg-accent text-background font-bold shadow-[0_0_15px_rgba(0,255,157,0.3)]'
-                    : 'text-slate-400 hover:text-foreground hover:bg-white/5'
+                    ? 'bg-gradient-to-r from-[#FF6B00] to-[#FF8533] text-white font-bold shadow-[0_0_16px_rgba(255,107,0,0.35)]'
+                    : 'text-neutral-600 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
                 }`}
               >
                 {getCategoryIcon(cat.iconName)}
@@ -107,7 +134,7 @@ export const SkillsSection: React.FC = () => {
 
           {/* Search input */}
           <div className="relative w-full sm:w-64">
-            <Search className="w-3.5 h-3.5 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-3.5 h-3.5 text-neutral-400 dark:text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search skill (e.g. Spring, Docker)..."
@@ -116,7 +143,7 @@ export const SkillsSection: React.FC = () => {
                 sound.playKey();
                 setSearchQuery(e.target.value);
               }}
-              className="w-full bg-[#101524] border border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs font-mono text-foreground placeholder-muted-foreground outline-none focus:border-accent/50"
+              className="w-full bg-neutral-100 dark:bg-[#07080B] border border-black/5 dark:border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs font-mono text-neutral-900 dark:text-foreground placeholder-neutral-400 dark:placeholder-muted-foreground outline-none focus:border-[#FF6B00]/60 transition-colors"
               aria-label="Filter skills"
             />
           </div>
@@ -129,15 +156,15 @@ export const SkillsSection: React.FC = () => {
             return (
               <div key={category.id} className="space-y-4">
                 {/* Category Title */}
-                <div className="flex items-center gap-2 pb-2 border-b border-white/10">
-                  <div className="p-1.5 rounded-lg bg-[#0e1422] border border-white/10 text-accent">
+                <div className="flex items-center gap-2 pb-2 border-b border-black/10 dark:border-white/10">
+                  <div className="p-1.5 rounded-lg bg-neutral-100 dark:bg-[#0F1016] border border-black/10 dark:border-white/10 text-[#FF6B00]">
                     {getCategoryIcon(category.iconName)}
                   </div>
                   <div>
-                    <h3 className="font-mono text-base font-bold text-foreground">
+                    <h3 className="font-mono text-base font-bold text-neutral-900 dark:text-foreground">
                       {category.title}
                     </h3>
-                    <p className="font-mono text-xs text-muted-foreground">
+                    <p className="font-mono text-xs text-neutral-500 dark:text-muted-foreground">
                       {category.description}
                     </p>
                   </div>
@@ -153,22 +180,22 @@ export const SkillsSection: React.FC = () => {
                       <div
                         key={skill.name}
                         onMouseEnter={() => sound.playHover()}
-                        className="p-4 rounded-xl bg-[#0b0f19] border border-white/10 hover:border-accent/40 transition-all duration-200 flex flex-col justify-between group hover:shadow-[0_0_20px_rgba(0,255,157,0.1)]"
+                        className="p-4 rounded-xl bg-white dark:bg-[#0B0C10] border border-neutral-200/80 dark:border-white/10 hover:border-[#FF6B00]/40 transition-all duration-200 flex flex-col justify-between group hover:shadow-[0_0_20px_rgba(255,107,0,0.1)] shadow-xs"
                       >
                         {/* Top: Skill name & proficiency pill */}
                         <div>
                           <div className="flex items-center justify-between gap-2 mb-2">
-                            <div className="font-mono text-sm font-bold text-foreground group-hover:text-accent transition-colors">
+                            <div className="font-mono text-sm font-bold text-neutral-900 dark:text-foreground group-hover:text-[#FF6B00] transition-colors">
                               {skill.name}
                             </div>
                             <div className="flex items-center gap-1.5">
-                              <span className="font-mono text-[11px] text-muted-foreground">
+                              <span className="font-mono text-[11px] text-neutral-500 dark:text-muted-foreground">
                                 {skill.experienceYears}y exp
                               </span>
                               <span className={`px-2 py-0.5 rounded font-mono text-[10px] font-bold border ${
                                 isExpert
-                                  ? 'bg-accent/10 text-accent border-accent/30'
-                                  : 'bg-cyan/10 text-cyan border-cyan/30'
+                                  ? 'bg-[#FF6B00]/15 text-[#FF6B00] border-[#FF6B00]/40'
+                                  : 'bg-black/5 dark:bg-white/5 text-neutral-700 dark:text-slate-300 border-black/10 dark:border-white/10'
                               }`}>
                                 {skill.proficiency}
                               </span>
@@ -176,27 +203,27 @@ export const SkillsSection: React.FC = () => {
                           </div>
 
                           {/* Proficiency Meter Bar */}
-                          <div className="w-full bg-[#101524] h-1 rounded-full overflow-hidden mb-3">
+                          <div className="w-full bg-neutral-100 dark:bg-[#07080B] h-1 rounded-full overflow-hidden mb-3">
                             <div
                               className={`h-full rounded-full ${
-                                isExpert ? 'bg-accent shadow-[0_0_8px_#00FF9D]' : 'bg-cyan shadow-[0_0_8px_#00E5FF]'
+                                isExpert ? 'bg-gradient-to-r from-[#FF6B00] to-[#FFA05C] shadow-[0_0_8px_rgba(255,107,0,0.6)]' : 'bg-neutral-400 dark:bg-slate-400 shadow-[0_0_8px_rgba(148,163,184,0.4)]'
                               }`}
                               style={{ width: proficiencyPct }}
                             />
                           </div>
 
                           {/* Middle: Real-world production context */}
-                          <p className="text-xs text-slate-300 font-sans leading-relaxed mb-3">
+                          <p className="text-xs text-neutral-600 dark:text-slate-300 font-sans leading-relaxed mb-3">
                             {skill.productionContext}
                           </p>
                         </div>
 
                         {/* Bottom: Tags */}
-                        <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/5 mt-auto">
+                        <div className="flex flex-wrap gap-1.5 pt-2 border-t border-black/5 dark:border-white/5 mt-auto">
                           {skill.tags.map((tag) => (
                             <span
                               key={tag}
-                              className="px-2 py-0.5 rounded bg-[#101626] text-slate-400 font-mono text-[10px] border border-white/5"
+                              className="px-2 py-0.5 rounded bg-neutral-100 dark:bg-[#0F1016] text-neutral-600 dark:text-slate-400 font-mono text-[10px] border border-black/5 dark:border-white/5 hover:border-[#FF6B00]/30 hover:text-[#FF6B00] dark:hover:text-white transition-colors"
                             >
                               {tag}
                             </span>

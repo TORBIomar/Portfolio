@@ -33,38 +33,36 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#06080d] border-t border-white/10 text-muted-foreground py-10">
+    <footer className="bg-white dark:bg-black border-t border-black/10 dark:border-white/10 text-neutral-600 dark:text-muted-foreground py-10 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Row */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-white/10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-black/10 dark:border-white/10">
           
           {/* Brand & Tagline */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-[#0e1422] border border-white/10 flex items-center justify-center text-accent">
+            <div className="w-8 h-8 rounded-lg bg-neutral-100 dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 flex items-center justify-center text-[#FF6B00] shadow-xs">
               <Terminal className="w-4 h-4" />
             </div>
             <div>
-              <span className="font-mono text-sm font-bold text-foreground">
-                {PERSONAL_INFO.name}
+              <span className="font-mono text-sm font-bold text-neutral-900 dark:text-foreground">
+                <span>omar</span>
+                <span className="text-[#FF6B00]">.torbi</span>
               </span>
-              <p className="font-mono text-xs text-muted-foreground">
-                Computer Engineering Student | Full-Stack Developer • EMSI Rabat
+              <p className="font-mono text-xs text-neutral-500 dark:text-muted-foreground">
+                Computer Engineering Student | Software &amp; DevOps Engineer • EMSI Rabat
               </p>
             </div>
           </div>
 
           {/* Real-time System Status Banner */}
-          <div className="flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-[#0e1422] border border-white/10 text-xs font-mono">
-            <div className="flex items-center gap-1.5">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-              </span>
-              <span className="text-accent font-semibold">ALL_SYSTEMS_ONLINE</span>
+          <div className="flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-neutral-100 dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 text-xs font-mono shadow-xs">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 beacon-green"></span>
+              <span className="text-neutral-900 dark:text-slate-200 font-semibold">ALL_SYSTEMS_ONLINE</span>
             </div>
-            <span className="text-white/20">|</span>
-            <span className="text-slate-300">RBT {rbtTime || '14:30:00'}</span>
+            <span className="text-black/10 dark:text-white/20">|</span>
+            <span className="text-neutral-600 dark:text-slate-300">RBT {rbtTime || '14:30:00'}</span>
           </div>
 
           {/* Socials & Back to Top */}
@@ -74,7 +72,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sound.playClick()}
-              className="p-2 rounded-xl bg-[#0e1422] border border-white/10 text-muted-foreground hover:text-foreground hover:border-white/20 transition-colors cursor-pointer"
+              className="p-2.5 rounded-full bg-neutral-100 dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 text-neutral-600 dark:text-muted-foreground hover:text-[#FF6B00] hover:border-[#FF6B00]/40 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 active:scale-95 cursor-pointer shadow-xs"
               aria-label="GitHub Profile"
             >
               <Github className="w-4 h-4" />
@@ -84,7 +82,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sound.playClick()}
-              className="p-2 rounded-xl bg-[#0e1422] border border-white/10 text-muted-foreground hover:text-foreground hover:border-white/20 transition-colors cursor-pointer"
+              className="p-2.5 rounded-full bg-neutral-100 dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 text-neutral-600 dark:text-muted-foreground hover:text-[#FF6B00] hover:border-[#FF6B00]/40 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 active:scale-95 cursor-pointer shadow-xs"
               aria-label="LinkedIn Profile"
             >
               <Linkedin className="w-4 h-4" />
@@ -94,14 +92,14 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sound.playClick()}
-              className="p-2 rounded-xl bg-[#0e1422] border border-white/10 text-muted-foreground hover:text-foreground hover:border-white/20 transition-colors cursor-pointer"
+              className="p-2.5 rounded-full bg-neutral-100 dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 text-neutral-600 dark:text-muted-foreground hover:text-[#FF6B00] hover:border-[#FF6B00]/40 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 active:scale-95 cursor-pointer shadow-xs"
               aria-label="Instagram Profile"
             >
               <Instagram className="w-4 h-4" />
             </a>
             <button
               onClick={scrollToTop}
-              className="p-2 rounded-xl bg-[#0e1422] border border-white/10 text-muted-foreground hover:text-accent hover:border-accent/40 transition-colors cursor-pointer ml-1"
+              className="p-2.5 rounded-full bg-neutral-100 dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 text-neutral-600 dark:text-muted-foreground hover:text-[#FF6B00] hover:border-[#FF6B00]/40 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 active:scale-95 cursor-pointer ml-1 shadow-xs"
               title="Return to top"
               aria-label="Scroll back to top"
             >
@@ -112,21 +110,21 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Copyright & Technical Colophon */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-muted-foreground">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-neutral-500 dark:text-muted-foreground">
           <div className="flex items-center gap-2">
-            <GitBranch className="w-3.5 h-3.5 text-accent" />
+            <GitBranch className="w-3.5 h-3.5 text-[#FF6B00]" />
             <span>rev.2026.4 // build clean</span>
             <span>•</span>
             <span>© {new Date().getFullYear()} {PERSONAL_INFO.name}</span>
           </div>
-          <div className="flex items-center gap-3 text-slate-400">
+          <div className="flex items-center gap-3 text-neutral-600 dark:text-slate-400">
             <span>React 18 + TS</span>
             <span>•</span>
             <span>Spring Boot</span>
             <span>•</span>
             <span>Three.js / Wasm</span>
             <span>•</span>
-            <span className="text-accent">Zero AI Slop</span>
+            <span className="text-[#FF6B00] font-semibold">Zero AI Slop</span>
           </div>
         </div>
 
