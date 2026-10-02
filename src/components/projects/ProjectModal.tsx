@@ -37,18 +37,18 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/60 dark:bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/60 dark:bg-[#0E1117]/85 backdrop-blur-md animate-in fade-in duration-200"
       onClick={() => {
         sound.playClick();
         onClose();
       }}
     >
       <div
-        className="relative w-full max-w-3xl max-h-[88vh] overflow-y-auto bg-white dark:bg-[#0A0B0F] border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl p-6 sm:p-8 text-neutral-900 dark:text-foreground flex flex-col font-sans"
+        className="relative w-full max-w-3xl max-h-[88vh] overflow-y-auto bg-white dark:bg-[#141820] border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl p-6 sm:p-8 text-neutral-900 dark:text-foreground flex flex-col font-sans"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Hairline Accent Line */}
-        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#FF6B00] to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#E58A3C] to-transparent" />
 
         {/* Close Button */}
         <button
@@ -65,7 +65,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         {/* Header */}
         <div className="space-y-2 pr-10">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded bg-[#FF6B00]/10 text-neutral-900 dark:text-white font-mono text-xs font-semibold uppercase tracking-wider border border-[#FF6B00]/30">
+            <span className="px-2.5 py-0.5 rounded bg-[#E58A3C]/10 text-neutral-900 dark:text-white font-mono text-xs font-semibold uppercase tracking-wider border border-[#E58A3C]/30">
               {project.category}
             </span>
             <span className="text-xs font-mono text-neutral-500 dark:text-muted-foreground">
@@ -97,7 +97,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 }}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-[#FF6B00]/15 text-[#FF6B00] border border-[#FF6B00]/40 font-semibold shadow-[0_0_12px_rgba(255,107,0,0.15)]'
+                    ? 'bg-[#E58A3C]/15 text-[#E58A3C] border border-[#E58A3C]/40 font-semibold shadow-[0_0_12px_rgba(255,107,0,0.15)]'
                     : 'text-neutral-500 dark:text-muted-foreground hover:text-neutral-900 dark:hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5'
                 }`}
               >
@@ -114,17 +114,17 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             <div className="space-y-4">
               <div className="space-y-2">
                 <h3 className="font-mono text-xs uppercase tracking-wider text-neutral-500 dark:text-muted-foreground font-semibold flex items-center gap-2">
-                  <Network className="w-4 h-4 text-[#FF6B00]" />
+                  <Network className="w-4 h-4 text-[#E58A3C]" />
                   <span>Architecture Overview</span>
                 </h3>
-                <p className="text-neutral-700 dark:text-slate-300 leading-relaxed font-sans bg-neutral-50 dark:bg-[#06070A] p-4 rounded-xl border border-black/5 dark:border-white/5">
+                <p className="text-neutral-700 dark:text-slate-300 leading-relaxed font-sans bg-neutral-50 dark:bg-[#141820] p-4 rounded-xl border border-black/5 dark:border-white/5">
                   {project.architectureDetails.overview}
                 </p>
               </div>
 
               <div className="space-y-2">
                 <h3 className="font-mono text-xs uppercase tracking-wider text-neutral-800 dark:text-slate-300 font-semibold flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 text-[#FF6B00]" />
+                  <AlertCircle className="w-4 h-4 text-[#E58A3C]" />
                   <span>Bottlenecks & Latency Resolutions</span>
                 </h3>
                 <p className="text-xs sm:text-sm text-neutral-700 dark:text-slate-300 leading-relaxed font-sans bg-neutral-50 dark:bg-white/[0.02] border border-black/5 dark:border-white/10 p-4 rounded-xl">
@@ -137,13 +137,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           {activeTab === 'decisions' && (
             <div className="space-y-3">
               <h3 className="font-mono text-xs uppercase tracking-wider text-neutral-500 dark:text-muted-foreground font-semibold flex items-center gap-2">
-                <Cpu className="w-4 h-4 text-[#FF6B00]" />
+                <Cpu className="w-4 h-4 text-[#E58A3C]" />
                 <span>Critical Architectural Decisions</span>
               </h3>
               <div className="space-y-2.5">
                 {project.architectureDetails.keyDecisions.map((decision, idx) => (
-                  <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl bg-neutral-50 dark:bg-[#06070A] border border-black/5 dark:border-white/5">
-                    <CheckCircle2 className="w-4 h-4 text-[#FF6B00] shrink-0 mt-0.5" />
+                  <div key={idx} className="flex items-start gap-3 p-3.5 rounded-xl bg-neutral-50 dark:bg-[#141820] border border-black/5 dark:border-white/5">
+                    <CheckCircle2 className="w-4 h-4 text-[#E58A3C] shrink-0 mt-0.5" />
                     <span className="text-xs sm:text-sm text-neutral-700 dark:text-slate-300">{decision}</span>
                   </div>
                 ))}
@@ -160,9 +160,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                   {project.metrics.map((m, idx) => (
-                    <div key={idx} className="bg-neutral-50 dark:bg-[#06070A] p-3 rounded-xl border border-black/5 dark:border-white/5 text-center">
+                    <div key={idx} className="bg-neutral-50 dark:bg-[#141820] p-3 rounded-xl border border-black/5 dark:border-white/5 text-center">
                       <div className="text-[11px] text-neutral-500 dark:text-muted-foreground font-mono">{m.label}</div>
-                      <div className="text-sm sm:text-base font-mono font-bold text-[#FF6B00] mt-1">{m.value}</div>
+                      <div className="text-sm sm:text-base font-mono font-bold text-[#E58A3C] mt-1">{m.value}</div>
                     </div>
                   ))}
                 </div>
@@ -177,7 +177,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                   {project.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 rounded-md bg-neutral-100 dark:bg-[#0F1016] text-neutral-800 dark:text-slate-200 font-mono text-xs border border-black/5 dark:border-white/5"
+                      className="px-3 py-1 rounded-md bg-neutral-100 dark:bg-[#181D26] text-neutral-800 dark:text-slate-200 font-mono text-xs border border-black/5 dark:border-white/5"
                     >
                       {tech}
                     </span>

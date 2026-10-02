@@ -47,14 +47,14 @@ export const ProjectsSection: React.FC = () => {
           />
 
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-sm bg-neutral-100 dark:bg-[#111218] border border-neutral-300 dark:border-white/10 text-xs font-mono text-neutral-600 dark:text-neutral-400 self-start md:self-auto shrink-0">
-            <span className="text-[#FF6B00] font-bold">SYS//RUN</span>
+            <span className="text-[#E58A3C] font-bold">SYS//RUN</span>
             <span className="text-neutral-300 dark:text-neutral-700">|</span>
             <span>{filteredProjects.length} Systems Active</span>
           </div>
         </div>
 
         {/* Filter Controls & Search Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 bg-neutral-50 dark:bg-[#0B0C10] p-2 rounded-md border border-neutral-300 dark:border-white/10">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 bg-neutral-50 dark:bg-[#141820] p-2 rounded-md border border-neutral-300 dark:border-white/10">
           {/* Category Tabs */}
           <div className="flex flex-wrap items-center gap-1.5 w-full sm:w-auto">
             {categories.map((cat) => {
@@ -68,7 +68,7 @@ export const ProjectsSection: React.FC = () => {
                   }}
                   className={`px-3 py-1.5 rounded-md font-mono text-xs transition-colors cursor-pointer ${
                     isActive
-                      ? 'bg-[#FF6B00] text-white font-semibold'
+                      ? 'bg-[#E58A3C] text-white font-semibold'
                       : 'text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:bg-neutral-200 dark:hover:bg-white/5'
                   }`}
                 >
@@ -89,7 +89,7 @@ export const ProjectsSection: React.FC = () => {
                 setSearchQuery(e.target.value);
               }}
               placeholder="Filter by tech (e.g. Docker, Spring)..."
-              className="w-full bg-neutral-100 dark:bg-[#07080B] border border-black/5 dark:border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs font-mono text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 outline-none focus:border-[#FF6B00]/60 transition-colors"
+              className="w-full bg-neutral-100 dark:bg-[#0E1117] border border-black/5 dark:border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs font-mono text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 outline-none focus:border-[#E58A3C]/60 transition-colors"
               aria-label="Filter projects by technology"
             />
           </div>
@@ -108,7 +108,7 @@ export const ProjectsSection: React.FC = () => {
 
         {/* Empty state */}
         {filteredProjects.length === 0 && (
-          <div className="py-20 text-center space-y-3 bg-white dark:bg-[#0B0C10] rounded-2xl border border-black/10 dark:border-white/10">
+          <div className="py-20 text-center space-y-3 bg-white dark:bg-[#141820] rounded-2xl border border-black/10 dark:border-white/10">
             <Code2 className="w-8 h-8 mx-auto text-neutral-400 dark:text-neutral-500 opacity-60" />
             <div className="text-sm font-mono text-neutral-500 dark:text-neutral-400">
               No systems match query "{searchQuery}"
@@ -118,7 +118,7 @@ export const ProjectsSection: React.FC = () => {
                 setSelectedCategory('all');
                 setSearchQuery('');
               }}
-              className="text-xs font-mono text-[#FF6B00] hover:underline cursor-pointer"
+              className="text-xs font-mono text-[#E58A3C] hover:underline cursor-pointer"
             >
               Reset Filters
             </button>

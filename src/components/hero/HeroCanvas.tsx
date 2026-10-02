@@ -44,7 +44,7 @@ export const HeroCanvas: React.FC = () => {
       const isDarkMode = document.documentElement.classList.contains('dark');
       const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.035)' : 'rgba(0, 0, 0, 0.04)';
       const crossColor = isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.09)';
-      const accentColor = '#FF6B00';
+      const accentColor = '#E58A3C';
 
       // 1. Draw Architectural Grid Lines
       ctx.lineWidth = 1;
@@ -79,7 +79,7 @@ export const HeroCanvas: React.FC = () => {
             const dist = Math.sqrt(dx * dx + dy * dy);
             if (dist < 140) {
               const proximityAlpha = Math.max(0, 1 - dist / 140);
-              currentCrossColor = `rgba(255, 107, 0, ${proximityAlpha * 0.75})`;
+              currentCrossColor = `rgba(229, 138, 60, ${proximityAlpha * 0.75})`;
             }
           }
 
@@ -99,7 +99,7 @@ export const HeroCanvas: React.FC = () => {
         const my = mouseRef.current.y;
 
         // Subtle projection hairline guides
-        ctx.strokeStyle = isDarkMode ? 'rgba(255, 107, 0, 0.22)' : 'rgba(255, 107, 0, 0.28)';
+        ctx.strokeStyle = isDarkMode ? 'rgba(229, 138, 60, 0.25)' : 'rgba(229, 138, 60, 0.32)';
         ctx.setLineDash([3, 3]);
         
         // Vertical projection guide
@@ -135,7 +135,7 @@ export const HeroCanvas: React.FC = () => {
           continue;
         }
 
-        ctx.strokeStyle = `rgba(255, 107, 0, ${p.alpha * 0.6})`;
+        ctx.strokeStyle = `rgba(229, 138, 60, ${p.alpha * 0.6})`;
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
@@ -143,7 +143,7 @@ export const HeroCanvas: React.FC = () => {
 
         // Secondary inner echo ring
         if (p.radius > 20) {
-          ctx.strokeStyle = `rgba(255, 107, 0, ${p.alpha * 0.25})`;
+          ctx.strokeStyle = `rgba(229, 138, 60, ${p.alpha * 0.25})`;
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.radius * 0.65, 0, Math.PI * 2);
           ctx.stroke();
@@ -200,8 +200,8 @@ export const HeroCanvas: React.FC = () => {
       />
 
       {/* Architectural Telemetry HUD Badge */}
-      <div className="absolute bottom-4 right-4 z-20 hidden md:flex items-center gap-2.5 px-3 py-1 rounded bg-white/80 dark:bg-[#07080B]/85 border border-neutral-300 dark:border-neutral-800 text-[10px] font-mono text-neutral-500 dark:text-neutral-400 select-none backdrop-blur-xs">
-        <span className="text-[#FF6B00] font-bold">CAD//GRID: 56PX</span>
+      <div className="absolute bottom-4 right-4 z-20 hidden md:flex items-center gap-2.5 px-3 py-1 rounded-sm bg-white/90 dark:bg-[#141820]/90 border border-neutral-300 dark:border-neutral-800 text-[10px] font-mono text-neutral-500 dark:text-neutral-400 select-none backdrop-blur-xs">
+        <span className="text-[#E58A3C] font-bold">CAD//GRID: 56PX</span>
         <span className="text-neutral-300 dark:text-neutral-700">|</span>
         <span>X: {hudCoords.x.toString().padStart(4, '0')}</span>
         <span>Y: {hudCoords.y.toString().padStart(4, '0')}</span>

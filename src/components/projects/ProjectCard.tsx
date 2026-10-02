@@ -57,7 +57,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
         transition: isHovered ? 'transform 0.08s ease-out' : 'transform 0.4s ease-out',
       }}
       data-cursor="view"
-      className="project-card relative rounded-md bg-white dark:bg-[#0A0B0F] border border-neutral-300 dark:border-neutral-800 overflow-hidden flex flex-col justify-between group hover:border-[#FF6B00] transition-colors"
+      className="project-card relative rounded-md bg-white dark:bg-[#141820] border border-neutral-300 dark:border-neutral-800 overflow-hidden flex flex-col justify-between group hover:border-[#E58A3C] transition-colors"
     >
       {/* Top Header & Categorization */}
       <div className="p-6 sm:p-7 space-y-4 relative z-20">
@@ -68,7 +68,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
             </span>
             {project.featured && (
               <span className="px-2 py-0.5 rounded-sm bg-neutral-100 dark:bg-white/5 text-neutral-800 dark:text-neutral-200 font-mono text-[10px] font-semibold border border-neutral-300 dark:border-white/10 flex items-center gap-1">
-                <span className="text-[#FF6B00] font-bold">#</span>
+                <span className="text-[#E58A3C] font-bold">#</span>
                 <span>VERIFIED SYSTEM</span>
               </span>
             )}
@@ -83,7 +83,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
 
         {/* Title & Subtitle */}
         <div>
-          <h3 className="text-xl sm:text-2xl font-mono font-bold text-neutral-900 dark:text-white group-hover:text-[#FF6B00] transition-colors">
+          <h3 className="text-xl sm:text-2xl font-mono font-bold text-neutral-900 dark:text-white group-hover:text-[#E58A3C] transition-colors">
             {project.title}
           </h3>
           <p className="text-xs sm:text-sm font-mono text-neutral-500 dark:text-neutral-400 mt-1">
@@ -124,13 +124,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
         {/* Architectural Highlights */}
         <div className="space-y-1.5 pt-1">
           <div className="text-xs font-mono font-semibold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
-            <Cpu className="w-3.5 h-3.5 text-[#FF6B00]" />
+            <Cpu className="w-3.5 h-3.5 text-[#E58A3C]" />
             <span>Architecture Highlights</span>
           </div>
           <ul className="space-y-1.5 text-xs text-neutral-500 dark:text-neutral-400 font-sans">
             {project.architecturalHighlights.slice(0, 3).map((item, idx) => (
               <li key={idx} className="flex items-start gap-2">
-                <span className="text-[#FF6B00] font-mono shrink-0 mt-0.5">›</span>
+                <span className="text-[#E58A3C] font-mono shrink-0 mt-0.5">›</span>
                 <span className="line-clamp-2 text-neutral-700 dark:text-neutral-300">{item}</span>
               </li>
             ))}
@@ -145,7 +145,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="px-2 py-0.5 rounded-sm bg-neutral-100 dark:bg-[#111218] text-neutral-700 dark:text-neutral-300 font-mono text-[11px] border border-neutral-200 dark:border-white/5 hover:border-[#FF6B00] transition-colors"
+              className="px-2 py-0.5 rounded-sm bg-neutral-100 dark:bg-[#111218] text-neutral-700 dark:text-neutral-300 font-mono text-[11px] border border-neutral-200 dark:border-white/5 hover:border-[#E58A3C] transition-colors"
             >
               {tech}
             </span>
@@ -159,7 +159,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
               sound.playClick();
               onOpenModal(project);
             }}
-            className="inline-flex items-center gap-1 text-xs font-mono font-semibold text-[#FF6B00] hover:text-[#FFA05C] transition-colors cursor-pointer group/link"
+            className="inline-flex items-center gap-1 text-xs font-mono font-semibold text-[#E58A3C] hover:text-[#F09A4E] transition-colors cursor-pointer group/link"
           >
             <span>[ INSPECT BLUEPRINT ]</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
@@ -172,7 +172,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playClick()}
-                className="p-1.5 rounded-md bg-neutral-100 dark:bg-[#111218] text-neutral-600 dark:text-neutral-300 hover:text-[#FF6B00] border border-neutral-200 dark:border-white/10 hover:border-[#FF6B00] transition-colors cursor-pointer"
+                className="p-1.5 rounded-md bg-neutral-100 dark:bg-[#111218] text-neutral-600 dark:text-neutral-300 hover:text-[#E58A3C] border border-neutral-200 dark:border-white/10 hover:border-[#E58A3C] transition-colors cursor-pointer"
                 title="View Live Platform"
                 aria-label={`View ${project.title} live platform`}
               >
@@ -184,7 +184,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sound.playClick()}
-              className="p-1.5 rounded-md bg-neutral-100 dark:bg-[#111218] text-neutral-600 dark:text-neutral-300 hover:text-[#FF6B00] border border-neutral-200 dark:border-white/10 hover:border-[#FF6B00] transition-colors cursor-pointer"
+              className="p-1.5 rounded-md bg-neutral-100 dark:bg-[#111218] text-neutral-600 dark:text-neutral-300 hover:text-[#E58A3C] border border-neutral-200 dark:border-white/10 hover:border-[#E58A3C] transition-colors cursor-pointer"
               title="View Repository"
               aria-label={`View ${project.title} repository on GitHub`}
             >

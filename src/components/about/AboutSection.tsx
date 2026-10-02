@@ -25,7 +25,7 @@ export const AboutSection: React.FC = () => {
           {/* Left: Engineering Narrative */}
           <div className="lg:col-span-7 space-y-6 text-base text-neutral-700 dark:text-neutral-300 font-light leading-relaxed">
             <p className="text-lg sm:text-xl font-normal text-neutral-900 dark:text-white leading-relaxed">
-              I am <strong className="font-semibold text-neutral-900 dark:text-white">{PERSONAL_INFO.name}</strong>, a final-year Computer Science &amp; Networks engineering student at <strong className="font-semibold text-neutral-900 dark:text-white">EMSI Rabat</strong> and an <span className="text-[#FF6B00] font-medium">OCI Certified DevOps &amp; Architect Professional</span>.
+              I am <strong className="font-semibold text-neutral-900 dark:text-white">{PERSONAL_INFO.name}</strong>, a final-year Computer Science &amp; Networks engineering student at <strong className="font-semibold text-neutral-900 dark:text-white">EMSI Rabat</strong> and an <span className="text-[#E58A3C] font-medium">OCI Certified DevOps &amp; Architect Professional</span>.
             </p>
             
             <p>
@@ -58,7 +58,7 @@ export const AboutSection: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playSuccess()}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-neutral-100 dark:bg-white/[0.05] border border-neutral-300 dark:border-white/10 text-neutral-800 dark:text-neutral-200 font-semibold hover:border-[#FF6B00] hover:text-[#FF6B00] transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-neutral-100 dark:bg-white/[0.05] border border-neutral-300 dark:border-white/10 text-neutral-800 dark:text-neutral-200 font-semibold hover:border-[#E58A3C] hover:text-[#E58A3C] transition-colors cursor-pointer"
               >
                 <span>CV Français (PDF)</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -70,8 +70,8 @@ export const AboutSection: React.FC = () => {
           <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
             
             {/* Pillar 1: Certifications & Cloud */}
-            <div className="p-4 rounded-md bg-white dark:bg-[#0B0C10] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#FF6B00] transition-colors">
-              <div className="flex items-center gap-2 text-[#FF6B00]">
+            <div className="p-4 rounded-md bg-white dark:bg-[#141820] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#E58A3C] transition-colors">
+              <div className="flex items-center gap-2 text-[#E58A3C]">
                 <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                   Cloud Certifications
@@ -86,8 +86,8 @@ export const AboutSection: React.FC = () => {
             </div>
 
             {/* Pillar 2: Backend Software Architecture */}
-            <div className="p-4 rounded-md bg-white dark:bg-[#0B0C10] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#FF6B00] transition-colors">
-              <div className="flex items-center gap-2 text-[#FF6B00]">
+            <div className="p-4 rounded-md bg-white dark:bg-[#141820] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#E58A3C] transition-colors">
+              <div className="flex items-center gap-2 text-[#E58A3C]">
                 <Server className="w-4 h-4 shrink-0" />
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                   Backend Architecture
@@ -102,8 +102,8 @@ export const AboutSection: React.FC = () => {
             </div>
 
             {/* Pillar 3: DevOps & Containerization */}
-            <div className="p-4 rounded-md bg-white dark:bg-[#0B0C10] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#FF6B00] transition-colors">
-              <div className="flex items-center gap-2 text-[#FF6B00]">
+            <div className="p-4 rounded-md bg-white dark:bg-[#141820] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#E58A3C] transition-colors">
+              <div className="flex items-center gap-2 text-[#E58A3C]">
                 <Cloud className="w-4 h-4 shrink-0" />
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                   DevOps &amp; Infrastructure
@@ -118,8 +118,8 @@ export const AboutSection: React.FC = () => {
             </div>
 
             {/* Pillar 4: Persistence & Data Systems */}
-            <div className="p-4 rounded-md bg-white dark:bg-[#0B0C10] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#FF6B00] transition-colors">
-              <div className="flex items-center gap-2 text-[#FF6B00]">
+            <div className="p-4 rounded-md bg-white dark:bg-[#141820] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#E58A3C] transition-colors">
+              <div className="flex items-center gap-2 text-[#E58A3C]">
                 <Database className="w-4 h-4 shrink-0" />
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                   Data Persistence &amp; ACID

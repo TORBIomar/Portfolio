@@ -18,12 +18,12 @@ export const Button: React.FC<ButtonProps> = ({
   disabled,
   ...props
 }) => {
-  const baseStyles = "inline-flex items-center justify-center font-mono font-medium transition-all duration-200 ease-out cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 select-none focus-visible:ring-2 focus-visible:ring-[#FF6B00] focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0.5 tracking-tight";
+  const baseStyles = "inline-flex items-center justify-center font-mono font-medium transition-all duration-200 ease-out cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 select-none focus-visible:ring-2 focus-visible:ring-[#E58A3C] focus-visible:ring-offset-2 focus-visible:ring-offset-background active:translate-y-0.5 tracking-tight";
 
   const variantStyles = {
-    primary: "bg-[#FF6B00] hover:bg-[#FF7A1A] text-white font-semibold border border-[#E65F00] shadow-sm hover:shadow active:bg-[#E65F00]",
+    primary: "bg-[#E58A3C] hover:bg-[#FF7A1A] text-white font-semibold border border-[#E65F00] shadow-sm hover:shadow active:bg-[#E65F00]",
     secondary: "bg-neutral-100 dark:bg-[#111218] text-neutral-900 dark:text-white hover:bg-neutral-200 dark:hover:bg-[#181A22] border border-neutral-200 dark:border-white/10 hover:border-neutral-300 dark:hover:border-white/20 shadow-xs",
-    outline: "bg-transparent text-neutral-800 dark:text-neutral-200 hover:bg-black/[0.03] dark:hover:bg-white/[0.04] border border-neutral-300 dark:border-white/15 hover:border-[#FF6B00] dark:hover:border-[#FF6B00] hover:text-[#FF6B00] dark:hover:text-[#FF6B00]",
+    outline: "bg-transparent text-neutral-800 dark:text-neutral-200 hover:bg-black/[0.03] dark:hover:bg-white/[0.04] border border-neutral-300 dark:border-white/15 hover:border-[#E58A3C] dark:hover:border-[#E58A3C] hover:text-[#E58A3C] dark:hover:text-[#E58A3C]",
     ghost: "bg-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
   };
 

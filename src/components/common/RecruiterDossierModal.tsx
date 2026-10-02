@@ -62,13 +62,13 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
       }}
     >
       <div
-        className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto bg-white dark:bg-[#07080B] border border-neutral-300 dark:border-neutral-800 rounded-lg shadow-2xl p-5 sm:p-7 text-neutral-900 dark:text-neutral-100 flex flex-col font-sans"
+        className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto bg-white dark:bg-[#0E1117] border border-neutral-300 dark:border-neutral-800 rounded-lg shadow-2xl p-5 sm:p-7 text-neutral-900 dark:text-neutral-100 flex flex-col font-sans"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Architectural Header Bar: Document Reference & Status */}
         <div className="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-5 font-mono text-[11px] text-neutral-500 dark:text-neutral-400">
           <div className="flex items-center gap-2">
-            <span className="text-[#FF6B00] font-bold">SYS//DOC-SPEC</span>
+            <span className="text-[#E58A3C] font-bold">SYS//DOC-SPEC</span>
             <span className="text-neutral-300 dark:text-neutral-700">|</span>
             <span>REF: OT-ENG-2026</span>
             <span className="text-neutral-300 dark:text-neutral-700">|</span>
@@ -94,7 +94,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
               <h2 id="dossier-title" className="text-2xl sm:text-3xl font-mono font-bold tracking-tight text-neutral-900 dark:text-white">
                 {PERSONAL_INFO.name}
               </h2>
-              <div className="font-mono text-xs sm:text-sm text-[#FF6B00] font-semibold mt-0.5">
+              <div className="font-mono text-xs sm:text-sm text-[#E58A3C] font-semibold mt-0.5">
                 SOFTWARE &amp; DEVOPS ENGINEER
               </div>
             </div>
@@ -132,7 +132,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
             <Button
               variant="secondary"
               size="sm"
-              icon={<Download className="w-3.5 h-3.5 text-[#FF6B00]" />}
+              icon={<Download className="w-3.5 h-3.5 text-[#E58A3C]" />}
             >
               CV (FR .pdf)
             </Button>
@@ -155,19 +155,19 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
 
           <button
             onClick={handleCopyEmail}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-[#111218] border border-neutral-300 dark:border-white/10 hover:border-[#FF6B00] text-neutral-800 dark:text-neutral-200 text-xs font-mono transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-[#111218] border border-neutral-300 dark:border-white/10 hover:border-[#E58A3C] text-neutral-800 dark:text-neutral-200 text-xs font-mono transition-colors cursor-pointer"
             title="Copy candidate email to clipboard"
           >
-            {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Mail className="w-3.5 h-3.5 text-[#FF6B00]" />}
+            {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Mail className="w-3.5 h-3.5 text-[#E58A3C]" />}
             <span>{copiedEmail ? 'Copied' : 'omartorbi18@gmail.com'}</span>
           </button>
 
           <button
             onClick={handleCopyPhone}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-[#111218] border border-neutral-300 dark:border-white/10 hover:border-[#FF6B00] text-neutral-800 dark:text-neutral-200 text-xs font-mono transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-[#111218] border border-neutral-300 dark:border-white/10 hover:border-[#E58A3C] text-neutral-800 dark:text-neutral-200 text-xs font-mono transition-colors cursor-pointer"
             title="Copy phone number to clipboard"
           >
-            {copiedPhone ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Phone className="w-3.5 h-3.5 text-[#FF6B00]" />}
+            {copiedPhone ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Phone className="w-3.5 h-3.5 text-[#E58A3C]" />}
             <span>{copiedPhone ? 'Copied' : '+212 602 12 79 38'}</span>
           </button>
         </div>
@@ -175,13 +175,13 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
         {/* Official Accreditations Panel */}
         <div className="mb-5 p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800">
           <div className="flex items-center gap-2 mb-2 font-mono text-[11px] font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
-            <ShieldCheck className="w-4 h-4 text-[#FF6B00]" />
+            <ShieldCheck className="w-4 h-4 text-[#E58A3C]" />
             <span>Official Cloud Accreditations (Oracle Cloud Infrastructure)</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs">
             <div className="p-2.5 rounded bg-white dark:bg-[#111218] border border-neutral-200 dark:border-white/5 space-y-0.5">
-              <div className="flex items-center justify-between text-[#FF6B00] font-bold text-[11px]">
+              <div className="flex items-center justify-between text-[#E58A3C] font-bold text-[11px]">
                 <span>OCI DEVOPS PROFESSIONAL</span>
                 <span className="text-neutral-500 dark:text-neutral-400 font-normal">1Z0-1109-26</span>
               </div>
@@ -191,7 +191,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
             </div>
 
             <div className="p-2.5 rounded bg-white dark:bg-[#111218] border border-neutral-200 dark:border-white/5 space-y-0.5">
-              <div className="flex items-center justify-between text-[#FF6B00] font-bold text-[11px]">
+              <div className="flex items-center justify-between text-[#E58A3C] font-bold text-[11px]">
                 <span>OCI ARCHITECT PROFESSIONAL</span>
                 <span className="text-neutral-500 dark:text-neutral-400 font-normal">1Z0-997-26</span>
               </div>
@@ -212,7 +212,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
             {/* Backend Architecture */}
             <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800 space-y-1.5">
               <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-bold">
-                <Server className="w-3.5 h-3.5 text-[#FF6B00]" />
+                <Server className="w-3.5 h-3.5 text-[#E58A3C]" />
                 <span>01 // Backend Architecture</span>
               </div>
               <p className="text-[11px] font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
@@ -230,7 +230,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
             {/* Cloud & DevOps */}
             <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800 space-y-1.5">
               <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-bold">
-                <Cloud className="w-3.5 h-3.5 text-[#FF6B00]" />
+                <Cloud className="w-3.5 h-3.5 text-[#E58A3C]" />
                 <span>02 // DevOps &amp; Cloud Runtimes</span>
               </div>
               <p className="text-[11px] font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
@@ -248,7 +248,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
             {/* Data Persistence */}
             <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800 space-y-1.5">
               <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-bold">
-                <Database className="w-3.5 h-3.5 text-[#FF6B00]" />
+                <Database className="w-3.5 h-3.5 text-[#E58A3C]" />
                 <span>03 // Relational &amp; Vector Data</span>
               </div>
               <p className="text-[11px] font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
@@ -266,7 +266,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
             {/* Modern Web & 3D CAD */}
             <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800 space-y-1.5">
               <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-bold">
-                <Cpu className="w-3.5 h-3.5 text-[#FF6B00]" />
+                <Cpu className="w-3.5 h-3.5 text-[#E58A3C]" />
                 <span>04 // CAD &amp; Web Systems</span>
               </div>
               <p className="text-[11px] font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
@@ -294,7 +294,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
               className="inline-flex items-center gap-1 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
               <span>GitHub</span>
-              <ArrowUpRight className="w-3 h-3 text-[#FF6B00]" />
+              <ArrowUpRight className="w-3 h-3 text-[#E58A3C]" />
             </a>
             <span className="text-neutral-300 dark:text-neutral-700">|</span>
             <a
@@ -305,7 +305,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
               className="inline-flex items-center gap-1 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
               <span>LinkedIn</span>
-              <ArrowUpRight className="w-3 h-3 text-[#FF6B00]" />
+              <ArrowUpRight className="w-3 h-3 text-[#E58A3C]" />
             </a>
             <span className="text-neutral-300 dark:text-neutral-700">|</span>
             <span className="text-neutral-500 dark:text-neutral-400">
