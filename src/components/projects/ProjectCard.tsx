@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Github, ExternalLink, ArrowRight, Cpu, Sparkles } from 'lucide-react';
+import { Github, ExternalLink, ArrowRight, Cpu } from 'lucide-react';
 import { Project } from '../../types/portfolio';
 import { VectorRagVisualizer } from './VectorRagVisualizer';
 import { CadVisualizerPreview } from './CadVisualizerPreview';
@@ -14,7 +14,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
   const cardRef = useRef<HTMLDivElement | null>(null);
   const [rotateX, setRotateX] = useState(0);
   const [rotateY, setRotateY] = useState(0);
-  const [spotlightPos, setSpotlightPos] = useState({ x: -500, y: -500 });
   const [isHovered, setIsHovered] = useState(false);
 
   // Handle subtle 3D perspective mouse tilt
@@ -24,12 +23,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    setSpotlightPos({ x, y });
-
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const rX = ((y - centerY) / centerY) * -3;
-    const rY = ((x - centerX) / centerX) * 3;
+    const rX = ((y - centerY) / centerY) * -2.5;
+    const rY = ((x - centerX) / centerX) * 2.5;
 
     setRotateX(rX);
     setRotateY(rY);
@@ -44,7 +41,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
     setIsHovered(false);
     setRotateX(0);
     setRotateY(0);
-    setSpotlightPos({ x: -500, y: -500 });
   };
 
   const isAiRagProject = project.id === 'intelligent-library';
@@ -61,28 +57,19 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
         transition: isHovered ? 'transform 0.08s ease-out' : 'transform 0.4s ease-out',
       }}
       data-cursor="view"
-      className="project-card relative rounded-2xl bg-white dark:bg-[#0B0C10] border border-neutral-200/80 dark:border-white/10 overflow-hidden flex flex-col justify-between group hover:border-[#FF6B00]/40 shadow-sm dark:shadow-card-elevated hover:shadow-[0_0_25px_rgba(255,107,0,0.1)] transition-all duration-300"
+      className="project-card relative rounded-md bg-white dark:bg-[#0A0B0F] border border-neutral-300 dark:border-neutral-800 overflow-hidden flex flex-col justify-between group hover:border-[#FF6B00] transition-colors"
     >
-      {/* Specular Radial Cursor Spotlight */}
-      <div
-        className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
-        style={{
-          background: `radial-gradient(400px circle at ${spotlightPos.x}px ${spotlightPos.y}px, rgba(255, 107, 0, 0.08), transparent 70%)`,
-        }}
-        aria-hidden="true"
-      />
-
       {/* Top Header & Categorization */}
       <div className="p-6 sm:p-7 space-y-4 relative z-20">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded bg-black/5 dark:bg-white/5 text-neutral-800 dark:text-neutral-200 font-mono text-[11px] font-semibold uppercase tracking-wider border border-black/10 dark:border-white/10 group-hover:border-[#FF6B00]/30 transition-colors">
+            <span className="px-2 py-0.5 rounded-sm bg-neutral-100 dark:bg-white/5 text-neutral-800 dark:text-neutral-200 font-mono text-[11px] font-semibold uppercase tracking-wider border border-neutral-300 dark:border-white/10">
               {project.category.replace('-', ' ')}
             </span>
             {project.featured && (
-              <span className="px-2 py-0.5 rounded bg-[#FF6B00]/10 text-neutral-900 dark:text-white font-mono text-[11px] font-medium border border-[#FF6B00]/30 flex items-center gap-1 shadow-xs">
-                <Sparkles className="w-3 h-3 text-[#FF6B00]" />
-                Featured System
+              <span className="px-2 py-0.5 rounded-sm bg-neutral-100 dark:bg-white/5 text-neutral-800 dark:text-neutral-200 font-mono text-[10px] font-semibold border border-neutral-300 dark:border-white/10 flex items-center gap-1">
+                <span className="text-[#FF6B00] font-bold">#</span>
+                <span>VERIFIED SYSTEM</span>
               </span>
             )}
           </div>
@@ -123,11 +110,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
         </p>
 
         {/* Performance Metrics Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 py-3 border-y border-black/10 dark:border-white/10">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 py-3 border-y border-neutral-200 dark:border-neutral-800">
           {project.metrics.map((metric, idx) => (
-            <div key={idx} className="bg-neutral-100 dark:bg-[#0F1016] p-2.5 rounded-xl border border-black/5 dark:border-white/5">
-              <div className="text-[11px] text-neutral-500 dark:text-neutral-400 font-mono truncate">{metric.label}</div>
-              <div className="text-sm sm:text-base font-mono font-bold text-neutral-900 dark:text-white mt-0.5 truncate">
+            <div key={idx} className="bg-neutral-50 dark:bg-[#111218] p-2 rounded-sm border border-neutral-200 dark:border-white/5">
+              <div className="text-[10px] text-neutral-500 dark:text-neutral-400 font-mono truncate">{metric.label}</div>
+              <div className="text-xs sm:text-sm font-mono font-bold text-neutral-900 dark:text-white mt-0.5 truncate">
                 {metric.value}
               </div>
             </div>
@@ -135,7 +122,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
         </div>
 
         {/* Architectural Highlights */}
-        <div className="space-y-2 pt-1">
+        <div className="space-y-1.5 pt-1">
           <div className="text-xs font-mono font-semibold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
             <Cpu className="w-3.5 h-3.5 text-[#FF6B00]" />
             <span>Architecture Highlights</span>
@@ -152,13 +139,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
       </div>
 
       {/* Footer: Tech Stack Chips & Action Controls */}
-      <div className="p-6 pt-0 sm:p-7 sm:pt-0 space-y-4 mt-auto relative z-20">
+      <div className="p-6 pt-0 sm:p-7 sm:pt-0 space-y-3 mt-auto relative z-20">
         {/* Tech Stack Badges */}
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1">
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="px-2.5 py-1 rounded-md bg-neutral-100 dark:bg-[#0F1016] text-neutral-700 dark:text-neutral-300 font-mono text-xs border border-black/5 dark:border-white/5 hover:border-[#FF6B00]/40 hover:text-[#FF6B00] dark:hover:text-white transition-colors"
+              className="px-2 py-0.5 rounded-sm bg-neutral-100 dark:bg-[#111218] text-neutral-700 dark:text-neutral-300 font-mono text-[11px] border border-neutral-200 dark:border-white/5 hover:border-[#FF6B00] transition-colors"
             >
               {tech}
             </span>
@@ -166,30 +153,30 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
         </div>
 
         {/* Action Controls */}
-        <div className="flex items-center justify-between gap-3 pt-3 border-t border-black/10 dark:border-white/10">
+        <div className="flex items-center justify-between gap-3 pt-3 border-t border-neutral-200 dark:border-neutral-800">
           <button
             onClick={() => {
               sound.playClick();
               onOpenModal(project);
             }}
-            className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#FF6B00] hover:text-[#FFA05C] transition-colors cursor-pointer group/link"
+            className="inline-flex items-center gap-1 text-xs font-mono font-semibold text-[#FF6B00] hover:text-[#FFA05C] transition-colors cursor-pointer group/link"
           >
-            <span>Inspect Blueprint</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1.5 transition-transform" />
+            <span>[ INSPECT BLUEPRINT ]</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
           </button>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playClick()}
-                className="p-2 rounded-lg bg-neutral-100 dark:bg-[#0F1016] text-neutral-600 dark:text-neutral-300 hover:text-[#FF6B00] hover:bg-neutral-200 dark:hover:bg-white/10 border border-black/5 dark:border-white/5 hover:border-[#FF6B00]/30 transition-colors cursor-pointer"
+                className="p-1.5 rounded-md bg-neutral-100 dark:bg-[#111218] text-neutral-600 dark:text-neutral-300 hover:text-[#FF6B00] border border-neutral-200 dark:border-white/10 hover:border-[#FF6B00] transition-colors cursor-pointer"
                 title="View Live Platform"
                 aria-label={`View ${project.title} live platform`}
               >
-                <ExternalLink className="w-4 h-4" />
+                <ExternalLink className="w-3.5 h-3.5" />
               </a>
             )}
             <a
@@ -197,11 +184,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenModal }
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sound.playClick()}
-              className="p-2 rounded-lg bg-neutral-100 dark:bg-[#0F1016] text-neutral-600 dark:text-neutral-300 hover:text-[#FF6B00] hover:bg-neutral-200 dark:hover:bg-white/10 border border-black/5 dark:border-white/5 hover:border-[#FF6B00]/30 transition-colors cursor-pointer"
+              className="p-1.5 rounded-md bg-neutral-100 dark:bg-[#111218] text-neutral-600 dark:text-neutral-300 hover:text-[#FF6B00] border border-neutral-200 dark:border-white/10 hover:border-[#FF6B00] transition-colors cursor-pointer"
               title="View Repository"
               aria-label={`View ${project.title} repository on GitHub`}
             >
-              <Github className="w-4 h-4" />
+              <Github className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>

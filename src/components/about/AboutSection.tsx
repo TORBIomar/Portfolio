@@ -47,7 +47,7 @@ export const AboutSection: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playSuccess()}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-neutral-900 text-white dark:bg-white dark:text-black font-semibold hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors shadow-sm cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-neutral-900 text-white dark:bg-white dark:text-black font-semibold hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors shadow-xs cursor-pointer"
               >
                 <span>English Resume (PDF)</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -58,7 +58,7 @@ export const AboutSection: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playSuccess()}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-neutral-800 dark:text-neutral-200 font-semibold hover:border-[#FF6B00]/40 hover:text-[#FF6B00] transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-neutral-100 dark:bg-white/[0.05] border border-neutral-300 dark:border-white/10 text-neutral-800 dark:text-neutral-200 font-semibold hover:border-[#FF6B00] hover:text-[#FF6B00] transition-colors cursor-pointer"
               >
                 <span>CV Français (PDF)</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -67,12 +67,12 @@ export const AboutSection: React.FC = () => {
           </div>
 
           {/* Right: Technical Pillars Bento */}
-          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
             
             {/* Pillar 1: Certifications & Cloud */}
-            <div className="p-5 rounded-2xl bg-white dark:bg-[#111111] border border-neutral-200/80 dark:border-white/10 shadow-sm space-y-2 hover:border-[#FF6B00]/40 transition-colors">
-              <div className="flex items-center gap-2.5 text-[#FF6B00]">
-                <ShieldCheck className="w-5 h-5 shrink-0" />
+            <div className="p-4 rounded-md bg-white dark:bg-[#0B0C10] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#FF6B00] transition-colors">
+              <div className="flex items-center gap-2 text-[#FF6B00]">
+                <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                   Cloud Certifications
                 </span>
@@ -86,9 +86,9 @@ export const AboutSection: React.FC = () => {
             </div>
 
             {/* Pillar 2: Backend Software Architecture */}
-            <div className="p-5 rounded-2xl bg-white dark:bg-[#111111] border border-neutral-200/80 dark:border-white/10 shadow-sm space-y-2 hover:border-[#FF6B00]/40 transition-colors">
-              <div className="flex items-center gap-2.5 text-[#FF6B00]">
-                <Server className="w-5 h-5 shrink-0" />
+            <div className="p-4 rounded-md bg-white dark:bg-[#0B0C10] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#FF6B00] transition-colors">
+              <div className="flex items-center gap-2 text-[#FF6B00]">
+                <Server className="w-4 h-4 shrink-0" />
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                   Backend Architecture
                 </span>
@@ -102,9 +102,9 @@ export const AboutSection: React.FC = () => {
             </div>
 
             {/* Pillar 3: DevOps & Containerization */}
-            <div className="p-5 rounded-2xl bg-white dark:bg-[#111111] border border-neutral-200/80 dark:border-white/10 shadow-sm space-y-2 hover:border-[#FF6B00]/40 transition-colors">
-              <div className="flex items-center gap-2.5 text-[#FF6B00]">
-                <Cloud className="w-5 h-5 shrink-0" />
+            <div className="p-4 rounded-md bg-white dark:bg-[#0B0C10] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#FF6B00] transition-colors">
+              <div className="flex items-center gap-2 text-[#FF6B00]">
+                <Cloud className="w-4 h-4 shrink-0" />
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                   DevOps &amp; Infrastructure
                 </span>
@@ -118,9 +118,9 @@ export const AboutSection: React.FC = () => {
             </div>
 
             {/* Pillar 4: Persistence & Data Systems */}
-            <div className="p-5 rounded-2xl bg-white dark:bg-[#111111] border border-neutral-200/80 dark:border-white/10 shadow-sm space-y-2 hover:border-[#FF6B00]/40 transition-colors">
-              <div className="flex items-center gap-2.5 text-[#FF6B00]">
-                <Database className="w-5 h-5 shrink-0" />
+            <div className="p-4 rounded-md bg-white dark:bg-[#0B0C10] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#FF6B00] transition-colors">
+              <div className="flex items-center gap-2 text-[#FF6B00]">
+                <Database className="w-4 h-4 shrink-0" />
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                   Data Persistence &amp; ACID
                 </span>
@@ -132,7 +132,6 @@ export const AboutSection: React.FC = () => {
                 Normalized relational schemas, PL/SQL packages, foreign key constraints, B-Tree indexing, and sub-10ms query resolution.
               </p>
             </div>
-
           </div>
 
         </div>

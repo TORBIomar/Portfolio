@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Sparkles, Search, Database, Bot, CheckCircle2 } from 'lucide-react';
+import { Layers, Search, Database, Bot, CheckCircle2 } from 'lucide-react';
 import { sound } from '../../utils/sound';
 
 interface DocumentChunk {
@@ -240,17 +240,17 @@ export const VectorRagVisualizer: React.FC = () => {
         />
 
         {/* Vector Space HUD Watermark */}
-        <div className="absolute bottom-2 left-3 text-[10px] text-slate-400 flex items-center gap-1.5 pointer-events-none">
-          <Sparkles className="w-3 h-3 text-[#FF6B00]" />
-          <span>2D Embedding Projection (HNSW Cosine Vector Space)</span>
+        <div className="absolute bottom-2 left-3 text-[10px] text-neutral-400 flex items-center gap-1.5 pointer-events-none font-mono">
+          <Layers className="w-3 h-3 text-[#FF6B00]" />
+          <span>2D EMBEDDING PROJECTION (HNSW COSINE VECTOR SPACE)</span>
         </div>
       </div>
 
       {/* Retrieved Chunk Inspection & Gemini Output */}
-      <div className="p-3.5 bg-neutral-50 dark:bg-[#0A0B0F] border-t border-black/10 dark:border-white/10 space-y-2.5">
+      <div className="p-3.5 bg-neutral-50 dark:bg-[#07080B] border-t border-neutral-300 dark:border-neutral-800 space-y-2.5">
         {/* Top-K Retrieved Document Chunk */}
-        <div className="p-2.5 rounded-lg bg-white dark:bg-[#06070A] border border-black/5 dark:border-white/5 space-y-1 shadow-2xs">
-          <div className="flex items-center justify-between text-[11px]">
+        <div className="p-2.5 rounded-md bg-white dark:bg-[#0A0B10] border border-neutral-300 dark:border-neutral-800 space-y-1">
+          <div className="flex items-center justify-between text-[11px] font-mono">
             <span className="text-neutral-900 dark:text-white font-semibold flex items-center gap-1">
               <CheckCircle2 className="w-3 h-3 text-[#FF6B00]" />
               Retrieved Context: {selectedChunk.source}
@@ -259,18 +259,18 @@ export const VectorRagVisualizer: React.FC = () => {
               Similarity: {(selectedChunk.similarity * 100).toFixed(0)}%
             </span>
           </div>
-          <p className="text-[11px] text-neutral-700 dark:text-slate-300 font-sans leading-relaxed">
+          <p className="text-[11px] text-neutral-700 dark:text-neutral-300 font-sans leading-relaxed">
             "{selectedChunk.content}"
           </p>
         </div>
 
         {/* Generative Synthesis */}
-        <div className="p-2.5 rounded-lg bg-[#FF6B00]/[0.05] border border-[#FF6B00]/30 space-y-1">
-          <div className="flex items-center gap-1.5 text-neutral-900 dark:text-white text-[11px] font-semibold">
+        <div className="p-2.5 rounded-md bg-[#FF6B00]/[0.05] border border-[#FF6B00]/30 space-y-1">
+          <div className="flex items-center gap-1.5 text-neutral-900 dark:text-white text-[11px] font-mono font-semibold">
             <Bot className="w-3.5 h-3.5 text-[#FF6B00]" />
             <span>Google Gemini API Contextual Answer:</span>
           </div>
-          <p className="text-[11px] text-neutral-800 dark:text-slate-200 font-sans leading-relaxed">
+          <p className="text-[11px] text-neutral-800 dark:text-neutral-200 font-sans leading-relaxed">
             {isSearching ? 'Computing vector similarity & streaming response...' : generatedText}
           </p>
         </div>

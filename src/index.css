@@ -156,37 +156,36 @@ body {
   pointer-events: none;
 }
 
-/* Shimmer Light Reflection Effect on Buttons */
-.shimmer-button {
+/* Architectural Corner Registration Marks & Blueprint Accents */
+.tech-corner-tl {
   position: relative;
-  overflow: hidden;
 }
-.shimmer-button::after {
-  content: '';
+.tech-corner-tl::before {
+  content: '+';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.22),
-    transparent
-  );
-  transform: translateX(-120%) skewX(-20deg);
+  top: -8px;
+  left: -8px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  line-height: 1;
+  color: #FF6B00;
+  opacity: 0.65;
   pointer-events: none;
 }
-.shimmer-button:hover::after {
-  animation: shimmerSweep 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
 
-@keyframes shimmerSweep {
-  0% {
-    transform: translateX(-120%) skewX(-20deg);
-  }
-  100% {
-    transform: translateX(260%) skewX(-20deg);
-  }
+.tech-corner-tr {
+  position: relative;
+}
+.tech-corner-tr::after {
+  content: '+';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  line-height: 1;
+  color: #FF6B00;
+  opacity: 0.65;
+  pointer-events: none;
 }
 

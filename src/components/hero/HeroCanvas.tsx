@@ -1,25 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { sound } from '../../utils/sound';
 
-interface DataNode {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  radius: number;
-  type: 'vector' | 'db' | 'service' | 'ai';
-  clusterId: number;
-  pulse: number;
-}
-
-interface DataPacket {
-  fromNode: number;
-  toNode: number;
-  progress: number;
-  speed: number;
-}
-
-interface PulseWave {
+interface RadarPulse {
   x: number;
   y: number;
   radius: number;
@@ -29,9 +11,9 @@ interface PulseWave {
 
 export const HeroCanvas: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [networkMode, setNetworkMode] = useState<'vector' | 'pipeline' | 'cluster'>('vector');
   const mouseRef = useRef<{ x: number; y: number; active: boolean }>({ x: -1000, y: -1000, active: false });
-  const pulseWavesRef = useRef<PulseWave[]>([]);
+  const pulsesRef = useRef<RadarPulse[]>([]);
+  const [hudCoords, setHudCoords] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -52,176 +34,120 @@ export const HeroCanvas: React.FC = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // Create Data/Vector Nodes (optimized count for smooth performance)
-    const nodeCount = Math.min(36, Math.max(20, Math.floor(width / 38)));
-    const nodes: DataNode[] = [];
-    const types: DataNode['type'][] = ['vector', 'db', 'service', 'ai'];
+    const gridSize = 56;
+    let timeOffset = 0;
 
-    for (let i = 0; i < nodeCount; i++) {
-      nodes.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.45,
-        vy: (Math.random() - 0.5) * 0.45,
-        radius: i % 5 === 0 ? 3 : Math.random() * 1.5 + 1.8,
-        type: types[i % types.length],
-        clusterId: i % 4,
-        pulse: Math.random() * Math.PI * 2,
-      });
-    }
-
-    // Packets streaming between nodes
-    const packets: DataPacket[] = [];
-    for (let p = 0; p < 12; p++) {
-      const from = Math.floor(Math.random() * nodeCount);
-      const to = (from + 1 + Math.floor(Math.random() * 4)) % nodeCount;
-      packets.push({
-        fromNode: from,
-        toNode: to,
-        progress: Math.random(),
-        speed: 0.005 + Math.random() * 0.007,
-      });
-    }
-
-    let lastTime = performance.now();
-
-    const render = (time: number) => {
-      const dt = Math.min((time - lastTime) / 1000, 0.05);
-      lastTime = time;
-
+    const render = () => {
+      timeOffset += 0.015;
       ctx.clearRect(0, 0, width, height);
 
-      // Update Node Positions
-      for (let i = 0; i < nodes.length; i++) {
-        const n = nodes[i];
-        n.x += n.vx * 60 * dt;
-        n.y += n.vy * 60 * dt;
-        n.pulse += dt * 2.2;
+      const isDarkMode = document.documentElement.classList.contains('dark');
+      const gridColor = isDarkMode ? 'rgba(255, 255, 255, 0.035)' : 'rgba(0, 0, 0, 0.04)';
+      const crossColor = isDarkMode ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.09)';
+      const accentColor = '#FF6B00';
 
-        // Wrap boundaries
-        if (n.x < 0) n.x = width;
-        if (n.x > width) n.x = 0;
-        if (n.y < 0) n.y = height;
-        if (n.y > height) n.y = 0;
+      // 1. Draw Architectural Grid Lines
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = gridColor;
 
-        // Mouse interaction (fast squared distance check)
-        if (mouseRef.current.active) {
-          const dx = n.x - mouseRef.current.x;
-          const dy = n.y - mouseRef.current.y;
-          const distSq = dx * dx + dy * dy;
-          const threshold = 170;
-          if (distSq < threshold * threshold && distSq > 4) {
-            const dist = Math.sqrt(distSq);
-            const force = (threshold - dist) / threshold;
-            n.x += (dx / dist) * force * 7;
-            n.y += (dy / dist) * force * 7;
-          }
-        }
+      // Vertical lines
+      for (let x = 0; x <= width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
       }
 
-      // Draw Connections (Cosine Vectors / Data Bus) - Optimized distSq
-      const maxDist = networkMode === 'vector' ? 140 : networkMode === 'pipeline' ? 120 : 160;
-      const maxDistSq = maxDist * maxDist;
+      // Horizontal lines
+      for (let y = 0; y <= height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
 
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i];
-          const b = nodes[j];
-          const dx = a.x - b.x;
-          const dy = a.y - b.y;
-          const distSq = dx * dx + dy * dy;
-
-          if (distSq < maxDistSq) {
-            const dist = Math.sqrt(distSq);
-            const alpha = (1 - dist / maxDist) * 0.22;
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-
-            if (networkMode === 'vector') {
-              ctx.strokeStyle = a.clusterId === b.clusterId 
-                ? `rgba(255, 107, 0, ${alpha * 1.6})` 
-                : `rgba(203, 213, 225, ${alpha * 0.8})`;
-              ctx.lineWidth = a.clusterId === b.clusterId ? 1 : 0.6;
-            } else if (networkMode === 'pipeline') {
-              ctx.strokeStyle = `rgba(226, 232, 240, ${alpha * 1.1})`;
-              ctx.lineWidth = 0.75;
-            } else {
-              ctx.strokeStyle = `rgba(148, 163, 184, ${alpha * 1.0})`;
-              ctx.lineWidth = 0.65;
+      // 2. Draw Subtle Crosshair Ticks (+) at Grid Intersections
+      ctx.lineWidth = 1;
+      const crossSize = 3;
+      for (let x = 0; x <= width; x += gridSize) {
+        for (let y = 0; y <= height; y += gridSize) {
+          // If close to cursor, highlight tick
+          let currentCrossColor = crossColor;
+          if (mouseRef.current.active) {
+            const dx = x - mouseRef.current.x;
+            const dy = y - mouseRef.current.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 140) {
+              const proximityAlpha = Math.max(0, 1 - dist / 140);
+              currentCrossColor = `rgba(255, 107, 0, ${proximityAlpha * 0.75})`;
             }
-            ctx.stroke();
           }
+
+          ctx.strokeStyle = currentCrossColor;
+          ctx.beginPath();
+          ctx.moveTo(x - crossSize, y);
+          ctx.lineTo(x + crossSize, y);
+          ctx.moveTo(x, y - crossSize);
+          ctx.lineTo(x, y + crossSize);
+          ctx.stroke();
         }
       }
 
-      // Draw Streaming Data Packets (High-energy Orange)
-      for (let p = 0; p < packets.length; p++) {
-        const pkt = packets[p];
-        pkt.progress += pkt.speed;
-        if (pkt.progress >= 1) {
-          pkt.progress = 0;
-          pkt.fromNode = Math.floor(Math.random() * nodes.length);
-          pkt.toNode = (pkt.fromNode + 1 + Math.floor(Math.random() * 4)) % nodes.length;
-        }
+      // 3. Interactive CAD Cursor Orthogonal Projections
+      if (mouseRef.current.active) {
+        const mx = mouseRef.current.x;
+        const my = mouseRef.current.y;
 
-        const a = nodes[pkt.fromNode];
-        const b = nodes[pkt.toNode];
-        const px = a.x + (b.x - a.x) * pkt.progress;
-        const py = a.y + (b.y - a.y) * pkt.progress;
-
+        // Subtle projection hairline guides
+        ctx.strokeStyle = isDarkMode ? 'rgba(255, 107, 0, 0.22)' : 'rgba(255, 107, 0, 0.28)';
+        ctx.setLineDash([3, 3]);
+        
+        // Vertical projection guide
         ctx.beginPath();
-        ctx.arc(px, py, 2, 0, Math.PI * 2);
-        ctx.fillStyle = '#FF6B00';
-        ctx.shadowColor = '#FF6B00';
-        ctx.shadowBlur = 8;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-
-      // Draw Pulse Waves on Click (Orange radiant ripple)
-      for (let i = pulseWavesRef.current.length - 1; i >= 0; i--) {
-        const wave = pulseWavesRef.current[i];
-        wave.radius += 180 * dt;
-        wave.alpha = Math.max(0, 1 - wave.radius / wave.maxRadius);
-
-        ctx.beginPath();
-        ctx.arc(wave.x, wave.y, wave.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(255, 107, 0, ${wave.alpha * 0.7})`;
-        ctx.lineWidth = 1.5;
+        ctx.moveTo(mx, 0);
+        ctx.lineTo(mx, height);
         ctx.stroke();
 
-        if (wave.radius >= wave.maxRadius) {
-          pulseWavesRef.current.splice(i, 1);
-        }
+        // Horizontal projection guide
+        ctx.beginPath();
+        ctx.moveTo(0, my);
+        ctx.lineTo(width, my);
+        ctx.stroke();
+
+        ctx.setLineDash([]);
+
+        // Small target crosshair
+        ctx.strokeStyle = accentColor;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(mx, my, 4, 0, Math.PI * 2);
+        ctx.stroke();
       }
 
-      // Draw Nodes (Silver, White, & Orange focal nodes)
-      for (let i = 0; i < nodes.length; i++) {
-        const n = nodes[i];
-        const pulse = Math.sin(n.pulse) * 0.2 + 0.8;
-        const r = n.radius * pulse;
+      // 4. Render Precision Shockwave Radar Pulses
+      for (let i = pulsesRef.current.length - 1; i >= 0; i--) {
+        const p = pulsesRef.current[i];
+        p.radius += 4;
+        p.alpha *= 0.94;
 
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-
-        if (n.type === 'ai') {
-          ctx.fillStyle = '#FF6B00';
-          ctx.shadowColor = 'rgba(255, 107, 0, 0.7)';
-        } else if (n.type === 'db') {
-          ctx.fillStyle = '#FFFFFF';
-          ctx.shadowColor = 'rgba(255, 255, 255, 0.6)';
-        } else if (n.type === 'service') {
-          ctx.fillStyle = '#CBD5E1';
-          ctx.shadowColor = 'rgba(203, 213, 225, 0.4)';
-        } else {
-          ctx.fillStyle = '#94A3B8';
-          ctx.shadowColor = 'rgba(148, 163, 184, 0.4)';
+        if (p.alpha < 0.02 || p.radius >= p.maxRadius) {
+          pulsesRef.current.splice(i, 1);
+          continue;
         }
 
-        ctx.shadowBlur = 6;
-        ctx.fill();
-        ctx.shadowBlur = 0;
+        ctx.strokeStyle = `rgba(255, 107, 0, ${p.alpha * 0.6})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Secondary inner echo ring
+        if (p.radius > 20) {
+          ctx.strokeStyle = `rgba(255, 107, 0, ${p.alpha * 0.25})`;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius * 0.65, 0, Math.PI * 2);
+          ctx.stroke();
+        }
       }
 
       animId = requestAnimationFrame(render);
@@ -231,11 +157,10 @@ export const HeroCanvas: React.FC = () => {
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      mouseRef.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-        active: true,
-      };
+      const x = Math.round(e.clientX - rect.left);
+      const y = Math.round(e.clientY - rect.top);
+      mouseRef.current = { x, y, active: true };
+      setHudCoords({ x, y });
     };
 
     const handleMouseLeave = () => {
@@ -244,12 +169,12 @@ export const HeroCanvas: React.FC = () => {
 
     const handleClick = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      pulseWavesRef.current.push({
+      pulsesRef.current.push({
         x: e.clientX - rect.left,
         y: e.clientY - rect.top,
-        radius: 5,
-        maxRadius: 260,
-        alpha: 0.85,
+        radius: 6,
+        maxRadius: 280,
+        alpha: 0.9,
       });
       sound.playLaser();
     };
@@ -265,33 +190,21 @@ export const HeroCanvas: React.FC = () => {
       canvas.removeEventListener('mouseleave', handleMouseLeave);
       canvas.removeEventListener('click', handleClick);
     };
-  }, [networkMode]);
-
-  const cycleMode = () => {
-    sound.playClick();
-    if (networkMode === 'vector') setNetworkMode('pipeline');
-    else if (networkMode === 'pipeline') setNetworkMode('cluster');
-    else setNetworkMode('vector');
-  };
+  }, []);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-auto">
       <canvas
         ref={canvasRef}
-        className="w-full h-full cursor-crosshair block opacity-85"
+        className="w-full h-full cursor-crosshair block"
       />
 
-      {/* Mode Switcher HUD */}
-      <div className="absolute bottom-4 right-4 z-20 hidden md:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0A0B0F]/90 border border-white/10 backdrop-blur-md text-[11px] font-mono text-slate-300 shadow-xl">
-        <span className="w-2 h-2 rounded-full bg-[#FF6B00] beacon-orange" />
-        <span className="text-slate-400">Topology:</span>
-        <button
-          onClick={cycleMode}
-          className="text-white hover:text-[#FF6B00] font-semibold transition-colors uppercase tracking-wider cursor-pointer"
-          title="Click to cycle interactive data network topology"
-        >
-          [{networkMode === 'vector' ? 'Vector RAG Space' : networkMode === 'pipeline' ? 'Data Pipeline' : 'Cloud Cluster'}]
-        </button>
+      {/* Architectural Telemetry HUD Badge */}
+      <div className="absolute bottom-4 right-4 z-20 hidden md:flex items-center gap-2.5 px-3 py-1 rounded bg-white/80 dark:bg-[#07080B]/85 border border-neutral-300 dark:border-neutral-800 text-[10px] font-mono text-neutral-500 dark:text-neutral-400 select-none backdrop-blur-xs">
+        <span className="text-[#FF6B00] font-bold">CAD//GRID: 56PX</span>
+        <span className="text-neutral-300 dark:text-neutral-700">|</span>
+        <span>X: {hudCoords.x.toString().padStart(4, '0')}</span>
+        <span>Y: {hudCoords.y.toString().padStart(4, '0')}</span>
       </div>
     </div>
   );

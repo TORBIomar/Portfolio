@@ -16,7 +16,7 @@ export const ExperienceSection: React.FC = () => {
         />
 
         {/* Official Cloud Certifications Banner */}
-        <div className="mb-12 p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#0B0C10] border border-neutral-200/80 dark:border-white/10 shadow-sm space-y-4">
+        <div className="mb-12 p-5 sm:p-6 rounded-md bg-white dark:bg-[#0B0C10] border border-neutral-300 dark:border-neutral-800 space-y-4">
           <div className="flex items-center justify-between flex-wrap gap-2">
             <div className="flex items-center gap-2 text-[#FF6B00]">
               <ShieldCheck className="w-5 h-5" />
@@ -29,11 +29,11 @@ export const ExperienceSection: React.FC = () => {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-            <div className="p-4 rounded-xl bg-neutral-50 dark:bg-[#111218] border border-black/5 dark:border-white/5 space-y-1.5 hover:border-[#FF6B00]/40 transition-colors">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#111218] border border-neutral-200 dark:border-white/5 space-y-1 hover:border-[#FF6B00] transition-colors">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono font-bold text-[#FF6B00]">OCI DEVOPS PRO</span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 text-neutral-600 dark:text-neutral-400">
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-white/5 text-neutral-600 dark:text-neutral-400">
                   1Z0-1109-26
                 </span>
               </div>
@@ -45,10 +45,10 @@ export const ExperienceSection: React.FC = () => {
               </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-neutral-50 dark:bg-[#111218] border border-black/5 dark:border-white/5 space-y-1.5 hover:border-[#FF6B00]/40 transition-colors">
+            <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#111218] border border-neutral-200 dark:border-white/5 space-y-1 hover:border-[#FF6B00] transition-colors">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono font-bold text-[#FF6B00]">OCI ARCHITECT PRO</span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 text-neutral-600 dark:text-neutral-400">
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-white/5 text-neutral-600 dark:text-neutral-400">
                   1Z0-997-26
                 </span>
               </div>
@@ -63,7 +63,7 @@ export const ExperienceSection: React.FC = () => {
         </div>
 
         {/* Timeline Container with Laser Guide Line */}
-        <div className="relative border-l-2 border-neutral-300 dark:border-white/20 ml-4 sm:ml-6 pl-6 sm:pl-9 space-y-10">
+        <div className="relative border-l border-neutral-300 dark:border-neutral-800 ml-4 sm:ml-6 pl-6 sm:pl-9 space-y-8">
           {EXPERIENCES_DATA.map((item) => (
             <div
               key={item.id}
@@ -72,35 +72,35 @@ export const ExperienceSection: React.FC = () => {
             >
               
               {/* Timeline Indicator Dot */}
-              <div className="absolute -left-[33px] sm:-left-[45px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-[#050507] border-2 border-[#FF6B00] group-hover:bg-[#FF6B00] group-hover:shadow-[0_0_16px_#FF6B00] group-hover:scale-125 transition-all duration-200" />
+              <div className="absolute -left-[31px] sm:-left-[43px] top-2 w-3 h-3 rounded-none bg-white dark:bg-[#07080B] border-2 border-[#FF6B00] group-hover:bg-[#FF6B00] transition-colors" />
 
               {/* Experience Card */}
-              <div className="bg-white dark:bg-[#0B0C10] rounded-2xl border border-neutral-200/80 dark:border-white/10 p-6 sm:p-7 space-y-4 hover:border-[#FF6B00]/40 transition-all duration-200 shadow-sm dark:shadow-xl group-hover:shadow-[0_0_25px_rgba(255,107,0,0.1)]">
+              <div className="bg-white dark:bg-[#0B0C10] rounded-md border border-neutral-300 dark:border-neutral-800 p-5 sm:p-6 space-y-3.5 hover:border-[#FF6B00] transition-colors">
                 
                 {/* Header: Role & Period */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-black/10 dark:border-white/10">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-neutral-200 dark:border-neutral-800">
                   <div>
-                    <h3 className="text-xl font-mono font-bold text-neutral-900 dark:text-white group-hover:text-[#FF6B00] transition-colors">
+                    <h3 className="text-lg sm:text-xl font-mono font-bold text-neutral-900 dark:text-white group-hover:text-[#FF6B00] transition-colors">
                       {item.role}
                     </h3>
-                    <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono text-neutral-500 dark:text-neutral-400 mt-1.5">
+                    <div className="flex flex-wrap items-center gap-2.5 text-xs font-mono text-neutral-500 dark:text-neutral-400 mt-1">
                       <span className="text-neutral-900 dark:text-white font-semibold flex items-center gap-1">
                         {item.type === 'Engineering Degree' ? <GraduationCap className="w-3.5 h-3.5 text-[#FF6B00]" /> : <Building2 className="w-3.5 h-3.5 text-[#FF6B00]" />}
                         {item.company}
                       </span>
-                      <span>•</span>
+                      <span>|</span>
                       <span className="flex items-center gap-1 text-neutral-500 dark:text-neutral-400">
                         <MapPin className="w-3.5 h-3.5" />
                         {item.location}
                       </span>
-                      <span>•</span>
-                      <span className="px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 text-neutral-700 dark:text-neutral-300 font-semibold border border-black/5 dark:border-white/5">
+                      <span>|</span>
+                      <span className="px-1.5 py-0.2 rounded bg-neutral-100 dark:bg-white/5 text-neutral-700 dark:text-neutral-300 font-medium border border-neutral-200 dark:border-white/10">
                         {item.type}
                       </span>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-1.5 font-mono text-xs text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-[#0F1016] px-3 py-1.5 rounded-xl border border-black/5 dark:border-white/10 shrink-0 self-start sm:self-auto">
+                  <div className="flex items-center gap-1.5 font-mono text-xs text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-[#111218] px-2.5 py-1 rounded-md border border-neutral-200 dark:border-white/10 shrink-0 self-start sm:self-auto">
                     <Calendar className="w-3.5 h-3.5 text-[#FF6B00]" />
                     <span>{item.period}</span>
                   </div>
@@ -112,11 +112,11 @@ export const ExperienceSection: React.FC = () => {
                 </p>
 
                 {/* Quantifiable Impact Metrics Banner */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-1">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 py-1">
                   {item.metrics.map((metric, mIdx) => (
-                    <div key={mIdx} className="bg-neutral-100 dark:bg-[#0F1016] p-3 rounded-xl border border-black/5 dark:border-white/5">
-                      <div className="text-[11px] text-neutral-500 dark:text-neutral-400 font-mono truncate">{metric.label}</div>
-                      <div className="text-sm sm:text-base font-mono font-bold text-neutral-900 dark:text-white mt-0.5 truncate">
+                    <div key={mIdx} className="bg-neutral-50 dark:bg-[#111218] p-2.5 rounded-sm border border-neutral-200 dark:border-white/5">
+                      <div className="text-[10px] text-neutral-500 dark:text-neutral-400 font-mono truncate">{metric.label}</div>
+                      <div className="text-xs sm:text-sm font-mono font-bold text-neutral-900 dark:text-white mt-0.5 truncate">
                         {metric.value}
                       </div>
                     </div>
@@ -124,15 +124,15 @@ export const ExperienceSection: React.FC = () => {
                 </div>
 
                 {/* Core Responsibilities & Engineering Accomplishments */}
-                <div className="space-y-2 pt-1">
+                <div className="space-y-1.5 pt-1">
                   <div className="text-xs font-mono font-semibold text-neutral-900 dark:text-neutral-200 uppercase tracking-wider flex items-center gap-1.5">
                     <TrendingUp className="w-3.5 h-3.5 text-[#FF6B00]" />
                     <span>Key Engineering Deliverables</span>
                   </div>
-                  <ul className="space-y-2 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 font-sans">
+                  <ul className="space-y-1.5 text-xs text-neutral-700 dark:text-neutral-300 font-sans">
                     {item.achievements.map((achievement, aIdx) => (
-                      <li key={aIdx} className="flex items-start gap-2.5">
-                        <span className="text-[#FF6B00] font-mono shrink-0 mt-0.5 font-bold">✔</span>
+                      <li key={aIdx} className="flex items-start gap-2">
+                        <span className="text-[#FF6B00] font-mono shrink-0 mt-0.5 font-bold">+</span>
                         <span className="leading-relaxed">{achievement}</span>
                       </li>
                     ))}

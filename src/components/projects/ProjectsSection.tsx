@@ -46,14 +46,15 @@ export const ProjectsSection: React.FC = () => {
             className="mb-0"
           />
 
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-[#0B0C10] border border-neutral-200/80 dark:border-white/10 text-xs font-mono text-neutral-600 dark:text-neutral-400 self-start md:self-auto shrink-0 shadow-xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF6B00]" />
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-sm bg-neutral-100 dark:bg-[#111218] border border-neutral-300 dark:border-white/10 text-xs font-mono text-neutral-600 dark:text-neutral-400 self-start md:self-auto shrink-0">
+            <span className="text-[#FF6B00] font-bold">SYS//RUN</span>
+            <span className="text-neutral-300 dark:text-neutral-700">|</span>
             <span>{filteredProjects.length} Systems Active</span>
           </div>
         </div>
 
         {/* Filter Controls & Search Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 bg-white dark:bg-[#0B0C10] p-2.5 rounded-2xl border border-neutral-200/80 dark:border-white/10 shadow-sm">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 bg-neutral-50 dark:bg-[#0B0C10] p-2 rounded-md border border-neutral-300 dark:border-white/10">
           {/* Category Tabs */}
           <div className="flex flex-wrap items-center gap-1.5 w-full sm:w-auto">
             {categories.map((cat) => {
@@ -65,10 +66,10 @@ export const ProjectsSection: React.FC = () => {
                     sound.playClick();
                     setSelectedCategory(cat.id);
                   }}
-                  className={`px-3.5 py-1.5 rounded-xl font-mono text-xs transition-all cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-md font-mono text-xs transition-colors cursor-pointer ${
                     isActive
-                      ? 'bg-gradient-to-r from-[#FF6B00] to-[#FF8533] text-white font-bold shadow-[0_0_16px_rgba(255,107,0,0.35)]'
-                      : 'text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
+                      ? 'bg-[#FF6B00] text-white font-semibold'
+                      : 'text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:bg-neutral-200 dark:hover:bg-white/5'
                   }`}
                 >
                   {cat.label}

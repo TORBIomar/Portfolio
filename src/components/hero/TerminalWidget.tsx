@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Copy, Check, Terminal, CornerDownLeft, Sparkles } from 'lucide-react';
+import { Copy, Check, Terminal, CornerDownLeft } from 'lucide-react';
 import { PERSONAL_INFO, PROJECTS_DATA } from '../../data/portfolioData';
 import { sound } from '../../utils/sound';
 
@@ -194,10 +194,10 @@ export const TerminalWidget: React.FC = () => {
     <div
       data-cursor="terminal"
       data-terminal-widget="true"
-      className="w-full rounded-2xl bg-white dark:bg-[#0B0C10] border border-black/10 dark:border-white/10 shadow-2xl overflow-hidden font-mono text-xs sm:text-sm backdrop-blur-md"
+      className="w-full rounded-lg bg-white dark:bg-[#07080B] border border-neutral-300 dark:border-neutral-800 shadow-2xl overflow-hidden font-mono text-xs sm:text-sm backdrop-blur-md"
     >
       {/* Title Bar */}
-      <div className="flex items-center justify-between px-4 py-2.5 bg-neutral-100 dark:bg-[#0A0A0A] border-b border-black/10 dark:border-white/10 select-none">
+      <div className="flex items-center justify-between px-4 py-2.5 bg-neutral-100/70 dark:bg-[#0A0B10] border-b border-neutral-200 dark:border-neutral-800 select-none">
         <div className="flex items-center gap-2">
           <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
           <div className="w-2.5 h-2.5 rounded-full bg-[#FF6B00]/80" />
@@ -263,17 +263,17 @@ export const TerminalWidget: React.FC = () => {
       </div>
 
       {/* Interactive Command Suggester Bar */}
-      <div className="px-4 py-2 bg-neutral-100 dark:bg-[#07080B] border-t border-black/5 dark:border-white/5 flex items-center justify-between overflow-x-auto gap-2 text-[11px]">
-        <div className="flex items-center gap-1.5 shrink-0 text-neutral-500 dark:text-neutral-400">
-          <Sparkles className="w-3 h-3 text-[#FF6B00]" />
-          <span>Quick:</span>
+      <div className="px-4 py-2 bg-neutral-100/70 dark:bg-[#0A0B10] border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between overflow-x-auto gap-2 text-[11px]">
+        <div className="flex items-center gap-1.5 shrink-0 text-neutral-500 dark:text-neutral-400 font-mono text-[10px]">
+          <span className="text-[#FF6B00] font-bold">&gt;_</span>
+          <span>QUICK:</span>
         </div>
         <div className="flex items-center gap-1.5 overflow-x-auto">
           {['devops', 'backend', 'certifs', 'projects', 'skills', 'help'].map((cmd) => (
             <button
               key={cmd}
               onClick={() => handleExecute(cmd)}
-              className="px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-neutral-700 dark:text-neutral-300 hover:text-[#FF6B00] dark:hover:text-[#FF6B00] border border-black/10 dark:border-white/10 hover:border-[#FF6B00]/40 font-mono text-[10px] transition-all cursor-pointer shrink-0"
+              className="px-2 py-0.5 rounded-sm bg-neutral-200/60 dark:bg-white/5 hover:bg-neutral-300/80 dark:hover:bg-white/10 text-neutral-700 dark:text-neutral-300 hover:text-[#FF6B00] dark:hover:text-[#FF6B00] border border-neutral-300 dark:border-neutral-700 hover:border-[#FF6B00]/40 font-mono text-[10px] transition-all cursor-pointer shrink-0"
             >
               {cmd}
             </button>

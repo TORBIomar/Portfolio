@@ -57,7 +57,7 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-20 sm:py-28 border-b border-black/10 dark:border-white/10 scroll-mt-16 relative">
+    <section id="contact" className="py-20 sm:py-28 border-b border-neutral-300 dark:border-neutral-800 scroll-mt-16 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <SectionHeading
@@ -72,7 +72,7 @@ export const ContactSection: React.FC = () => {
           <div className="lg:col-span-5 space-y-6">
             
             {/* Status Card */}
-            <div className="bg-white dark:bg-[#0B0C10] rounded-2xl border border-neutral-200/80 dark:border-white/10 p-6 sm:p-7 space-y-5 shadow-sm dark:shadow-xl">
+            <div className="bg-white dark:bg-[#07080B] rounded-md border border-neutral-300 dark:border-neutral-800 p-6 sm:p-7 space-y-5 shadow-2xl">
               <div className="flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
                 <span className="font-mono text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
@@ -100,7 +100,7 @@ export const ContactSection: React.FC = () => {
                 <label className="font-mono text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-wider block mb-2">
                   Direct Email
                 </label>
-                <div className="flex items-center justify-between p-3 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/5 dark:border-white/5 hover:border-[#FF6B00]/30 transition-colors">
+                <div className="flex items-center justify-between p-3 rounded-md bg-neutral-100 dark:bg-white/5 border border-neutral-300 dark:border-neutral-800 hover:border-[#FF6B00] transition-colors">
                   <div className="flex items-center gap-2 truncate">
                     <Mail className="w-4 h-4 text-[#FF6B00] shrink-0" />
                     <a
@@ -112,7 +112,7 @@ export const ContactSection: React.FC = () => {
                   </div>
                   <button
                     onClick={handleCopyEmail}
-                    className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer shrink-0 ml-2"
+                    className="p-1.5 rounded-sm hover:bg-neutral-200 dark:hover:bg-white/10 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer shrink-0 ml-2"
                     title="Copy email to clipboard"
                     aria-label="Copy email address"
                   >
@@ -130,7 +130,7 @@ export const ContactSection: React.FC = () => {
                 <label className="font-mono text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-wider block mb-2">
                   Phone &amp; WhatsApp
                 </label>
-                <div className="flex items-center justify-between p-3 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/5 dark:border-white/5 hover:border-[#FF6B00]/30 transition-colors">
+                <div className="flex items-center justify-between p-3 rounded-md bg-neutral-100 dark:bg-white/5 border border-neutral-300 dark:border-neutral-800 hover:border-[#FF6B00] transition-colors">
                   <div className="flex items-center gap-2">
                     <Phone className="w-4 h-4 text-[#FF6B00] shrink-0" />
                     <a
@@ -144,7 +144,7 @@ export const ContactSection: React.FC = () => {
                   </div>
                   <button
                     onClick={handleCopyPhone}
-                    className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer shrink-0 ml-2"
+                    className="p-1.5 rounded-sm hover:bg-neutral-200 dark:hover:bg-white/10 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer shrink-0 ml-2"
                     title="Copy phone to clipboard"
                     aria-label="Copy phone number"
                   >
@@ -158,7 +158,7 @@ export const ContactSection: React.FC = () => {
               </div>
 
               {/* Download CV Options */}
-              <div className="pt-2 border-t border-black/10 dark:border-white/10">
+              <div className="pt-2 border-t border-neutral-200 dark:border-neutral-800">
                 <div className="font-mono text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-2.5">
                   Official Resumes
                 </div>
@@ -168,7 +168,7 @@ export const ContactSection: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => sound.playSuccess()}
-                    className="flex items-center justify-between p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] hover:border-[#FF6B00]/40 border border-black/5 dark:border-white/5 text-neutral-800 dark:text-neutral-200 transition-colors"
+                    className="flex items-center justify-between p-2.5 rounded-md bg-neutral-100 dark:bg-white/5 hover:border-[#FF6B00] border border-neutral-300 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 transition-colors"
                   >
                     <span>Resume (EN)</span>
                     <Download className="w-3.5 h-3.5 text-[#FF6B00]" />
@@ -178,7 +178,7 @@ export const ContactSection: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => sound.playSuccess()}
-                    className="flex items-center justify-between p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] hover:border-[#FF6B00]/40 border border-black/5 dark:border-white/5 text-neutral-800 dark:text-neutral-200 transition-colors"
+                    className="flex items-center justify-between p-2.5 rounded-md bg-neutral-100 dark:bg-white/5 hover:border-[#FF6B00] border border-neutral-300 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 transition-colors"
                   >
                     <span>CV (FR)</span>
                     <Download className="w-3.5 h-3.5 text-[#FF6B00]" />
@@ -187,14 +187,14 @@ export const ContactSection: React.FC = () => {
               </div>
 
               {/* Social Channels */}
-              <div className="pt-2 border-t border-black/10 dark:border-white/10">
+              <div className="pt-2 border-t border-neutral-200 dark:border-neutral-800">
                 <div className="grid grid-cols-3 gap-2 font-mono text-xs">
                   <a
                     href={PERSONAL_INFO.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => sound.playClick()}
-                    className="flex items-center justify-between p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] hover:bg-neutral-200 dark:hover:bg-white/5 border border-black/5 dark:border-white/5 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+                    className="flex items-center justify-between p-2.5 rounded-md bg-neutral-100 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-white/10 border border-neutral-300 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-1.5">
                       <Github className="w-3.5 h-3.5 text-[#FF6B00]" />
@@ -208,7 +208,7 @@ export const ContactSection: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => sound.playClick()}
-                    className="flex items-center justify-between p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] hover:bg-neutral-200 dark:hover:bg-white/5 border border-black/5 dark:border-white/5 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+                    className="flex items-center justify-between p-2.5 rounded-md bg-neutral-100 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-white/10 border border-neutral-300 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-1.5">
                       <Linkedin className="w-3.5 h-3.5 text-[#FF6B00]" />
@@ -222,7 +222,7 @@ export const ContactSection: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => sound.playClick()}
-                    className="flex items-center justify-between p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] hover:bg-neutral-200 dark:hover:bg-white/5 border border-black/5 dark:border-white/5 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+                    className="flex items-center justify-between p-2.5 rounded-md bg-neutral-100 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-white/10 border border-neutral-300 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-1.5">
                       <Instagram className="w-3.5 h-3.5 text-[#FF6B00]" />
@@ -238,7 +238,7 @@ export const ContactSection: React.FC = () => {
           </div>
 
           {/* Right Column: Contact Message Form (7 Cols) */}
-          <div className="lg:col-span-7 bg-white dark:bg-[#0B0C10] rounded-2xl border border-neutral-200/80 dark:border-white/10 p-6 sm:p-7 shadow-sm dark:shadow-xl">
+          <div className="lg:col-span-7 bg-white dark:bg-[#07080B] rounded-md border border-neutral-300 dark:border-neutral-800 p-6 sm:p-7 shadow-2xl">
             <div className="mb-6">
               <h3 className="font-mono text-xl font-bold text-neutral-900 dark:text-white flex items-center gap-2">
                 <span>Send a Message</span>
@@ -250,7 +250,7 @@ export const ContactSection: React.FC = () => {
 
             {/* Status Alert Banner */}
             {status === 'success' && (
-              <div className="mb-6 p-4 rounded-xl bg-[#FF6B00]/[0.05] border border-[#FF6B00]/30 text-neutral-900 dark:text-white text-xs font-mono flex items-start gap-3">
+              <div className="mb-6 p-4 rounded-md bg-[#FF6B00]/[0.05] border border-[#FF6B00]/30 text-neutral-900 dark:text-white text-xs font-mono flex items-start gap-3">
                 <Check className="w-4 h-4 text-[#FF6B00] shrink-0 mt-0.5" />
                 <div>
                   <div className="font-bold">Message Initiated</div>
@@ -262,7 +262,7 @@ export const ContactSection: React.FC = () => {
             )}
 
             {status === 'error' && (
-              <div className="mb-6 p-4 rounded-xl bg-rose-950/30 border border-rose-800/50 text-rose-400 text-xs font-mono">
+              <div className="mb-6 p-4 rounded-md bg-rose-950/30 border border-rose-800/50 text-rose-400 text-xs font-mono">
                 {errorMessage}
               </div>
             )}
@@ -284,7 +284,7 @@ export const ContactSection: React.FC = () => {
                       sound.playKey();
                       setFormData({ ...formData, name: e.target.value });
                     }}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-[#FF6B00]/60 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-md bg-neutral-50 dark:bg-[#050507] border border-neutral-300 dark:border-neutral-800 text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-600 outline-none focus:border-[#FF6B00] transition-colors"
                   />
                 </div>
 
@@ -302,7 +302,7 @@ export const ContactSection: React.FC = () => {
                       sound.playKey();
                       setFormData({ ...formData, email: e.target.value });
                     }}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-[#FF6B00]/60 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-md bg-neutral-50 dark:bg-[#050507] border border-neutral-300 dark:border-neutral-800 text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-600 outline-none focus:border-[#FF6B00] transition-colors"
                   />
                 </div>
               </div>
@@ -320,7 +320,7 @@ export const ContactSection: React.FC = () => {
                     sound.playKey();
                     setFormData({ ...formData, subject: e.target.value });
                   }}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-[#FF6B00]/60 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-md bg-neutral-50 dark:bg-[#050507] border border-neutral-300 dark:border-neutral-800 text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-600 outline-none focus:border-[#FF6B00] transition-colors"
                 />
               </div>
 
@@ -338,7 +338,7 @@ export const ContactSection: React.FC = () => {
                     sound.playKey();
                     setFormData({ ...formData, message: e.target.value });
                   }}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-[#FF6B00]/60 transition-colors font-sans text-sm resize-none"
+                  className="w-full px-3.5 py-2.5 rounded-md bg-neutral-50 dark:bg-[#050507] border border-neutral-300 dark:border-neutral-800 text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-600 outline-none focus:border-[#FF6B00] transition-colors font-sans text-sm resize-none"
                 />
               </div>
 

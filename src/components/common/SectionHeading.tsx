@@ -19,15 +19,15 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
 
   return (
     <div className={`mb-8 ${isCenter ? 'text-center max-w-2xl mx-auto' : 'max-w-3xl'} ${className}`}>
-      <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF6B00]/10 border border-[#FF6B00]/30 text-neutral-800 dark:text-neutral-200 font-mono text-[11px] font-bold uppercase tracking-widest mb-3 ${isCenter ? 'mx-auto' : ''}`}>
-        <span className="w-1.5 h-1.5 rounded-full bg-[#FF6B00] beacon-orange" />
-        {badge}
+      <div className={`inline-flex items-center gap-2 px-2.5 py-1 rounded-sm bg-neutral-100 dark:bg-[#111218] border border-neutral-300 dark:border-white/10 text-neutral-700 dark:text-neutral-300 font-mono text-[11px] font-medium uppercase tracking-wider mb-3 ${isCenter ? 'mx-auto' : ''}`}>
+        <span className="text-[#FF6B00] font-bold">#</span>
+        <span>{badge}</span>
       </div>
-      <h2 className="text-2xl sm:text-4xl md:text-5xl font-mono font-extrabold tracking-tight uppercase text-neutral-900 dark:text-white leading-[1.1]">
+      <h2 className="text-2xl sm:text-4xl md:text-5xl font-mono font-extrabold tracking-tight uppercase text-neutral-900 dark:text-white leading-[1.08]">
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-3 text-sm sm:text-base text-neutral-600 dark:text-neutral-400 font-light leading-relaxed font-sans">
+        <p className="mt-3 text-sm sm:text-base text-neutral-600 dark:text-neutral-400 font-normal leading-relaxed font-sans">
           {subtitle}
         </p>
       )}

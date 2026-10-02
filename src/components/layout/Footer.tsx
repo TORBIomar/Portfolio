@@ -10,15 +10,15 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-white dark:bg-black border-t border-black/10 dark:border-white/10 text-neutral-600 dark:text-neutral-400 py-10 transition-colors">
+    <footer className="bg-white dark:bg-[#07080B] border-t border-neutral-300 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 py-10 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Row */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-black/10 dark:border-white/10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-neutral-200 dark:border-neutral-800">
           
           {/* Brand & Tagline */}
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-neutral-100 dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 flex items-center justify-center text-[#FF6B00] shadow-xs">
+            <div className="w-8 h-8 rounded-md bg-neutral-100 dark:bg-white/5 border border-neutral-300 dark:border-neutral-800 flex items-center justify-center text-[#FF6B00]">
               <Terminal className="w-4 h-4" />
             </div>
             <div>
@@ -33,10 +33,10 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Simple Clean Status Banner */}
-          <div className="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-neutral-100 dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 text-xs font-mono shadow-xs">
+          <div className="flex items-center gap-2.5 px-3 py-1 rounded-md bg-neutral-100 dark:bg-white/5 border border-neutral-300 dark:border-neutral-800 text-xs font-mono">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF6B00]" />
             <span className="text-neutral-800 dark:text-neutral-200 font-medium">Rabat, Morocco</span>
-            <span className="text-black/10 dark:text-white/20">|</span>
+            <span className="text-neutral-300 dark:text-neutral-700">|</span>
             <span className="text-neutral-500 dark:text-neutral-400 font-medium">OCI Certified Pro</span>
           </div>
 
@@ -47,7 +47,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sound.playClick()}
-              className="p-2.5 rounded-full bg-neutral-100 dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 text-neutral-600 dark:text-neutral-400 hover:text-[#FF6B00] hover:border-[#FF6B00]/40 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 active:scale-95 cursor-pointer shadow-xs"
+              className="p-2 rounded-md bg-neutral-100 dark:bg-white/5 border border-neutral-300 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-[#FF6B00] hover:border-[#FF6B00] transition-colors cursor-pointer"
               aria-label="GitHub Profile"
             >
               <Github className="w-4 h-4" />
@@ -57,7 +57,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sound.playClick()}
-              className="p-2.5 rounded-full bg-neutral-100 dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 text-neutral-600 dark:text-neutral-400 hover:text-[#FF6B00] hover:border-[#FF6B00]/40 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 active:scale-95 cursor-pointer shadow-xs"
+              className="p-2 rounded-md bg-neutral-100 dark:bg-white/5 border border-neutral-300 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-[#FF6B00] hover:border-[#FF6B00] transition-colors cursor-pointer"
               aria-label="LinkedIn Profile"
             >
               <Linkedin className="w-4 h-4" />
@@ -67,14 +67,14 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sound.playClick()}
-              className="p-2.5 rounded-full bg-neutral-100 dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 text-neutral-600 dark:text-neutral-400 hover:text-[#FF6B00] hover:border-[#FF6B00]/40 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 active:scale-95 cursor-pointer shadow-xs"
+              className="p-2 rounded-md bg-neutral-100 dark:bg-white/5 border border-neutral-300 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-[#FF6B00] hover:border-[#FF6B00] transition-colors cursor-pointer"
               aria-label="Instagram Profile"
             >
               <Instagram className="w-4 h-4" />
             </a>
             <button
               onClick={scrollToTop}
-              className="p-2.5 rounded-full bg-neutral-100 dark:bg-[#0A0A0A] border border-black/10 dark:border-white/10 text-neutral-600 dark:text-neutral-400 hover:text-[#FF6B00] hover:border-[#FF6B00]/40 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 active:scale-95 cursor-pointer ml-1 shadow-xs"
+              className="p-2 rounded-md bg-neutral-100 dark:bg-white/5 border border-neutral-300 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:text-[#FF6B00] hover:border-[#FF6B00] transition-colors cursor-pointer ml-1"
               title="Return to top"
               aria-label="Scroll back to top"
             >

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Code2, Cpu, User, Mail, Download, ExternalLink, Volume2, VolumeX, X, CornerDownLeft, Sparkles, ShieldCheck } from 'lucide-react';
+import { Search, Code2, Cpu, User, Mail, Download, ExternalLink, Volume2, VolumeX, X, CornerDownLeft, ShieldCheck } from 'lucide-react';
 import { PERSONAL_INFO, PROJECTS_DATA } from '../../data/portfolioData';
 import { sound } from '../../utils/sound';
 
@@ -49,12 +49,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
 
   // Build command catalogue
   const commands: CommandItem[] = [
-    // Recruiter Fast-Scan Dossier
+    // Engineering Candidate Dossier
     {
       id: 'action-recruiter-dossier',
-      title: '⚡ Open Recruiter Fast-Scan Dossier (Key Facts & Contact)',
-      category: 'Recruiter Fast-Scan',
-      icon: <Sparkles className="w-4 h-4 text-[#FF6B00]" />,
+      title: 'Open Engineering Candidate Dossier (Spec Sheet & Accreditations)',
+      category: 'Engineering Dossier',
+      icon: <ShieldCheck className="w-4 h-4 text-[#FF6B00]" />,
       action: () => {
         onClose();
         if (onOpenRecruiterDossier) {
@@ -233,11 +233,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
 
       {/* Palette Modal Container */}
       <div
-        className="relative w-full max-w-2xl bg-white dark:bg-[#0A0B0F] border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl shadow-black/40 dark:shadow-black/90 overflow-hidden z-10 flex flex-col font-mono text-xs sm:text-sm animate-in zoom-in-95 duration-150"
+        className="relative w-full max-w-2xl bg-white dark:bg-[#07080B] border border-neutral-300 dark:border-neutral-800 rounded-lg shadow-2xl overflow-hidden z-10 flex flex-col font-mono text-xs sm:text-sm animate-in zoom-in-95 duration-150"
         onKeyDown={handleKeyDown}
       >
         {/* Top Search Bar */}
-        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-black/10 dark:border-white/10 bg-neutral-50 dark:bg-[#0F1016]">
+        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-[#0A0B10]">
           <Search className="w-4 h-4 text-[#FF6B00] shrink-0" />
           <input
             ref={inputRef}
@@ -249,7 +249,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
               sound.playKey();
             }}
             placeholder="Search commands, projects, skills, or actions..."
-            className="flex-1 bg-transparent border-none text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 outline-none text-sm font-mono"
+            className="flex-1 bg-transparent border-none text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 outline-none text-xs sm:text-sm font-mono"
             aria-label="Command palette input"
           />
           {query && (
@@ -263,7 +263,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
               <X className="w-3.5 h-3.5" />
             </button>
           )}
-          <kbd className="hidden sm:inline-block px-1.5 py-0.5 rounded bg-black/5 dark:bg-white/10 border border-black/5 dark:border-white/10 text-[10px] text-neutral-500">
+          <kbd className="hidden sm:inline-block px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-white/10 border border-neutral-300 dark:border-neutral-700 text-[10px] text-neutral-500 dark:text-neutral-400">
             ESC
           </kbd>
         </div>
@@ -288,10 +288,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
                     cmd.action();
                   }}
                   onMouseEnter={() => setSelectedIndex(idx)}
-                  className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer transition-colors ${
+                  className={`flex items-center justify-between px-3.5 py-2.5 rounded-md cursor-pointer transition-colors ${
                     isSelected
-                      ? 'bg-neutral-100 dark:bg-[#15161E] text-neutral-900 dark:text-white'
-                      : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-white/5'
+                      ? 'bg-neutral-100 dark:bg-[#15161E] text-neutral-900 dark:text-white border border-neutral-300 dark:border-neutral-700'
+                      : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-white/5 border border-transparent'
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-0">
@@ -305,7 +305,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0 ml-3">
-                    <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-neutral-500 dark:text-neutral-400">
+                    <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-neutral-100 dark:bg-white/5 border border-neutral-200 dark:border-neutral-800 text-neutral-500 dark:text-neutral-400">
                       {cmd.category}
                     </span>
                     {isSelected && (
@@ -319,13 +319,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
         </div>
 
         {/* Footer HUD */}
-        <div className="px-4 py-2 border-t border-black/10 dark:border-white/10 bg-neutral-50 dark:bg-[#0F1016] flex items-center justify-between text-[11px] text-neutral-500 dark:text-neutral-400">
+        <div className="px-4 py-2 border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-[#0A0B10] flex items-center justify-between text-[11px] text-neutral-500 dark:text-neutral-400">
           <div className="flex items-center gap-3">
             <span>↑↓ to navigate</span>
             <span>↵ to select</span>
             <span>esc to dismiss</span>
           </div>
-          <span className="text-neutral-400">Omar Torbi // CLI</span>
+          <span className="text-neutral-400">SYS//COMMAND-PALETTE</span>
         </div>
       </div>
     </div>

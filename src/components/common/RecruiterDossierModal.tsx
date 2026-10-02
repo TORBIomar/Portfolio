@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { 
-  X, Download, Mail, Phone, GraduationCap, 
-  Check, Sparkles, Server, Cloud, Cpu, 
-  Database, ShieldCheck, Languages, Briefcase, MessageSquare, ArrowUpRight
+  Download, Mail, Phone, Check, Server, Cloud, Cpu, 
+  Database, ShieldCheck, MessageSquare, ArrowUpRight
 } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { Button } from './Button';
@@ -55,57 +54,60 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
     <div
       role="dialog"
       aria-modal="true"
-      aria-labelledby="recruiter-dossier-title"
-      className="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-6 bg-black/70 backdrop-blur-md animate-in fade-in duration-200"
+      aria-labelledby="dossier-title"
+      className="fixed inset-0 z-[120] flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-sm animate-in fade-in duration-150"
       onClick={() => {
         sound.playClick();
         onClose();
       }}
     >
       <div
-        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white dark:bg-[#0A0B0F] border border-black/10 dark:border-white/10 rounded-2xl shadow-2xl p-6 sm:p-8 text-neutral-900 dark:text-foreground flex flex-col font-sans"
+        className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto bg-white dark:bg-[#07080B] border border-neutral-300 dark:border-neutral-800 rounded-lg shadow-2xl p-5 sm:p-7 text-neutral-900 dark:text-neutral-100 flex flex-col font-sans"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Top Hairline Gradient Accent */}
-        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#FF6B00] via-[#FFA05C] to-[#FF6B00]" />
-
-        {/* Close Button */}
-        <button
-          onClick={() => {
-            sound.playClick();
-            onClose();
-          }}
-          className="absolute top-5 right-5 p-2 rounded-xl bg-black/5 dark:bg-white/5 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer"
-          aria-label="Close recruiter dossier"
-        >
-          <X className="w-5 h-5" />
-        </button>
-
-        {/* Header: Candidate Identity & Executive Badge */}
-        <div className="space-y-3 pr-10">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF6B00]/10 border border-[#FF6B00]/30 text-[#FF6B00] font-mono text-xs font-bold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Recruiter Fast-Scan Dossier</span>
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-neutral-800 dark:text-neutral-200 font-mono text-xs">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#FF6B00]" />
-              <span>OCI DevOps &amp; Architect Pro Certified</span>
-            </span>
+        {/* Architectural Header Bar: Document Reference & Status */}
+        <div className="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-5 font-mono text-[11px] text-neutral-500 dark:text-neutral-400">
+          <div className="flex items-center gap-2">
+            <span className="text-[#FF6B00] font-bold">SYS//DOC-SPEC</span>
+            <span className="text-neutral-300 dark:text-neutral-700">|</span>
+            <span>REF: OT-ENG-2026</span>
+            <span className="text-neutral-300 dark:text-neutral-700">|</span>
+            <span className="hidden sm:inline">STATUS: VERIFIED CANDIDATE</span>
           </div>
 
-          <div>
-            <h2 id="recruiter-dossier-title" className="text-2xl sm:text-3xl font-mono font-extrabold text-neutral-900 dark:text-white">
-              {PERSONAL_INFO.name}
-            </h2>
-            <p className="font-mono text-sm text-[#FF6B00] font-semibold mt-0.5">
-              Software &amp; DevOps Engineer • EMSI Rabat (DDSI)
-            </p>
+          <button
+            onClick={() => {
+              sound.playClick();
+              onClose();
+            }}
+            className="flex items-center gap-1 px-2 py-0.5 rounded border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500 text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
+            aria-label="Close dossier"
+          >
+            <span>[ESC / ✕]</span>
+          </button>
+        </div>
+
+        {/* Candidate Identity Block */}
+        <div className="space-y-1.5 pb-4 border-b border-neutral-200 dark:border-neutral-800">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <h2 id="dossier-title" className="text-2xl sm:text-3xl font-mono font-bold tracking-tight text-neutral-900 dark:text-white">
+                {PERSONAL_INFO.name}
+              </h2>
+              <div className="font-mono text-xs sm:text-sm text-[#FF6B00] font-semibold mt-0.5">
+                SOFTWARE &amp; DEVOPS ENGINEER
+              </div>
+            </div>
+
+            <div className="text-right font-mono text-[11px] text-neutral-500 dark:text-neutral-400 hidden sm:block">
+              <div>Rabat, Morocco [GMT+1]</div>
+              <div className="text-neutral-800 dark:text-neutral-200 font-medium">EMSI Rabat (DDSI)</div>
+            </div>
           </div>
         </div>
 
-        {/* Action Buttons: Dual Resume Downloads & WhatsApp */}
-        <div className="flex flex-wrap items-center gap-3 my-5 pt-1">
+        {/* Tactile Action Row: Resumes, WhatsApp & Quick-Copy */}
+        <div className="flex flex-wrap items-center gap-2.5 my-4">
           <a
             href={PERSONAL_INFO.resumeUrlEn}
             target="_blank"
@@ -114,10 +116,10 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
           >
             <Button
               variant="primary"
-              size="md"
-              icon={<Download className="w-4 h-4" />}
+              size="sm"
+              icon={<Download className="w-3.5 h-3.5" />}
             >
-              Resume (English)
+              Resume (EN .pdf)
             </Button>
           </a>
 
@@ -128,11 +130,11 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
             onClick={() => sound.playSuccess()}
           >
             <Button
-              variant="outline"
-              size="md"
-              icon={<Download className="w-4 h-4 text-[#FF6B00]" />}
+              variant="secondary"
+              size="sm"
+              icon={<Download className="w-3.5 h-3.5 text-[#FF6B00]" />}
             >
-              CV (Français)
+              CV (FR .pdf)
             </Button>
           </a>
 
@@ -143,9 +145,9 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
             onClick={() => sound.playClick()}
           >
             <Button
-              variant="secondary"
-              size="md"
-              icon={<MessageSquare className="w-4 h-4 text-emerald-500" />}
+              variant="outline"
+              size="sm"
+              icon={<MessageSquare className="w-3.5 h-3.5 text-emerald-500" />}
             >
               WhatsApp
             </Button>
@@ -153,138 +155,126 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
 
           <button
             onClick={handleCopyEmail}
-            className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 hover:border-[#FF6B00]/40 text-neutral-800 dark:text-neutral-200 text-xs font-mono font-medium transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-[#111218] border border-neutral-300 dark:border-white/10 hover:border-[#FF6B00] text-neutral-800 dark:text-neutral-200 text-xs font-mono transition-colors cursor-pointer"
+            title="Copy candidate email to clipboard"
           >
-            {copiedEmail ? <Check className="w-4 h-4 text-[#FF6B00]" /> : <Mail className="w-4 h-4 text-[#FF6B00]" />}
-            <span>{copiedEmail ? 'Copied!' : 'Copy Email'}</span>
+            {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Mail className="w-3.5 h-3.5 text-[#FF6B00]" />}
+            <span>{copiedEmail ? 'Copied' : 'omartorbi18@gmail.com'}</span>
           </button>
 
           <button
             onClick={handleCopyPhone}
-            className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 hover:border-[#FF6B00]/40 text-neutral-800 dark:text-neutral-200 text-xs font-mono font-medium transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-[#111218] border border-neutral-300 dark:border-white/10 hover:border-[#FF6B00] text-neutral-800 dark:text-neutral-200 text-xs font-mono transition-colors cursor-pointer"
+            title="Copy phone number to clipboard"
           >
-            {copiedPhone ? <Check className="w-4 h-4 text-emerald-500" /> : <Phone className="w-4 h-4 text-[#FF6B00]" />}
-            <span>{copiedPhone ? 'Copied!' : 'Copy Phone'}</span>
+            {copiedPhone ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Phone className="w-3.5 h-3.5 text-[#FF6B00]" />}
+            <span>{copiedPhone ? 'Copied' : '+212 602 12 79 38'}</span>
           </button>
         </div>
 
-        {/* 4 Key Executive Fact Tiles */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
-          <div className="p-3.5 rounded-xl bg-neutral-50 dark:bg-[#0E1017] border border-black/5 dark:border-white/5 space-y-1">
-            <div className="flex items-center gap-1.5 text-neutral-500 dark:text-neutral-400 text-xs font-mono">
-              <Briefcase className="w-3.5 h-3.5 text-[#FF6B00]" />
-              <span>Target Roles</span>
-            </div>
-            <div className="text-xs font-semibold text-neutral-900 dark:text-white leading-tight">
-              Software &amp; DevOps Engineer
-            </div>
+        {/* Official Accreditations Panel */}
+        <div className="mb-5 p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800">
+          <div className="flex items-center gap-2 mb-2 font-mono text-[11px] font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
+            <ShieldCheck className="w-4 h-4 text-[#FF6B00]" />
+            <span>Official Cloud Accreditations (Oracle Cloud Infrastructure)</span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-neutral-50 dark:bg-[#0E1017] border border-black/5 dark:border-white/5 space-y-1">
-            <div className="flex items-center gap-1.5 text-neutral-500 dark:text-neutral-400 text-xs font-mono">
-              <GraduationCap className="w-3.5 h-3.5 text-[#FF6B00]" />
-              <span>Education</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs">
+            <div className="p-2.5 rounded bg-white dark:bg-[#111218] border border-neutral-200 dark:border-white/5 space-y-0.5">
+              <div className="flex items-center justify-between text-[#FF6B00] font-bold text-[11px]">
+                <span>OCI DEVOPS PROFESSIONAL</span>
+                <span className="text-neutral-500 dark:text-neutral-400 font-normal">1Z0-1109-26</span>
+              </div>
+              <div className="text-[11px] text-neutral-600 dark:text-neutral-400 font-sans">
+                Automated CI/CD pipelines, container orchestration, IaC, and secure delivery.
+              </div>
             </div>
-            <div className="text-xs font-semibold text-neutral-900 dark:text-white leading-tight">
-              EMSI Rabat (DDSI, 2022–Present)
-            </div>
-          </div>
 
-          <div className="p-3.5 rounded-xl bg-neutral-50 dark:bg-[#0E1017] border border-black/5 dark:border-white/5 space-y-1">
-            <div className="flex items-center gap-1.5 text-neutral-500 dark:text-neutral-400 text-xs font-mono">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#FF6B00]" />
-              <span>Certifications</span>
-            </div>
-            <div className="text-xs font-semibold text-neutral-900 dark:text-white leading-tight">
-              OCI DevOps &amp; Architect Pro
-            </div>
-          </div>
-
-          <div className="p-3.5 rounded-xl bg-neutral-50 dark:bg-[#0E1017] border border-black/5 dark:border-white/5 space-y-1">
-            <div className="flex items-center gap-1.5 text-neutral-500 dark:text-neutral-400 text-xs font-mono">
-              <Languages className="w-3.5 h-3.5 text-[#FF6B00]" />
-              <span>Spoken Languages</span>
-            </div>
-            <div className="text-xs font-semibold text-neutral-900 dark:text-white leading-tight">
-              English (Fluent) • French • Arabic
+            <div className="p-2.5 rounded bg-white dark:bg-[#111218] border border-neutral-200 dark:border-white/5 space-y-0.5">
+              <div className="flex items-center justify-between text-[#FF6B00] font-bold text-[11px]">
+                <span>OCI ARCHITECT PROFESSIONAL</span>
+                <span className="text-neutral-500 dark:text-neutral-400 font-normal">1Z0-997-26</span>
+              </div>
+              <div className="text-[11px] text-neutral-600 dark:text-neutral-400 font-sans">
+                High-availability cloud architecture, network security, and scalable microservices.
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Detailed Competency Matrix for Hiring Managers */}
-        <div className="space-y-4 mb-6">
-          <div className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-[#FF6B00]" />
-            <span>Verified Core Competencies</span>
+        {/* 4 Core Systems Architectural Specification Grid */}
+        <div className="space-y-2 mb-5">
+          <div className="font-mono text-[11px] font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+            [ TECHNICAL ARCHITECTURE &amp; PRODUCTION DOMAINS ]
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 font-mono text-xs">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 font-mono text-xs">
             {/* Backend Architecture */}
-            <div className="p-4 rounded-xl bg-neutral-50 dark:bg-[#0E1017] border border-black/5 dark:border-white/5 space-y-2">
+            <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800 space-y-1.5">
               <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-bold">
-                <Server className="w-4 h-4 text-[#FF6B00]" />
-                <span>Backend &amp; Microservices</span>
+                <Server className="w-3.5 h-3.5 text-[#FF6B00]" />
+                <span>01 // Backend Architecture</span>
               </div>
               <p className="text-[11px] font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                Spring Boot 3, RESTful APIs, Spring Security filter chains with stateless JWT authentication, JPA Hibernate query tuning, and decoupled services.
+                Spring Boot 3, RESTful APIs, stateless JWT filter chains, role-based access control (RBAC), and JPA/Hibernate performance query tuning.
               </p>
               <div className="flex flex-wrap gap-1 pt-1">
                 {['Spring Boot 3', 'Java 17/21', 'REST APIs', 'Spring Security', 'JWT', 'JPA / Hibernate'].map((t) => (
-                  <span key={t} className="px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 text-neutral-800 dark:text-neutral-200 text-[10px] border border-black/5 dark:border-white/10">
+                  <span key={t} className="px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-white/5 text-neutral-800 dark:text-neutral-300 text-[10px] border border-neutral-300 dark:border-white/10">
                     {t}
                   </span>
                 ))}
               </div>
             </div>
 
-            {/* Cloud, DevOps & Linux */}
-            <div className="p-4 rounded-xl bg-neutral-50 dark:bg-[#0E1017] border border-black/5 dark:border-white/5 space-y-2">
+            {/* Cloud & DevOps */}
+            <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800 space-y-1.5">
               <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-bold">
-                <Cloud className="w-4 h-4 text-[#FF6B00]" />
-                <span>DevOps &amp; Cloud Infrastructure</span>
+                <Cloud className="w-3.5 h-3.5 text-[#FF6B00]" />
+                <span>02 // DevOps &amp; Cloud Runtimes</span>
               </div>
               <p className="text-[11px] font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                Multi-stage Alpine Docker builds, Linux shell automation, Oracle Cloud Infrastructure (OCI), Nginx reverse proxies, and n8n webhook pipelines.
+                Multi-stage Alpine Docker builds, Linux shell automation, Oracle Cloud Infrastructure (OCI), Nginx reverse proxy, and n8n webhook automation.
               </p>
               <div className="flex flex-wrap gap-1 pt-1">
-                {['OCI Cloud', 'Docker', 'Linux', 'Docker Compose', 'CI/CD', 'Git', 'n8n'].map((t) => (
-                  <span key={t} className="px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 text-neutral-800 dark:text-neutral-200 text-[10px] border border-black/5 dark:border-white/10">
+                {['Docker', 'Alpine', 'Linux', 'OCI Cloud', 'n8n', 'CI/CD Pipelines'].map((t) => (
+                  <span key={t} className="px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-white/5 text-neutral-800 dark:text-neutral-300 text-[10px] border border-neutral-300 dark:border-white/10">
                     {t}
                   </span>
                 ))}
               </div>
             </div>
 
-            {/* Databases & Integrity */}
-            <div className="p-4 rounded-xl bg-neutral-50 dark:bg-[#0E1017] border border-black/5 dark:border-white/5 space-y-2">
+            {/* Data Persistence */}
+            <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800 space-y-1.5">
               <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-bold">
-                <Database className="w-4 h-4 text-[#FF6B00]" />
-                <span>Relational &amp; Vector Data Systems</span>
+                <Database className="w-3.5 h-3.5 text-[#FF6B00]" />
+                <span>03 // Relational &amp; Vector Data</span>
               </div>
               <p className="text-[11px] font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                Oracle Database (PL/SQL packages), PostgreSQL, MySQL 8.0, and ChromaDB. Schema normalization, composite B-Tree indexes, and ACID transaction safety.
+                PostgreSQL, Oracle Database (PL/SQL packages), MySQL 8.0, and ChromaDB. Normalized schemas (3NF), composite indexing, and ACID transaction safety.
               </p>
               <div className="flex flex-wrap gap-1 pt-1">
-                {['PostgreSQL', 'Oracle DB', 'PL/SQL', 'MySQL', 'ChromaDB RAG', 'ACID'].map((t) => (
-                  <span key={t} className="px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 text-neutral-800 dark:text-neutral-200 text-[10px] border border-black/5 dark:border-white/10">
+                {['PostgreSQL', 'Oracle DB', 'PL/SQL', 'MySQL', 'ChromaDB', 'ACID Safety'].map((t) => (
+                  <span key={t} className="px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-white/5 text-neutral-800 dark:text-neutral-300 text-[10px] border border-neutral-300 dark:border-white/10">
                     {t}
                   </span>
                 ))}
               </div>
             </div>
 
-            {/* Modern Web & Frontend */}
-            <div className="p-4 rounded-xl bg-neutral-50 dark:bg-[#0E1017] border border-black/5 dark:border-white/5 space-y-2">
+            {/* Modern Web & 3D CAD */}
+            <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800 space-y-1.5">
               <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-bold">
-                <Cpu className="w-4 h-4 text-[#FF6B00]" />
-                <span>Modern Web &amp; 3D Graphics</span>
+                <Cpu className="w-3.5 h-3.5 text-[#FF6B00]" />
+                <span>04 // CAD &amp; Web Systems</span>
               </div>
               <p className="text-[11px] font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                TypeScript, React 18, Next.js, and Three.js WebGL rendering with OpenCascade.js WebAssembly for high-performance 3D CAD visualization.
+                TypeScript, React 18, Next.js, and Three.js WebGL with OpenCascade.js WebAssembly for high-performance 3D CAD tube laser cutting visualization.
               </p>
               <div className="flex flex-wrap gap-1 pt-1">
-                {['TypeScript', 'React 18', 'Next.js', 'Three.js', 'Web Workers', 'Tailwind CSS'].map((t) => (
-                  <span key={t} className="px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 text-neutral-800 dark:text-neutral-200 text-[10px] border border-black/5 dark:border-white/10">
+                {['TypeScript', 'React 18', 'Next.js', 'Three.js', 'OpenCascade.js', 'Web Workers'].map((t) => (
+                  <span key={t} className="px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-white/5 text-neutral-800 dark:text-neutral-300 text-[10px] border border-neutral-300 dark:border-white/10">
                     {t}
                   </span>
                 ))}
@@ -294,42 +284,45 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
         </div>
 
         {/* Verification Links & Footer Row */}
-        <div className="pt-4 border-t border-black/10 dark:border-white/10 flex flex-wrap items-center justify-between gap-4 font-mono text-xs">
+        <div className="pt-3 border-t border-neutral-200 dark:border-neutral-800 flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
           <div className="flex items-center gap-3">
             <a
               href={PERSONAL_INFO.github}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sound.playClick()}
-              className="inline-flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+              className="inline-flex items-center gap-1 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
-              <span>GitHub Repositories</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-[#FF6B00]" />
+              <span>GitHub</span>
+              <ArrowUpRight className="w-3 h-3 text-[#FF6B00]" />
             </a>
-            <span className="text-neutral-300 dark:text-white/20">•</span>
+            <span className="text-neutral-300 dark:text-neutral-700">|</span>
             <a
               href={PERSONAL_INFO.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sound.playClick()}
-              className="inline-flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+              className="inline-flex items-center gap-1 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
-              <span>LinkedIn Profile</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-[#FF6B00]" />
+              <span>LinkedIn</span>
+              <ArrowUpRight className="w-3 h-3 text-[#FF6B00]" />
             </a>
+            <span className="text-neutral-300 dark:text-neutral-700">|</span>
+            <span className="text-neutral-500 dark:text-neutral-400">
+              Languages: English (Fluent), French, Arabic
+            </span>
           </div>
 
-          <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
+          <div>
+            <button
               onClick={() => {
                 sound.playClick();
                 onClose();
               }}
+              className="px-3 py-1 rounded bg-neutral-100 dark:bg-[#111218] border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500 text-neutral-700 dark:text-neutral-300 text-xs font-mono transition-colors cursor-pointer"
             >
-              Close Dossier
-            </Button>
+              Close Spec Sheet
+            </button>
           </div>
         </div>
 
