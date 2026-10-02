@@ -109,7 +109,7 @@ export const CadVisualizerPreview: React.FC = () => {
       // Laser beam path (slot cut)
       ctx.beginPath();
       ctx.ellipse(cutX, 0, radius * 0.3, radius * 0.75, 0, 0, Math.PI * 2);
-      ctx.strokeStyle = '#E58A3C';
+      ctx.strokeStyle = '#FFFFFF';
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
@@ -119,13 +119,13 @@ export const CadVisualizerPreview: React.FC = () => {
         const nozzleY = -radius - 35;
         const targetY = -radius + 2;
 
-        // Laser beam line (Intense industrial orange core)
+        // Laser beam line (Intense precision white core)
         ctx.beginPath();
         ctx.moveTo(nozzleX, nozzleY);
         ctx.lineTo(nozzleX, targetY);
-        ctx.strokeStyle = '#E58A3C';
+        ctx.strokeStyle = '#FFFFFF';
         ctx.lineWidth = 2.5;
-        ctx.shadowColor = '#E58A3C';
+        ctx.shadowColor = '#FFFFFF';
         ctx.shadowBlur = 16;
         ctx.stroke();
         ctx.shadowBlur = 0;
@@ -139,7 +139,7 @@ export const CadVisualizerPreview: React.FC = () => {
         ctx.stroke();
 
         // Nozzle graphic
-        ctx.fillStyle = '#334155';
+        ctx.fillStyle = '#52525B';
         ctx.beginPath();
         ctx.moveTo(nozzleX - 8, nozzleY - 15);
         ctx.lineTo(nozzleX + 8, nozzleY - 15);
@@ -148,7 +148,7 @@ export const CadVisualizerPreview: React.FC = () => {
         ctx.closePath();
         ctx.fill();
 
-        // Emit cutting sparks (High-energy fiery orange)
+        // Emit cutting sparks (High-energy pure white & silver sparks)
         if (isPlaying && Math.random() < 0.85) {
           for (let s = 0; s < 3; s++) {
             sparksRef.current.push({
@@ -158,7 +158,7 @@ export const CadVisualizerPreview: React.FC = () => {
               vy: Math.random() * 4 + 1,
               life: 1,
               maxLife: Math.random() * 20 + 15,
-              color: Math.random() > 0.4 ? '#E58A3C' : Math.random() > 0.5 ? '#F09A4E' : '#FFFFFF',
+              color: Math.random() > 0.3 ? '#FFFFFF' : Math.random() > 0.5 ? '#E4E4E7' : '#A1A1AA',
             });
           }
         }
@@ -237,9 +237,9 @@ export const CadVisualizerPreview: React.FC = () => {
   return (
     <div className="rounded-xl bg-[#07080B] border border-white/10 overflow-hidden font-mono text-xs">
       {/* Top Telemetry Header */}
-      <div className="flex items-center justify-between px-3 py-2 bg-[#141820] border-b border-white/10">
+      <div className="flex items-center justify-between px-3 py-2 bg-neutral-900 dark:bg-black border-b border-white/10">
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-[#E58A3C] beacon-orange" />
+          <div className="w-2 h-2 rounded-full bg-white beacon-white" />
           <span className="font-bold text-slate-200">WEB CAD SIMULATOR</span>
           <span className="text-[10px] text-slate-300 px-1.5 py-0.2 rounded bg-white/5 border border-white/10">
             OpenCascade.js / Wasm
@@ -248,13 +248,13 @@ export const CadVisualizerPreview: React.FC = () => {
         <div className="flex items-center gap-3 text-[11px] text-muted-foreground">
           <span>KERF: 0.15mm</span>
           <span className="text-white flex items-center gap-1">
-            <CheckCircle2 className="w-3 h-3 text-[#E58A3C]" /> STEP Validated
+            <CheckCircle2 className="w-3 h-3 text-white" /> STEP Validated
           </span>
         </div>
       </div>
 
       {/* Interactive 3D Canvas Viewport */}
-      <div className="relative h-48 sm:h-56 bg-[#0E1117] cursor-grab active:cursor-grabbing flex items-center justify-center">
+      <div className="relative h-48 sm:h-56 bg-black cursor-grab active:cursor-grabbing flex items-center justify-center">
         <canvas
           ref={canvasRef}
           width={460}
@@ -271,14 +271,14 @@ export const CadVisualizerPreview: React.FC = () => {
         {/* Status Chip */}
         <div className="absolute top-2 right-3 text-[10px] px-2 py-0.5 rounded bg-black/70 border border-white/10">
           <span className="text-slate-400">Laser: </span>
-          <span className={laserActive ? "text-[#E58A3C] font-bold" : "text-slate-400"}>
+          <span className={laserActive ? "text-white font-bold" : "text-slate-400"}>
             {laserActive ? 'ENGAGED 1.5kW' : 'OFF'}
           </span>
         </div>
       </div>
 
       {/* Bottom Interactive Controls */}
-      <div className="p-3 bg-[#141820] border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
+      <div className="p-3 bg-neutral-900 dark:bg-black border-t border-white/10 grid grid-cols-1 sm:grid-cols-3 gap-3 items-center">
         {/* Play / Laser toggle buttons */}
         <div className="flex items-center gap-2">
           <button
@@ -293,7 +293,7 @@ export const CadVisualizerPreview: React.FC = () => {
             onClick={toggleLaser}
             className={`px-2.5 py-1.5 rounded-lg border flex items-center gap-1.5 cursor-pointer transition-all ${
               laserActive
-                ? 'bg-[#E58A3C]/15 border-[#E58A3C]/50 text-[#E58A3C] shadow-[0_0_12px_rgba(255,107,0,0.25)]'
+                ? 'bg-white text-black border-white font-semibold shadow-[0_0_12px_rgba(255,255,255,0.25)]'
                 : 'bg-white/5 border-white/10 text-muted-foreground hover:text-white'
             }`}
           >
@@ -306,7 +306,7 @@ export const CadVisualizerPreview: React.FC = () => {
         <div className="space-y-1">
           <div className="flex justify-between text-[10px] text-muted-foreground">
             <span>Diameter</span>
-            <span className="text-[#E58A3C] font-bold">{diameter} mm</span>
+            <span className="text-white font-bold">{diameter} mm</span>
           </div>
           <input
             type="range"
@@ -317,7 +317,7 @@ export const CadVisualizerPreview: React.FC = () => {
               sound.playHover();
               setDiameter(Number(e.target.value));
             }}
-            className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#E58A3C]"
+            className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-white"
             aria-label="Adjust tube diameter"
           />
         </div>
@@ -338,7 +338,7 @@ export const CadVisualizerPreview: React.FC = () => {
               sound.playHover();
               setRotationSpeed(Number(e.target.value));
             }}
-            className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#E58A3C]"
+            className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-white"
             aria-label="Adjust rotation speed"
           />
         </div>

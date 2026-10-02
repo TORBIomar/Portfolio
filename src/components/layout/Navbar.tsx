@@ -52,7 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecr
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         isScrolled
-          ? 'bg-[#FAF9F5]/90 dark:bg-[#0E1117]/90 backdrop-blur-xl border-b border-neutral-300 dark:border-neutral-800 shadow-sm py-2.5 sm:py-3'
+          ? 'bg-white/90 dark:bg-black/90 backdrop-blur-xl border-b border-neutral-300 dark:border-neutral-800 shadow-sm py-2.5 sm:py-3'
           : 'bg-transparent border-b border-transparent py-4 sm:py-5'
       }`}
     >
@@ -62,23 +62,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecr
         <a
           href="#"
           onClick={() => sound.playClick()}
-          className="flex items-center gap-2.5 group cursor-pointer p-1 focus-visible:ring-2 focus-visible:ring-[#E58A3C] transition-transform duration-300 ease-out"
+          className="flex items-center gap-2.5 group cursor-pointer p-1 focus-visible:ring-2 focus-visible:ring-neutral-900 dark:focus-visible:ring-white transition-transform duration-300 ease-out"
           aria-label="Omar Torbi Portfolio Home"
         >
-          <div className="w-8 h-8 rounded-md bg-neutral-100 dark:bg-white/[0.06] border border-neutral-300 dark:border-neutral-800 flex items-center justify-center text-[#E58A3C] group-hover:border-[#E58A3C] transition-colors">
+          <div className="w-8 h-8 rounded-md bg-neutral-100 dark:bg-white/[0.06] border border-neutral-300 dark:border-neutral-800 flex items-center justify-center text-neutral-900 dark:text-white group-hover:border-neutral-900 dark:group-hover:border-white transition-colors">
             <Terminal className="w-4 h-4" />
           </div>
           <div className="font-mono text-sm tracking-tight font-bold text-neutral-900 dark:text-white flex items-center">
             <ScrambleText text="omar" scrambleOnHover autoPlay={false} speed={25} />
-            <span className="text-[#E58A3C]">.torbi</span>
-            <span className="text-neutral-400 dark:text-neutral-500 font-normal text-xs ml-2 hidden sm:inline-block">
+            <span className="text-neutral-900 dark:text-white">.torbi</span>
+            <span className="font-sans text-neutral-400 dark:text-neutral-500 font-normal text-xs ml-2 hidden sm:inline-block">
               /software &amp; devops
             </span>
           </div>
         </a>
 
         {/* Desktop Navigation Links with Clean Minimal Numbering */}
-        <nav className="hidden lg:flex items-center gap-1 font-mono text-xs uppercase tracking-wider" aria-label="Main Navigation">
+        <nav className="hidden lg:flex items-center gap-1 font-sans text-xs sm:text-[13px] font-medium" aria-label="Main Navigation">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -87,7 +87,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecr
               onClick={() => sound.playClick()}
               className="group px-2.5 py-1.5 rounded-md text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-white/[0.06] transition-colors cursor-pointer"
             >
-              <span className="text-[#E58A3C]/70 group-hover:text-[#E58A3C] font-bold mr-1.5 transition-colors">{link.num}</span>
+              <span className="font-mono text-neutral-900 dark:text-white font-bold mr-1.5 transition-colors">{link.num}</span>
               <span>{link.label}</span>
             </a>
           ))}
@@ -103,22 +103,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecr
                 sound.playClick();
                 setResumeDropdownOpen(!resumeDropdownOpen);
               }}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-neutral-100 dark:bg-white/[0.05] border border-neutral-300 dark:border-white/10 hover:border-[#E58A3C] text-neutral-800 dark:text-neutral-200 text-xs font-mono font-medium hover:text-[#E58A3C] dark:hover:text-white transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-neutral-100 dark:bg-white/[0.05] border border-neutral-300 dark:border-white/10 hover:border-neutral-900 dark:hover:border-white text-neutral-800 dark:text-neutral-200 text-xs font-sans font-medium hover:text-black dark:hover:text-white transition-colors cursor-pointer"
               aria-label="Download Resume / CV"
             >
-              <FileText className="w-3.5 h-3.5 text-[#E58A3C]" />
+              <FileText className="w-3.5 h-3.5 text-neutral-900 dark:text-white" />
               <span>Resume</span>
               <span className="text-[10px] text-neutral-400 dark:text-neutral-500 font-mono">▾</span>
             </button>
 
             {resumeDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-44 rounded-md bg-white dark:bg-[#141820] border border-neutral-300 dark:border-white/10 shadow-xl py-1 z-50 font-mono text-xs animate-in fade-in duration-100">
+              <div className="absolute right-0 mt-2 w-44 rounded-md bg-white dark:bg-[#09090B] border border-neutral-300 dark:border-white/10 shadow-xl py-1 z-50 font-sans text-xs animate-in fade-in duration-100">
                 <a
                   href={PERSONAL_INFO.resumeUrlEn}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => sound.playSuccess()}
-                  className="flex items-center justify-between px-3 py-2 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-[#E58A3C] transition-colors"
+                  className="flex items-center justify-between px-3 py-2 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors"
                 >
                   <span>Resume (EN)</span>
                   <Download className="w-3.5 h-3.5 text-neutral-400" />
@@ -128,7 +128,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecr
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => sound.playSuccess()}
-                  className="flex items-center justify-between px-3 py-2 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-[#E58A3C] transition-colors border-t border-neutral-200 dark:border-white/5"
+                  className="flex items-center justify-between px-3 py-2 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors border-t border-neutral-200 dark:border-white/5"
                 >
                   <span>CV (FR)</span>
                   <Download className="w-3.5 h-3.5 text-neutral-400" />
@@ -143,7 +143,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecr
                 sound.playClick();
                 onOpenRecruiterDossier();
               }}
-              className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-[#E58A3C]/10 border border-[#E58A3C]/40 hover:border-[#E58A3C] text-[#E58A3C] text-xs font-mono font-semibold transition-colors cursor-pointer"
+              className="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-neutral-900 text-white dark:bg-white dark:text-black hover:bg-black dark:hover:bg-neutral-200 border border-neutral-900 dark:border-white text-xs font-mono font-semibold transition-colors cursor-pointer shadow-xs"
               title="Open Engineering Candidate Dossier"
             >
               <span>[ DOSSIER ]</span>
@@ -159,7 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecr
               title={theme === 'dark' ? "Switch to Light Mode" : "Switch to Dark Mode"}
               aria-label={theme === 'dark' ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
-              {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-[#E58A3C]" /> : <Moon className="w-3.5 h-3.5 text-neutral-700" />}
+              {theme === 'dark' ? <Sun className="w-3.5 h-3.5 text-white" /> : <Moon className="w-3.5 h-3.5 text-neutral-900" />}
             </button>
 
             {/* Command Palette Trigger Button */}
@@ -175,7 +175,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecr
                   title="Open Command Palette (⌘K)"
                   aria-label="Open Command Palette"
                 >
-                  <Search className="w-3.5 h-3.5 text-[#E58A3C]" />
+                  <Search className="w-3.5 h-3.5 text-neutral-900 dark:text-white" />
                   <kbd className="hidden sm:inline-block px-1 py-0.2 rounded bg-neutral-200/80 dark:bg-white/10 border border-neutral-300 dark:border-neutral-700 text-[9px] font-mono text-neutral-600 dark:text-neutral-300">
                     ⌘K
                   </kbd>
@@ -190,7 +190,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecr
               className={`w-7 h-7 rounded flex items-center justify-center transition-colors cursor-pointer ${
                 isAudioMuted
                   ? 'text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-white/10'
-                  : 'text-[#E58A3C] bg-[#E58A3C]/15'
+                  : 'text-neutral-900 dark:text-white bg-black/10 dark:bg-white/15'
               }`}
               title={isAudioMuted ? "Unmute audio effects" : "Mute audio effects"}
               aria-label={isAudioMuted ? "Unmute audio effects" : "Mute audio effects"}
@@ -205,7 +205,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecr
               sound.playClick();
               setMobileMenuOpen(!mobileMenuOpen);
             }}
-            className="lg:hidden w-8 h-8 flex items-center justify-center text-neutral-800 dark:text-neutral-200 hover:text-[#E58A3C] rounded-md border border-neutral-300 dark:border-white/10 bg-neutral-100 dark:bg-white/[0.05] cursor-pointer transition-colors"
+            className="lg:hidden w-8 h-8 flex items-center justify-center text-neutral-800 dark:text-neutral-200 hover:text-black dark:hover:text-white rounded-md border border-neutral-300 dark:border-white/10 bg-neutral-100 dark:bg-white/[0.05] cursor-pointer transition-colors"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -215,7 +215,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecr
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white/95 dark:bg-[#0E1117]/95 backdrop-blur-2xl border-b border-neutral-300 dark:border-neutral-800 px-5 pt-4 pb-6 space-y-4 font-mono text-xs animate-in slide-in-from-top-3 duration-300 shadow-2xl">
+        <div className="lg:hidden bg-white/95 dark:bg-black/95 backdrop-blur-2xl border-b border-neutral-300 dark:border-neutral-800 px-5 pt-4 pb-6 space-y-4 font-sans text-xs animate-in slide-in-from-top-3 duration-300 shadow-2xl">
           <div className="space-y-1">
             {navLinks.map((link) => (
               <a
@@ -227,7 +227,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecr
                 }}
                 className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-md text-neutral-700 dark:text-neutral-200 hover:text-black dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-white/5 transition-colors"
               >
-                <span className="text-[#E58A3C] font-bold">{link.num}</span>
+                <span className="font-mono text-neutral-900 dark:text-white font-bold">{link.num}</span>
                 <span className="text-sm font-semibold">{link.label}</span>
               </a>
             ))}
@@ -239,7 +239,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecr
                 href={PERSONAL_INFO.resumeUrlEn}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-white/5 text-neutral-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-800 text-xs font-semibold"
+                className="px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-white/5 text-neutral-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-800 text-xs font-sans font-semibold"
               >
                 Resume (EN)
               </a>
@@ -247,17 +247,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecr
                 href={PERSONAL_INFO.resumeUrlFr}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-white/5 text-neutral-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-800 text-xs font-semibold"
+                className="px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-white/5 text-neutral-800 dark:text-neutral-200 border border-neutral-300 dark:border-neutral-800 text-xs font-sans font-semibold"
               >
                 CV (FR)
               </a>
             </div>
 
             <div className="flex items-center gap-3">
-              <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-[#E58A3C] p-1.5 transition-colors">
+              <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white p-1.5 transition-colors">
                 <Github className="w-4 h-4" />
               </a>
-              <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-[#E58A3C] p-1.5 transition-colors">
+              <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white p-1.5 transition-colors">
                 <Linkedin className="w-4 h-4" />
               </a>
             </div>

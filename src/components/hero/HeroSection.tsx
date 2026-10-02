@@ -28,11 +28,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenRecruiterDossier
             {/* Architectural Status Tag / Professional Badges */}
             <div className="flex flex-wrap items-center gap-2">
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm bg-neutral-100 dark:bg-white/5 border border-neutral-300 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 font-mono text-xs font-medium">
-                <span className="text-[#E58A3C] font-bold">#</span>
+                <span className="text-neutral-900 dark:text-white font-bold">#</span>
                 <span>EMSI RABAT • DDSI (ENGINEERING DEGREE)</span>
               </div>
 
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm bg-neutral-100 dark:bg-white/5 border border-[#E58A3C]/40 text-[#E58A3C] font-mono text-xs font-semibold">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm bg-neutral-100 dark:bg-white/5 border border-neutral-300 dark:border-white/20 text-neutral-900 dark:text-white font-mono text-xs font-semibold">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>OCI DEVOPS &amp; ARCHITECT PRO CERTIFIED</span>
               </div>
@@ -46,7 +46,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenRecruiterDossier
 
               <h1 className="text-4xl sm:text-6xl xl:text-7xl font-mono font-extrabold tracking-tight text-neutral-900 dark:text-white leading-[1.05] uppercase">
                 SOFTWARE &amp; DEVOPS <br />
-                <span className="text-[#E58A3C]">
+                <span className="text-neutral-900 dark:text-white underline underline-offset-8 decoration-neutral-300 dark:decoration-neutral-700">
                   <ScrambleText text="ENGINEER." scrambleOnHover autoPlay={false} speed={25} />
                 </span>
               </h1>
@@ -58,27 +58,27 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenRecruiterDossier
             </p>
 
             {/* Core Competency Chips */}
-            <div className="flex flex-wrap items-center gap-2 pt-1 text-xs font-mono">
+            <div className="flex flex-wrap items-center gap-2 pt-1 text-xs font-sans">
               <div
                 onMouseEnter={() => sound.playHover()}
-                className="group flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white dark:bg-[#0E1117] border border-neutral-300 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-[#E58A3C] hover:text-neutral-900 dark:hover:text-white transition-all cursor-default shadow-xs"
+                className="group flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white dark:bg-[#09090B] border border-neutral-300 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-neutral-900 dark:hover:border-white hover:text-neutral-900 dark:hover:text-white transition-all cursor-default shadow-xs"
               >
-                <Server className="w-3.5 h-3.5 text-[#E58A3C]" />
+                <Server className="w-3.5 h-3.5 text-neutral-900 dark:text-white" />
                 <span className="font-medium text-neutral-900 dark:text-white">Backend (Spring Boot 3, REST, JPA)</span>
               </div>
               <div
                 onMouseEnter={() => sound.playHover()}
-                className="group flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white dark:bg-[#0E1117] border border-neutral-300 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-[#E58A3C] hover:text-neutral-900 dark:hover:text-white transition-all cursor-default shadow-xs"
+                className="group flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white dark:bg-[#09090B] border border-neutral-300 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-neutral-900 dark:hover:border-white hover:text-neutral-900 dark:hover:text-white transition-all cursor-default shadow-xs"
               >
-                <Cloud className="w-3.5 h-3.5 text-[#E58A3C]" />
+                <Cloud className="w-3.5 h-3.5 text-neutral-900 dark:text-white" />
                 <span className="font-medium text-neutral-900 dark:text-white">DevOps &amp; Cloud (Docker, Linux, OCI)</span>
               </div>
               <div
                 onMouseEnter={() => sound.playHover()}
-                className="group flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white dark:bg-[#0E1117] border border-neutral-300 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-[#E58A3C] hover:text-neutral-900 dark:hover:text-white transition-all cursor-default shadow-xs"
+                className="group flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white dark:bg-[#09090B] border border-neutral-300 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-neutral-900 dark:hover:border-white hover:text-neutral-900 dark:hover:text-white transition-all cursor-default shadow-xs"
               >
-                <Database className="w-3.5 h-3.5 text-[#E58A3C]" />
-                <span>Databases (PostgreSQL, Oracle, MySQL)</span>
+                <Database className="w-3.5 h-3.5 text-neutral-900 dark:text-white" />
+                <span className="font-medium text-neutral-900 dark:text-white">Databases (PostgreSQL, Oracle, MySQL)</span>
               </div>
             </div>
 
@@ -104,7 +104,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenRecruiterDossier
                 <Button
                   variant="outline"
                   size="md"
-                  icon={<FileText className="w-4 h-4 text-[#E58A3C]" />}
+                  icon={<FileText className="w-4 h-4 text-neutral-900 dark:text-white" />}
                   onClick={() => {
                     sound.playClick();
                     setResumeMenuOpen(!resumeMenuOpen);
@@ -114,7 +114,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenRecruiterDossier
                 </Button>
 
                 {resumeMenuOpen && (
-                  <div className="absolute left-0 mt-2 w-48 rounded-md bg-white dark:bg-[#0E1117] border border-neutral-300 dark:border-neutral-800 shadow-xl py-1 z-50 font-mono text-xs animate-in fade-in duration-100">
+                  <div className="absolute left-0 mt-2 w-48 rounded-md bg-white dark:bg-[#09090B] border border-neutral-300 dark:border-neutral-800 shadow-xl py-1 z-50 font-sans text-xs animate-in fade-in duration-100">
                     <a
                       href={PERSONAL_INFO.resumeUrlEn}
                       target="_blank"
@@ -123,10 +123,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenRecruiterDossier
                         sound.playSuccess();
                         setResumeMenuOpen(false);
                       }}
-                      className="flex items-center justify-between px-3 py-2 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-[#E58A3C] transition-colors"
+                      className="flex items-center justify-between px-3 py-2 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors"
                     >
                       <span>Resume (English)</span>
-                      <Download className="w-3.5 h-3.5 text-[#E58A3C]" />
+                      <Download className="w-3.5 h-3.5 text-neutral-900 dark:text-white" />
                     </a>
                     <a
                       href={PERSONAL_INFO.resumeUrlFr}
@@ -136,10 +136,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenRecruiterDossier
                         sound.playSuccess();
                         setResumeMenuOpen(false);
                       }}
-                      className="flex items-center justify-between px-3 py-2 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-[#E58A3C] transition-colors border-t border-neutral-200 dark:border-neutral-800"
+                      className="flex items-center justify-between px-3 py-2 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors border-t border-neutral-200 dark:border-neutral-800"
                     >
                       <span>CV (Français)</span>
-                      <Download className="w-3.5 h-3.5 text-[#E58A3C]" />
+                      <Download className="w-3.5 h-3.5 text-neutral-900 dark:text-white" />
                     </a>
                   </div>
                 )}
@@ -153,7 +153,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenRecruiterDossier
                     sound.playClick();
                     onOpenRecruiterDossier();
                   }}
-                  icon={<ShieldCheck className="w-4 h-4 text-[#E58A3C]" />}
+                  icon={<ShieldCheck className="w-4 h-4 text-neutral-900 dark:text-white" />}
                 >
                   TECHNICAL DOSSIER
                 </Button>
@@ -164,18 +164,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenRecruiterDossier
             <div className="grid grid-cols-3 gap-3 pt-6 border-t border-neutral-300 dark:border-neutral-800 max-w-lg">
               <div>
                 <div className="text-xl font-mono font-bold text-neutral-900 dark:text-white">Spring Boot 3</div>
-                <div className="text-[11px] text-neutral-500 dark:text-neutral-400 font-mono mt-0.5">Enterprise Backend</div>
+                <div className="text-[11px] text-neutral-500 dark:text-neutral-400 font-sans mt-0.5">Enterprise Backend</div>
               </div>
               <div>
-                <div className="text-xl font-mono font-bold text-[#E58A3C] flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E58A3C]" />
+                <div className="text-xl font-mono font-bold text-neutral-900 dark:text-white flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-900 dark:bg-white" />
                   Docker &amp; Linux
                 </div>
-                <div className="text-[11px] text-neutral-500 dark:text-neutral-400 font-mono mt-0.5">Containerization &amp; Ops</div>
+                <div className="text-[11px] text-neutral-500 dark:text-neutral-400 font-sans mt-0.5">Containerization &amp; Ops</div>
               </div>
               <div>
                 <div className="text-xl font-mono font-bold text-neutral-900 dark:text-white">OCI Certified</div>
-                <div className="text-[11px] text-neutral-500 dark:text-neutral-400 font-mono mt-0.5">DevOps &amp; Architect</div>
+                <div className="text-[11px] text-neutral-500 dark:text-neutral-400 font-sans mt-0.5">DevOps &amp; Architect</div>
               </div>
             </div>
 

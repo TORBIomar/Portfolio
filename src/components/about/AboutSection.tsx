@@ -25,7 +25,7 @@ export const AboutSection: React.FC = () => {
           {/* Left: Engineering Narrative */}
           <div className="lg:col-span-7 space-y-6 text-base text-neutral-700 dark:text-neutral-300 font-light leading-relaxed">
             <p className="text-lg sm:text-xl font-normal text-neutral-900 dark:text-white leading-relaxed">
-              I am <strong className="font-semibold text-neutral-900 dark:text-white">{PERSONAL_INFO.name}</strong>, a final-year Computer Science &amp; Networks engineering student at <strong className="font-semibold text-neutral-900 dark:text-white">EMSI Rabat</strong> and an <span className="text-[#E58A3C] font-medium">OCI Certified DevOps &amp; Architect Professional</span>.
+              I am <strong className="font-semibold text-neutral-900 dark:text-white">{PERSONAL_INFO.name}</strong>, a final-year Computer Science &amp; Networks engineering student at <strong className="font-semibold text-neutral-900 dark:text-white">EMSI Rabat</strong> and an <span className="text-neutral-900 dark:text-white font-semibold underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700">OCI Certified DevOps &amp; Architect Professional</span>.
             </p>
             
             <p>
@@ -41,13 +41,13 @@ export const AboutSection: React.FC = () => {
             </p>
 
             {/* Quick action links */}
-            <div className="pt-4 flex flex-wrap items-center gap-3 text-xs font-mono">
+            <div className="pt-4 flex flex-wrap items-center gap-3 text-xs font-sans">
               <a
                 href={PERSONAL_INFO.resumeUrlEn}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playSuccess()}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-neutral-900 text-white dark:bg-white dark:text-black font-semibold hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors shadow-xs cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-neutral-900 text-white dark:bg-white dark:text-black font-semibold hover:bg-black dark:hover:bg-neutral-200 transition-colors shadow-xs cursor-pointer"
               >
                 <span>English Resume (PDF)</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -58,7 +58,7 @@ export const AboutSection: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playSuccess()}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-neutral-100 dark:bg-white/[0.05] border border-neutral-300 dark:border-white/10 text-neutral-800 dark:text-neutral-200 font-semibold hover:border-[#E58A3C] hover:text-[#E58A3C] transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-md bg-neutral-100 dark:bg-white/[0.05] border border-neutral-300 dark:border-white/10 text-neutral-800 dark:text-neutral-200 font-semibold hover:border-neutral-900 dark:hover:border-white hover:text-black dark:hover:text-white transition-colors cursor-pointer"
               >
                 <span>CV Français (PDF)</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -70,65 +70,65 @@ export const AboutSection: React.FC = () => {
           <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
             
             {/* Pillar 1: Certifications & Cloud */}
-            <div className="p-4 rounded-md bg-white dark:bg-[#141820] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#E58A3C] transition-colors">
-              <div className="flex items-center gap-2 text-[#E58A3C]">
+            <div className="p-4 rounded-md bg-white dark:bg-[#09090B] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-neutral-900 dark:hover:border-white transition-colors">
+              <div className="flex items-center gap-2 text-neutral-900 dark:text-white">
                 <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                   Cloud Certifications
                 </span>
               </div>
-              <h4 className="font-mono text-sm font-bold text-neutral-900 dark:text-white">
+              <h4 className="font-sans text-sm sm:text-base font-bold text-neutral-900 dark:text-white tracking-tight">
                 OCI DevOps &amp; Architect Pro
               </h4>
-              <p className="font-sans text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              <p className="font-sans text-xs sm:text-[13px] text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 Certified in Oracle Cloud Infrastructure across both professional tracks (1Z0-1109-26 &amp; 1Z0-997-26).
               </p>
             </div>
 
             {/* Pillar 2: Backend Software Architecture */}
-            <div className="p-4 rounded-md bg-white dark:bg-[#141820] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#E58A3C] transition-colors">
-              <div className="flex items-center gap-2 text-[#E58A3C]">
+            <div className="p-4 rounded-md bg-white dark:bg-[#09090B] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-neutral-900 dark:hover:border-white transition-colors">
+              <div className="flex items-center gap-2 text-neutral-900 dark:text-white">
                 <Server className="w-4 h-4 shrink-0" />
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                   Backend Architecture
                 </span>
               </div>
-              <h4 className="font-mono text-sm font-bold text-neutral-900 dark:text-white">
+              <h4 className="font-sans text-sm sm:text-base font-bold text-neutral-900 dark:text-white tracking-tight">
                 Spring Boot 3 &amp; Modular REST
               </h4>
-              <p className="font-sans text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              <p className="font-sans text-xs sm:text-[13px] text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 Enterprise RESTful microservices, Spring Security with stateless JWT, JPA/Hibernate query tuning, and SOLID principles.
               </p>
             </div>
 
             {/* Pillar 3: DevOps & Containerization */}
-            <div className="p-4 rounded-md bg-white dark:bg-[#141820] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#E58A3C] transition-colors">
-              <div className="flex items-center gap-2 text-[#E58A3C]">
+            <div className="p-4 rounded-md bg-white dark:bg-[#09090B] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-neutral-900 dark:hover:border-white transition-colors">
+              <div className="flex items-center gap-2 text-neutral-900 dark:text-white">
                 <Cloud className="w-4 h-4 shrink-0" />
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                   DevOps &amp; Infrastructure
                 </span>
               </div>
-              <h4 className="font-mono text-sm font-bold text-neutral-900 dark:text-white">
+              <h4 className="font-sans text-sm sm:text-base font-bold text-neutral-900 dark:text-white tracking-tight">
                 Docker, Linux &amp; CI/CD Pipelines
               </h4>
-              <p className="font-sans text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              <p className="font-sans text-xs sm:text-[13px] text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 Multi-stage Alpine containerization, Linux server operations, GitFlow automation, and n8n webhook pipelines.
               </p>
             </div>
 
             {/* Pillar 4: Persistence & Data Systems */}
-            <div className="p-4 rounded-md bg-white dark:bg-[#141820] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-[#E58A3C] transition-colors">
-              <div className="flex items-center gap-2 text-[#E58A3C]">
+            <div className="p-4 rounded-md bg-white dark:bg-[#09090B] border border-neutral-300 dark:border-neutral-800 space-y-1.5 hover:border-neutral-900 dark:hover:border-white transition-colors">
+              <div className="flex items-center gap-2 text-neutral-900 dark:text-white">
                 <Database className="w-4 h-4 shrink-0" />
                 <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                   Data Persistence &amp; ACID
                 </span>
               </div>
-              <h4 className="font-mono text-sm font-bold text-neutral-900 dark:text-white">
+              <h4 className="font-sans text-sm sm:text-base font-bold text-neutral-900 dark:text-white tracking-tight">
                 PostgreSQL, Oracle DB &amp; MySQL
               </h4>
-              <p className="font-sans text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              <p className="font-sans text-xs sm:text-[13px] text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 Normalized relational schemas, PL/SQL packages, foreign key constraints, B-Tree indexing, and sub-10ms query resolution.
               </p>
             </div>

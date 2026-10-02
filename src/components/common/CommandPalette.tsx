@@ -54,7 +54,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       id: 'action-recruiter-dossier',
       title: 'Open Engineering Candidate Dossier (Spec Sheet & Accreditations)',
       category: 'Engineering Dossier',
-      icon: <ShieldCheck className="w-4 h-4 text-[#E58A3C]" />,
+      icon: <ShieldCheck className="w-4 h-4 text-neutral-900 dark:text-white" />,
       action: () => {
         onClose();
         if (onOpenRecruiterDossier) {
@@ -70,7 +70,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       id: 'nav-about',
       title: '01. About Me & Engineering Focus',
       category: 'Navigation',
-      icon: <User className="w-4 h-4 text-[#E58A3C]" />,
+      icon: <User className="w-4 h-4 text-neutral-900 dark:text-white" />,
       action: () => scrollToSection('about'),
       shortcut: 'A',
     },
@@ -78,7 +78,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       id: 'nav-projects',
       title: '02. Engineered Systems & Projects',
       category: 'Navigation',
-      icon: <Code2 className="w-4 h-4 text-[#E58A3C]" />,
+      icon: <Code2 className="w-4 h-4 text-neutral-900 dark:text-white" />,
       action: () => scrollToSection('projects'),
       shortcut: 'P',
     },
@@ -86,7 +86,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       id: 'nav-skills',
       title: '03. Core Capabilities Matrix',
       category: 'Navigation',
-      icon: <Cpu className="w-4 h-4 text-[#E58A3C]" />,
+      icon: <Cpu className="w-4 h-4 text-neutral-900 dark:text-white" />,
       action: () => scrollToSection('skills'),
       shortcut: 'M',
     },
@@ -94,7 +94,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       id: 'nav-experience',
       title: '04. Experience & OCI Certifications',
       category: 'Navigation',
-      icon: <ShieldCheck className="w-4 h-4 text-[#E58A3C]" />,
+      icon: <ShieldCheck className="w-4 h-4 text-neutral-900 dark:text-white" />,
       action: () => scrollToSection('experience'),
       shortcut: 'E',
     },
@@ -102,7 +102,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       id: 'nav-contact',
       title: '05. Get In Touch & Direct Channels',
       category: 'Navigation',
-      icon: <Mail className="w-4 h-4 text-[#E58A3C]" />,
+      icon: <Mail className="w-4 h-4 text-neutral-900 dark:text-white" />,
       action: () => scrollToSection('contact'),
       shortcut: 'C',
     },
@@ -112,7 +112,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       id: 'action-download-cv-en',
       title: 'Download English Resume (PDF)',
       category: 'Actions',
-      icon: <Download className="w-4 h-4 text-[#E58A3C]" />,
+      icon: <Download className="w-4 h-4 text-neutral-900 dark:text-white" />,
       action: () => {
         window.open(PERSONAL_INFO.resumeUrlEn, '_blank');
         onClose();
@@ -123,7 +123,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       id: 'action-download-cv-fr',
       title: 'Download French CV (PDF)',
       category: 'Actions',
-      icon: <Download className="w-4 h-4 text-[#E58A3C]" />,
+      icon: <Download className="w-4 h-4 text-neutral-900 dark:text-white" />,
       action: () => {
         window.open(PERSONAL_INFO.resumeUrlFr, '_blank');
         onClose();
@@ -134,7 +134,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       id: 'action-copy-email',
       title: `Copy Email (${PERSONAL_INFO.email})`,
       category: 'Actions',
-      icon: <Mail className="w-4 h-4 text-[#E58A3C]" />,
+      icon: <Mail className="w-4 h-4 text-neutral-900 dark:text-white" />,
       action: () => {
         navigator.clipboard.writeText(PERSONAL_INFO.email);
         sound.playSuccess();
@@ -145,7 +145,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       id: 'action-toggle-audio',
       title: isAudioMuted ? 'Enable Audio Haptics & Synth' : 'Mute Audio Haptics & Synth',
       category: 'Preferences',
-      icon: isAudioMuted ? <Volume2 className="w-4 h-4 text-[#E58A3C]" /> : <VolumeX className="w-4 h-4 text-neutral-400" />,
+      icon: isAudioMuted ? <Volume2 className="w-4 h-4 text-neutral-900 dark:text-white" /> : <VolumeX className="w-4 h-4 text-neutral-400" />,
       action: () => {
         sound.toggleMute();
       },
@@ -179,7 +179,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       id: `proj-${p.id}`,
       title: p.title,
       category: 'Projects',
-      icon: <Code2 className="w-4 h-4 text-[#E58A3C]" />,
+      icon: <Code2 className="w-4 h-4 text-neutral-900 dark:text-white" />,
       action: () => {
         scrollToSection('projects');
       },
@@ -226,19 +226,19 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
     <div className="fixed inset-0 z-[100] flex items-start justify-center pt-16 sm:pt-24 px-4">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/60 dark:bg-[#0E1117]/85 backdrop-blur-md transition-opacity animate-in fade-in"
+        className="fixed inset-0 bg-black/60 dark:bg-black/85 backdrop-blur-md transition-opacity animate-in fade-in"
         onClick={onClose}
         aria-hidden="true"
       />
 
       {/* Palette Modal Container */}
       <div
-        className="relative w-full max-w-2xl bg-white dark:bg-[#0E1117] border border-neutral-300 dark:border-neutral-800 rounded-lg shadow-2xl overflow-hidden z-10 flex flex-col font-mono text-xs sm:text-sm animate-in zoom-in-95 duration-150"
+        className="relative w-full max-w-2xl bg-white dark:bg-[#09090B] border border-neutral-300 dark:border-white/10 rounded-lg shadow-2xl overflow-hidden z-10 flex flex-col font-sans text-xs sm:text-sm animate-in zoom-in-95 duration-150"
         onKeyDown={handleKeyDown}
       >
         {/* Top Search Bar */}
-        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-[#141820]">
-          <Search className="w-4 h-4 text-[#E58A3C] shrink-0" />
+        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-neutral-200 dark:border-white/10 bg-neutral-50/50 dark:bg-[#121215]">
+          <Search className="w-4 h-4 text-neutral-900 dark:text-white shrink-0" />
           <input
             ref={inputRef}
             type="text"
@@ -249,7 +249,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
               sound.playKey();
             }}
             placeholder="Search commands, projects, skills, or actions..."
-            className="flex-1 bg-transparent border-none text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 outline-none text-xs sm:text-sm font-mono"
+            className="flex-1 bg-transparent border-none text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 outline-none text-xs sm:text-sm font-sans"
             aria-label="Command palette input"
           />
           {query && (
@@ -290,7 +290,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
                   onMouseEnter={() => setSelectedIndex(idx)}
                   className={`flex items-center justify-between px-3.5 py-2.5 rounded-md cursor-pointer transition-colors ${
                     isSelected
-                      ? 'bg-neutral-100 dark:bg-[#15161E] text-neutral-900 dark:text-white border border-neutral-300 dark:border-neutral-700'
+                      ? 'bg-neutral-100 dark:bg-[#18181B] text-neutral-900 dark:text-white border border-neutral-300 dark:border-white/20'
                       : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-white/5 border border-transparent'
                   }`}
                 >
@@ -309,7 +309,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
                       {cmd.category}
                     </span>
                     {isSelected && (
-                      <CornerDownLeft className="w-3.5 h-3.5 text-[#E58A3C]" />
+                      <CornerDownLeft className="w-3.5 h-3.5 text-neutral-900 dark:text-white" />
                     )}
                   </div>
                 </div>
@@ -319,7 +319,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
         </div>
 
         {/* Footer HUD */}
-        <div className="px-4 py-2 border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-[#141820] flex items-center justify-between text-[11px] text-neutral-500 dark:text-neutral-400">
+        <div className="px-4 py-2 border-t border-neutral-200 dark:border-white/10 bg-neutral-50/50 dark:bg-[#121215] flex items-center justify-between text-[11px] text-neutral-500 dark:text-neutral-400">
           <div className="flex items-center gap-3">
             <span>↑↓ to navigate</span>
             <span>↵ to select</span>

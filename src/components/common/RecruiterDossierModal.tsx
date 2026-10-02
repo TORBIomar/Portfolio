@@ -62,13 +62,13 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
       }}
     >
       <div
-        className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto bg-white dark:bg-[#0E1117] border border-neutral-300 dark:border-neutral-800 rounded-lg shadow-2xl p-5 sm:p-7 text-neutral-900 dark:text-neutral-100 flex flex-col font-sans"
+        className="relative w-full max-w-3xl max-h-[92vh] overflow-y-auto bg-white dark:bg-[#09090B] border border-neutral-300 dark:border-white/10 rounded-lg shadow-2xl p-5 sm:p-7 text-neutral-900 dark:text-neutral-100 flex flex-col font-sans"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Architectural Header Bar: Document Reference & Status */}
         <div className="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 pb-3 mb-5 font-mono text-[11px] text-neutral-500 dark:text-neutral-400">
           <div className="flex items-center gap-2">
-            <span className="text-[#E58A3C] font-bold">SYS//DOC-SPEC</span>
+            <span className="text-neutral-900 dark:text-white font-bold">SYS//DOC-SPEC</span>
             <span className="text-neutral-300 dark:text-neutral-700">|</span>
             <span>REF: OT-ENG-2026</span>
             <span className="text-neutral-300 dark:text-neutral-700">|</span>
@@ -94,12 +94,12 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
               <h2 id="dossier-title" className="text-2xl sm:text-3xl font-mono font-bold tracking-tight text-neutral-900 dark:text-white">
                 {PERSONAL_INFO.name}
               </h2>
-              <div className="font-mono text-xs sm:text-sm text-[#E58A3C] font-semibold mt-0.5">
+              <div className="font-sans text-xs sm:text-sm text-neutral-900 dark:text-white font-semibold mt-0.5 tracking-wide">
                 SOFTWARE &amp; DEVOPS ENGINEER
               </div>
             </div>
 
-            <div className="text-right font-mono text-[11px] text-neutral-500 dark:text-neutral-400 hidden sm:block">
+            <div className="text-right font-sans text-[11px] text-neutral-500 dark:text-neutral-400 hidden sm:block">
               <div>Rabat, Morocco [GMT+1]</div>
               <div className="text-neutral-800 dark:text-neutral-200 font-medium">EMSI Rabat (DDSI)</div>
             </div>
@@ -132,7 +132,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
             <Button
               variant="secondary"
               size="sm"
-              icon={<Download className="w-3.5 h-3.5 text-[#E58A3C]" />}
+              icon={<Download className="w-3.5 h-3.5" />}
             >
               CV (FR .pdf)
             </Button>
@@ -155,33 +155,33 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
 
           <button
             onClick={handleCopyEmail}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-[#111218] border border-neutral-300 dark:border-white/10 hover:border-[#E58A3C] text-neutral-800 dark:text-neutral-200 text-xs font-mono transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-[#121215] border border-neutral-300 dark:border-white/10 hover:border-neutral-900 dark:hover:border-white/40 text-neutral-800 dark:text-neutral-200 text-xs font-sans font-medium transition-colors cursor-pointer"
             title="Copy candidate email to clipboard"
           >
-            {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Mail className="w-3.5 h-3.5 text-[#E58A3C]" />}
+            {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Mail className="w-3.5 h-3.5 text-neutral-900 dark:text-white" />}
             <span>{copiedEmail ? 'Copied' : 'omartorbi18@gmail.com'}</span>
           </button>
 
           <button
             onClick={handleCopyPhone}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-[#111218] border border-neutral-300 dark:border-white/10 hover:border-[#E58A3C] text-neutral-800 dark:text-neutral-200 text-xs font-mono transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-neutral-100 dark:bg-[#121215] border border-neutral-300 dark:border-white/10 hover:border-neutral-900 dark:hover:border-white/40 text-neutral-800 dark:text-neutral-200 text-xs font-sans font-medium transition-colors cursor-pointer"
             title="Copy phone number to clipboard"
           >
-            {copiedPhone ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Phone className="w-3.5 h-3.5 text-[#E58A3C]" />}
+            {copiedPhone ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Phone className="w-3.5 h-3.5 text-neutral-900 dark:text-white" />}
             <span>{copiedPhone ? 'Copied' : '+212 602 12 79 38'}</span>
           </button>
         </div>
 
         {/* Official Accreditations Panel */}
-        <div className="mb-5 p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800">
+        <div className="mb-5 p-3.5 rounded-md bg-neutral-50 dark:bg-[#121215] border border-neutral-200 dark:border-white/10">
           <div className="flex items-center gap-2 mb-2 font-mono text-[11px] font-bold uppercase tracking-wider text-neutral-700 dark:text-neutral-300">
-            <ShieldCheck className="w-4 h-4 text-[#E58A3C]" />
+            <ShieldCheck className="w-4 h-4 text-neutral-900 dark:text-white" />
             <span>Official Cloud Accreditations (Oracle Cloud Infrastructure)</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 font-mono text-xs">
-            <div className="p-2.5 rounded bg-white dark:bg-[#111218] border border-neutral-200 dark:border-white/5 space-y-0.5">
-              <div className="flex items-center justify-between text-[#E58A3C] font-bold text-[11px]">
+            <div className="p-2.5 rounded bg-white dark:bg-[#09090B] border border-neutral-200 dark:border-white/5 space-y-0.5">
+              <div className="flex items-center justify-between text-neutral-900 dark:text-white font-bold text-[11px]">
                 <span>OCI DEVOPS PROFESSIONAL</span>
                 <span className="text-neutral-500 dark:text-neutral-400 font-normal">1Z0-1109-26</span>
               </div>
@@ -190,8 +190,8 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
               </div>
             </div>
 
-            <div className="p-2.5 rounded bg-white dark:bg-[#111218] border border-neutral-200 dark:border-white/5 space-y-0.5">
-              <div className="flex items-center justify-between text-[#E58A3C] font-bold text-[11px]">
+            <div className="p-2.5 rounded bg-white dark:bg-[#09090B] border border-neutral-200 dark:border-white/5 space-y-0.5">
+              <div className="flex items-center justify-between text-neutral-900 dark:text-white font-bold text-[11px]">
                 <span>OCI ARCHITECT PROFESSIONAL</span>
                 <span className="text-neutral-500 dark:text-neutral-400 font-normal">1Z0-997-26</span>
               </div>
@@ -208,11 +208,11 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
             [ TECHNICAL ARCHITECTURE &amp; PRODUCTION DOMAINS ]
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 font-mono text-xs">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs">
             {/* Backend Architecture */}
-            <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800 space-y-1.5">
-              <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-bold">
-                <Server className="w-3.5 h-3.5 text-[#E58A3C]" />
+            <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#121215] border border-neutral-200 dark:border-white/10 space-y-1.5">
+              <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-sans font-semibold text-xs sm:text-sm">
+                <Server className="w-3.5 h-3.5 text-neutral-900 dark:text-white shrink-0" />
                 <span>01 // Backend Architecture</span>
               </div>
               <p className="text-[11px] font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
@@ -220,7 +220,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
               </p>
               <div className="flex flex-wrap gap-1 pt-1">
                 {['Spring Boot 3', 'Java 17/21', 'REST APIs', 'Spring Security', 'JWT', 'JPA / Hibernate'].map((t) => (
-                  <span key={t} className="px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-white/5 text-neutral-800 dark:text-neutral-300 text-[10px] border border-neutral-300 dark:border-white/10">
+                  <span key={t} className="px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-white/5 text-neutral-800 dark:text-neutral-300 text-[11px] font-sans font-medium border border-neutral-300 dark:border-white/10">
                     {t}
                   </span>
                 ))}
@@ -228,9 +228,9 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
             </div>
 
             {/* Cloud & DevOps */}
-            <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800 space-y-1.5">
-              <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-bold">
-                <Cloud className="w-3.5 h-3.5 text-[#E58A3C]" />
+            <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#121215] border border-neutral-200 dark:border-white/10 space-y-1.5">
+              <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-sans font-semibold text-xs sm:text-sm">
+                <Cloud className="w-3.5 h-3.5 text-neutral-900 dark:text-white shrink-0" />
                 <span>02 // DevOps &amp; Cloud Runtimes</span>
               </div>
               <p className="text-[11px] font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
@@ -238,7 +238,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
               </p>
               <div className="flex flex-wrap gap-1 pt-1">
                 {['Docker', 'Alpine', 'Linux', 'OCI Cloud', 'n8n', 'CI/CD Pipelines'].map((t) => (
-                  <span key={t} className="px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-white/5 text-neutral-800 dark:text-neutral-300 text-[10px] border border-neutral-300 dark:border-white/10">
+                  <span key={t} className="px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-white/5 text-neutral-800 dark:text-neutral-300 text-[11px] font-sans font-medium border border-neutral-300 dark:border-white/10">
                     {t}
                   </span>
                 ))}
@@ -246,9 +246,9 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
             </div>
 
             {/* Data Persistence */}
-            <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800 space-y-1.5">
-              <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-bold">
-                <Database className="w-3.5 h-3.5 text-[#E58A3C]" />
+            <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#121215] border border-neutral-200 dark:border-white/10 space-y-1.5">
+              <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-sans font-semibold text-xs sm:text-sm">
+                <Database className="w-3.5 h-3.5 text-neutral-900 dark:text-white shrink-0" />
                 <span>03 // Relational &amp; Vector Data</span>
               </div>
               <p className="text-[11px] font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
@@ -256,7 +256,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
               </p>
               <div className="flex flex-wrap gap-1 pt-1">
                 {['PostgreSQL', 'Oracle DB', 'PL/SQL', 'MySQL', 'ChromaDB', 'ACID Safety'].map((t) => (
-                  <span key={t} className="px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-white/5 text-neutral-800 dark:text-neutral-300 text-[10px] border border-neutral-300 dark:border-white/10">
+                  <span key={t} className="px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-white/5 text-neutral-800 dark:text-neutral-300 text-[11px] font-sans font-medium border border-neutral-300 dark:border-white/10">
                     {t}
                   </span>
                 ))}
@@ -264,9 +264,9 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
             </div>
 
             {/* Modern Web & 3D CAD */}
-            <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#0C0D12] border border-neutral-200 dark:border-neutral-800 space-y-1.5">
-              <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-bold">
-                <Cpu className="w-3.5 h-3.5 text-[#E58A3C]" />
+            <div className="p-3.5 rounded-md bg-neutral-50 dark:bg-[#121215] border border-neutral-200 dark:border-white/10 space-y-1.5">
+              <div className="flex items-center gap-2 text-neutral-900 dark:text-white font-sans font-semibold text-xs sm:text-sm">
+                <Cpu className="w-3.5 h-3.5 text-neutral-900 dark:text-white shrink-0" />
                 <span>04 // CAD &amp; Web Systems</span>
               </div>
               <p className="text-[11px] font-sans text-neutral-600 dark:text-neutral-400 leading-relaxed">
@@ -274,7 +274,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
               </p>
               <div className="flex flex-wrap gap-1 pt-1">
                 {['TypeScript', 'React 18', 'Next.js', 'Three.js', 'OpenCascade.js', 'Web Workers'].map((t) => (
-                  <span key={t} className="px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-white/5 text-neutral-800 dark:text-neutral-300 text-[10px] border border-neutral-300 dark:border-white/10">
+                  <span key={t} className="px-1.5 py-0.5 rounded bg-neutral-200/70 dark:bg-white/5 text-neutral-800 dark:text-neutral-300 text-[11px] font-sans font-medium border border-neutral-300 dark:border-white/10">
                     {t}
                   </span>
                 ))}
@@ -294,7 +294,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
               className="inline-flex items-center gap-1 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
               <span>GitHub</span>
-              <ArrowUpRight className="w-3 h-3 text-[#E58A3C]" />
+              <ArrowUpRight className="w-3 h-3 text-neutral-900 dark:text-white" />
             </a>
             <span className="text-neutral-300 dark:text-neutral-700">|</span>
             <a
@@ -305,10 +305,10 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
               className="inline-flex items-center gap-1 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
               <span>LinkedIn</span>
-              <ArrowUpRight className="w-3 h-3 text-[#E58A3C]" />
+              <ArrowUpRight className="w-3 h-3 text-neutral-900 dark:text-white" />
             </a>
             <span className="text-neutral-300 dark:text-neutral-700">|</span>
-            <span className="text-neutral-500 dark:text-neutral-400">
+            <span className="text-neutral-500 dark:text-neutral-400 font-sans">
               Languages: English (Fluent), French, Arabic
             </span>
           </div>
@@ -319,7 +319,7 @@ export const RecruiterDossierModal: React.FC<RecruiterDossierModalProps> = ({ is
                 sound.playClick();
                 onClose();
               }}
-              className="px-3 py-1 rounded bg-neutral-100 dark:bg-[#111218] border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500 text-neutral-700 dark:text-neutral-300 text-xs font-mono transition-colors cursor-pointer"
+              className="px-3 py-1 rounded bg-neutral-100 dark:bg-[#121215] border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500 text-neutral-700 dark:text-neutral-300 text-xs font-sans font-medium transition-colors cursor-pointer"
             >
               Close Spec Sheet
             </button>
