@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Copy, Check, Send, Github, Linkedin, Instagram, ArrowUpRight, GraduationCap, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, Copy, Check, Send, Github, Linkedin, Instagram, ArrowUpRight, GraduationCap, Download } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { SectionHeading } from '../common/SectionHeading';
 import { Button } from '../common/Button';
@@ -44,13 +44,16 @@ export const ContactSection: React.FC = () => {
     setStatus('submitting');
     setErrorMessage('');
 
-    // Simulate direct secure dispatch
+    // Open mailto fallback and show success
     setTimeout(() => {
       sound.playSuccess();
       setStatus('success');
+      const subject = encodeURIComponent(formData.subject || `Inquiry from ${formData.name}`);
+      const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
+      window.open(`mailto:${PERSONAL_INFO.email}?subject=${subject}&body=${body}`, '_blank');
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setStatus('idle'), 6000);
-    }, 1200);
+    }, 800);
   };
 
   return (
@@ -58,9 +61,9 @@ export const ContactSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <SectionHeading
-          badge="06. Connection"
+          badge="05. Direct Channels"
           title="GET IN TOUCH"
-          subtitle="Whether you require Spring Boot backend engineering, scalable web platforms, or full-stack software development, connect directly."
+          subtitle="Whether discussing software engineering, cloud infrastructure & DevOps, or final-year internship opportunities, get in touch directly."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -71,22 +74,22 @@ export const ContactSection: React.FC = () => {
             {/* Status Card */}
             <div className="bg-white dark:bg-[#0B0C10] rounded-2xl border border-neutral-200/80 dark:border-white/10 p-6 sm:p-7 space-y-5 shadow-sm dark:shadow-xl">
               <div className="flex items-center gap-3">
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 beacon-green" />
+                <span className="w-2 h-2 rounded-full bg-[#FF6B00]" />
                 <span className="font-mono text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
-                  Current Availability
+                  Professional Availability
                 </span>
               </div>
 
-              <h3 className="font-mono text-lg font-bold text-neutral-900 dark:text-foreground">
-                {PERSONAL_INFO.availabilityDetails}
+              <h3 className="font-mono text-lg font-bold text-neutral-900 dark:text-white">
+                {PERSONAL_INFO.workAuthorization}
               </h3>
 
-              <div className="space-y-2.5 pt-1 font-sans text-xs text-neutral-500 dark:text-muted-foreground">
-                <div className="flex items-center gap-2 text-neutral-700 dark:text-slate-300">
+              <div className="space-y-2.5 pt-1 font-sans text-xs text-neutral-600 dark:text-neutral-400">
+                <div className="flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
                   <MapPin className="w-4 h-4 text-[#FF6B00] shrink-0" />
                   <span>{PERSONAL_INFO.location}</span>
                 </div>
-                <div className="flex items-center gap-2 text-neutral-700 dark:text-slate-300">
+                <div className="flex items-center gap-2 text-neutral-800 dark:text-neutral-200">
                   <GraduationCap className="w-4 h-4 text-[#FF6B00] shrink-0" />
                   <span>{PERSONAL_INFO.education}</span>
                 </div>
@@ -94,100 +97,110 @@ export const ContactSection: React.FC = () => {
 
               {/* Direct Email with Quick Copy */}
               <div className="pt-2">
-                <label className="font-mono text-xs text-neutral-500 dark:text-muted-foreground uppercase tracking-wider block mb-2">
-                  Direct Verified Email
+                <label className="font-mono text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-wider block mb-2">
+                  Direct Email
                 </label>
                 <div className="flex items-center justify-between p-3 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/5 dark:border-white/5 hover:border-[#FF6B00]/30 transition-colors">
-                  <div className="flex items-center gap-2.5 overflow-hidden">
+                  <div className="flex items-center gap-2 truncate">
                     <Mail className="w-4 h-4 text-[#FF6B00] shrink-0" />
                     <a
                       href={`mailto:${PERSONAL_INFO.email}`}
-                      className="font-mono text-xs sm:text-sm text-neutral-800 dark:text-slate-200 hover:text-[#FF6B00] dark:hover:text-white truncate transition-colors"
+                      className="font-mono text-xs text-neutral-900 dark:text-white hover:text-[#FF6B00] transition-colors truncate"
                     >
                       {PERSONAL_INFO.email}
                     </a>
                   </div>
                   <button
-                    type="button"
                     onClick={handleCopyEmail}
-                    className="p-2 rounded-lg bg-black/5 dark:bg-white/5 text-neutral-500 dark:text-muted-foreground hover:text-[#FF6B00] hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer shrink-0 ml-2"
+                    className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer shrink-0 ml-2"
                     title="Copy email to clipboard"
                     aria-label="Copy email address"
                   >
-                    {copiedEmail ? <Check className="w-4 h-4 text-[#FF6B00]" /> : <Copy className="w-4 h-4" />}
+                    {copiedEmail ? (
+                      <Check className="w-4 h-4 text-[#FF6B00]" />
+                    ) : (
+                      <Copy className="w-4 h-4" />
+                    )}
                   </button>
                 </div>
-                {copiedEmail && (
-                  <p className="text-xs font-mono text-[#FF6B00] mt-1.5 animate-in fade-in">
-                    ✓ Email copied to clipboard!
-                  </p>
-                )}
               </div>
 
-              {/* Direct Phone */}
-              <div className="pt-1">
-                <label className="font-mono text-xs text-neutral-500 dark:text-muted-foreground uppercase tracking-wider block mb-2">
-                  Direct Phone / Telemetry
+              {/* Phone / WhatsApp */}
+              <div>
+                <label className="font-mono text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-wider block mb-2">
+                  Phone &amp; WhatsApp
                 </label>
                 <div className="flex items-center justify-between p-3 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/5 dark:border-white/5 hover:border-[#FF6B00]/30 transition-colors">
-                  <div className="flex items-center gap-2.5 overflow-hidden">
+                  <div className="flex items-center gap-2">
                     <Phone className="w-4 h-4 text-[#FF6B00] shrink-0" />
                     <a
-                      href={`tel:${PERSONAL_INFO.phone.replace(/\s+/g, '')}`}
-                      className="font-mono text-xs sm:text-sm text-neutral-800 dark:text-slate-200 hover:text-[#FF6B00] dark:hover:text-white truncate transition-colors"
+                      href={PERSONAL_INFO.whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono text-xs text-neutral-900 dark:text-white hover:text-[#FF6B00] transition-colors"
                     >
                       {PERSONAL_INFO.phone}
                     </a>
                   </div>
                   <button
-                    type="button"
                     onClick={handleCopyPhone}
-                    className="p-2 rounded-lg bg-black/5 dark:bg-white/5 text-neutral-500 dark:text-muted-foreground hover:text-[#FF6B00] hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer shrink-0 ml-2"
+                    className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer shrink-0 ml-2"
                     title="Copy phone to clipboard"
                     aria-label="Copy phone number"
                   >
-                    {copiedPhone ? <Check className="w-4 h-4 text-[#FF6B00]" /> : <Copy className="w-4 h-4" />}
+                    {copiedPhone ? (
+                      <Check className="w-4 h-4 text-[#FF6B00]" />
+                    ) : (
+                      <Copy className="w-4 h-4" />
+                    )}
                   </button>
                 </div>
-                {copiedPhone && (
-                  <p className="text-xs font-mono text-[#FF6B00] mt-1.5 animate-in fade-in">
-                    ✓ Phone number copied to clipboard!
-                  </p>
-                )}
               </div>
 
-              {/* Direct WhatsApp Chat Action */}
-              <div className="pt-1">
-                <a
-                  href={PERSONAL_INFO.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => sound.playClick()}
-                  className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-mono text-xs font-semibold shadow-xs transition-colors cursor-pointer"
-                >
-                  <MessageSquare className="w-4 h-4" />
-                  <span>Direct WhatsApp Chat →</span>
-                </a>
+              {/* Download CV Options */}
+              <div className="pt-2 border-t border-black/10 dark:border-white/10">
+                <div className="font-mono text-xs text-neutral-500 dark:text-neutral-400 uppercase tracking-wider mb-2.5">
+                  Official Resumes
+                </div>
+                <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                  <a
+                    href={PERSONAL_INFO.resumeUrlEn}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => sound.playSuccess()}
+                    className="flex items-center justify-between p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] hover:border-[#FF6B00]/40 border border-black/5 dark:border-white/5 text-neutral-800 dark:text-neutral-200 transition-colors"
+                  >
+                    <span>Resume (EN)</span>
+                    <Download className="w-3.5 h-3.5 text-[#FF6B00]" />
+                  </a>
+                  <a
+                    href={PERSONAL_INFO.resumeUrlFr}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => sound.playSuccess()}
+                    className="flex items-center justify-between p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] hover:border-[#FF6B00]/40 border border-black/5 dark:border-white/5 text-neutral-800 dark:text-neutral-200 transition-colors"
+                  >
+                    <span>CV (FR)</span>
+                    <Download className="w-3.5 h-3.5 text-[#FF6B00]" />
+                  </a>
+                </div>
               </div>
 
               {/* Social Channels */}
-              <div className="pt-3 border-t border-black/10 dark:border-white/10 space-y-2">
-                <span className="font-mono text-xs text-neutral-500 dark:text-muted-foreground uppercase tracking-wider block">
-                  Professional Channels
-                </span>
+              <div className="pt-2 border-t border-black/10 dark:border-white/10">
                 <div className="grid grid-cols-3 gap-2 font-mono text-xs">
                   <a
                     href={PERSONAL_INFO.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => sound.playClick()}
-                    className="flex items-center justify-between p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] hover:bg-neutral-200 dark:hover:bg-white/5 border border-black/5 dark:border-white/5 text-neutral-700 dark:text-slate-300 hover:text-black dark:hover:text-foreground transition-colors cursor-pointer"
+                    className="flex items-center justify-between p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] hover:bg-neutral-200 dark:hover:bg-white/5 border border-black/5 dark:border-white/5 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-1.5">
-                      <Github className="w-3.5 h-3.5 text-neutral-900 dark:text-white" />
+                      <Github className="w-3.5 h-3.5 text-[#FF6B00]" />
                       <span>GitHub</span>
                     </span>
-                    <ArrowUpRight className="w-3 h-3 text-neutral-400 dark:text-muted-foreground" />
+                    <ArrowUpRight className="w-3 h-3 text-neutral-400" />
                   </a>
 
                   <a
@@ -195,13 +208,13 @@ export const ContactSection: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => sound.playClick()}
-                    className="flex items-center justify-between p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] hover:bg-neutral-200 dark:hover:bg-white/5 border border-black/5 dark:border-white/5 text-neutral-700 dark:text-slate-300 hover:text-black dark:hover:text-foreground transition-colors cursor-pointer"
+                    className="flex items-center justify-between p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] hover:bg-neutral-200 dark:hover:bg-white/5 border border-black/5 dark:border-white/5 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-1.5">
                       <Linkedin className="w-3.5 h-3.5 text-[#FF6B00]" />
                       <span>LinkedIn</span>
                     </span>
-                    <ArrowUpRight className="w-3 h-3 text-neutral-400 dark:text-muted-foreground" />
+                    <ArrowUpRight className="w-3 h-3 text-neutral-400" />
                   </a>
 
                   <a
@@ -209,13 +222,13 @@ export const ContactSection: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => sound.playClick()}
-                    className="flex items-center justify-between p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] hover:bg-neutral-200 dark:hover:bg-white/5 border border-black/5 dark:border-white/5 text-neutral-700 dark:text-slate-300 hover:text-black dark:hover:text-foreground transition-colors cursor-pointer"
+                    className="flex items-center justify-between p-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] hover:bg-neutral-200 dark:hover:bg-white/5 border border-black/5 dark:border-white/5 text-neutral-700 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-1.5">
-                      <Instagram className="w-3.5 h-3.5 text-pink-500" />
-                      <span>Insta</span>
+                      <Instagram className="w-3.5 h-3.5 text-[#FF6B00]" />
+                      <span>Instagram</span>
                     </span>
-                    <ArrowUpRight className="w-3 h-3 text-neutral-400 dark:text-muted-foreground" />
+                    <ArrowUpRight className="w-3 h-3 text-neutral-400" />
                   </a>
                 </div>
               </div>
@@ -227,12 +240,11 @@ export const ContactSection: React.FC = () => {
           {/* Right Column: Contact Message Form (7 Cols) */}
           <div className="lg:col-span-7 bg-white dark:bg-[#0B0C10] rounded-2xl border border-neutral-200/80 dark:border-white/10 p-6 sm:p-7 shadow-sm dark:shadow-xl">
             <div className="mb-6">
-              <h3 className="font-mono text-xl font-bold text-neutral-900 dark:text-foreground flex items-center gap-2">
-                <span>Dispatch Direct Transmission</span>
-                <span className="w-2 h-2 rounded-full bg-[#FF6B00] beacon-orange" />
+              <h3 className="font-mono text-xl font-bold text-neutral-900 dark:text-white flex items-center gap-2">
+                <span>Send a Message</span>
               </h3>
-              <p className="font-mono text-xs text-neutral-500 dark:text-muted-foreground mt-1">
-                Direct route to inbox. Guaranteed response within 24 hours.
+              <p className="font-mono text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+                Direct to inbox. Inquiries regarding roles or engineering projects are typically answered within 24 hours.
               </p>
             </div>
 
@@ -241,9 +253,9 @@ export const ContactSection: React.FC = () => {
               <div className="mb-6 p-4 rounded-xl bg-[#FF6B00]/[0.05] border border-[#FF6B00]/30 text-neutral-900 dark:text-white text-xs font-mono flex items-start gap-3">
                 <Check className="w-4 h-4 text-[#FF6B00] shrink-0 mt-0.5" />
                 <div>
-                  <div className="font-bold">Transmission Successfully Received</div>
-                  <div className="mt-0.5 text-neutral-600 dark:text-slate-300 font-sans">
-                    Thank you for reaching out, Omar Torbi will review your inquiry and reply promptly.
+                  <div className="font-bold">Message Initiated</div>
+                  <div className="mt-0.5 text-neutral-600 dark:text-neutral-300 font-sans">
+                    Email dispatch opened. Omar Torbi will review and respond promptly.
                   </div>
                 </div>
               </div>
@@ -259,74 +271,74 @@ export const ContactSection: React.FC = () => {
             <form onSubmit={handleSubmit} className="space-y-4 font-mono text-xs">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label htmlFor="name" className="text-neutral-600 dark:text-muted-foreground">
-                    Sender Name <span className="text-[#FF6B00]">*</span>
+                  <label htmlFor="name" className="text-neutral-600 dark:text-neutral-400">
+                    Your Name <span className="text-[#FF6B00]">*</span>
                   </label>
                   <input
                     id="name"
                     type="text"
                     required
-                    placeholder="e.g., Alex Vance"
+                    placeholder="e.g. Alex Vance"
                     value={formData.name}
                     onChange={(e) => {
                       sound.playKey();
                       setFormData({ ...formData, name: e.target.value });
                     }}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/10 dark:border-white/10 text-neutral-900 dark:text-foreground placeholder:text-neutral-400 dark:placeholder:text-muted-foreground/60 outline-none focus:border-[#FF6B00]/60 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-[#FF6B00]/60 transition-colors"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label htmlFor="email" className="text-neutral-600 dark:text-muted-foreground">
-                    Return Email Address <span className="text-[#FF6B00]">*</span>
+                  <label htmlFor="email" className="text-neutral-600 dark:text-neutral-400">
+                    Your Email <span className="text-[#FF6B00]">*</span>
                   </label>
                   <input
                     id="email"
                     type="email"
                     required
-                    placeholder="alex@example.com"
+                    placeholder="alex@company.com"
                     value={formData.email}
                     onChange={(e) => {
                       sound.playKey();
                       setFormData({ ...formData, email: e.target.value });
                     }}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/10 dark:border-white/10 text-neutral-900 dark:text-foreground placeholder:text-neutral-400 dark:placeholder:text-muted-foreground/60 outline-none focus:border-[#FF6B00]/60 transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-[#FF6B00]/60 transition-colors"
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label htmlFor="subject" className="text-neutral-600 dark:text-muted-foreground">
+                <label htmlFor="subject" className="text-neutral-600 dark:text-neutral-400">
                   Subject / Topic
                 </label>
                 <input
                   id="subject"
                   type="text"
-                  placeholder="Full-Stack Opportunity / Software Architecture Consulting"
+                  placeholder="Software / DevOps Engineering Opportunity"
                   value={formData.subject}
                   onChange={(e) => {
                     sound.playKey();
                     setFormData({ ...formData, subject: e.target.value });
                   }}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/10 dark:border-white/10 text-neutral-900 dark:text-foreground placeholder:text-neutral-400 dark:placeholder:text-muted-foreground/60 outline-none focus:border-[#FF6B00]/60 transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-[#FF6B00]/60 transition-colors"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label htmlFor="message" className="text-neutral-600 dark:text-muted-foreground">
-                  Transmission Body <span className="text-[#FF6B00]">*</span>
+                <label htmlFor="message" className="text-neutral-600 dark:text-neutral-400">
+                  Message <span className="text-[#FF6B00]">*</span>
                 </label>
                 <textarea
                   id="message"
                   required
                   rows={4}
-                  placeholder="Describe your project, timeline, or engineering opportunity..."
+                  placeholder="Tell me about your team, tech stack, or engineering project..."
                   value={formData.message}
                   onChange={(e) => {
                     sound.playKey();
                     setFormData({ ...formData, message: e.target.value });
                   }}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/10 dark:border-white/10 text-neutral-900 dark:text-foreground placeholder:text-neutral-400 dark:placeholder:text-muted-foreground/60 outline-none focus:border-[#FF6B00]/60 transition-colors font-sans text-sm resize-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-neutral-100 dark:bg-[#0F1016] border border-black/10 dark:border-white/10 text-neutral-900 dark:text-white placeholder:text-neutral-400 dark:placeholder:text-neutral-500 outline-none focus:border-[#FF6B00]/60 transition-colors font-sans text-sm resize-none"
                 />
               </div>
 
@@ -339,7 +351,7 @@ export const ContactSection: React.FC = () => {
                 icon={<Send className="w-4 h-4" />}
                 iconPosition="right"
               >
-                {status === 'submitting' ? 'Transmitting Data...' : 'Transmit Message (RPC)'}
+                {status === 'submitting' ? 'Sending Message...' : 'Send Message →'}
               </Button>
             </form>
           </div>

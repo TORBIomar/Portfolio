@@ -1,4 +1,17 @@
-export type ProjectCategory = 'all' | 'ai-backend' | 'backend-data' | 'data-algorithms' | 'data-systems' | 'systems-frontend' | 'backend' | 'fullstack' | 'systems' | 'frontend';
+export type ProjectCategory = 
+  | 'all' 
+  | 'software-engineering' 
+  | 'devops-automation' 
+  | 'backend-systems' 
+  | 'ai-backend' 
+  | 'backend-data' 
+  | 'data-algorithms' 
+  | 'data-systems' 
+  | 'systems-frontend' 
+  | 'backend' 
+  | 'fullstack' 
+  | 'systems' 
+  | 'frontend';
 
 export interface ProjectMetric {
   label: string;
@@ -47,10 +60,9 @@ export interface ExperienceItem {
   company: string;
   location: string;
   period: string;
-  type: 'Full-time' | 'Contract' | 'Leadership';
+  type: 'Full-time' | 'Contract' | 'Leadership' | 'Internship' | 'Engineering Degree';
   summary: string;
   achievements: string[];
   metrics: { label: string; value: string }[];
   technologies: string[];
 }
-

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, Terminal, Code2, Cpu, User, Mail, Download, ExternalLink, Volume2, VolumeX, X, CornerDownLeft, Sparkles } from 'lucide-react';
+import { Search, Code2, Cpu, User, Mail, Download, ExternalLink, Volume2, VolumeX, X, CornerDownLeft, Sparkles, ShieldCheck } from 'lucide-react';
 import { PERSONAL_INFO, PROJECTS_DATA } from '../../data/portfolioData';
 import { sound } from '../../utils/sound';
 
@@ -62,13 +62,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
         }
       },
       shortcut: 'R',
-      meta: 'Target: Software & DevOps • EMSI Rabat • PFE 2026/2027',
+      meta: 'Software & DevOps Engineer • EMSI Rabat • OCI Certified',
     },
 
     // Navigation
     {
       id: 'nav-about',
-      title: '01. About Me & Engineering Philosophy',
+      title: '01. About Me & Engineering Focus',
       category: 'Navigation',
       icon: <User className="w-4 h-4 text-[#FF6B00]" />,
       action: () => scrollToSection('about'),
@@ -84,7 +84,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
     },
     {
       id: 'nav-skills',
-      title: '03. Core Capabilities & Skills Matrix',
+      title: '03. Core Capabilities Matrix',
       category: 'Navigation',
       icon: <Cpu className="w-4 h-4 text-[#FF6B00]" />,
       action: () => scrollToSection('skills'),
@@ -92,23 +92,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
     },
     {
       id: 'nav-experience',
-      title: '04. Career Milestones & Experience',
+      title: '04. Experience & OCI Certifications',
       category: 'Navigation',
-      icon: <User className="w-4 h-4 text-[#FF6B00]" />,
+      icon: <ShieldCheck className="w-4 h-4 text-[#FF6B00]" />,
       action: () => scrollToSection('experience'),
       shortcut: 'E',
     },
     {
-      id: 'nav-faq',
-      title: '05. System Specs & FAQ',
-      category: 'Navigation',
-      icon: <Terminal className="w-4 h-4 text-[#FF6B00]" />,
-      action: () => scrollToSection('faq'),
-      shortcut: 'F',
-    },
-    {
       id: 'nav-contact',
-      title: '06. Get In Touch & Transmission',
+      title: '05. Get In Touch & Direct Channels',
       category: 'Navigation',
       icon: <Mail className="w-4 h-4 text-[#FF6B00]" />,
       action: () => scrollToSection('contact'),
@@ -117,15 +109,26 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
 
     // Actions
     {
-      id: 'action-download-cv',
-      title: 'Download CV / Resume (PDF)',
+      id: 'action-download-cv-en',
+      title: 'Download English Resume (PDF)',
       category: 'Actions',
-      icon: <Download className="w-4 h-4 text-white" />,
+      icon: <Download className="w-4 h-4 text-[#FF6B00]" />,
       action: () => {
-        window.open(PERSONAL_INFO.resumeUrl, '_blank');
+        window.open(PERSONAL_INFO.resumeUrlEn, '_blank');
         onClose();
       },
       shortcut: 'D',
+    },
+    {
+      id: 'action-download-cv-fr',
+      title: 'Download French CV (PDF)',
+      category: 'Actions',
+      icon: <Download className="w-4 h-4 text-[#FF6B00]" />,
+      action: () => {
+        window.open(PERSONAL_INFO.resumeUrlFr, '_blank');
+        onClose();
+      },
+      shortcut: 'F',
     },
     {
       id: 'action-copy-email',
@@ -142,7 +145,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       id: 'action-toggle-audio',
       title: isAudioMuted ? 'Enable Audio Haptics & Synth' : 'Mute Audio Haptics & Synth',
       category: 'Preferences',
-      icon: isAudioMuted ? <Volume2 className="w-4 h-4 text-[#FF6B00]" /> : <VolumeX className="w-4 h-4 text-muted-foreground" />,
+      icon: isAudioMuted ? <Volume2 className="w-4 h-4 text-[#FF6B00]" /> : <VolumeX className="w-4 h-4 text-neutral-400" />,
       action: () => {
         sound.toggleMute();
       },
@@ -154,7 +157,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       id: 'ext-github',
       title: 'View GitHub Profile (@TORBIomar)',
       category: 'External',
-      icon: <ExternalLink className="w-4 h-4 text-foreground" />,
+      icon: <ExternalLink className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />,
       action: () => {
         window.open(PERSONAL_INFO.github, '_blank');
         onClose();
@@ -164,7 +167,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
       id: 'ext-linkedin',
       title: 'Connect on LinkedIn',
       category: 'External',
-      icon: <ExternalLink className="w-4 h-4 text-foreground" />,
+      icon: <ExternalLink className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />,
       action: () => {
         window.open(PERSONAL_INFO.linkedin, '_blank');
         onClose();
@@ -221,7 +224,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
 
   return (
     <div className="fixed inset-0 z-[100] flex items-start justify-center pt-16 sm:pt-24 px-4">
-      {/* Dark / Light Backdrop */}
+      {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/60 dark:bg-[#050507]/85 backdrop-blur-md transition-opacity animate-in fade-in"
         onClick={onClose}
@@ -246,31 +249,37 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
               sound.playKey();
             }}
             placeholder="Search commands, projects, skills, or actions..."
-            className="flex-1 bg-transparent border-none text-neutral-900 dark:text-foreground placeholder-neutral-400 dark:placeholder-muted-foreground outline-none text-sm font-mono"
+            className="flex-1 bg-transparent border-none text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 outline-none text-sm font-mono"
             aria-label="Command palette input"
           />
-          <kbd className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-[10px] text-neutral-500 dark:text-muted-foreground">
-            ESC to close
+          {query && (
+            <button
+              onClick={() => {
+                setQuery('');
+                inputRef.current?.focus();
+              }}
+              className="p-1 text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
+          <kbd className="hidden sm:inline-block px-1.5 py-0.5 rounded bg-black/5 dark:bg-white/10 border border-black/5 dark:border-white/10 text-[10px] text-neutral-500">
+            ESC
           </kbd>
-          <button
-            onClick={onClose}
-            className="p-1 rounded text-neutral-500 dark:text-muted-foreground hover:text-neutral-900 dark:hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
-            aria-label="Close command palette"
-          >
-            <X className="w-4 h-4" />
-          </button>
         </div>
 
         {/* Results List */}
-        <div ref={listRef} className="max-h-[380px] overflow-y-auto p-2 space-y-1">
+        <div
+          ref={listRef}
+          className="max-h-[340px] overflow-y-auto p-2 space-y-1"
+        >
           {filteredCommands.length === 0 ? (
-            <div className="py-12 text-center text-neutral-500 dark:text-muted-foreground">
-              <Terminal className="w-8 h-8 mx-auto mb-2 opacity-30 text-[#FF6B00]" />
-              <p>No matching commands for "{query}"</p>
+            <div className="py-12 text-center text-neutral-400 dark:text-neutral-500">
+              No matching actions or commands found.
             </div>
           ) : (
-            filteredCommands.map((cmd, index) => {
-              const isSelected = index === selectedIndex;
+            filteredCommands.map((cmd, idx) => {
+              const isSelected = idx === selectedIndex;
               return (
                 <div
                   key={cmd.id}
@@ -278,42 +287,29 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
                     sound.playClick();
                     cmd.action();
                   }}
-                  onMouseEnter={() => setSelectedIndex(index)}
-                  className={`flex items-center justify-between px-3 py-2.5 rounded-lg cursor-pointer transition-colors ${
+                  onMouseEnter={() => setSelectedIndex(idx)}
+                  className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl cursor-pointer transition-colors ${
                     isSelected
-                      ? 'bg-[#FF6B00]/15 text-neutral-900 dark:text-foreground border border-[#FF6B00]/40 shadow-[0_0_12px_rgba(255,107,0,0.12)]'
-                      : 'text-neutral-700 dark:text-slate-300 hover:bg-black/5 dark:hover:bg-white/5 border border-transparent'
+                      ? 'bg-neutral-100 dark:bg-[#15161E] text-neutral-900 dark:text-white'
+                      : 'text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-white/5'
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="p-1.5 rounded-md bg-black/5 dark:bg-black/40 border border-black/10 dark:border-white/10 shrink-0">
-                      {cmd.icon}
-                    </div>
-                    <div className="truncate">
-                      <div className="font-semibold text-neutral-900 dark:text-foreground truncate flex items-center gap-2">
-                        <span>{cmd.title}</span>
-                        {cmd.category === 'Projects' && (
-                          <span className="text-[10px] px-1.5 py-0.2 rounded bg-[#FF6B00]/10 text-[#FF6B00] border border-[#FF6B00]/25">
-                            PROJECT
-                          </span>
-                        )}
-                      </div>
-                      {cmd.meta && (
-                        <div className="text-[11px] text-neutral-500 dark:text-muted-foreground truncate">
-                          {cmd.meta}
-                        </div>
-                      )}
-                    </div>
+                    <span className="shrink-0">{cmd.icon}</span>
+                    <span className="truncate font-medium">{cmd.title}</span>
+                    {cmd.meta && (
+                      <span className="text-[11px] text-neutral-400 dark:text-neutral-500 hidden sm:inline truncate">
+                        • {cmd.meta}
+                      </span>
+                    )}
                   </div>
 
-                  <div className="flex items-center gap-2 shrink-0 text-neutral-500 dark:text-muted-foreground text-[11px]">
-                    {cmd.shortcut && (
-                      <kbd className="px-1.5 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 font-mono text-[10px]">
-                        {cmd.shortcut}
-                      </kbd>
-                    )}
+                  <div className="flex items-center gap-2 shrink-0 ml-3">
+                    <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 text-neutral-500 dark:text-neutral-400">
+                      {cmd.category}
+                    </span>
                     {isSelected && (
-                      <CornerDownLeft className="w-3.5 h-3.5 text-[#FF6B00] transition-transform duration-200" />
+                      <CornerDownLeft className="w-3.5 h-3.5 text-[#FF6B00]" />
                     )}
                   </div>
                 </div>
@@ -322,19 +318,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({ isOpen, onClose,
           )}
         </div>
 
-        {/* Footer Hotkeys Bar */}
-        <div className="px-4 py-2 bg-neutral-50 dark:bg-[#07080B] border-t border-black/10 dark:border-white/5 flex items-center justify-between text-[11px] text-neutral-500 dark:text-muted-foreground">
+        {/* Footer HUD */}
+        <div className="px-4 py-2 border-t border-black/10 dark:border-white/10 bg-neutral-50 dark:bg-[#0F1016] flex items-center justify-between text-[11px] text-neutral-500 dark:text-neutral-400">
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1">
-              <kbd className="px-1 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-[10px]">↑↓</kbd> Navigate
-            </span>
-            <span className="flex items-center gap-1">
-              <kbd className="px-1 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-[10px]">↵</kbd> Select
-            </span>
+            <span>↑↓ to navigate</span>
+            <span>↵ to select</span>
+            <span>esc to dismiss</span>
           </div>
-          <div className="text-[10px] text-[#FF6B00]/90 font-mono">
-            SYS_CMD_PROMPT v2.4
-          </div>
+          <span className="text-neutral-400">Omar Torbi // CLI</span>
         </div>
       </div>
     </div>

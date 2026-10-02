@@ -6,7 +6,6 @@ import { AboutSection } from './components/about/AboutSection';
 import { ProjectsSection } from './components/projects/ProjectsSection';
 import { SkillsSection } from './components/skills/SkillsSection';
 import { ExperienceSection } from './components/experience/ExperienceSection';
-import { FaqSection } from './components/faq/FaqSection';
 import { ContactSection } from './components/contact/ContactSection';
 import { Footer } from './components/layout/Footer';
 import { CommandPalette } from './components/common/CommandPalette';
@@ -43,20 +42,19 @@ export const AppContent: React.FC = () => {
         onOpenRecruiterDossier={() => setIsRecruiterModalOpen(true)}
       />
 
-      {/* Top HUD Navbar with Sun/Moon Toggle & Numbered Links */}
+      {/* Streamlined Top Navbar */}
       <Navbar
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
         onOpenRecruiterDossier={() => setIsRecruiterModalOpen(true)}
       />
 
-      {/* Main Content Sections: 01 About -> 02 Systems -> 03 Capabilities -> 04 Experience -> 05 FAQ -> 06 Contact */}
+      {/* Main Content Sections: 01 About -> 02 Systems -> 03 Capabilities -> 04 Experience -> 05 Contact */}
       <main className="flex-1">
         <HeroSection onOpenRecruiterDossier={() => setIsRecruiterModalOpen(true)} />
         <AboutSection />
         <ProjectsSection />
         <SkillsSection />
         <ExperienceSection />
-        <FaqSection />
         <ContactSection />
       </main>
 

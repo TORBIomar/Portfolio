@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Terminal, Github, Linkedin, Menu, X, Volume2, VolumeX, Search, Clock, Sun, Moon } from 'lucide-react';
+import { Terminal, Github, Linkedin, Menu, X, Volume2, VolumeX, Search, Sun, Moon, FileText, Download } from 'lucide-react';
 import { PERSONAL_INFO } from '../../data/portfolioData';
 import { sound } from '../../utils/sound';
 import { useTheme } from '../../context/ThemeContext';
@@ -10,12 +10,12 @@ interface NavbarProps {
   onOpenRecruiterDossier?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette, onOpenRecruiterDossier }) => {
   const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isAudioMuted, setIsAudioMuted] = useState(sound.isMuted());
-  const [moroccoTime, setMoroccoTime] = useState('');
+  const [resumeDropdownOpen, setResumeDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,46 +29,36 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
     return sound.onMuteChange((muted) => setIsAudioMuted(muted));
   }, []);
 
+  // Close dropdown on outside click
   useEffect(() => {
-    const updateTime = () => {
-      try {
-        const timeStr = new Intl.DateTimeFormat('en-GB', {
-          timeZone: 'Africa/Casablanca',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false,
-        }).format(new Date());
-        setMoroccoTime(timeStr);
-      } catch {
-        const d = new Date();
-        setMoroccoTime(d.toTimeString().slice(0, 8));
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement).closest('[data-resume-dropdown]')) {
+        setResumeDropdownOpen(false);
       }
     };
-
-    updateTime();
-    const timer = setInterval(updateTime, 1000);
-    return () => clearInterval(timer);
+    window.addEventListener('click', handleOutsideClick);
+    return () => window.removeEventListener('click', handleOutsideClick);
   }, []);
 
   const navLinks = [
     { num: '01.', label: 'About', href: '#about' },
-    { num: '02.', label: 'Capabilities', href: '#skills' },
-    { num: '03.', label: 'Experiences', href: '#experience' },
-    { num: '04.', label: 'FAQ', href: '#faq' },
+    { num: '02.', label: 'Systems', href: '#projects' },
+    { num: '03.', label: 'Capabilities', href: '#skills' },
+    { num: '04.', label: 'Experience', href: '#experience' },
+    { num: '05.', label: 'Contact', href: '#contact' },
   ];
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         isScrolled
-          ? 'bg-white/80 dark:bg-black/80 backdrop-blur-xl border-b border-black/5 dark:border-white/10 shadow-sm py-2.5 sm:py-3'
+          ? 'bg-white/85 dark:bg-[#07080B]/85 backdrop-blur-xl border-b border-black/5 dark:border-white/10 shadow-sm py-2.5 sm:py-3'
           : 'bg-transparent border-b border-transparent py-4 sm:py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         
-        {/* Brand Terminal Identifier with ScrambleText */}
+        {/* Brand Terminal Identifier */}
         <a
           href="#"
           onClick={() => sound.playClick()}
@@ -81,28 +71,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           <div className="font-mono text-sm tracking-tight font-bold text-neutral-900 dark:text-white flex items-center">
             <ScrambleText text="omar" scrambleOnHover autoPlay={false} speed={25} />
             <span className="text-[#FF6B00]">.torbi</span>
-            <span className="text-neutral-400 dark:text-neutral-500 font-normal text-xs ml-1.5 hidden sm:inline-block">/software-devops</span>
+            <span className="text-neutral-400 dark:text-neutral-500 font-normal text-xs ml-2 hidden sm:inline-block">
+              /software &amp; devops
+            </span>
           </div>
         </a>
 
-        {/* Real-time Telemetry: Morocco Local Clock + Availability */}
-        <div className="hidden xl:flex items-center gap-3 text-xs font-mono text-neutral-500 dark:text-neutral-400">
-          {/* Real time clock */}
-          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/[0.03] dark:bg-white/[0.04] border border-black/10 dark:border-white/10">
-            <Clock className="w-3.5 h-3.5 text-neutral-400 dark:text-neutral-300" />
-            <span className="text-neutral-500 dark:text-neutral-400">RBT [GMT+1]:</span>
-            <span className="text-neutral-900 dark:text-neutral-100 font-semibold">{moroccoTime || '16:00:00'}</span>
-          </div>
-
-          {/* Availability badge with smooth beacon */}
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF6B00]/10 border border-[#FF6B00]/30 text-neutral-900 dark:text-white font-medium shadow-[0_0_12px_rgba(255,107,0,0.12)]">
-            <span className="w-2 h-2 rounded-full bg-[#FF6B00] beacon-orange"></span>
-            <span className="text-xs font-semibold">{PERSONAL_INFO.status}</span>
-          </div>
-        </div>
-
-        {/* Desktop Navigation Links with Numbered Prefixes & Smooth Hover */}
-        <nav className="hidden lg:flex items-center gap-1 font-mono text-[11px] uppercase tracking-wider" aria-label="Main Navigation">
+        {/* Desktop Navigation Links with Clean Minimal Numbering */}
+        <nav className="hidden lg:flex items-center gap-1 font-mono text-xs uppercase tracking-wider" aria-label="Main Navigation">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -111,15 +87,69 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
               onClick={() => sound.playClick()}
               className="group px-3 py-1.5 rounded-full text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition-all duration-300 ease-out cursor-pointer"
             >
-              <span className="text-[#FF6B00]/60 group-hover:text-[#FF6B00] font-bold mr-1.5 transition-colors duration-300">{link.num}</span>
+              <span className="text-[#FF6B00]/70 group-hover:text-[#FF6B00] font-bold mr-1.5 transition-colors duration-300">{link.num}</span>
               <span>{link.label}</span>
             </a>
           ))}
         </nav>
 
-        {/* Top Action Buttons Cluster (Unified Heights & Smooth Spring Physics) */}
-        <div className="flex items-center gap-2.5">
+        {/* Top Action Buttons Cluster */}
+        <div className="flex items-center gap-2 sm:gap-3">
           
+          {/* Quick Resume Dropdown (EN / FR) */}
+          <div className="relative hidden sm:block" data-resume-dropdown>
+            <button
+              onClick={() => {
+                sound.playClick();
+                setResumeDropdownOpen(!resumeDropdownOpen);
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 hover:border-[#FF6B00]/40 text-neutral-800 dark:text-neutral-200 text-xs font-mono font-medium hover:text-[#FF6B00] dark:hover:text-white transition-all cursor-pointer shadow-xs"
+              aria-label="Download Resume / CV"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#FF6B00]" />
+              <span>Resume</span>
+              <span className="text-[10px] text-neutral-400 dark:text-neutral-500 font-mono">▾</span>
+            </button>
+
+            {resumeDropdownOpen && (
+              <div className="absolute right-0 mt-2 w-44 rounded-xl bg-white dark:bg-[#0E0F14] border border-black/10 dark:border-white/10 shadow-xl py-1 z-50 font-mono text-xs animate-in fade-in slide-in-from-top-2 duration-150">
+                <a
+                  href={PERSONAL_INFO.resumeUrlEn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => sound.playSuccess()}
+                  className="flex items-center justify-between px-3 py-2 text-neutral-700 dark:text-neutral-300 hover:bg-black/5 dark:hover:bg-white/5 hover:text-[#FF6B00] transition-colors"
+                >
+                  <span>Resume (EN)</span>
+                  <Download className="w-3.5 h-3.5 text-neutral-400" />
+                </a>
+                <a
+                  href={PERSONAL_INFO.resumeUrlFr}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => sound.playSuccess()}
+                  className="flex items-center justify-between px-3 py-2 text-neutral-700 dark:text-neutral-300 hover:bg-black/5 dark:hover:bg-white/5 hover:text-[#FF6B00] transition-colors border-t border-black/5 dark:border-white/5"
+                >
+                  <span>CV (FR)</span>
+                  <Download className="w-3.5 h-3.5 text-neutral-400" />
+                </a>
+              </div>
+            )}
+          </div>
+
+          {onOpenRecruiterDossier && (
+            <button
+              onClick={() => {
+                sound.playClick();
+                onOpenRecruiterDossier();
+              }}
+              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FF6B00]/10 border border-[#FF6B00]/30 hover:border-[#FF6B00]/60 text-[#FF6B00] text-xs font-mono font-semibold transition-all cursor-pointer shadow-xs"
+              title="Open Recruiter Fast-Scan Dossier"
+            >
+              <span>Dossier ⚡</span>
+            </button>
+          )}
+
           {/* Integrated Frosted Utility Dock (Theme, Search ⌘K, Audio) */}
           <div className="flex items-center p-0.5 rounded-full bg-black/[0.04] dark:bg-white/[0.06] border border-black/10 dark:border-white/10 backdrop-blur-md transition-all duration-300">
             {/* Theme Toggle */}
@@ -185,15 +215,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white/95 dark:bg-black/95 backdrop-blur-2xl border-b border-black/10 dark:border-white/10 px-5 pt-4 pb-6 space-y-4 font-mono text-xs animate-in slide-in-from-top-3 duration-300 shadow-2xl">
-          <div className="flex items-center justify-between pb-3 border-b border-black/10 dark:border-white/10 text-neutral-500">
-            <span>RBT GMT+1: {moroccoTime}</span>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#FF6B00] beacon-orange"></span>
-              <span className="text-[#FF6B00] font-semibold">{PERSONAL_INFO.status}</span>
-            </div>
-          </div>
-
+        <div className="lg:hidden bg-white/95 dark:bg-[#07080B]/95 backdrop-blur-2xl border-b border-black/10 dark:border-white/10 px-5 pt-4 pb-6 space-y-4 font-mono text-xs animate-in slide-in-from-top-3 duration-300 shadow-2xl">
           <div className="space-y-1">
             {navLinks.map((link) => (
               <a
@@ -212,6 +234,25 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
           </div>
 
           <div className="pt-3 border-t border-black/10 dark:border-white/10 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <a
+                href={PERSONAL_INFO.resumeUrlEn}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1.5 rounded-lg bg-black/5 dark:bg-white/5 text-neutral-800 dark:text-neutral-200 border border-black/10 dark:border-white/10 text-xs font-semibold"
+              >
+                Resume (EN)
+              </a>
+              <a
+                href={PERSONAL_INFO.resumeUrlFr}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1.5 rounded-lg bg-black/5 dark:bg-white/5 text-neutral-800 dark:text-neutral-200 border border-black/10 dark:border-white/10 text-xs font-semibold"
+              >
+                CV (FR)
+              </a>
+            </div>
+
             <div className="flex items-center gap-3">
               <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="text-neutral-600 dark:text-neutral-400 hover:text-[#FF6B00] p-1.5 transition-colors">
                 <Github className="w-4 h-4" />
@@ -220,10 +261,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommandPalette }) => {
                 <Linkedin className="w-4 h-4" />
               </a>
             </div>
-
-            <span className="font-mono text-[11px] text-neutral-400 dark:text-neutral-500">
-              omar.torbi © 2026
-            </span>
           </div>
         </div>
       )}

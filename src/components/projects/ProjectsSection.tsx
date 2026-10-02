@@ -14,17 +14,15 @@ export const ProjectsSection: React.FC = () => {
 
   const categories = [
     { id: 'all', label: 'All Systems' },
-    { id: 'ai', label: 'AI & Vector RAG' },
-    { id: 'backend', label: 'Enterprise Backend' },
-    { id: 'data', label: 'Data Systems & Algorithms' },
+    { id: 'software', label: 'Software Engineering' },
+    { id: 'devops', label: 'DevOps & Automation' },
   ];
 
   const filteredProjects = PROJECTS_DATA.filter((project) => {
     const matchesCategory =
       selectedCategory === 'all' ||
-      (selectedCategory === 'ai' && project.category.includes('ai')) ||
-      (selectedCategory === 'backend' && (project.category.includes('backend') || project.techStack.includes('Spring Boot'))) ||
-      (selectedCategory === 'data' && (project.category.includes('data') || project.techStack.includes('MySQL') || project.techStack.includes('Algorithms')));
+      (selectedCategory === 'software' && (project.category.includes('software') || project.techStack.includes('Spring Boot 3') || project.techStack.includes('Spring Boot') || project.techStack.includes('React'))) ||
+      (selectedCategory === 'devops' && (project.category.includes('devops') || project.techStack.includes('Docker') || project.techStack.includes('n8n') || project.techStack.includes('Python')));
 
     const matchesSearch =
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -42,14 +40,14 @@ export const ProjectsSection: React.FC = () => {
         {/* Section Heading */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <SectionHeading
-            badge="02. Production Platforms"
+            badge="02. Systems & Engineering"
             title="ENGINEERED SYSTEMS"
-            subtitle="Deep-dive into production-grade applications across WebGL CAD kernels, enterprise Spring Boot services, and AI RAG systems."
+            subtitle="Deep-dive into production-grade systems across enterprise Spring Boot architectures, automated cloud pipelines, and 3D web platforms."
             className="mb-0"
           />
 
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-[#0B0C10] border border-neutral-200/80 dark:border-white/10 text-xs font-mono text-neutral-600 dark:text-muted-foreground self-start md:self-auto shrink-0 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-[#FF6B00] beacon-orange" />
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-[#0B0C10] border border-neutral-200/80 dark:border-white/10 text-xs font-mono text-neutral-600 dark:text-neutral-400 self-start md:self-auto shrink-0 shadow-xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF6B00]" />
             <span>{filteredProjects.length} Systems Active</span>
           </div>
         </div>
@@ -70,7 +68,7 @@ export const ProjectsSection: React.FC = () => {
                   className={`px-3.5 py-1.5 rounded-xl font-mono text-xs transition-all cursor-pointer ${
                     isActive
                       ? 'bg-gradient-to-r from-[#FF6B00] to-[#FF8533] text-white font-bold shadow-[0_0_16px_rgba(255,107,0,0.35)]'
-                      : 'text-neutral-600 dark:text-slate-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
+                      : 'text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5'
                   }`}
                 >
                   {cat.label}
@@ -81,7 +79,7 @@ export const ProjectsSection: React.FC = () => {
 
           {/* Search Input */}
           <div className="relative w-full sm:w-64">
-            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-slate-400" />
+            <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-400" />
             <input
               type="text"
               value={searchQuery}
@@ -89,8 +87,8 @@ export const ProjectsSection: React.FC = () => {
                 sound.playKey();
                 setSearchQuery(e.target.value);
               }}
-              placeholder="Filter by tech (e.g. Spring Boot)..."
-              className="w-full bg-neutral-100 dark:bg-[#07080B] border border-black/5 dark:border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs font-mono text-neutral-900 dark:text-foreground placeholder-neutral-400 dark:placeholder-muted-foreground outline-none focus:border-[#FF6B00]/60 transition-colors"
+              placeholder="Filter by tech (e.g. Docker, Spring)..."
+              className="w-full bg-neutral-100 dark:bg-[#07080B] border border-black/5 dark:border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs font-mono text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 outline-none focus:border-[#FF6B00]/60 transition-colors"
               aria-label="Filter projects by technology"
             />
           </div>
@@ -109,9 +107,9 @@ export const ProjectsSection: React.FC = () => {
 
         {/* Empty state */}
         {filteredProjects.length === 0 && (
-          <div className="py-20 text-center space-y-3 bg-[#0B0C10] rounded-2xl border border-white/10">
-            <Code2 className="w-8 h-8 mx-auto text-muted-foreground opacity-40" />
-            <div className="text-sm font-mono text-muted-foreground">
+          <div className="py-20 text-center space-y-3 bg-white dark:bg-[#0B0C10] rounded-2xl border border-black/10 dark:border-white/10">
+            <Code2 className="w-8 h-8 mx-auto text-neutral-400 dark:text-neutral-500 opacity-60" />
+            <div className="text-sm font-mono text-neutral-500 dark:text-neutral-400">
               No systems match query "{searchQuery}"
             </div>
             <button
@@ -119,7 +117,7 @@ export const ProjectsSection: React.FC = () => {
                 setSelectedCategory('all');
                 setSearchQuery('');
               }}
-              className="text-xs font-mono text-white hover:underline cursor-pointer"
+              className="text-xs font-mono text-[#FF6B00] hover:underline cursor-pointer"
             >
               Reset Filters
             </button>
