@@ -19,6 +19,7 @@ import { RetroTrashApp } from './apps/RetroTrashApp';
 import { RetroSettingsApp } from './apps/RetroSettingsApp';
 
 import { retroSound } from '../../utils/retroSound';
+import { useIsMobile } from '../../utils/useIsMobile';
 
 const INITIAL_DESKTOP_ICONS: IRetroDesktopIcon[] = [
   // ⭐ ESSENTIAL PORTFOLIO APPS (AT THE TOP - ROWS 1 to 3)
@@ -124,6 +125,7 @@ export const RetroDesktop: React.FC = () => {
   const [showScanlines, setShowScanlines] = useState(false); // Clean & vibrant by default
   const [desktopIcons, setDesktopIcons] = useState<IRetroDesktopIcon[]>(INITIAL_DESKTOP_ICONS);
   const [selectedIconId, setSelectedIconId] = useState<string | null>(null);
+  const isMobile = useIsMobile();
 
   // Windows
   const [windows, setWindows] = useState<RetroWindowState[]>([]);
@@ -136,24 +138,24 @@ export const RetroDesktop: React.FC = () => {
 
     const screenW = typeof window !== 'undefined' ? window.innerWidth : 1024;
     const screenH = typeof window !== 'undefined' ? window.innerHeight : 768;
-    const isMobile = screenW < 768;
+    const isMobileScreen = screenW < 768;
 
     const sidebarW = screenW >= 1260 ? 290 : 16;
     const availW = Math.max(320, screenW - sidebarW - 24);
     const availH = Math.max(320, screenH - 28 - 40);
 
     const cfg = APP_CONFIG.about;
-    const aboutWidth = isMobile
-      ? screenW - 16
+    const aboutWidth = isMobileScreen
+      ? screenW
       : Math.min(cfg.defaultSize.width, Math.max(760, Math.floor(availW * 0.94)));
     const slackX = Math.max(0, availW - aboutWidth);
-    const aboutX = isMobile ? 8 : sidebarW + Math.floor(slackX / 2);
+    const aboutX = isMobileScreen ? 0 : sidebarW + Math.floor(slackX / 2);
 
-    const aboutHeight = isMobile
-      ? screenH - 74
+    const aboutHeight = isMobileScreen
+      ? screenH - 64
       : Math.min(cfg.defaultSize.height, Math.max(540, Math.floor(availH * 0.92)));
     const slackY = Math.max(0, availH - aboutHeight);
-    const aboutY = isMobile ? 32 : 28 + Math.max(8, Math.floor(slackY / 2));
+    const aboutY = isMobileScreen ? 28 : 28 + Math.max(8, Math.floor(slackY / 2));
 
     const initialAboutWindow: RetroWindowState = {
       id: 'win-about',
@@ -192,7 +194,7 @@ export const RetroDesktop: React.FC = () => {
       const cfg = APP_CONFIG[appType];
       const screenW = typeof window !== 'undefined' ? window.innerWidth : 1024;
       const screenH = typeof window !== 'undefined' ? window.innerHeight : 768;
-      const isMobile = screenW < 768;
+      const isMobileScreen = screenW < 768;
       const nextZ = highestZ + 1;
       setHighestZ(nextZ);
 
@@ -200,20 +202,20 @@ export const RetroDesktop: React.FC = () => {
       const availW = Math.max(320, screenW - sidebarW - 24);
       const availH = Math.max(320, screenH - 28 - 40);
 
-      const winWidth = isMobile
-        ? screenW - 16
+      const winWidth = isMobileScreen
+        ? screenW
         : Math.min(cfg.defaultSize.width, Math.max(760, Math.floor(availW * 0.94)));
       const slackX = Math.max(0, availW - winWidth);
-      const winX = isMobile
-        ? 8
+      const winX = isMobileScreen
+        ? 0
         : sidebarW + Math.floor(slackX / 2);
 
-      const winHeight = isMobile
-        ? screenH - 74
+      const winHeight = isMobileScreen
+        ? screenH - 64
         : Math.min(cfg.defaultSize.height, Math.max(540, Math.floor(availH * 0.92)));
       const slackY = Math.max(0, availH - winHeight);
-      const winY = isMobile
-        ? 32
+      const winY = isMobileScreen
+        ? 28
         : 28 + Math.max(8, Math.floor(slackY / 2));
 
       // Check if window already exists
@@ -227,10 +229,13 @@ export const RetroDesktop: React.FC = () => {
                   ...w,
                   isMinimized: false,
                   isCollapsed: false,
-                  size: {
-                    width: Math.max(w.size.width, winWidth),
-                    height: Math.max(w.size.height, winHeight),
-                  },
+                  position: isMobileScreen ? { x: 0, y: 28 } : w.position,
+                  size: isMobileScreen
+                    ? { width: screenW, height: screenH - 64 }
+                    : {
+                        width: Math.max(w.size.width, winWidth),
+                        height: Math.max(w.size.height, winHeight),
+                      },
                   zIndex: nextZ,
                   params: params || w.params,
                 }
@@ -445,40 +450,100 @@ export const RetroDesktop: React.FC = () => {
       />
 
       {/* Desktop Workspace */}
-      <div className="absolute inset-0 pt-6 pb-9 overflow-hidden">
-        {/* Category Header 1: Essential Portfolio (At the Top) */}
-        <div className="hidden sm:flex absolute left-[18px] top-8 w-[260px] z-0 items-center justify-between px-3 py-1 bg-yellow-300 border-2 border-black font-screen text-[10px] font-bold tracking-wider shadow-[2px_2px_0px_#000] select-none pointer-events-none">
-          <div className="flex items-center gap-1.5">
-            <span className="text-xs">⭐</span>
-            <span>ESSENTIAL PORTFOLIO</span>
-          </div>
-          <span className="text-[9px] font-mono bg-black text-white px-1.5 py-0.2">6 APPS</span>
-        </div>
+      <div className={`absolute inset-0 pt-7 pb-9 ${isMobile ? 'overflow-y-auto no-scrollbar' : 'overflow-hidden'}`}>
+        {isMobile ? (
+          <div className="p-3 pb-16 space-y-4 max-w-sm mx-auto">
+            {/* Category 1: Essential Portfolio */}
+            <div>
+              <div className="flex items-center justify-between px-3 py-1.5 bg-yellow-300 border-2 border-black font-screen text-[11px] font-bold tracking-wider shadow-[2px_2px_0px_#000] mb-3">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs">⭐</span>
+                  <span>ESSENTIAL PORTFOLIO</span>
+                </div>
+                <span className="text-[9px] font-mono bg-black text-white px-1.5 py-0.5 font-bold">6 APPS</span>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {desktopIcons.slice(0, 6).map((icon) => (
+                  <RetroDesktopIcon
+                    key={icon.id}
+                    item={icon}
+                    isSelected={selectedIconId === icon.id}
+                    onSelect={() => setSelectedIconId(icon.id)}
+                    onOpen={() => openApp(icon.appType, icon.params)}
+                    onPositionChange={(pos) =>
+                      setDesktopIcons((prev) =>
+                        prev.map((i) => (i.id === icon.id ? { ...i, position: pos } : i))
+                      )
+                    }
+                  />
+                ))}
+              </div>
+            </div>
 
-        {/* Category Header 2: Retro Accessories & Extras (Below) */}
-        <div className="hidden sm:flex absolute left-[18px] top-[382px] w-[260px] z-0 items-center justify-between px-3 py-1 bg-cyan-300 border-2 border-black font-screen text-[10px] font-bold tracking-wider shadow-[2px_2px_0px_#000] select-none pointer-events-none">
-          <div className="flex items-center gap-1.5">
-            <span className="text-xs">🕹️</span>
-            <span>ACCESSORIES &amp; EXTRAS</span>
+            {/* Category 2: Retro Accessories & Extras */}
+            <div>
+              <div className="flex items-center justify-between px-3 py-1.5 bg-cyan-300 border-2 border-black font-screen text-[11px] font-bold tracking-wider shadow-[2px_2px_0px_#000] mb-3">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs">🕹️</span>
+                  <span>ACCESSORIES &amp; EXTRAS</span>
+                </div>
+                <span className="text-[9px] font-mono bg-neutral-800 text-white px-1.5 py-0.5 font-bold">TOYS</span>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {desktopIcons.slice(6).map((icon) => (
+                  <RetroDesktopIcon
+                    key={icon.id}
+                    item={icon}
+                    isSelected={selectedIconId === icon.id}
+                    onSelect={() => setSelectedIconId(icon.id)}
+                    onOpen={() => openApp(icon.appType, icon.params)}
+                    onPositionChange={(pos) =>
+                      setDesktopIcons((prev) =>
+                        prev.map((i) => (i.id === icon.id ? { ...i, position: pos } : i))
+                      )
+                    }
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-          <span className="text-[9px] font-mono bg-neutral-800 text-white px-1.5 py-0.2">TOYS</span>
-        </div>
+        ) : (
+          <>
+            {/* Category Header 1: Essential Portfolio (At the Top) */}
+            <div className="hidden sm:flex absolute left-[18px] top-8 w-[260px] z-0 items-center justify-between px-3 py-1 bg-yellow-300 border-2 border-black font-screen text-[10px] font-bold tracking-wider shadow-[2px_2px_0px_#000] select-none pointer-events-none">
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs">⭐</span>
+                <span>ESSENTIAL PORTFOLIO</span>
+              </div>
+              <span className="text-[9px] font-mono bg-black text-white px-1.5 py-0.2">6 APPS</span>
+            </div>
 
-        {/* Desktop Icons */}
-        {desktopIcons.map((icon) => (
-          <RetroDesktopIcon
-            key={icon.id}
-            item={icon}
-            isSelected={selectedIconId === icon.id}
-            onSelect={() => setSelectedIconId(icon.id)}
-            onOpen={() => openApp(icon.appType, icon.params)}
-            onPositionChange={(pos) =>
-              setDesktopIcons((prev) =>
-                prev.map((i) => (i.id === icon.id ? { ...i, position: pos } : i))
-              )
-            }
-          />
-        ))}
+            {/* Category Header 2: Retro Accessories & Extras (Below) */}
+            <div className="hidden sm:flex absolute left-[18px] top-[382px] w-[260px] z-0 items-center justify-between px-3 py-1 bg-cyan-300 border-2 border-black font-screen text-[10px] font-bold tracking-wider shadow-[2px_2px_0px_#000] select-none pointer-events-none">
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs">🕹️</span>
+                <span>ACCESSORIES &amp; EXTRAS</span>
+              </div>
+              <span className="text-[9px] font-mono bg-neutral-800 text-white px-1.5 py-0.2">TOYS</span>
+            </div>
+
+            {/* Desktop Icons */}
+            {desktopIcons.map((icon) => (
+              <RetroDesktopIcon
+                key={icon.id}
+                item={icon}
+                isSelected={selectedIconId === icon.id}
+                onSelect={() => setSelectedIconId(icon.id)}
+                onOpen={() => openApp(icon.appType, icon.params)}
+                onPositionChange={(pos) =>
+                  setDesktopIcons((prev) =>
+                    prev.map((i) => (i.id === icon.id ? { ...i, position: pos } : i))
+                  )
+                }
+              />
+            ))}
+          </>
+        )}
 
         {/* Floating Windows */}
         {windows.map((win) => (

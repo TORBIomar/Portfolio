@@ -56,15 +56,15 @@ export const RetroCapabilitiesApp: React.FC = () => {
           placeholder="Filter skills (Docker, Spring, OCI)..."
           value={searchFilter}
           onChange={(e) => setSearchFilter(e.target.value)}
-          className="px-3.5 py-2 my-1 text-xs font-mono border-2 border-black bg-white focus:outline-none w-64 shadow-inner"
+          className="px-3 py-1.5 my-1 text-xs font-mono border-2 border-black bg-white focus:outline-none w-full sm:w-64 shadow-inner"
         />
       </div>
 
       {/* Main Split Layout */}
       <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-        {/* Left Subsystem Navigation */}
-        <div className="w-full md:w-64 border-b-2 md:border-b-0 md:border-r-2 border-black bg-white overflow-y-auto p-3 space-y-1.5">
-          <span className="font-bold text-[10px] uppercase tracking-wider text-neutral-500 px-1 block mb-1">
+        {/* Subsystem Navigation: Horizontal on mobile, vertical sidebar on desktop */}
+        <div className="w-full md:w-64 border-b-2 md:border-b-0 md:border-r-2 border-black bg-white flex flex-row md:flex-col overflow-x-auto md:overflow-y-auto p-2 md:p-3 gap-2 md:gap-0 md:space-y-1.5 shrink-0 no-scrollbar">
+          <span className="hidden md:block font-bold text-[10px] uppercase tracking-wider text-neutral-500 px-1 mb-1">
             Subsystems
           </span>
           {SKILL_CATEGORIES.map((cat) => {
@@ -76,14 +76,14 @@ export const RetroCapabilitiesApp: React.FC = () => {
                   retroSound.playClick();
                   setSelectedCategoryId(cat.id);
                 }}
-                className={`w-full text-left px-3.5 py-2.5 my-1 text-xs font-bold border-2 transition-all flex items-center justify-between cursor-pointer ${
+                className={`shrink-0 md:w-full text-left px-3 md:px-3.5 py-1.5 md:py-2.5 text-xs font-bold border-2 transition-all flex items-center justify-between gap-2 cursor-pointer ${
                   isSelected
-                    ? 'bg-emerald-500 text-black border-black shadow-[3px_3px_0px_#000] scale-101'
+                    ? 'bg-emerald-500 text-black border-black shadow-[2px_2px_0px_#000] md:shadow-[3px_3px_0px_#000] scale-101'
                     : 'bg-white text-neutral-800 border-neutral-300 hover:border-black hover:bg-neutral-50'
                 }`}
               >
-                <span className="truncate">{cat.title}</span>
-                <span className="text-[10px] font-mono bg-black text-white px-1.5 py-0.2 ml-1 rounded-xs font-bold">
+                <span className="truncate whitespace-nowrap">{cat.title}</span>
+                <span className="text-[10px] font-mono bg-black text-white px-1.5 py-0.2 rounded-xs font-bold">
                   {cat.skills.length}
                 </span>
               </button>

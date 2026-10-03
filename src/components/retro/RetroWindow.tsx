@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { RetroWindowState, RetroTheme } from '../../types/retro';
 import { RetroIcon } from './RetroIcon';
 import { retroSound } from '../../utils/retroSound';
+import { useIsMobile } from '../../utils/useIsMobile';
 
 interface RetroWindowProps {
   windowState: RetroWindowState;
@@ -89,8 +90,10 @@ export const RetroWindow: React.FC<RetroWindowProps> = ({
     height: 0,
   });
 
+  const isMobile = useIsMobile();
+
   const handlePointerDownHeader = (e: React.PointerEvent) => {
-    if (isZoomed) return;
+    if (isZoomed || isMobile) return;
     if ((e.target as HTMLElement).closest('button')) return;
     onFocus();
     setIsDragging(true);
@@ -105,7 +108,7 @@ export const RetroWindow: React.FC<RetroWindowProps> = ({
   };
 
   const handlePointerMoveHeader = (e: React.PointerEvent) => {
-    if (!isDragging || isZoomed) return;
+    if (!isDragging || isZoomed || isMobile) return;
     const deltaX = e.clientX - dragStartRef.current.startX;
     const deltaY = e.clientY - dragStartRef.current.startY;
     const maxW = typeof window !== 'undefined' ? window.innerWidth : 1200;
@@ -126,6 +129,7 @@ export const RetroWindow: React.FC<RetroWindowProps> = ({
   };
 
   const handlePointerDownResize = (e: React.PointerEvent) => {
+    if (isMobile) return;
     e.stopPropagation();
     onFocus();
     setIsResizing(true);
@@ -140,7 +144,7 @@ export const RetroWindow: React.FC<RetroWindowProps> = ({
   };
 
   const handlePointerMoveResize = (e: React.PointerEvent) => {
-    if (!isResizing || isZoomed || isCollapsed) return;
+    if (!isResizing || isZoomed || isCollapsed || isMobile) return;
     const deltaX = e.clientX - resizeStartRef.current.startX;
     const deltaY = e.clientY - resizeStartRef.current.startY;
     const maxW = typeof window !== 'undefined' ? window.innerWidth : 1200;
@@ -162,7 +166,18 @@ export const RetroWindow: React.FC<RetroWindowProps> = ({
 
   if (isMinimized) return null;
 
-  const windowStyle: React.CSSProperties = isZoomed
+  const windowStyle: React.CSSProperties = isMobile
+    ? {
+        position: 'fixed',
+        top: '28px',
+        left: '0px',
+        right: '0px',
+        bottom: '36px',
+        width: '100vw',
+        height: 'calc(100dvh - 64px)',
+        zIndex,
+      }
+    : isZoomed
     ? {
         position: 'fixed',
         top: 26,
@@ -249,19 +264,19 @@ export const RetroWindow: React.FC<RetroWindowProps> = ({
               onClose();
             }}
             title="Close Window (Esc)"
-            className="w-5 h-5 bg-white border-2 border-black flex items-center justify-center cursor-pointer hover:bg-red-600 hover:text-white active:bg-black transition-colors shadow-xs group"
+            className="w-6 h-6 sm:w-5 sm:h-5 bg-white border-2 border-black flex items-center justify-center cursor-pointer hover:bg-red-600 hover:text-white active:bg-black transition-colors shadow-xs group"
           >
-            <span className="text-[10px] font-bold font-mono leading-none group-hover:scale-110">✕</span>
+            <span className="text-[11px] font-bold font-mono leading-none group-hover:scale-110">✕</span>
           </button>
         </div>
 
         {/* Center: Title Plaque - True Mathematical Center */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-28">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-10 sm:px-28">
           <div
-            className={`px-3.5 py-0.5 border-2 border-black flex items-center justify-center gap-2.5 shadow-xs max-w-full truncate pointer-events-auto ${getPlaqueColor()}`}
+            className={`px-3 py-0.5 border-2 border-black flex items-center justify-center gap-2 shadow-xs max-w-full truncate pointer-events-auto ${getPlaqueColor()}`}
           >
             <RetroIcon name={getAppIconName(windowState.appType) as any} size={15} className="shrink-0" />
-            <span className="font-screen text-xs font-bold truncate tracking-wider">
+            <span className="font-screen text-xs font-bold truncate tracking-wider max-w-[150px] xs:max-w-[220px] sm:max-w-none">
               {title}
             </span>
           </div>
@@ -277,7 +292,7 @@ export const RetroWindow: React.FC<RetroWindowProps> = ({
               onMinimize();
             }}
             title="Minimize to Taskbar"
-            className="w-5 h-5 bg-white border-2 border-black flex items-center justify-center cursor-pointer hover:bg-yellow-300 shadow-xs transition-colors"
+            className="w-6 h-6 sm:w-5 sm:h-5 bg-white border-2 border-black flex items-center justify-center cursor-pointer hover:bg-yellow-300 shadow-xs transition-colors"
           >
             <div className="w-2.5 h-0.5 bg-black" />
           </button>
@@ -290,7 +305,7 @@ export const RetroWindow: React.FC<RetroWindowProps> = ({
               onCollapseToggle();
             }}
             title={isCollapsed ? 'Unroll Window' : 'Roll up Window'}
-            className="w-5 h-5 bg-white border-2 border-black flex flex-col justify-center items-center gap-[1.5px] cursor-pointer hover:bg-blue-300 shadow-xs transition-colors"
+            className="hidden sm:flex w-5 h-5 bg-white border-2 border-black flex-col justify-center items-center gap-[1.5px] cursor-pointer hover:bg-blue-300 shadow-xs transition-colors"
           >
             <div className="w-2.5 h-[1.5px] bg-black" />
             <div className="w-2.5 h-[1.5px] bg-black" />
@@ -304,7 +319,7 @@ export const RetroWindow: React.FC<RetroWindowProps> = ({
               onZoomToggle();
             }}
             title={isZoomed ? 'Restore Window' : 'Zoom Window'}
-            className="w-5 h-5 bg-white border-2 border-black flex items-center justify-center cursor-pointer hover:bg-emerald-300 shadow-xs transition-colors"
+            className="hidden sm:flex w-5 h-5 bg-white border-2 border-black items-center justify-center cursor-pointer hover:bg-emerald-300 shadow-xs transition-colors"
           >
             <div className="w-2.5 h-2.5 border-2 border-black" />
           </button>
@@ -317,7 +332,7 @@ export const RetroWindow: React.FC<RetroWindowProps> = ({
               onClose();
             }}
             title="Close Window (Esc)"
-            className="w-5 h-5 ml-1 bg-white hover:bg-red-600 hover:text-white text-black border-2 border-black flex items-center justify-center cursor-pointer font-mono text-[11px] font-black transition-colors shadow-xs group"
+            className="hidden sm:flex w-5 h-5 ml-1 bg-white hover:bg-red-600 hover:text-white text-black border-2 border-black items-center justify-center cursor-pointer font-mono text-[11px] font-black transition-colors shadow-xs group"
           >
             <span className="leading-none group-hover:scale-110">✕</span>
           </button>
@@ -341,7 +356,7 @@ export const RetroWindow: React.FC<RetroWindowProps> = ({
             </span>
           </div>
 
-          <div className="flex items-center gap-2 pr-6 my-auto">
+          <div className="flex items-center gap-2 pr-2 sm:pr-6 my-auto">
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -357,7 +372,7 @@ export const RetroWindow: React.FC<RetroWindowProps> = ({
           </div>
 
           {/* Resize Corner Grip on far right */}
-          {!isZoomed && (
+          {!isZoomed && !isMobile && (
             <div
               onPointerDown={handlePointerDownResize}
               onPointerMove={handlePointerMoveResize}
@@ -376,3 +391,4 @@ export const RetroWindow: React.FC<RetroWindowProps> = ({
     </div>
   );
 };
+

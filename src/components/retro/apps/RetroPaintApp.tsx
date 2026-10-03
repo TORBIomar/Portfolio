@@ -28,37 +28,41 @@ export const RetroPaintApp: React.FC = () => {
     ctx.strokeRect(18, 18, canvas.width - 36, 60);
   }, []);
 
-  const getCanvasCoords = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  const getCanvasCoords = (clientX: number, clientY: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return { x: 0, y: 0 };
     const rect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / rect.width;
     const scaleY = canvas.height / rect.height;
     return {
-      x: (e.clientX - rect.left) * scaleX,
-      y: (e.clientY - rect.top) * scaleY,
+      x: (clientX - rect.left) * scaleX,
+      y: (clientY - rect.top) * scaleY,
     };
   };
 
-  const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  const handlePointerDown = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
     setIsDrawing(true);
-    const coords = getCanvasCoords(e);
+    const coords = getCanvasCoords(e.clientX, e.clientY);
     lastPosRef.current = coords;
     draw(coords.x, coords.y);
   };
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  const handlePointerMove = (e: React.PointerEvent<HTMLCanvasElement>) => {
     if (!isDrawing) return;
-    const coords = getCanvasCoords(e);
+    const coords = getCanvasCoords(e.clientX, e.clientY);
     if (lastPosRef.current) {
       drawLine(lastPosRef.current.x, lastPosRef.current.y, coords.x, coords.y);
     }
     lastPosRef.current = coords;
   };
 
-  const handleMouseUp = () => {
+  const handlePointerUp = (e: React.PointerEvent<HTMLCanvasElement>) => {
     setIsDrawing(false);
     lastPosRef.current = null;
+    try {
+      (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+    } catch {}
   };
 
   const drawLine = (x0: number, y0: number, x1: number, y1: number) => {
@@ -151,16 +155,15 @@ export const RetroPaintApp: React.FC = () => {
       </div>
 
       {/* Canvas Area */}
-      <div className="flex-1 bg-[#737373] p-5 flex items-center justify-center overflow-auto">
+      <div className="flex-1 bg-[#737373] p-2 sm:p-5 flex items-center justify-center overflow-auto">
         <canvas
           ref={canvasRef}
           width={760}
           height={480}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
-          className="border-3 border-black shadow-[6px_6px_0px_#000000] bg-white cursor-crosshair touch-none"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          className="border-3 border-black shadow-[6px_6px_0px_#000000] bg-white cursor-crosshair touch-none max-w-full h-auto"
         />
       </div>
 

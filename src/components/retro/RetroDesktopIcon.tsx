@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { RetroDesktopIcon as IRetroDesktopIcon } from '../../types/retro';
 import { RetroIcon } from './RetroIcon';
 import { retroSound } from '../../utils/retroSound';
+import { useIsMobile } from '../../utils/useIsMobile';
 
 interface RetroDesktopIconProps {
   item: IRetroDesktopIcon;
@@ -18,6 +19,7 @@ export const RetroDesktopIcon: React.FC<RetroDesktopIconProps> = ({
   onOpen,
   onPositionChange,
 }) => {
+  const isMobile = useIsMobile();
   const [isDragging, setIsDragging] = useState(false);
   const dragStartRef = useRef<{ startX: number; startY: number; posX: number; posY: number }>({
     startX: 0,
@@ -29,6 +31,7 @@ export const RetroDesktopIcon: React.FC<RetroDesktopIconProps> = ({
   const lastClickTimeRef = useRef<number>(0);
 
   const handlePointerDown = (e: React.PointerEvent) => {
+    if (isMobile) return;
     e.stopPropagation();
     onSelect();
     setIsDragging(true);
@@ -66,11 +69,17 @@ export const RetroDesktopIcon: React.FC<RetroDesktopIconProps> = ({
   // Click & Tap Handling
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    retroSound.playClick();
+
+    if (isMobile) {
+      onSelect();
+      onOpen();
+      return;
+    }
+
     const now = Date.now();
     const isDoubleClick = now - lastClickTimeRef.current < 380;
     lastClickTimeRef.current = now;
-
-    retroSound.playClick();
 
     if (isDoubleClick || isSelected) {
       onOpen();
@@ -79,20 +88,26 @@ export const RetroDesktopIcon: React.FC<RetroDesktopIconProps> = ({
     }
   };
 
-  return (
-    <div
-      style={{
+  const containerStyle: React.CSSProperties = isMobile
+    ? {}
+    : {
         position: 'absolute',
         top: `${item.position.y}px`,
         left: `${item.position.x}px`,
-      }}
+      };
+
+  return (
+    <div
+      style={containerStyle}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onClick={handleClick}
-      className={`w-[124px] p-1 flex flex-col items-center justify-start cursor-pointer select-none group z-10 transition-transform ${
-        isDragging ? 'scale-105 z-30 opacity-90' : 'hover:-translate-y-0.5'
-      }`}
+      className={`${
+        isMobile
+          ? 'relative w-full max-w-[130px] mx-auto p-1.5 flex flex-col items-center justify-start cursor-pointer select-none active:scale-95 transition-transform'
+          : 'w-[124px] p-1 flex flex-col items-center justify-start cursor-pointer select-none group z-10 transition-transform'
+      } ${!isMobile && isDragging ? 'scale-105 z-30 opacity-90' : !isMobile ? 'hover:-translate-y-0.5' : ''}`}
     >
       {/* Icon Graphic Container */}
       <div

@@ -5,6 +5,7 @@ import { retroSound } from '../../../utils/retroSound';
 
 export const RetroExperienceApp: React.FC = () => {
   const [selectedExpId, setSelectedExpId] = useState<string>(EXPERIENCES_DATA[0].id);
+  const [mobileTab, setMobileTab] = useState<'timeline' | 'details'>('timeline');
 
   const selectedExp =
     EXPERIENCES_DATA.find((e) => e.id === selectedExpId) || EXPERIENCES_DATA[0];
@@ -28,15 +29,41 @@ export const RetroExperienceApp: React.FC = () => {
           </div>
         </div>
 
-        <div className="text-xs font-mono bg-white px-3 py-1 border-2 border-black shadow-xs font-bold">
+        <div className="hidden sm:block text-xs font-mono bg-white px-3 py-1 border-2 border-black shadow-xs font-bold">
           3 Log Entries Recorded
         </div>
+      </div>
+
+      {/* Mobile Mode Switcher */}
+      <div className="flex md:hidden border-b-2 border-black bg-neutral-200">
+        <button
+          onClick={() => {
+            retroSound.playClick();
+            setMobileTab('timeline');
+          }}
+          className={`flex-1 py-2 text-xs font-bold text-center border-r-2 border-black ${
+            mobileTab === 'timeline' ? 'bg-white text-black' : 'bg-neutral-200 text-neutral-600'
+          }`}
+        >
+          📜 Career Timeline (3)
+        </button>
+        <button
+          onClick={() => {
+            retroSound.playClick();
+            setMobileTab('details');
+          }}
+          className={`flex-1 py-2 text-xs font-bold text-center ${
+            mobileTab === 'details' ? 'bg-white text-black' : 'bg-neutral-200 text-neutral-600'
+          }`}
+        >
+          🔍 Role Inspector
+        </button>
       </div>
 
       {/* Main Split Layout */}
       <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
         {/* Left: Timeline List */}
-        <div className="w-full md:w-5/12 border-b-2 md:border-b-0 md:border-r-2 border-black bg-white overflow-y-auto p-3 space-y-2.5">
+        <div className={`w-full md:w-5/12 border-b-2 md:border-b-0 md:border-r-2 border-black bg-white overflow-y-auto p-3 space-y-2.5 ${mobileTab === 'details' ? 'hidden md:block' : 'block'}`}>
           {EXPERIENCES_DATA.map((exp) => {
             const isSelected = exp.id === selectedExpId;
             return (
@@ -45,6 +72,7 @@ export const RetroExperienceApp: React.FC = () => {
                 onClick={() => {
                   retroSound.playClick();
                   setSelectedExpId(exp.id);
+                  setMobileTab('details');
                 }}
                 className={`p-3.5 border-2 cursor-pointer transition-all select-none ${
                   isSelected
@@ -74,7 +102,21 @@ export const RetroExperienceApp: React.FC = () => {
         </div>
 
         {/* Right: Detailed Event Inspector */}
-        <div className="flex-1 bg-[#FAFAFA] overflow-y-auto p-4 space-y-4">
+        <div className={`flex-1 bg-[#FAFAFA] overflow-y-auto p-4 space-y-4 ${mobileTab === 'timeline' ? 'hidden md:block' : 'block'}`}>
+          {/* Mobile Back Button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => {
+                retroSound.playClick();
+                setMobileTab('timeline');
+              }}
+              className="px-3 py-1.5 bg-white hover:bg-neutral-100 border-2 border-black font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer active:translate-y-0.5"
+            >
+              <span className="font-mono text-sm leading-none">‹</span>
+              <span>Back to Timeline</span>
+            </button>
+          </div>
+
           {/* Header Card */}
           <div className="p-4 bg-white border-2 border-black shadow-[4px_4px_0px_#000]">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b-2 border-black pb-2.5 mb-2.5">

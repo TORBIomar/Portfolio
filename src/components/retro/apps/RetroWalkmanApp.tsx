@@ -166,47 +166,47 @@ export const RetroWalkmanApp: React.FC = () => {
         </div>
 
         {/* Cassette Tape Window */}
-        <div className="bg-[#1C1C1C] border-2 border-black p-4 relative flex items-center justify-between rounded-sm overflow-hidden shadow-inner h-32">
+        <div className="bg-[#1C1C1C] border-2 border-black p-2 sm:p-4 relative flex items-center justify-between rounded-sm overflow-hidden shadow-inner h-28 sm:h-32">
           {/* Tape Label Sticker */}
-          <div className="absolute top-1.5 left-3 right-3 bg-[#EBE0C5] text-black px-2.5 py-1 text-xs font-mono border border-black flex justify-between">
+          <div className="absolute top-1.5 left-2 right-2 sm:left-3 sm:right-3 bg-[#EBE0C5] text-black px-2 sm:px-2.5 py-1 text-[11px] sm:text-xs font-mono border border-black flex justify-between">
             <span className="font-bold truncate">{currentTrack.title}</span>
-            <span className="shrink-0 font-bold">SIDE A</span>
+            <span className="shrink-0 font-bold ml-2">SIDE A</span>
           </div>
 
           {/* Left Spool */}
-          <div className="relative z-10 ml-6 flex flex-col items-center">
+          <div className="relative z-10 ml-1 sm:ml-6 flex flex-col items-center">
             <div
               style={{ transform: `rotate(${spoolAngle}deg)` }}
-              className="w-16 h-16 rounded-full border-4 border-white bg-black flex items-center justify-center relative shadow-sm"
+              className="w-12 h-12 sm:w-16 sm:h-16 rounded-full border-2 sm:border-4 border-white bg-black flex items-center justify-center relative shadow-sm"
             >
-              <div className="w-7 h-7 rounded-full bg-neutral-700 border-2 border-white flex items-center justify-center">
-                <div className="w-2 h-2 bg-white" />
+              <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-neutral-700 border border-white flex items-center justify-center">
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white" />
               </div>
-              <div className="absolute w-full h-1 bg-white/40" />
-              <div className="absolute h-full w-1 bg-white/40" />
+              <div className="absolute w-full h-0.5 sm:h-1 bg-white/40" />
+              <div className="absolute h-full w-0.5 sm:w-1 bg-white/40" />
             </div>
-            <div className="w-12 h-2 bg-neutral-900 border border-neutral-600 mt-1" />
+            <div className="w-8 sm:w-12 h-1.5 sm:h-2 bg-neutral-900 border border-neutral-600 mt-1" />
           </div>
 
           {/* Center Magnetic Tape Bridge */}
-          <div className="flex-1 px-3 flex flex-col items-center justify-center z-10">
-            <div className="w-full h-3.5 bg-[#422B19] border border-neutral-800 shadow-inner" />
-            <span className="text-[10px] font-mono text-neutral-400 mt-1">NORMAL BIAS • 120µs</span>
+          <div className="flex-1 px-1 sm:px-3 flex flex-col items-center justify-center z-10">
+            <div className="w-full h-2.5 sm:h-3.5 bg-[#422B19] border border-neutral-800 shadow-inner" />
+            <span className="text-[8px] sm:text-[10px] font-mono text-neutral-400 mt-1">NORMAL BIAS • 120µs</span>
           </div>
 
           {/* Right Spool */}
-          <div className="relative z-10 mr-6 flex flex-col items-center">
+          <div className="relative z-10 mr-1 sm:mr-6 flex flex-col items-center">
             <div
               style={{ transform: `rotate(${spoolAngle}deg)` }}
-              className="w-16 h-16 rounded-full border-4 border-white bg-black flex items-center justify-center relative shadow-sm"
+              className="w-12 h-12 sm:w-16 sm:h-16 rounded-full border-2 sm:border-4 border-white bg-black flex items-center justify-center relative shadow-sm"
             >
-              <div className="w-7 h-7 rounded-full bg-neutral-700 border-2 border-white flex items-center justify-center">
-                <div className="w-2 h-2 bg-white" />
+              <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-neutral-700 border border-white flex items-center justify-center">
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white" />
               </div>
-              <div className="absolute w-full h-1 bg-white/40" />
-              <div className="absolute h-full w-1 bg-white/40" />
+              <div className="absolute w-full h-0.5 sm:h-1 bg-white/40" />
+              <div className="absolute h-full w-0.5 sm:w-1 bg-white/40" />
             </div>
-            <div className="w-12 h-2 bg-neutral-900 border border-neutral-600 mt-1" />
+            <div className="w-8 sm:w-12 h-1.5 sm:h-2 bg-neutral-900 border border-neutral-600 mt-1" />
           </div>
         </div>
 

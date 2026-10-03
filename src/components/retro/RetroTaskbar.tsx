@@ -310,7 +310,7 @@ export const RetroTaskbar: React.FC<RetroTaskbarProps> = ({
         </div>
 
         {/* Center: Open Window Tabs with Close Button */}
-        <div className="flex-1 flex items-center gap-1.5 overflow-x-auto px-2 mx-1 max-w-[calc(100%-250px)] no-scrollbar my-auto">
+        <div className="flex-1 flex items-center gap-1.5 overflow-x-auto px-1 sm:px-2 mx-1 max-w-[calc(100%-90px)] sm:max-w-[calc(100%-250px)] no-scrollbar my-auto">
           {windows.map((win) => {
             const isActive = activeWindowId === win.id && !win.isMinimized;
             return (
@@ -320,7 +320,7 @@ export const RetroTaskbar: React.FC<RetroTaskbarProps> = ({
                   retroSound.playClick();
                   onRestoreOrMinimizeWindow(win.id);
                 }}
-                className={`group h-8 pl-2.5 pr-2 my-auto flex items-center gap-1.5 border-2 border-black text-xs font-bold cursor-pointer transition-all shrink-0 max-w-[210px] min-w-[120px] shadow-xs ${
+                className={`group h-8 pl-2 sm:pl-2.5 pr-1.5 sm:pr-2 my-auto flex items-center gap-1.5 border-2 border-black text-xs font-bold cursor-pointer transition-all shrink-0 max-w-[150px] sm:max-w-[210px] min-w-[90px] sm:min-w-[120px] shadow-xs ${
                   isActive
                     ? 'bg-black text-white shadow-inner scale-102 ring-1 ring-yellow-400'
                     : win.isMinimized
@@ -330,12 +330,12 @@ export const RetroTaskbar: React.FC<RetroTaskbarProps> = ({
                 title={win.title}
               >
                 <div className="shrink-0">
-                  <RetroIcon name={getAppIcon(win.appType) as any} size={16} />
+                  <RetroIcon name={getAppIcon(win.appType) as any} size={15} />
                 </div>
                 
                 {/* Active Indicator Light */}
                 <span
-                  className={`w-2 h-2 rounded-full shrink-0 ${
+                  className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full shrink-0 ${
                     isActive
                       ? 'bg-emerald-400 shadow-[0_0_6px_#34D399] animate-pulse'
                       : win.isMinimized
@@ -345,7 +345,7 @@ export const RetroTaskbar: React.FC<RetroTaskbarProps> = ({
                 />
 
                 {/* Window Name */}
-                <span className="truncate flex-1 font-screen text-[11px] tracking-wide">
+                <span className="truncate flex-1 font-screen text-[10px] sm:text-[11px] tracking-wide">
                   {getCleanTitle(win.title)}
                 </span>
 
@@ -357,7 +357,7 @@ export const RetroTaskbar: React.FC<RetroTaskbarProps> = ({
                     onCloseWindow(win.id);
                   }}
                   title="Close Tab"
-                  className={`w-4.5 h-4.5 my-auto ml-1 flex items-center justify-center text-[10px] font-mono font-bold border transition-colors cursor-pointer ${
+                  className={`w-4 h-4 sm:w-4.5 sm:h-4.5 my-auto ml-0.5 sm:ml-1 flex items-center justify-center text-[9px] sm:text-[10px] font-mono font-bold border transition-colors cursor-pointer ${
                     isActive
                       ? 'border-neutral-600 hover:bg-rose-600 hover:text-white hover:border-black'
                       : 'border-neutral-300 hover:bg-rose-500 hover:text-white hover:border-black'
@@ -370,8 +370,8 @@ export const RetroTaskbar: React.FC<RetroTaskbarProps> = ({
           })}
         </div>
 
-        {/* Right: Controls & Clock */}
-        <div className="flex items-center gap-2 shrink-0 text-xs my-auto">
+        {/* Right: Controls & Clock (Compact on mobile) */}
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 text-xs my-auto">
           {/* Quick Theme Cycle Button */}
           <button
             onClick={() => {
@@ -379,36 +379,39 @@ export const RetroTaskbar: React.FC<RetroTaskbarProps> = ({
               onThemeCycle();
             }}
             title="Cycle Retro Wallpaper Palette"
-            className="px-3 py-1.5 my-auto bg-white border-2 border-black font-bold text-[10px] hover:bg-yellow-200 cursor-pointer shadow-[1px_1px_0px_#000] active:translate-y-0.5"
+            className="px-2 sm:px-3 py-1 sm:py-1.5 my-auto bg-white border-2 border-black font-bold text-[10px] hover:bg-yellow-200 cursor-pointer shadow-[1px_1px_0px_#000] active:translate-y-0.5"
           >
-            {getThemeDisplayName()}
+            <span className="sm:hidden text-xs">
+              {theme === 'vaporwave-sunset' ? '🌸' : theme === 'win95-teal' ? '🌲' : theme === 'candy-pastel' ? '🍬' : theme === 'cyber-matrix' ? '⚡' : theme === 'imac-bondi' ? '🌊' : '🕹️'}
+            </span>
+            <span className="hidden sm:inline">{getThemeDisplayName()}</span>
           </button>
 
-          {/* CRT Scanline Toggle */}
+          {/* CRT Scanline Toggle (Desktop only) */}
           <button
             onClick={() => {
               retroSound.playClick();
               onToggleScanlines();
             }}
             title={showScanlines ? 'Disable CRT Scanlines' : 'Enable CRT Scanlines'}
-            className={`px-2.5 py-1.5 my-auto border-2 border-black font-bold text-[10px] cursor-pointer shadow-[1px_1px_0px_#000] ${
+            className={`hidden sm:block px-2.5 py-1.5 my-auto border-2 border-black font-bold text-[10px] cursor-pointer shadow-[1px_1px_0px_#000] ${
               showScanlines ? 'bg-emerald-300 text-black' : 'bg-white text-neutral-600 hover:bg-neutral-100'
             }`}
           >
             CRT
           </button>
 
-          {/* Sound Toggle */}
+          {/* Sound Toggle (Desktop only - mobile has it in top bar) */}
           <button
             onClick={handleMuteToggle}
             title={isMuted ? 'Unmute Sound' : 'Mute Sound'}
-            className="p-1.5 my-auto bg-white border-2 border-black cursor-pointer hover:bg-neutral-100 shadow-[1px_1px_0px_#000]"
+            className="hidden sm:block p-1.5 my-auto bg-white border-2 border-black cursor-pointer hover:bg-neutral-100 shadow-[1px_1px_0px_#000]"
           >
             <RetroIcon name={isMuted ? 'speaker-muted' : 'speaker'} size={14} />
           </button>
 
-          {/* Digital Clock */}
-          <div className="bg-white border-2 border-black px-2.5 py-1.5 my-auto font-mono text-[11px] font-bold min-w-[66px] text-center shadow-[1px_1px_0px_#000]">
+          {/* Digital Clock (Desktop only - mobile has it in top bar) */}
+          <div className="hidden sm:block bg-white border-2 border-black px-2.5 py-1.5 my-auto font-mono text-[11px] font-bold min-w-[66px] text-center shadow-[1px_1px_0px_#000]">
             {timeStr}
           </div>
         </div>

@@ -15,30 +15,30 @@ export const RetroAboutApp: React.FC<RetroAboutAppProps> = ({ onOpenApp }) => {
   return (
     <div className="flex flex-col h-full bg-[#F8F9FA] text-black font-screen text-xs p-4 overflow-y-auto">
       {/* 1. Cheerful Colorful Hero Header with Generous Padding */}
-      <div className="p-4 bg-gradient-to-r from-amber-100 via-rose-100 to-purple-100 border-2 border-black shadow-[4px_4px_0px_#000000] mb-3 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <div className="p-2.5 border-2 border-black bg-white shadow-xs rounded-sm shrink-0">
-            <RetroIcon name="mac" size={52} />
+      <div className="p-3 sm:p-4 bg-gradient-to-r from-amber-100 via-rose-100 to-purple-100 border-2 border-black shadow-[4px_4px_0px_#000000] mb-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <div className="p-2 sm:p-2.5 border-2 border-black bg-white shadow-xs rounded-sm shrink-0">
+            <RetroIcon name="mac" size={44} />
           </div>
           <div>
-            <div className="flex items-center gap-2.5">
-              <h1 className="font-screen text-lg font-bold text-black tracking-wide">{PERSONAL_INFO.name}</h1>
-              <span className="text-[10px] bg-purple-700 text-white px-2 py-0.5 font-mono font-bold rounded-sm border border-black shadow-xs">
+            <div className="flex items-center gap-2">
+              <h1 className="font-screen text-base sm:text-lg font-bold text-black tracking-wide">{PERSONAL_INFO.name}</h1>
+              <span className="text-[9px] sm:text-[10px] bg-purple-700 text-white px-1.5 sm:px-2 py-0.5 font-mono font-bold rounded-sm border border-black shadow-xs">
                 PRO v7.5
               </span>
             </div>
-            <p className="font-bold text-sm text-purple-900 mt-0.5">{PERSONAL_INFO.titleDisplay}</p>
-            <p className="text-xs text-neutral-600 font-mono mt-1">{PERSONAL_INFO.location}</p>
+            <p className="font-bold text-xs sm:text-sm text-purple-900 mt-0.5">{PERSONAL_INFO.titleDisplay}</p>
+            <p className="text-[11px] sm:text-xs text-neutral-600 font-mono mt-0.5">{PERSONAL_INFO.location}</p>
           </div>
         </div>
 
         {/* Status Pill */}
-        <div className="flex flex-col items-end">
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-100 border-2 border-emerald-800 text-emerald-950 font-bold text-xs shadow-xs">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
+        <div className="flex flex-col items-start sm:items-end w-full sm:w-auto pt-1 sm:pt-0 border-t sm:border-t-0 border-neutral-400">
+          <span className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 bg-emerald-100 border-2 border-emerald-800 text-emerald-950 font-bold text-[11px] sm:text-xs shadow-xs">
+            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500 animate-ping" />
             <span>Open for PFE Internship (Feb 2027)</span>
           </span>
-          <span className="text-[10px] text-neutral-600 font-mono mt-1">&amp; Full-Time Software / DevOps</span>
+          <span className="text-[9px] sm:text-[10px] text-neutral-600 font-mono mt-0.5">&amp; Full-Time Software / DevOps</span>
         </div>
       </div>
 

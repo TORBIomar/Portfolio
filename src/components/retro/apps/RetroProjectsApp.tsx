@@ -9,6 +9,7 @@ export const RetroProjectsApp: React.FC = () => {
   const [categoryFilter, setCategoryFilter] = useState<'all' | 'featured' | 'software-engineering' | 'devops-automation'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+  const [mobileTab, setMobileTab] = useState<'list' | 'details'>('list');
 
   const filteredProjects = PROJECTS_DATA.filter((proj) => {
     const matchesFilter =
@@ -112,10 +113,36 @@ export const RetroProjectsApp: React.FC = () => {
         </div>
       </div>
 
+      {/* Mobile Mode Switcher */}
+      <div className="flex md:hidden border-b-2 border-black bg-neutral-200">
+        <button
+          onClick={() => {
+            retroSound.playClick();
+            setMobileTab('list');
+          }}
+          className={`flex-1 py-2 text-xs font-bold text-center border-r-2 border-black ${
+            mobileTab === 'list' ? 'bg-white text-black' : 'bg-neutral-200 text-neutral-600'
+          }`}
+        >
+          📁 Projects ({filteredProjects.length})
+        </button>
+        <button
+          onClick={() => {
+            retroSound.playClick();
+            setMobileTab('details');
+          }}
+          className={`flex-1 py-2 text-xs font-bold text-center ${
+            mobileTab === 'details' ? 'bg-white text-black' : 'bg-neutral-200 text-neutral-600'
+          }`}
+        >
+          🔍 Specifications
+        </button>
+      </div>
+
       {/* 2. Main Split Content with Generous Room */}
       <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
         {/* Left: Project Explorer List */}
-        <div className="w-full md:w-5/12 border-b-2 md:border-b-0 md:border-r-2 border-black bg-white overflow-y-auto p-3 space-y-2">
+        <div className={`w-full md:w-5/12 border-b-2 md:border-b-0 md:border-r-2 border-black bg-white overflow-y-auto p-3 space-y-2 ${mobileTab === 'details' ? 'hidden md:block' : 'block'}`}>
           {viewMode === 'list' ? (
             filteredProjects.map((proj) => {
               const isSelected = proj.id === selectedProjectId;
@@ -125,6 +152,7 @@ export const RetroProjectsApp: React.FC = () => {
                   onClick={() => {
                     retroSound.playClick();
                     setSelectedProjectId(proj.id);
+                    setMobileTab('details');
                   }}
                   className={`p-3.5 border-2 cursor-pointer select-none transition-all flex items-start gap-3 ${
                     isSelected
@@ -173,6 +201,7 @@ export const RetroProjectsApp: React.FC = () => {
                     onClick={() => {
                       retroSound.playClick();
                       setSelectedProjectId(proj.id);
+                      setMobileTab('details');
                     }}
                     className={`p-3 flex flex-col items-center justify-center text-center cursor-pointer border-2 transition-all ${
                       isSelected
@@ -192,9 +221,23 @@ export const RetroProjectsApp: React.FC = () => {
         </div>
 
         {/* Right: Technical Inspector Pane */}
-        <div className="w-full md:w-7/12 flex-1 bg-[#FAFAFA] overflow-y-auto p-4 flex flex-col justify-between">
+        <div className={`w-full md:w-7/12 flex-1 bg-[#FAFAFA] overflow-y-auto p-4 flex flex-col justify-between ${mobileTab === 'list' ? 'hidden md:flex' : 'flex'}`}>
           {selectedProject ? (
             <div className="space-y-4">
+              {/* Mobile Back Button */}
+              <div className="md:hidden">
+                <button
+                  onClick={() => {
+                    retroSound.playClick();
+                    setMobileTab('list');
+                  }}
+                  className="px-3 py-1.5 bg-white hover:bg-neutral-100 border-2 border-black font-bold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer active:translate-y-0.5"
+                >
+                  <span className="font-mono text-sm leading-none">‹</span>
+                  <span>Back to Projects List</span>
+                </button>
+              </div>
+
               {/* Header Box */}
               <div className="p-4 bg-white border-2 border-black shadow-[4px_4px_0px_#000]">
                 <div className="flex flex-wrap items-start justify-between gap-2 border-b-2 border-black pb-2.5 mb-2.5">

@@ -217,8 +217,8 @@ export const RetroMenuBar: React.FC<RetroMenuBarProps> = ({
           )}
         </div>
 
-        {/* 3. File Menu */}
-        <div className="relative h-full flex items-center">
+        {/* 3. File Menu (Desktop only) */}
+        <div className="hidden md:flex relative h-full items-center">
           <button
             onClick={(e) => handleMenuClick(e, 'file')}
             className={`px-2 h-full font-bold cursor-pointer ${
@@ -229,7 +229,7 @@ export const RetroMenuBar: React.FC<RetroMenuBarProps> = ({
           </button>
 
           {activeMenu === 'file' && (
-            <div className="absolute top-7 left-0 w-52 bg-white border-2 border-black shadow-[4px_4px_0px_#000] py-1.5 z-50 text-xs">
+            <div className="absolute top-7 left-0 w-52 max-w-[calc(100vw-24px)] bg-white border-2 border-black shadow-[4px_4px_0px_#000] py-1.5 z-50 text-xs">
               <a
                 href="/OMAR-TORBI-RESUME-EN.pdf"
                 download="OMAR-TORBI-RESUME-EN.pdf"
@@ -260,8 +260,8 @@ export const RetroMenuBar: React.FC<RetroMenuBarProps> = ({
           )}
         </div>
 
-        {/* 3. View / Themes Menu */}
-        <div className="relative h-full flex items-center">
+        {/* 4. View / Themes Menu (Desktop only) */}
+        <div className="hidden md:flex relative h-full items-center">
           <button
             onClick={(e) => handleMenuClick(e, 'view')}
             className={`px-2.5 h-full font-bold cursor-pointer ${
@@ -272,7 +272,7 @@ export const RetroMenuBar: React.FC<RetroMenuBarProps> = ({
           </button>
 
           {activeMenu === 'view' && (
-            <div className="absolute top-7 left-0 w-60 bg-white border-2 border-black shadow-[4px_4px_0px_#000] py-1.5 z-50 text-xs">
+            <div className="absolute top-7 left-0 w-60 max-w-[calc(100vw-24px)] bg-white border-2 border-black shadow-[4px_4px_0px_#000] py-1.5 z-50 text-xs">
               <div className="px-3.5 py-1 font-bold text-[10px] uppercase tracking-wider text-neutral-500">
                 Colorful Wallpaper Palettes:
               </div>
@@ -313,8 +313,8 @@ export const RetroMenuBar: React.FC<RetroMenuBarProps> = ({
           )}
         </div>
 
-        {/* 4. Special Menu */}
-        <div className="relative h-full flex items-center">
+        {/* 5. Special Menu (Desktop only) */}
+        <div className="hidden md:flex relative h-full items-center">
           <button
             onClick={(e) => handleMenuClick(e, 'special')}
             className={`px-2.5 h-full font-bold cursor-pointer ${
