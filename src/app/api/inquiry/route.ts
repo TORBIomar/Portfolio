@@ -35,10 +35,12 @@ export async function POST(request: Request) {
       );
     }
 
-    const recipientEmail = PERSONAL_INFO.email || "torbi.dev@outlook.com";
-    const endpoint = `https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`;
+    const accessKey =
+      process.env.WEB3FORMS_ACCESS_KEY ||
+      process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
+      "9cc52726-2085-4a72-9421-2b644a6d0c9b";
 
-    const formSubmitRes = await fetch(endpoint, {
+    const web3formsRes = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,23 +51,32 @@ export async function POST(request: Request) {
         Referer: "https://www.omartorbi.engineer/",
       },
       body: JSON.stringify({
+        access_key: accessKey,
         name: name.trim(),
         email: email.trim(),
-        _subject: subject?.trim() || `Portfolio Inquiry from ${name.trim()}`,
+        subject: subject?.trim() || `Portfolio Inquiry from ${name.trim()}`,
         message: message.trim(),
-        _template: "table",
-        _captcha: "false",
+        from_name: `${name.trim()} (Portfolio)`,
       }),
     });
 
-    const resData = await formSubmitRes.json().catch(() => ({}));
+    const resData = await web3formsRes.json().catch(() => ({}));
 
-    // FormSubmit returns status 200/JSON even if activation is pending
-    return NextResponse.json({
-      success: true,
-      message: "Inquiry dispatched successfully.",
-      details: resData,
-    });
+    if (web3formsRes.ok && resData.success) {
+      return NextResponse.json({
+        success: true,
+        message: "Inquiry dispatched successfully.",
+      });
+    }
+
+    console.error("Web3Forms API error response:", resData);
+    return NextResponse.json(
+      {
+        success: false,
+        error: resData.message || "Failed to deliver inquiry.",
+      },
+      { status: 502 }
+    );
   } catch (error: any) {
     console.error("Inquiry API error:", error);
     return NextResponse.json(

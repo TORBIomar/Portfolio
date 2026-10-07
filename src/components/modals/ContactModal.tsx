@@ -55,24 +55,28 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
 
       // 2. Direct fallback
       if (!isSuccess) {
-        const fallbackRes = await fetch(
-          `https://formsubmit.co/ajax/${encodeURIComponent(PERSONAL_INFO.email)}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify({
-              name: name.trim(),
-              email: email.trim(),
-              _subject: `Contact Modal Inquiry from ${name.trim()}`,
-              message: message.trim(),
-              _captcha: "false",
-            }),
-          }
-        );
-        if (fallbackRes.ok) isSuccess = true;
+        const accessKey =
+          process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY ||
+          "9cc52726-2085-4a72-9421-2b644a6d0c9b";
+        const fallbackRes = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            access_key: accessKey,
+            name: name.trim(),
+            email: email.trim(),
+            subject: `Contact Modal Inquiry from ${name.trim()}`,
+            message: message.trim(),
+            from_name: `${name.trim()} (Portfolio)`,
+          }),
+        });
+        if (fallbackRes.ok) {
+          const fbData = await fallbackRes.json().catch(() => ({}));
+          if (fbData.success) isSuccess = true;
+        }
       }
 
       if (isSuccess) {
