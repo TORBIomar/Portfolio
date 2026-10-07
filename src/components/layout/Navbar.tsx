@@ -19,19 +19,9 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dossierOpen, setDossierOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
 
   const navLinks = [
     { label: "About", href: "#about" },
@@ -42,13 +32,9 @@ export const Navbar: React.FC<NavbarProps> = () => {
   ];
 
   return (
-    <header className="fixed top-3 sm:top-4 left-0 right-0 z-40 flex justify-center px-3 sm:px-6 pointer-events-none">
+    <header className="fixed top-3 sm:top-4 left-0 right-0 z-50 flex justify-center px-3 sm:px-6 pointer-events-none">
       <div
-        className={`relative w-full max-w-5xl rounded-full transition-all duration-300 pointer-events-auto ${
-          isScrolled
-            ? "bg-[#fcfcfc]/95 dark:bg-[#09090b]/95 backdrop-blur-md border border-zinc-200 dark:border-white/10 shadow-[0_12px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.6)] py-2 sm:py-2.5 px-4 sm:px-6"
-            : "bg-[#fcfcfc]/90 dark:bg-[#09090b]/90 backdrop-blur-md border border-zinc-200/80 dark:border-white/10 shadow-md py-2.5 sm:py-3 px-4 sm:px-6"
-        } flex items-center justify-between gap-4`}
+        className="relative w-full max-w-5xl rounded-full bg-[#fcfcfc]/95 dark:bg-[#09090b]/95 backdrop-blur-md border border-zinc-200 dark:border-white/10 shadow-[0_12px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.5)] py-2.5 px-4 sm:px-6 flex items-center justify-between gap-4 pointer-events-auto"
       >
         {/* Brand Left with official Logo image */}
         <a
