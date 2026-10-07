@@ -174,31 +174,32 @@ export const ReachOutSection: React.FC = () => {
           {/* Left Column: Direct Channels & Telemetry (5 Cols) */}
           <div className="lg:col-span-5 space-y-4">
             
-            {/* Email Card */}
-            <div className="p-5 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between shadow-2xs hover:border-zinc-400 dark:hover:border-zinc-700 transition-colors">
+            {/* Email Card (Copies to clipboard and triggers inquiry form without opening mail app) */}
+            <div
+              onClick={handleCopyEmail}
+              className="p-5 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between shadow-2xs hover:border-zinc-400 dark:hover:border-zinc-700 transition-colors cursor-pointer group"
+              title="Click to copy email address"
+            >
               <div className="flex items-center gap-3.5 overflow-hidden">
-                <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center text-black dark:text-white shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-900 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-800 flex items-center justify-center text-black dark:text-white shrink-0 transition-colors">
                   <Mail className="w-4 h-4" />
                 </div>
                 <div className="truncate">
-                  <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">
-                    Direct Email
+                  <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
+                    <span>Direct Email</span>
+                    <span className="text-[9px] text-zinc-400 font-sans">(Click to copy)</span>
                   </div>
-                  <a
-                    href={`mailto:${PERSONAL_INFO.email}`}
-                    className="font-mono text-xs sm:text-sm font-bold text-black dark:text-white hover:underline truncate block"
-                  >
+                  <div className="font-mono text-xs sm:text-sm font-bold text-black dark:text-white group-hover:underline truncate block">
                     {PERSONAL_INFO.email}
-                  </a>
+                  </div>
                 </div>
               </div>
-              <button
-                onClick={handleCopyEmail}
+              <div
                 className="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-black dark:hover:text-white cursor-pointer shrink-0 ml-2 transition-colors"
                 title="Copy email address"
               >
                 {copiedEmail ? <Check className="w-4 h-4 text-black dark:text-white" /> : <Copy className="w-4 h-4" />}
-              </button>
+              </div>
             </div>
 
             {/* Phone & WhatsApp Card */}
