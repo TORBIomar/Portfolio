@@ -31,9 +31,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased scroll-smooth`}
+      className={`dark ${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased scroll-smooth`}
+      data-theme="dark"
     >
-      <body className="min-h-full flex flex-col bg-[#fcfcfc] text-[#1a1a1a] selection:bg-neutral-900 selection:text-white">
+      <body className="min-h-full flex flex-col bg-[#000000] text-[#fafafa] selection:bg-white selection:text-black">
         {children}
       </body>
     </html>

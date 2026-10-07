@@ -10,7 +10,6 @@ import {
   FileText,
   Mail,
   Phone,
-  ArrowRight,
   Sparkles,
   Box,
   Server,
@@ -38,9 +37,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         e.preventDefault();
         sound.playClick();
         if (isOpen) onClose();
-        else {
-          // Open
-        }
       }
       if (e.key === "Escape" && isOpen) {
         onClose();
@@ -60,7 +56,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       icon: FileText,
       action: () => {
         window.open(PERSONAL_INFO.resumeUrlEn, "_blank");
-        showToast("Opening English Resume...");
+        showToast("Opening English Resume PDF");
       },
     },
     {
@@ -70,33 +66,33 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       icon: FileText,
       action: () => {
         window.open(PERSONAL_INFO.resumeUrlFr, "_blank");
-        showToast("Opening French CV...");
+        showToast("Opening French CV PDF");
       },
     },
     {
-      id: "copy-email",
+      id: "email",
       label: `Copy Email (${PERSONAL_INFO.email})`,
       category: "Contact",
       icon: Mail,
       action: () => {
         navigator.clipboard.writeText(PERSONAL_INFO.email);
-        showToast("Email copied to clipboard!");
+        showToast("Email address copied to clipboard!");
       },
     },
     {
-      id: "copy-phone",
+      id: "phone",
       label: `Copy Phone (${PERSONAL_INFO.phone})`,
       category: "Contact",
       icon: Phone,
       action: () => {
         navigator.clipboard.writeText(PERSONAL_INFO.phone);
-        showToast("Phone copied to clipboard!");
+        showToast("Phone number copied to clipboard!");
       },
     },
     {
       id: "github",
       label: "Open GitHub Profile (@TORBIomar)",
-      category: "Links",
+      category: "Social",
       icon: GithubIcon,
       action: () => {
         window.open(PERSONAL_INFO.github, "_blank");
@@ -104,8 +100,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     },
     {
       id: "linkedin",
-      label: "Open LinkedIn Profile (Omar Torbi)",
-      category: "Links",
+      label: "Open LinkedIn Profile (/in/omar-torbi)",
+      category: "Social",
       icon: LinkedinIcon,
       action: () => {
         window.open(PERSONAL_INFO.linkedin, "_blank");
@@ -113,30 +109,31 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     },
   ];
 
-  const filteredProjects = PROJECTS_DATA.filter((p) =>
-    p.title.toLowerCase().includes(query.toLowerCase()) ||
-    p.subtitle.toLowerCase().includes(query.toLowerCase()) ||
-    p.techStack.some((t) => t.toLowerCase().includes(query.toLowerCase()))
-  );
-
   const filteredActions = actions.filter((a) =>
     a.label.toLowerCase().includes(query.toLowerCase()) ||
     a.category.toLowerCase().includes(query.toLowerCase())
   );
 
+  const filteredProjects = PROJECTS_DATA.filter(
+    (p) =>
+      p.title.toLowerCase().includes(query.toLowerCase()) ||
+      p.subtitle.toLowerCase().includes(query.toLowerCase()) ||
+      p.techStack.some((t) => t.toLowerCase().includes(query.toLowerCase()))
+  );
+
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-24 px-4 bg-black/75 backdrop-blur-xs animate-in fade-in duration-150"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-2xl bg-white rounded-2xl border border-zinc-200 shadow-2xl overflow-hidden font-sans text-xs animate-in zoom-in-95 duration-100"
+        className="w-full max-w-2xl bg-white dark:bg-[#09090b] rounded-2xl border border-zinc-200 dark:border-white/10 shadow-2xl overflow-hidden font-sans text-xs animate-in zoom-in-95 duration-100 transition-colors"
         onClick={(e) => e.stopPropagation()}
       >
         
         {/* Search Input Bar */}
-        <div className="flex items-center px-4 py-3.5 border-b border-zinc-200 gap-3">
-          <Search className="w-4 h-4 text-zinc-400 shrink-0" />
+        <div className="flex items-center px-4 py-3.5 border-b border-zinc-200 dark:border-zinc-800 gap-3">
+          <Search className="w-4 h-4 text-zinc-400 dark:text-zinc-500 shrink-0" />
           <input
             type="text"
             value={query}
@@ -145,12 +142,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
               setQuery(e.target.value);
             }}
             placeholder="Search systems, commands, documents, or skills..."
-            className="w-full bg-transparent border-none text-sm font-sans text-black placeholder-zinc-400 outline-none"
+            className="w-full bg-transparent border-none text-sm font-sans text-black dark:text-white placeholder-zinc-400 dark:placeholder-zinc-500 outline-none"
             autoFocus
           />
           <button
             onClick={onClose}
-            className="p-1 rounded-md text-zinc-400 hover:text-black hover:bg-zinc-100 cursor-pointer"
+            className="p-1 rounded-md text-zinc-400 dark:text-zinc-500 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -162,7 +159,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           {/* Quick Actions */}
           {filteredActions.length > 0 && (
             <div>
-              <div className="px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-zinc-400">
+              <div className="px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
                 Actions &amp; Documents
               </div>
               <div className="space-y-0.5 mt-1">
@@ -176,13 +173,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                         item.action();
                         onClose();
                       }}
-                      className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-zinc-700 hover:bg-zinc-100 hover:text-black transition-colors text-left cursor-pointer"
+                      className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-black dark:hover:text-white transition-colors text-left cursor-pointer"
                     >
                       <div className="flex items-center gap-2.5">
-                        <Icon className="w-4 h-4 text-zinc-500" />
+                        <Icon className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />
                         <span className="font-medium">{item.label}</span>
                       </div>
-                      <span className="font-mono text-[10px] text-zinc-400">
+                      <span className="font-mono text-[10px] text-zinc-400 dark:text-zinc-500">
                         {item.category}
                       </span>
                     </button>
@@ -195,7 +192,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           {/* Systems & Projects */}
           {filteredProjects.length > 0 && (
             <div>
-              <div className="px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-zinc-400">
+              <div className="px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
                 Engineered Systems ({filteredProjects.length})
               </div>
               <div className="space-y-0.5 mt-1">
@@ -207,15 +204,15 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                       onSelectProject(p.id);
                       onClose();
                     }}
-                    className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-zinc-700 hover:bg-zinc-100 hover:text-black transition-colors text-left cursor-pointer"
+                    className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-black dark:hover:text-white transition-colors text-left cursor-pointer"
                   >
                     <div>
-                      <div className="font-bold text-black">{p.title}</div>
-                      <div className="text-[11px] text-zinc-500 truncate max-w-md">
+                      <div className="font-bold text-black dark:text-white">{p.title}</div>
+                      <div className="text-[11px] text-zinc-500 dark:text-zinc-400 truncate max-w-md">
                         {p.subtitle}
                       </div>
                     </div>
-                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 text-zinc-600">
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-transparent dark:border-zinc-800">
                       {p.categoryLabel}
                     </span>
                   </button>
@@ -225,7 +222,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           )}
 
           {filteredActions.length === 0 && filteredProjects.length === 0 && (
-            <div className="py-8 text-center text-zinc-400 font-sans">
+            <div className="py-8 text-center text-zinc-400 dark:text-zinc-500 font-sans">
               No results found for "{query}".
             </div>
           )}
@@ -233,7 +230,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-4 py-2 bg-zinc-50 border-t border-zinc-200 flex items-center justify-between font-mono text-[10px] text-zinc-400">
+        <div className="px-4 py-2 bg-zinc-50 dark:bg-[#0c0d11] border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between font-mono text-[10px] text-zinc-400 dark:text-zinc-500">
           <span>Navigate with mouse or keyboard</span>
           <span>Press ESC to close</span>
         </div>

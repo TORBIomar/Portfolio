@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { sound } from "@/utils/sound";
 import { useToast } from "../common/Toast";
 import { PERSONAL_INFO } from "@/data/portfolioData";
-import { X, Send, Check, Mail, Phone, MapPin } from "lucide-react";
+import { X, Send, Check } from "lucide-react";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -45,25 +45,25 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-xs animate-in fade-in duration-150"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-lg bg-white rounded-3xl border border-zinc-200 shadow-2xl p-6 sm:p-8 animate-in zoom-in-95 duration-100"
+        className="w-full max-w-lg bg-white dark:bg-[#09090b] rounded-3xl border border-zinc-200 dark:border-white/10 shadow-2xl p-6 sm:p-8 animate-in zoom-in-95 duration-100 transition-colors"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between pb-4 border-b border-zinc-100 mb-6">
+        <div className="flex items-center justify-between pb-4 border-b border-zinc-100 dark:border-zinc-800 mb-6">
           <div>
-            <h3 className="text-xl font-serif font-black text-black uppercase">
+            <h3 className="text-xl font-serif font-black text-black dark:text-white uppercase transition-colors">
               Initiate Contact
             </h3>
-            <p className="font-sans text-xs text-zinc-500 mt-0.5">
+            <p className="font-sans text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
               Direct dispatch to {PERSONAL_INFO.email}
             </p>
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-500 hover:text-black cursor-pointer"
+            className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white cursor-pointer transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -71,18 +71,18 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
 
         {submitted ? (
           <div className="py-8 text-center space-y-2">
-            <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
               <Check className="w-6 h-6" />
             </div>
-            <div className="font-serif font-bold text-lg text-black">Message Prepared</div>
-            <div className="text-xs font-sans text-zinc-500">
+            <div className="font-serif font-bold text-lg text-black dark:text-white">Message Prepared</div>
+            <div className="text-xs font-sans text-zinc-500 dark:text-zinc-400">
               Email client opened for direct sending. Omar Torbi will reply promptly.
             </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 font-sans text-xs">
             <div>
-              <label className="block text-zinc-600 font-medium mb-1">Your Name</label>
+              <label className="block text-zinc-600 dark:text-zinc-400 font-medium mb-1">Your Name</label>
               <input
                 type="text"
                 required
@@ -92,12 +92,12 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                   setName(e.target.value);
                 }}
                 placeholder="e.g. Alex Vance"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-zinc-50 text-black text-xs outline-none focus:border-black transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-zinc-600 font-medium mb-1">Your Email</label>
+              <label className="block text-zinc-600 dark:text-zinc-400 font-medium mb-1">Your Email</label>
               <input
                 type="email"
                 required
@@ -107,12 +107,12 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                   setEmail(e.target.value);
                 }}
                 placeholder="alex@company.com"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-zinc-50 text-black text-xs outline-none focus:border-black transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-zinc-600 font-medium mb-1">Message</label>
+              <label className="block text-zinc-600 dark:text-zinc-400 font-medium mb-1">Message</label>
               <textarea
                 required
                 rows={4}
@@ -122,13 +122,13 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                   setMessage(e.target.value);
                 }}
                 placeholder="Tell me about your engineering project, team, or opportunity..."
-                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 bg-zinc-50 text-black text-xs outline-none focus:border-black transition-colors resize-none"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white transition-colors resize-none"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 rounded-full bg-black hover:bg-zinc-800 text-white font-sans font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-sm"
+              className="w-full py-3 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black font-sans font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-sm"
             >
               <span>SEND INQUIRY</span>
               <Send className="w-3.5 h-3.5" />
