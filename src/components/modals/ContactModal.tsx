@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import { sound } from "@/utils/sound";
 import { useToast } from "../common/Toast";
 import { PERSONAL_INFO } from "@/data/portfolioData";
-import { X, Send, Check } from "lucide-react";
+import { X, Send, Check, Loader2, AlertCircle } from "lucide-react";
+import confetti from "canvas-confetti";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -17,30 +18,92 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !email || !message) return;
+    if (!name.trim() || !email.trim() || !message.trim()) return;
 
-    sound.playSuccess();
-    setSubmitted(true);
-    showToast("Message initiated! Opening email client...");
+    setIsSubmitting(true);
+    setErrorMessage("");
 
-    const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-    );
-    window.open(`mailto:${PERSONAL_INFO.email}?subject=${subject}&body=${body}`, "_blank");
+    try {
+      let isSuccess = false;
 
-    setTimeout(() => {
-      setName("");
-      setEmail("");
-      setMessage("");
-      setSubmitted(false);
-      onClose();
-    }, 2000);
+      // 1. Next.js route
+      try {
+        const res = await fetch("/api/inquiry", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: name.trim(),
+            email: email.trim(),
+            subject: `Contact Modal Inquiry from ${name.trim()}`,
+            message: message.trim(),
+          }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) isSuccess = true;
+        }
+      } catch {
+        // Fallback below
+      }
+
+      // 2. Direct fallback
+      if (!isSuccess) {
+        const fallbackRes = await fetch(
+          `https://formsubmit.co/ajax/${encodeURIComponent(PERSONAL_INFO.email)}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              name: name.trim(),
+              email: email.trim(),
+              _subject: `Contact Modal Inquiry from ${name.trim()}`,
+              message: message.trim(),
+              _captcha: "false",
+            }),
+          }
+        );
+        if (fallbackRes.ok) isSuccess = true;
+      }
+
+      if (isSuccess) {
+        sound.playSuccess();
+        try {
+          confetti({
+            particleCount: 50,
+            spread: 60,
+            origin: { y: 0.5 },
+          });
+        } catch {
+          // ignore
+        }
+        setSubmitted(true);
+        showToast("Inquiry successfully sent to Omar Torbi!");
+        setTimeout(() => {
+          setName("");
+          setEmail("");
+          setMessage("");
+          setSubmitted(false);
+          onClose();
+        }, 2200);
+      } else {
+        setErrorMessage("Could not send inquiry. Please try again or reach out directly.");
+        showToast("Delivery issue. Please retry.", "info");
+      }
+    } catch {
+      setErrorMessage("Network issue encountered. Please retry.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -71,28 +134,36 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
 
         {submitted ? (
           <div className="py-8 text-center space-y-2">
-            <div className="w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 text-black dark:text-white flex items-center justify-center mx-auto">
-              <Check className="w-6 h-6" />
+            <div className="w-12 h-12 rounded-full bg-black dark:bg-white text-white dark:text-black flex items-center justify-center mx-auto shadow-md">
+              <Check className="w-6 h-6 stroke-[2.5]" />
             </div>
-            <div className="font-serif font-bold text-lg text-black dark:text-white">Message Prepared</div>
+            <div className="font-sans font-bold text-lg text-black dark:text-white">Inquiry Dispatched</div>
             <div className="text-xs font-sans text-zinc-500 dark:text-zinc-400">
-              Email client opened for direct sending. Omar Torbi will reply promptly.
+              Your inquiry has been sent straight to {PERSONAL_INFO.email}. Omar Torbi will reply promptly.
             </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4 font-sans text-xs">
+            {errorMessage && (
+              <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{errorMessage}</span>
+              </div>
+            )}
+
             <div>
               <label className="block text-zinc-600 dark:text-zinc-400 font-medium mb-1">Your Name</label>
               <input
                 type="text"
                 required
+                disabled={isSubmitting}
                 value={name}
                 onChange={(e) => {
                   sound.playKey();
                   setName(e.target.value);
                 }}
                 placeholder="e.g. Alex Vance"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white disabled:opacity-60 transition-colors"
               />
             </div>
 
@@ -101,13 +172,14 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
               <input
                 type="email"
                 required
+                disabled={isSubmitting}
                 value={email}
                 onChange={(e) => {
                   sound.playKey();
                   setEmail(e.target.value);
                 }}
                 placeholder="alex@company.com"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white disabled:opacity-60 transition-colors"
               />
             </div>
 
@@ -116,22 +188,33 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
               <textarea
                 required
                 rows={4}
+                disabled={isSubmitting}
                 value={message}
                 onChange={(e) => {
                   sound.playKey();
                   setMessage(e.target.value);
                 }}
                 placeholder="Tell me about your engineering project, team, or opportunity..."
-                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white transition-colors resize-none"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white disabled:opacity-60 transition-colors resize-none"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black font-sans font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-sm"
+              disabled={isSubmitting}
+              className="w-full py-3 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 disabled:opacity-60 disabled:cursor-not-allowed text-white dark:text-black font-sans font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-sm"
             >
-              <span>SEND INQUIRY</span>
-              <Send className="w-3.5 h-3.5" />
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  <span>DISPATCHING INQUIRY...</span>
+                </>
+              ) : (
+                <>
+                  <span>SEND INQUIRY</span>
+                  <Send className="w-3.5 h-3.5" />
+                </>
+              )}
             </button>
           </form>
         )}

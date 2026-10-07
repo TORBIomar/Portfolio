@@ -15,9 +15,12 @@ import {
   ExternalLink,
   MessageSquare,
   Sparkles,
+  Loader2,
+  AlertCircle,
 } from "lucide-react";
 import { LinkedinIcon, GithubIcon } from "../common/SocialIcons";
 import { motion } from "framer-motion";
+import confetti from "canvas-confetti";
 
 export const ReachOutSection: React.FC = () => {
   const { showToast } = useToast();
@@ -28,6 +31,9 @@ export const ReachOutSection: React.FC = () => {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [sentName, setSentName] = useState("");
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(PERSONAL_INFO.email);
@@ -45,27 +51,93 @@ export const ReachOutSection: React.FC = () => {
     setTimeout(() => setCopiedPhone(false), 2200);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !email || !message) return;
+    if (!name.trim() || !email.trim() || !message.trim()) return;
 
-    sound.playSuccess();
-    setSubmitted(true);
-    showToast("Message prepared! Opening email client...");
+    setIsSubmitting(true);
+    setErrorMessage("");
 
-    const mailSubject = encodeURIComponent(subject || `Portfolio Inquiry from ${name}`);
-    const mailBody = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-    );
-    window.open(`mailto:${PERSONAL_INFO.email}?subject=${mailSubject}&body=${mailBody}`, "_blank");
+    try {
+      let isSuccess = false;
 
-    setTimeout(() => {
-      setName("");
-      setEmail("");
-      setSubject("");
-      setMessage("");
-      setSubmitted(false);
-    }, 2500);
+      // 1. Try Next.js serverless route
+      try {
+        const res = await fetch("/api/inquiry", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: name.trim(),
+            email: email.trim(),
+            subject: subject.trim(),
+            message: message.trim(),
+          }),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success) {
+            isSuccess = true;
+          }
+        }
+      } catch {
+        // Fall back to direct client submission
+      }
+
+      // 2. Client-side fallback if route returned an error
+      if (!isSuccess) {
+        const fallbackRes = await fetch(
+          `https://formsubmit.co/ajax/${encodeURIComponent(PERSONAL_INFO.email)}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              name: name.trim(),
+              email: email.trim(),
+              _subject: subject.trim() || `Portfolio Inquiry from ${name.trim()}`,
+              message: message.trim(),
+              _captcha: "false",
+            }),
+          }
+        );
+        if (fallbackRes.ok) {
+          isSuccess = true;
+        }
+      }
+
+      if (isSuccess) {
+        sound.playSuccess();
+        try {
+          confetti({
+            particleCount: 65,
+            spread: 70,
+            origin: { y: 0.6 },
+          });
+        } catch {
+          // ignore confetti if canvas unsupported
+        }
+        setSentName(name.trim());
+        setSubmitted(true);
+        showToast("Inquiry successfully sent to Omar Torbi!");
+        setName("");
+        setEmail("");
+        setSubject("");
+        setMessage("");
+      } else {
+        setErrorMessage(
+          "Could not deliver message right now. Please try again or reach out directly at " +
+            PERSONAL_INFO.email
+        );
+        showToast("Delivery encountered an issue. Please retry.", "info");
+      }
+    } catch {
+      setErrorMessage("Network issue. Please try again or email directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -254,19 +326,37 @@ export const ReachOutSection: React.FC = () => {
               </p>
 
               {submitted ? (
-                <div className="py-12 text-center space-y-3">
-                  <div className="w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 text-black dark:text-white flex items-center justify-center mx-auto">
-                    <Check className="w-6 h-6" />
+                <div className="py-10 text-center space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-black dark:bg-white text-white dark:text-black flex items-center justify-center mx-auto shadow-md">
+                    <Check className="w-7 h-7 stroke-[2.5]" />
                   </div>
-                  <div className="font-sans font-bold text-lg text-black dark:text-white">
-                    Inquiry Dispatched
+                  <div>
+                    <h4 className="font-sans font-bold text-xl text-black dark:text-white">
+                      Inquiry Dispatched Successfully
+                    </h4>
+                    <p className="text-xs font-sans text-zinc-600 dark:text-zinc-400 max-w-md mx-auto mt-2 leading-relaxed">
+                      Thank you, <span className="font-semibold text-black dark:text-white">{sentName || "there"}</span>! Your inquiry has been routed straight to Omar Torbi&apos;s verified inbox (<span className="font-mono text-zinc-900 dark:text-zinc-200">{PERSONAL_INFO.email}</span>). A prompt response will follow.
+                    </p>
                   </div>
-                  <div className="text-xs font-sans text-zinc-500 dark:text-zinc-400 max-w-sm mx-auto">
-                    Email client launched for direct sending. Omar Torbi will review and respond promptly.
+                  <div className="pt-2">
+                    <button
+                      type="button"
+                      onClick={() => setSubmitted(false)}
+                      className="px-5 py-2.5 rounded-full text-xs font-sans font-medium border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 transition-colors cursor-pointer"
+                    >
+                      Send Another Inquiry
+                    </button>
                   </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4 font-sans text-xs">
+                  {errorMessage && (
+                    <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-xs flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4 shrink-0" />
+                      <span>{errorMessage}</span>
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-zinc-700 dark:text-zinc-300 font-medium mb-1">
@@ -275,13 +365,14 @@ export const ReachOutSection: React.FC = () => {
                       <input
                         type="text"
                         required
+                        disabled={isSubmitting}
                         value={name}
                         onChange={(e) => {
                           sound.playKey();
                           setName(e.target.value);
                         }}
                         placeholder="e.g. Sarah Connor"
-                        className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white transition-colors"
+                        className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white disabled:opacity-60 transition-colors"
                       />
                     </div>
 
@@ -292,13 +383,14 @@ export const ReachOutSection: React.FC = () => {
                       <input
                         type="email"
                         required
+                        disabled={isSubmitting}
                         value={email}
                         onChange={(e) => {
                           sound.playKey();
                           setEmail(e.target.value);
                         }}
                         placeholder="s.connor@enterprise.io"
-                        className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white transition-colors"
+                        className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white disabled:opacity-60 transition-colors"
                       />
                     </div>
                   </div>
@@ -309,13 +401,14 @@ export const ReachOutSection: React.FC = () => {
                     </label>
                     <input
                       type="text"
+                      disabled={isSubmitting}
                       value={subject}
                       onChange={(e) => {
                         sound.playKey();
                         setSubject(e.target.value);
                       }}
                       placeholder="e.g. Software Engineering Opportunity / PFE"
-                      className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white disabled:opacity-60 transition-colors"
                     />
                   </div>
 
@@ -326,22 +419,33 @@ export const ReachOutSection: React.FC = () => {
                     <textarea
                       required
                       rows={5}
+                      disabled={isSubmitting}
                       value={message}
                       onChange={(e) => {
                         sound.playKey();
                         setMessage(e.target.value);
                       }}
                       placeholder="Detail your requirements, project architecture, or recruitment timeline..."
-                      className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white transition-colors resize-none"
+                      className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white disabled:opacity-60 transition-colors resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black font-sans font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-md"
+                    disabled={isSubmitting}
+                    className="w-full py-3.5 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 disabled:opacity-60 disabled:cursor-not-allowed text-white dark:text-black font-sans font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-md"
                   >
-                    <span>SEND INQUIRY</span>
-                    <Send className="w-3.5 h-3.5" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                        <span>DISPATCHING INQUIRY...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>SEND INQUIRY</span>
+                        <Send className="w-3.5 h-3.5" />
+                      </>
+                    )}
                   </button>
                 </form>
               )}
