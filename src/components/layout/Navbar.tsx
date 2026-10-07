@@ -55,7 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="fixed top-3 sm:top-4 left-0 right-0 z-40 flex justify-center px-3 sm:px-6 pointer-events-none">
       <div
-        className={`w-full max-w-5xl rounded-full transition-all duration-300 pointer-events-auto ${
+        className={`relative w-full max-w-5xl rounded-full transition-all duration-300 pointer-events-auto ${
           isScrolled
             ? "bg-[#fcfcfc]/95 dark:bg-[#09090b]/95 backdrop-blur-md border border-zinc-200 dark:border-white/10 shadow-[0_12px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.6)] py-2 sm:py-2.5 px-4 sm:px-6"
             : "bg-[#fcfcfc]/90 dark:bg-[#09090b]/90 backdrop-blur-md border border-zinc-200/80 dark:border-white/10 shadow-md py-2.5 sm:py-3 px-4 sm:px-6"
@@ -65,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <a
           href="#"
           onClick={() => sound.playClick()}
-          className="flex items-center gap-2.5 group cursor-pointer shrink-0"
+          className="flex items-center gap-2.5 group cursor-pointer shrink-0 z-10"
           aria-label="Omar Torbi Portfolio Home"
         >
           <div className="h-7 sm:h-8 flex items-center justify-center">
@@ -84,15 +84,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </a>
 
-        {/* Center Minimal Navigation */}
-        <nav className="hidden md:flex items-center justify-center gap-5 lg:gap-7 text-[13px] font-sans text-zinc-600 dark:text-zinc-400 font-medium">
+        {/* Center Minimal Navigation - Mathematically centered in the navbar */}
+        <nav className="hidden md:flex items-center justify-center gap-5 lg:gap-7 text-[13px] font-sans text-zinc-600 dark:text-zinc-400 font-medium md:absolute md:left-1/2 md:-translate-x-1/2 z-10 pointer-events-auto">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
-              className="hover:text-black dark:hover:text-white transition-colors cursor-pointer"
+              className="hover:text-black dark:hover:text-white transition-colors cursor-pointer whitespace-nowrap"
             >
               {link.label}
             </a>
@@ -100,7 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 z-10">
           {/* Theme Toggle Button (Dark / Light) */}
           <button
             onClick={toggleTheme}
@@ -140,7 +140,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* Resume / Dossier Dropdown */}
-          <div className="relative hidden sm:block">
+          <div className="relative hidden lg:block">
             <button
               onClick={() => {
                 sound.playClick();
@@ -192,7 +192,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => {
               sound.playClick();
             }}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black text-xs font-sans font-bold transition-colors cursor-pointer shadow-2xs"
+            className="hidden xl:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black text-xs font-sans font-bold transition-colors cursor-pointer shadow-2xs"
           >
             <span>REACH OUT</span>
             <ArrowRight className="w-3 h-3" />

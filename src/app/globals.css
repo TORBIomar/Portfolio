@@ -62,3 +62,26 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #a1a1aa;
 }
+
+/* High-contrast text selection for light and dark modes */
+::selection {
+  background-color: #18181b !important;
+  color: #ffffff !important;
+}
+
+::-moz-selection {
+  background-color: #18181b !important;
+  color: #ffffff !important;
+}
+
+.dark ::selection,
+[data-theme="dark"] ::selection {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+.dark ::-moz-selection,
+[data-theme="dark"] ::-moz-selection {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}

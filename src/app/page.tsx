@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <ThemeProvider>
       <ToastProvider>
-        <main className="min-h-screen bg-[#fcfcfc] dark:bg-[#000000] text-[#1a1a1a] dark:text-[#fafafa] selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black flex flex-col font-sans transition-colors duration-300">
+        <main className="min-h-screen bg-[#fcfcfc] dark:bg-[#000000] text-[#1a1a1a] dark:text-[#fafafa] flex flex-col font-sans transition-colors duration-300">
           {/* Centered Floating Navigation Bar with Logo & Theme Toggles */}
           <Navbar
             onOpenCommandPalette={() => setCommandPaletteOpen(true)}

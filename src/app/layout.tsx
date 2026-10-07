@@ -20,7 +20,16 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "Omar Torbi — Software & DevOps Engineer",
-  description: "Portfolio of Omar Torbi. Final-year Computer Science & Networks engineer at EMSI Rabat. OCI Certified DevOps & Architect Professional.",
+  description:
+    "Portfolio of Omar Torbi. Final-year Computer Science & Networks engineer at EMSI Rabat. OCI Certified DevOps & Architect Professional.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "192x192" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -34,7 +43,7 @@ export default function RootLayout({
       className={`dark ${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased scroll-smooth`}
       data-theme="dark"
     >
-      <body className="min-h-full flex flex-col bg-[#000000] text-[#fafafa] selection:bg-white selection:text-black">
+      <body className="min-h-full flex flex-col bg-[#fcfcfc] dark:bg-[#000000] text-[#1a1a1a] dark:text-[#fafafa]">
         {children}
       </body>
     </html>
