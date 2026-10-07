@@ -1,0 +1,208 @@
+"use client";
+
+import React, { useEffect } from "react";
+import { Project } from "@/data/portfolioData";
+import { sound } from "@/utils/sound";
+import {
+  X,
+  ExternalLink,
+  CheckCircle2,
+  AlertCircle,
+  Cpu,
+  Layers,
+  ArrowRight,
+} from "lucide-react";
+import { GithubIcon } from "../common/SocialIcons";
+
+interface ProjectDetailModalProps {
+  project: Project | null;
+  onClose: () => void;
+}
+
+export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
+  project,
+  onClose,
+}) => {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    if (project) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "unset";
+    };
+  }, [project, onClose]);
+
+  if (!project) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+      <div
+        className="relative w-full max-w-3xl max-h-[90vh] bg-white rounded-3xl border border-zinc-200 shadow-2xl overflow-y-auto flex flex-col justify-between animate-in zoom-in-95 duration-150"
+        onClick={(e) => e.stopPropagation()}
+      >
+        
+        {/* Header Bar */}
+        <div className="sticky top-0 bg-white/95 backdrop-blur-md px-6 sm:px-8 py-5 border-b border-zinc-200 flex items-center justify-between z-10">
+          <div className="flex items-center gap-2">
+            <span className="px-2.5 py-1 rounded-full bg-zinc-100 font-mono text-[11px] font-bold uppercase text-zinc-600">
+              {project.categoryLabel}
+            </span>
+            {project.featured && (
+              <span className="px-2 py-0.5 rounded-full bg-black text-white font-mono text-[10px]">
+                FEATURED
+              </span>
+            )}
+          </div>
+
+          <button
+            onClick={() => {
+              sound.playClick();
+              onClose();
+            }}
+            className="w-8 h-8 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-500 hover:text-black hover:border-black transition-colors cursor-pointer"
+            aria-label="Close modal"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Modal Body */}
+        <div className="p-6 sm:p-8 space-y-8 font-sans">
+          
+          {/* Title & Subtitle */}
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-serif font-black text-black mb-2">
+              {project.title}
+            </h2>
+            <p className="text-sm font-mono text-zinc-500">
+              {project.subtitle}
+            </p>
+          </div>
+
+          {/* Description */}
+          <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200 text-xs sm:text-sm text-zinc-700 leading-relaxed">
+            {project.description}
+          </div>
+
+          {/* Metrics Row */}
+          <div>
+            <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-400 mb-3">
+              Engineered Telemetry &amp; Specs
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {project.metrics.map((m, idx) => (
+                <div
+                  key={idx}
+                  className="p-3.5 rounded-xl bg-white border border-zinc-200 text-center"
+                >
+                  <div className="text-[10px] font-mono text-zinc-400 uppercase">
+                    {m.label}
+                  </div>
+                  <div className="font-mono text-xs sm:text-sm font-bold text-black mt-1">
+                    {m.value}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Architectural Highlights */}
+          <div>
+            <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-400 mb-3">
+              Architectural Highlights
+            </h3>
+            <div className="space-y-2">
+              {project.architecturalHighlights.map((h, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-start gap-2.5 text-xs sm:text-[13px] text-zinc-700"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-black shrink-0 mt-0.5" />
+                  <span>{h}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Technical Deep Dive: Key Decisions & Bottlenecks */}
+          <div className="space-y-4 pt-4 border-t border-zinc-100">
+            <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-400">
+              Engineering Analysis
+            </h3>
+
+            <div className="p-4 rounded-xl bg-zinc-900 text-zinc-300 text-xs font-mono space-y-2">
+              <div className="text-white font-bold flex items-center gap-1.5">
+                <Cpu className="w-3.5 h-3.5 text-cyan-400" />
+                <span>Architecture Overview:</span>
+              </div>
+              <p className="text-zinc-400 leading-relaxed">
+                {project.architectureDetails.overview}
+              </p>
+            </div>
+
+            <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs space-y-1.5">
+              <div className="text-amber-900 font-bold font-mono flex items-center gap-1.5">
+                <AlertCircle className="w-3.5 h-3.5 text-amber-600" />
+                <span>Performance Bottleneck Resolved:</span>
+              </div>
+              <p className="text-amber-800 leading-relaxed font-sans">
+                {project.architectureDetails.performanceBottlenecksResolved}
+              </p>
+            </div>
+          </div>
+
+          {/* Tech Stack Chips */}
+          <div>
+            <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2.5">
+              Technology Stack
+            </h3>
+            <div className="flex flex-wrap gap-1.5">
+              {project.techStack.map((tech, idx) => (
+                <span
+                  key={idx}
+                  className="px-2.5 py-1 rounded-md bg-zinc-100 text-zinc-700 text-xs font-mono"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+        {/* Modal Footer */}
+        <div className="sticky bottom-0 bg-white/95 backdrop-blur-md px-6 sm:px-8 py-4 border-t border-zinc-200 flex items-center justify-between">
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => sound.playClick()}
+            className="inline-flex items-center gap-2 text-xs font-mono font-bold text-zinc-800 hover:text-black hover:underline"
+          >
+            <GithubIcon className="w-4 h-4" />
+            <span>View Source on GitHub</span>
+          </a>
+
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => sound.playSuccess()}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black text-white text-xs font-sans font-bold hover:bg-zinc-800 transition-colors shadow-xs"
+            >
+              <span>Launch Live System</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          )}
+        </div>
+
+      </div>
+    </div>
+  );
+};
