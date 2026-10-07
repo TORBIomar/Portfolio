@@ -2,14 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import {
-  Search,
-  Volume2,
-  VolumeX,
   Menu,
   X,
   FileText,
   Download,
-  ArrowRight,
   Sun,
   Moon,
 } from "lucide-react";
@@ -18,17 +14,13 @@ import { sound } from "@/utils/sound";
 import { useTheme } from "@/context/ThemeContext";
 
 interface NavbarProps {
-  onOpenCommandPalette: () => void;
+  onOpenCommandPalette?: () => void;
   onOpenContactModal?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({
-  onOpenCommandPalette,
-  onOpenContactModal,
-}) => {
+export const Navbar: React.FC<NavbarProps> = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isMuted, setIsMuted] = useState(sound.isMuted());
   const [dossierOpen, setDossierOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
@@ -40,9 +32,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    return sound.onMuteChange((muted) => setIsMuted(muted));
-  }, []);
 
   const navLinks = [
     { label: "About", href: "#about" },
@@ -99,8 +88,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           ))}
         </nav>
 
-        {/* Right Actions */}
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0 z-10">
+        {/* Right Actions: Only Theme Toggle, Resume, and Mobile Menu */}
+        <div className="flex items-center gap-2 shrink-0 z-10">
           {/* Theme Toggle Button (Dark / Light) */}
           <button
             onClick={toggleTheme}
@@ -115,32 +104,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </button>
 
-          {/* Audio Synthesizer Toggle */}
-          <button
-            onClick={() => sound.toggleMute()}
-            className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
-            title={isMuted ? "Unmute audio effects" : "Mute audio effects"}
-            aria-label={isMuted ? "Unmute audio effects" : "Mute audio effects"}
-          >
-            {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-          </button>
-
-          {/* Search / Command Palette Button */}
-          <button
-            onClick={() => {
-              sound.playClick();
-              onOpenCommandPalette();
-            }}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white text-xs font-mono transition-colors cursor-pointer shadow-2xs"
-            title="Open command palette (⌘K)"
-            aria-label="Open command palette"
-          >
-            <Search className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline-block text-[11px] text-zinc-400 dark:text-zinc-500">⌘K</span>
-          </button>
-
           {/* Resume / Dossier Dropdown */}
-          <div className="relative hidden lg:block">
+          <div className="relative">
             <button
               onClick={() => {
                 sound.playClick();
@@ -186,18 +151,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </div>
 
-          {/* Primary Action Button */}
-          <a
-            href="#contact"
-            onClick={() => {
-              sound.playClick();
-            }}
-            className="hidden xl:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black text-xs font-sans font-bold transition-colors cursor-pointer shadow-2xs"
-          >
-            <span>REACH OUT</span>
-            <ArrowRight className="w-3 h-3" />
-          </a>
-
           {/* Mobile Menu Button */}
           <button
             onClick={() => {
@@ -231,31 +184,22 @@ export const Navbar: React.FC<NavbarProps> = ({
             ))}
           </div>
 
-          <div className="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <a
-                href={PERSONAL_INFO.resumeUrlEn}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-2.5 py-1 rounded-full border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-300"
-              >
-                Resume (EN)
-              </a>
-              <a
-                href={PERSONAL_INFO.resumeUrlFr}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-2.5 py-1 rounded-full border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-300"
-              >
-                CV (FR)
-              </a>
-            </div>
+          <div className="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-center gap-2">
             <a
-              href="#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-3.5 py-1 rounded-full bg-black dark:bg-white text-white dark:text-black text-xs font-bold"
+              href={PERSONAL_INFO.resumeUrlEn}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-300"
             >
-              Reach Out →
+              Resume (EN)
+            </a>
+            <a
+              href={PERSONAL_INFO.resumeUrlFr}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-300"
+            >
+              CV (FR)
             </a>
           </div>
         </div>
