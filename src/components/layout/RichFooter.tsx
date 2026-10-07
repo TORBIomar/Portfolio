@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { BrandIcon } from "../common/BrandIcon";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
 import { useToast } from "../common/Toast";
@@ -43,7 +42,7 @@ export const RichFooter: React.FC = () => {
   };
 
   return (
-    <footer id="contact" className="w-full">
+    <footer className="w-full">
       {/* ========================================================= */}
       {/* LAYER 1 (Dark Block): Grid containing Links & Navigation */}
       {/* ========================================================= */}
@@ -51,10 +50,14 @@ export const RichFooter: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
             
-            {/* Col 1: Brand & Bio */}
+            {/* Col 1: Brand & Bio with official white logo */}
             <div className="lg:col-span-2 space-y-4">
               <div className="flex items-center gap-3">
-                <BrandIcon className="w-8 h-8 text-white" />
+                <img
+                  src="/logo/logo-white.png"
+                  alt="Omar Torbi"
+                  className="h-8 w-auto object-contain"
+                />
                 <span className="font-mono text-sm font-bold text-white tracking-tight">
                   OMAR TORBI // ENGINEER
                 </span>
@@ -62,8 +65,8 @@ export const RichFooter: React.FC = () => {
               <p className="font-sans text-xs text-zinc-400 leading-relaxed max-w-sm">
                 Software &amp; DevOps Engineer and final-year student at EMSI Rabat (DDSI). Dual certified in Oracle Cloud Infrastructure (OCI DevOps &amp; Architect Professional). Architecting modular enterprise systems and automated cloud pipelines.
               </p>
-              <div className="pt-2 flex items-center gap-2 text-xs font-mono text-zinc-500">
-                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <div className="pt-2 flex items-center gap-2 text-xs font-mono text-zinc-400">
+                <span className="w-2 h-2 rounded-full bg-white" />
                 <span>Available for PFE Internship (Feb 2027)</span>
               </div>
             </div>
@@ -138,20 +141,20 @@ export const RichFooter: React.FC = () => {
       </div>
 
       {/* ========================================================= */}
-      {/* LAYER 2 (Contrast Block): Massive "LET'S WORK TOGETHER" */}
+      {/* LAYER 2 (Contrast Block): Quick Collaboration Channels */}
       {/* ========================================================= */}
-      <div className="bg-[#fcfcfc] dark:bg-[#000000] text-black dark:text-white py-16 sm:py-24 border-t border-b border-zinc-200/90 dark:border-white/10 transition-colors duration-300">
+      <div className="bg-[#fcfcfc] dark:bg-[#000000] text-black dark:text-white py-14 sm:py-20 border-t border-b border-zinc-200/90 dark:border-white/10 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
             {/* Monumental Headline */}
             <div>
               <span className="font-mono text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 block mb-3">
-                OPEN FOR COLLABORATION
+                FAST DIRECT CHANNELS
               </span>
-              <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-black tracking-tight text-black dark:text-white uppercase leading-none transition-colors">
-                LET'S WORK TOGETHER <br />
-                <span className="text-zinc-400 dark:text-zinc-600">/ REACH OUT</span>
+              <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif font-black tracking-tight text-black dark:text-white uppercase leading-none transition-colors">
+                DIRECT INBOX &amp; PHONE <br />
+                <span className="text-zinc-400 dark:text-zinc-600">/ 24-HOUR RESPONSE</span>
               </h2>
             </div>
 
@@ -166,7 +169,7 @@ export const RichFooter: React.FC = () => {
           </div>
 
           {/* Interactive Contact Channels Tray */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12 sm:mt-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10 sm:mt-12">
             
             {/* Email Pill */}
             <div className="p-4 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between shadow-2xs hover:border-zinc-400 dark:hover:border-zinc-700 transition-colors">
@@ -186,10 +189,10 @@ export const RichFooter: React.FC = () => {
               </div>
               <button
                 onClick={handleCopyEmail}
-                className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-black dark:hover:text-white cursor-pointer shrink-0 ml-2"
+                className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-black dark:hover:text-white cursor-pointer shrink-0 ml-2 transition-colors"
                 title="Copy email address"
               >
-                {copiedEmail ? <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                {copiedEmail ? <Check className="w-4 h-4 text-black dark:text-white" /> : <Copy className="w-4 h-4" />}
               </button>
             </div>
 
@@ -213,10 +216,10 @@ export const RichFooter: React.FC = () => {
               </div>
               <button
                 onClick={handleCopyPhone}
-                className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-black dark:hover:text-white cursor-pointer shrink-0 ml-2"
+                className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-black dark:hover:text-white cursor-pointer shrink-0 ml-2 transition-colors"
                 title="Copy phone number"
               >
-                {copiedPhone ? <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-4 h-4" />}
+                {copiedPhone ? <Check className="w-4 h-4 text-black dark:text-white" /> : <Copy className="w-4 h-4" />}
               </button>
             </div>
 
@@ -282,8 +285,8 @@ export const RichFooter: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />
-            <span className="text-zinc-400">All systems operational</span>
+            <span className="w-2 h-2 rounded-full bg-white inline-block" />
+            <span className="text-zinc-300">All systems operational</span>
             <span className="text-zinc-700">•</span>
             <span className="text-zinc-400">{PERSONAL_INFO.coordinates}</span>
           </div>

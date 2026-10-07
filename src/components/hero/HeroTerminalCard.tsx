@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Copy, Check, Download, Terminal, Sparkles, ExternalLink } from "lucide-react";
+import { Copy, Check, Download, Terminal } from "lucide-react";
 import { sound } from "@/utils/sound";
 import { useToast } from "@/components/common/Toast";
 
@@ -20,25 +20,25 @@ export const HeroTerminalCard: React.FC = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto px-2 sm:px-0">
-      {/* Ambient background glow behind the card */}
+      {/* Subtle ambient monochrome background halo */}
       <div className="relative group">
-        <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-emerald-500/20 via-cyan-500/15 to-emerald-500/20 opacity-70 blur-xl group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-white/5 via-white/10 to-white/5 dark:from-white/5 dark:via-white/10 dark:to-white/5 opacity-40 blur-xl group-hover:opacity-75 transition-opacity duration-500" />
 
         {/* Outer Frame */}
-        <div className="relative rounded-2xl bg-[#090b10] border border-zinc-800/90 shadow-[0_20px_50px_rgba(0,0,0,0.6)] overflow-hidden">
+        <div className="relative rounded-2xl bg-[#09090b] border border-zinc-800 shadow-[0_20px_50px_rgba(0,0,0,0.7)] overflow-hidden">
           
           {/* Subtle Top Metadata Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-[#0d1117] border-b border-zinc-800/80 text-xs font-mono select-none">
+          <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-[#121214] border-b border-zinc-800 text-xs font-mono select-none">
             <div className="flex items-center gap-2">
               <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-40" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
               </span>
-              <span className="text-zinc-400 text-[11px] sm:text-xs">
+              <span className="text-zinc-300 text-[11px] sm:text-xs">
                 terminal-card.svg
               </span>
               <span className="text-zinc-600 hidden sm:inline">|</span>
-              <span className="text-zinc-500 hidden sm:inline text-[11px]">
+              <span className="text-zinc-400 hidden sm:inline text-[11px]">
                 profile spec v2.4
               </span>
             </div>
@@ -47,13 +47,13 @@ export const HeroTerminalCard: React.FC = () => {
               {/* Copy Command Button */}
               <button
                 onClick={handleCopyCommand}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-800/70 hover:bg-zinc-700 text-zinc-300 hover:text-white border border-zinc-700/60 text-[11px] transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-800/80 hover:bg-zinc-700 text-zinc-200 hover:text-white border border-zinc-700 text-[11px] transition-all cursor-pointer"
                 title="Copy terminal runner command"
               >
                 {copied ? (
                   <>
-                    <Check className="w-3 h-3 text-emerald-400" />
-                    <span className="text-emerald-400 font-bold">Copied</span>
+                    <Check className="w-3 h-3 text-white" />
+                    <span className="text-white font-bold">Copied</span>
                   </>
                 ) : (
                   <>
@@ -80,9 +80,9 @@ export const HeroTerminalCard: React.FC = () => {
           </div>
 
           {/* Card Presentation Container */}
-          <div className="relative p-2 sm:p-4 bg-[#0d1117] flex items-center justify-center">
+          <div className="relative p-2 sm:p-4 bg-[#09090b] flex items-center justify-center">
             <motion.div
-              whileHover={{ scale: 1.006 }}
+              whileHover={{ scale: 1.004 }}
               transition={{ duration: 0.2 }}
               className="w-full flex justify-center"
             >
@@ -96,15 +96,15 @@ export const HeroTerminalCard: React.FC = () => {
           </div>
 
           {/* Bottom Telemetry Strip */}
-          <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 bg-[#090b10] border-t border-zinc-800/80 text-[11px] font-mono text-zinc-400">
+          <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 bg-[#0e0e11] border-t border-zinc-800 text-[11px] font-mono text-zinc-400">
             <div className="flex items-center gap-2">
-              <span className="text-emerald-400">●</span>
-              <span>Available for high-impact engineering roles</span>
+              <span className="text-white font-bold">●</span>
+              <span className="text-zinc-300">Available for high-impact engineering roles</span>
             </div>
 
-            <div className="flex items-center gap-4 text-zinc-500">
+            <div className="flex items-center gap-4 text-zinc-400">
               <span className="hidden md:inline">EMSI Rabat — Computer Engineering</span>
-              <span className="text-zinc-400">Rabat / Béni Mellal, MA</span>
+              <span className="text-zinc-300">Rabat / Béni Mellal, MA</span>
             </div>
           </div>
 

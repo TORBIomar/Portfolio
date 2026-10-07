@@ -13,7 +13,6 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
-import { BrandIcon } from "../common/BrandIcon";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
 import { useTheme } from "@/context/ThemeContext";
@@ -50,38 +49,46 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: "Experiences", href: "#experiences" },
     { label: "Projects", href: "#projects" },
     { label: "FAQ", href: "#faq" },
+    { label: "Reach Out", href: "#contact" },
   ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
-        isScrolled
-          ? "bg-[#fcfcfc]/90 dark:bg-[#000000]/90 backdrop-blur-md border-b border-zinc-200 dark:border-white/10 shadow-[0_1px_3px_rgba(0,0,0,0.03)] py-3"
-          : "bg-[#fcfcfc]/80 dark:bg-[#000000]/80 backdrop-blur-xs border-b border-zinc-200/60 dark:border-white/5 py-4"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Left */}
+    <header className="fixed top-3 sm:top-4 left-0 right-0 z-40 flex justify-center px-3 sm:px-6 pointer-events-none">
+      <div
+        className={`w-full max-w-5xl rounded-full transition-all duration-300 pointer-events-auto ${
+          isScrolled
+            ? "bg-[#fcfcfc]/95 dark:bg-[#09090b]/95 backdrop-blur-md border border-zinc-200 dark:border-white/10 shadow-[0_12px_32px_rgba(0,0,0,0.12)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.6)] py-2 sm:py-2.5 px-4 sm:px-6"
+            : "bg-[#fcfcfc]/90 dark:bg-[#09090b]/90 backdrop-blur-md border border-zinc-200/80 dark:border-white/10 shadow-md py-2.5 sm:py-3 px-4 sm:px-6"
+        } flex items-center justify-between gap-4`}
+      >
+        {/* Brand Left with official Logo image */}
         <a
           href="#"
           onClick={() => sound.playClick()}
-          className="flex items-center gap-2.5 group cursor-pointer"
+          className="flex items-center gap-2.5 group cursor-pointer shrink-0"
           aria-label="Omar Torbi Portfolio Home"
         >
-          <div className="w-7 h-7 flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
-            <BrandIcon className="w-6 h-6 text-black dark:text-white transition-colors" />
+          <div className="h-7 sm:h-8 flex items-center justify-center">
+            {/* Dark mode logo (white) */}
+            <img
+              src="/logo/logo-white.png"
+              alt="Omar Torbi"
+              className="h-6 sm:h-7 w-auto object-contain hidden dark:block transition-transform duration-300 group-hover:scale-105"
+            />
+            {/* Light mode logo (black) */}
+            <img
+              src="/logo/logo-black.png"
+              alt="Omar Torbi"
+              className="h-6 sm:h-7 w-auto object-contain block dark:hidden transition-transform duration-300 group-hover:scale-105"
+            />
           </div>
-          <div className="flex flex-col">
-            <span className="font-mono text-xs font-bold tracking-tight text-black dark:text-white flex items-center gap-1.5 uppercase transition-colors">
-              <span>OMAR TORBI</span>
-              <span className="text-zinc-400 dark:text-zinc-600 font-normal">/</span>
-              <span className="text-[10px] text-zinc-500 dark:text-zinc-400 font-normal hidden sm:inline-block">ENG</span>
-            </span>
-          </div>
+          <span className="font-mono text-xs font-bold tracking-tight text-black dark:text-white hidden lg:inline-block uppercase">
+            OMAR TORBI
+          </span>
         </a>
 
         {/* Center Minimal Navigation */}
-        <nav className="hidden md:flex items-center gap-6 text-[13px] font-sans text-zinc-600 dark:text-zinc-400 font-medium">
+        <nav className="hidden md:flex items-center justify-center gap-5 lg:gap-7 text-[13px] font-sans text-zinc-600 dark:text-zinc-400 font-medium">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -96,25 +103,25 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-2 sm:gap-2.5">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {/* Theme Toggle Button (Dark / Light) */}
           <button
             onClick={toggleTheme}
-            className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-800 transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700 transition-colors cursor-pointer"
             title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
             aria-label="Toggle theme mode"
           >
             {theme === "dark" ? (
-              <Sun className="w-3.5 h-3.5 text-amber-400 transition-transform hover:rotate-45" />
+              <Sun className="w-3.5 h-3.5 text-zinc-200 transition-transform hover:rotate-45" />
             ) : (
-              <Moon className="w-3.5 h-3.5 text-zinc-700 transition-transform hover:-rotate-12" />
+              <Moon className="w-3.5 h-3.5 text-zinc-800 transition-transform hover:-rotate-12" />
             )}
           </button>
 
           {/* Audio Synthesizer Toggle */}
           <button
             onClick={() => sound.toggleMute()}
-            className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
             title={isMuted ? "Unmute audio effects" : "Mute audio effects"}
             aria-label={isMuted ? "Unmute audio effects" : "Mute audio effects"}
           >
@@ -127,7 +134,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               sound.playClick();
               onOpenCommandPalette();
             }}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white text-xs font-mono transition-colors cursor-pointer shadow-xs"
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white text-xs font-mono transition-colors cursor-pointer shadow-2xs"
             title="Open command palette (⌘K)"
             aria-label="Open command palette"
           >
@@ -142,7 +149,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 sound.playClick();
                 setDossierOpen(!dossierOpen);
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 text-xs font-sans font-medium transition-colors cursor-pointer shadow-xs"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 text-xs font-sans font-medium transition-colors cursor-pointer shadow-2xs"
               aria-label="View Resume / CV"
             >
               <FileText className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />
@@ -189,7 +196,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               sound.playClick();
               if (onOpenContactModal) onOpenContactModal();
             }}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black text-xs font-sans font-bold transition-colors cursor-pointer shadow-xs"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black text-xs font-sans font-bold transition-colors cursor-pointer shadow-2xs"
           >
             <span>REACH OUT</span>
             <ArrowRight className="w-3 h-3" />
@@ -201,7 +208,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               sound.playClick();
               setMobileMenuOpen(!mobileMenuOpen);
             }}
-            className="md:hidden w-8 h-8 flex items-center justify-center text-zinc-800 dark:text-zinc-200 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 cursor-pointer"
+            className="md:hidden w-8 h-8 flex items-center justify-center text-zinc-800 dark:text-zinc-200 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 cursor-pointer"
             aria-label="Toggle navigation"
           >
             {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -211,7 +218,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#fcfcfc] dark:bg-[#0e0f12] border-b border-zinc-200 dark:border-zinc-800 px-6 py-4 space-y-3 font-sans text-sm animate-in slide-in-from-top-2 duration-150">
+        <div className="md:hidden fixed top-16 left-4 right-4 bg-white dark:bg-[#0e0f12] rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-2xl p-5 space-y-3 font-sans text-sm animate-in slide-in-from-top-2 duration-150 pointer-events-auto">
           <div className="flex flex-col space-y-2">
             {navLinks.map((link) => (
               <a
@@ -221,7 +228,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   sound.playClick();
                   setMobileMenuOpen(false);
                 }}
-                className="py-1 text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white font-medium transition-colors"
+                className="py-1.5 text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white font-medium transition-colors"
               >
                 {link.label}
               </a>
@@ -250,7 +257,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-1 rounded-full bg-black dark:bg-white text-white dark:text-black text-xs font-bold"
+              className="px-3.5 py-1 rounded-full bg-black dark:bg-white text-white dark:text-black text-xs font-bold"
             >
               Reach Out →
             </a>

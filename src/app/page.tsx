@@ -8,6 +8,7 @@ import { HeroSection } from "@/components/hero/HeroSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { ProjectsGrid } from "@/components/sections/ProjectsGrid";
 import { FaqSection } from "@/components/sections/FaqSection";
+import { ReachOutSection } from "@/components/sections/ReachOutSection";
 import { RichFooter } from "@/components/layout/RichFooter";
 import { ProjectDetailModal } from "@/components/modals/ProjectDetailModal";
 import { CommandPalette } from "@/components/modals/CommandPalette";
@@ -30,7 +31,7 @@ export default function Home() {
     <ThemeProvider>
       <ToastProvider>
         <main className="min-h-screen bg-[#fcfcfc] dark:bg-[#000000] text-[#1a1a1a] dark:text-[#fafafa] selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black flex flex-col font-sans transition-colors duration-300">
-          {/* Navigation Bar with Theme & Audio Toggles */}
+          {/* Centered Floating Navigation Bar with Logo & Theme Toggles */}
           <Navbar
             onOpenCommandPalette={() => setCommandPaletteOpen(true)}
             onOpenContactModal={() => setContactModalOpen(true)}
@@ -48,7 +49,10 @@ export default function Home() {
           {/* SECTION 4: FAQ (Technical Specifications & Availability Accordion) */}
           <FaqSection />
 
-          {/* Three-Layered Rich Contrast Footer with "LET'S WORK TOGETHER / REACH OUT" */}
+          {/* SECTION 5: REACH OUT (Dedicated Interactive Contact & Dispatch Section) */}
+          <ReachOutSection />
+
+          {/* Three-Layered Rich Contrast Footer */}
           <RichFooter />
 
           {/* Interactive Modals */}

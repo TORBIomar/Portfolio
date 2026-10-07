@@ -27,37 +27,37 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
     switch (project.mockupType) {
       case "cad":
         return (
-          <div className="w-full h-44 bg-[#0c0d11] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-zinc-700 transition-colors">
+          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-zinc-700 transition-colors">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-              <span className="flex items-center gap-1.5 text-cyan-400 font-semibold">
-                <Box className="w-3.5 h-3.5" /> Wasm CSG Engine
+              <span className="flex items-center gap-1.5 text-white font-semibold">
+                <Box className="w-3.5 h-3.5 text-zinc-300" /> Wasm CSG Engine
               </span>
-              <span className="text-emerald-400 font-bold">60.2 FPS</span>
+              <span className="text-zinc-300 font-bold font-mono">60.2 FPS</span>
             </div>
 
             {/* 3D Wireframe Graphic */}
             <div className="flex items-center justify-center py-2 relative">
-              <div className="w-40 h-14 border border-cyan-500/70 rounded-full bg-cyan-950/25 flex items-center justify-center relative shadow-[0_0_20px_rgba(6,182,212,0.15)]">
-                <div className="w-5 h-5 rounded-full border border-cyan-400 border-dashed animate-spin" />
-                <span className="absolute -top-2.5 left-10 text-[9px] font-mono text-cyan-300 bg-[#0c0d11] px-1.5 border border-cyan-800/80 rounded">
+              <div className="w-40 h-14 border border-zinc-700 rounded-full bg-zinc-900/60 flex items-center justify-center relative shadow-sm">
+                <div className="w-5 h-5 rounded-full border border-white/80 border-dashed animate-spin" />
+                <span className="absolute -top-2.5 left-10 text-[9px] font-mono text-zinc-300 bg-[#09090b] px-1.5 border border-zinc-700 rounded">
                   Ø80mm Extrusion
                 </span>
               </div>
             </div>
 
-            <div className="text-[11px] font-mono text-zinc-400 flex justify-between pt-2 border-t border-zinc-800/80">
+            <div className="text-[11px] font-mono text-zinc-400 flex justify-between pt-2 border-t border-zinc-800">
               <span>Toolpath: ISO-6983</span>
-              <span className="text-cyan-300">STEP 3D CNC</span>
+              <span className="text-zinc-300">STEP 3D CNC</span>
             </div>
           </div>
         );
 
       case "recruitment":
         return (
-          <div className="w-full h-44 bg-[#0c0d11] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-zinc-700 transition-colors">
+          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-zinc-700 transition-colors">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-              <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
-                <ShieldCheck className="w-3.5 h-3.5" /> Spring Boot 3
+              <span className="flex items-center gap-1.5 text-white font-semibold">
+                <ShieldCheck className="w-3.5 h-3.5 text-zinc-300" /> Spring Boot 3
               </span>
               <span className="text-zinc-400 font-mono">RBAC + JWT</span>
             </div>
@@ -70,49 +70,49 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
               </div>
               <div className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-[10px] font-mono text-center">
                 <div className="text-zinc-500">PIPELINE</div>
-                <div className="text-emerald-400 font-bold text-sm mt-0.5">28</div>
+                <div className="text-zinc-200 font-bold text-sm mt-0.5">28</div>
               </div>
               <div className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-[10px] font-mono text-center">
                 <div className="text-zinc-500">OFFERS</div>
-                <div className="text-cyan-400 font-bold text-sm mt-0.5">6</div>
+                <div className="text-white font-bold text-sm mt-0.5">6</div>
               </div>
             </div>
 
-            <div className="text-[11px] font-mono text-zinc-400 flex justify-between pt-2 border-t border-zinc-800/80">
+            <div className="text-[11px] font-mono text-zinc-400 flex justify-between pt-2 border-t border-zinc-800">
               <span>Zero N+1 Overhead</span>
-              <span className="text-emerald-400">MySQL 8.0</span>
+              <span className="text-zinc-300">MySQL 8.0</span>
             </div>
           </div>
         );
 
       case "library":
         return (
-          <div className="w-full h-44 bg-[#0c0d11] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-zinc-700 transition-colors">
+          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-zinc-700 transition-colors">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-              <span className="flex items-center gap-1.5 text-violet-400 font-semibold">
-                <Sparkles className="w-3.5 h-3.5" /> Gemini &amp; Chroma
+              <span className="flex items-center gap-1.5 text-white font-semibold">
+                <Sparkles className="w-3.5 h-3.5 text-zinc-300" /> Gemini &amp; Chroma
               </span>
-              <span className="text-violet-300 font-mono">Dense RAG</span>
+              <span className="text-zinc-400 font-mono">Dense RAG</span>
             </div>
 
             {/* Vector Similarity Nodes */}
             <div className="flex items-center justify-center gap-3 py-3">
-              <div className="w-8 h-8 rounded-full border border-violet-500 bg-violet-950/50 flex items-center justify-center text-[10px] font-mono text-violet-300 shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+              <div className="w-8 h-8 rounded-full border border-zinc-600 bg-zinc-900 flex items-center justify-center text-[10px] font-mono text-white shadow-sm">
                 q
               </div>
-              <div className="h-0.5 w-10 bg-violet-500/50 dashed" />
-              <div className="w-8 h-8 rounded-full border border-emerald-500 bg-emerald-950/50 flex items-center justify-center text-[10px] font-mono text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+              <div className="h-0.5 w-10 bg-zinc-700 dashed" />
+              <div className="w-8 h-8 rounded-full border border-zinc-600 bg-zinc-900 flex items-center justify-center text-[10px] font-mono text-zinc-300 shadow-sm">
                 d₁
               </div>
-              <div className="h-0.5 w-10 bg-violet-500/50 dashed" />
-              <div className="w-8 h-8 rounded-full border border-cyan-500 bg-cyan-950/50 flex items-center justify-center text-[10px] font-mono text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+              <div className="h-0.5 w-10 bg-zinc-700 dashed" />
+              <div className="w-8 h-8 rounded-full border border-zinc-600 bg-zinc-900 flex items-center justify-center text-[10px] font-mono text-zinc-300 shadow-sm">
                 d₂
               </div>
             </div>
 
-            <div className="text-[11px] font-mono text-zinc-400 flex justify-between pt-2 border-t border-zinc-800/80">
+            <div className="text-[11px] font-mono text-zinc-400 flex justify-between pt-2 border-t border-zinc-800">
               <span>Reciprocal Rank Fusion</span>
-              <span className="text-violet-300">Cos 0.941</span>
+              <span className="text-zinc-300">Cos 0.941</span>
             </div>
           </div>
         );
@@ -120,12 +120,12 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
       case "matrix":
       default:
         return (
-          <div className="w-full h-44 bg-[#0c0d11] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-zinc-700 transition-colors">
+          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-zinc-700 transition-colors">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-              <span className="flex items-center gap-1.5 text-rose-400 font-semibold">
-                <Workflow className="w-3.5 h-3.5" /> n8n Orchestrator
+              <span className="flex items-center gap-1.5 text-white font-semibold">
+                <Workflow className="w-3.5 h-3.5 text-zinc-300" /> n8n Orchestrator
               </span>
-              <span className="text-emerald-400 font-mono">24/7 Webhooks</span>
+              <span className="text-zinc-300 font-mono">24/7 Webhooks</span>
             </div>
 
             {/* Playwright Headless Flow */}
@@ -136,9 +136,9 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
               <span className="text-[10px] text-zinc-400 font-mono mt-0.5">Media Route Abort Stream</span>
             </div>
 
-            <div className="text-[11px] font-mono text-zinc-400 flex justify-between pt-2 border-t border-zinc-800/80">
+            <div className="text-[11px] font-mono text-zinc-400 flex justify-between pt-2 border-t border-zinc-800">
               <span>Zoho API Webhook</span>
-              <span className="text-emerald-400">Zero Loss</span>
+              <span className="text-zinc-300">Zero Loss</span>
             </div>
           </div>
         );

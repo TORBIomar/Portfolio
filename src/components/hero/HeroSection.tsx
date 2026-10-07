@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, Copy, Check, Terminal, Server, Cloud, Database, Sparkles } from "lucide-react";
-import { BrandIcon } from "../common/BrandIcon";
+import { ArrowRight, Copy, Check, Server, Cloud, Database, Sparkles } from "lucide-react";
 import { HeroTerminalCard } from "./HeroTerminalCard";
 import { PERSONAL_INFO, FOUNDATION_PILLARS } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
@@ -27,9 +26,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
   };
 
   return (
-    <section id="about" className="relative pt-28 pb-20 md:pt-36 md:pb-28 overflow-hidden border-b border-zinc-200/90 dark:border-white/10 bg-[#fcfcfc] dark:bg-[#000000] scroll-mt-16 transition-colors duration-300">
+    <section id="about" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden border-b border-zinc-200/90 dark:border-white/10 bg-[#fcfcfc] dark:bg-[#000000] scroll-mt-20 transition-colors duration-300">
       {/* Subtle fine grid background */}
-      <div className="absolute inset-0 bg-grid-pattern dark:bg-grid-pattern-dark opacity-40 dark:opacity-25 pointer-events-none" />
+      <div className="absolute inset-0 bg-grid-pattern dark:bg-grid-pattern-dark opacity-35 dark:opacity-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center text-center">
         
@@ -40,19 +39,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           transition={{ duration: 0.4 }}
           className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-zinc-200/80 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-neutral-800 dark:text-neutral-200 text-xs font-mono font-semibold mb-6 shadow-2xs"
         >
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-black dark:bg-white animate-pulse" />
           <span>01 // PROFILE &amp; PHILOSOPHY</span>
         </motion.div>
 
-        {/* Center Geometric Brand Icon with interactive rotational micro-animation */}
+        {/* Center Official Brand Logo */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          whileHover={{ rotate: 90, scale: 1.05 }}
-          className="mb-6 cursor-pointer"
+          whileHover={{ scale: 1.05 }}
+          className="mb-6 cursor-pointer flex items-center justify-center"
         >
-          <BrandIcon className="w-14 h-14 sm:w-16 sm:h-16 text-black dark:text-white transition-colors" />
+          <img
+            src="/logo/logo-white.png"
+            alt="Omar Torbi"
+            className="h-14 sm:h-16 w-auto object-contain hidden dark:block"
+          />
+          <img
+            src="/logo/logo-black.png"
+            alt="Omar Torbi"
+            className="h-14 sm:h-16 w-auto object-contain block dark:hidden"
+          />
         </motion.div>
 
         {/* Monumental, Ultra-Clear Headline */}
@@ -128,14 +136,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
             <span className="font-bold">{PERSONAL_INFO.npmCommand}</span>
             <span className="text-zinc-300 dark:text-zinc-700">|</span>
             {copied ? (
-              <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 font-bold" />
+              <Check className="w-3.5 h-3.5 text-black dark:text-white font-bold" />
             ) : (
               <Copy className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400" />
             )}
           </motion.button>
         </motion.div>
 
-        {/* HERO SHOWCASE: terminal-card.svg replacing torbi workspace */}
+        {/* HERO SHOWCASE: terminal-card.svg in unified monochrome */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
@@ -154,7 +162,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           className="w-full max-w-4xl bg-white dark:bg-[#09090b] border border-zinc-200 dark:border-white/10 rounded-3xl p-7 sm:p-10 text-left shadow-xs mb-14 transition-colors"
         >
           <div className="flex items-center gap-2 font-mono text-xs font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
+            <Sparkles className="w-3.5 h-3.5 text-black dark:text-white" />
             <span>ABOUT OMAR TORBI</span>
           </div>
 
@@ -219,7 +227,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
                 <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 space-y-1.5 font-mono text-[11px] text-neutral-600 dark:text-neutral-400 font-medium">
                   {pillar.bullets.map((b, bIdx) => (
                     <div key={bIdx} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-neutral-950 dark:bg-emerald-400" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-neutral-950 dark:bg-white" />
                       <span>{b}</span>
                     </div>
                   ))}

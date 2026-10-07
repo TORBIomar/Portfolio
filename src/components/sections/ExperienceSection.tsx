@@ -162,7 +162,7 @@ export const ExperienceSection: React.FC = () => {
                       transition={{ duration: 0.25, delay: hIdx * 0.05 }}
                       className="flex items-start gap-3 font-sans text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed"
                     >
-                      <CheckCircle2 className="w-4 h-4 text-neutral-950 dark:text-emerald-400 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-neutral-950 dark:text-white shrink-0 mt-0.5" />
                       <span>{h}</span>
                     </motion.div>
                   ))}
