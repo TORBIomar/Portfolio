@@ -70,8 +70,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-black tracking-tight text-neutral-950 dark:text-white uppercase max-w-5xl leading-[1.04] mb-5 transition-colors"
         >
-          BUILDING HIGH-PERFORMANCE <br className="hidden sm:inline" />
-          DIGITAL EXPERIENCES
+          SOFTWARE AND DEVOPS <br className="hidden sm:inline" />
+          ENGINEER
         </motion.h1>
 
         {/* Crisp Subheader */}
