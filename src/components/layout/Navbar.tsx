@@ -32,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
   ];
 
   return (
-    <header className="fixed top-3 sm:top-4 left-0 right-0 z-50 flex justify-center px-3 sm:px-6 pointer-events-none">
+    <header className="absolute top-3 sm:top-4 left-0 right-0 z-50 flex justify-center px-3 sm:px-6 pointer-events-none">
       <div
         className="relative w-full max-w-5xl rounded-full bg-[#fcfcfc]/95 dark:bg-[#09090b]/95 backdrop-blur-md border border-zinc-200 dark:border-white/10 shadow-[0_12px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.5)] py-2.5 px-4 sm:px-6 flex items-center justify-between gap-4 pointer-events-auto"
       >
