@@ -72,9 +72,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
         >
           BUILDING HIGH-PERFORMANCE <br className="hidden sm:inline" />
           DIGITAL EXPERIENCES
-          <span className="block text-2xl sm:text-3xl md:text-4xl font-mono font-bold tracking-wider text-neutral-500 dark:text-neutral-400 mt-2">
-            / BY {PERSONAL_INFO.name.toUpperCase()}
-          </span>
         </motion.h1>
 
         {/* Crisp Subheader */}
@@ -114,10 +111,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
             href="#contact"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => {
-              sound.playClick();
-              if (onOpenContactModal) onOpenContactModal();
-            }}
+            onClick={() => sound.playClick()}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-zinc-100 text-neutral-950 border border-zinc-300 dark:bg-[#0e0f12] dark:hover:bg-zinc-900 dark:text-white dark:border-zinc-800 text-xs sm:text-sm font-sans font-bold transition-all cursor-pointer shadow-xs"
           >
             <span>REACH OUT</span>
@@ -167,14 +161,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           </div>
 
           <h2 className="text-xl sm:text-2xl font-sans font-black text-neutral-950 dark:text-white mb-4 leading-snug transition-colors">
-            Final-year Computer Science &amp; Networks student at EMSI Rabat. Dual-certified in Oracle Cloud Infrastructure (OCI DevOps &amp; Architect Professional).
+            Final-year Computer Science &amp; Networks student at EMSI Rabat. Triple-certified in Java SE 17 Developer, OCI DevOps Professional &amp; OCI Architect Professional.
           </h2>
 
           <p className="font-sans text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed mb-5 transition-colors">
-            Specializing in production-grade backend systems with <strong>Spring Boot 3</strong>, containerized cloud infrastructure with <strong>Docker &amp; Linux</strong>, secure REST APIs, and automated workflow pipelines. Driven by modular architecture, clean code, and zero-defect delivery.
+            Specializing in production-grade backend systems with <strong>Spring Boot 3 &amp; Java 17</strong>, containerized cloud infrastructure with <strong>Docker &amp; Linux</strong>, secure REST APIs, and automated workflow pipelines. Driven by modular architecture, clean code, and zero-defect delivery.
           </p>
 
           <div className="flex flex-wrap items-center gap-2 pt-2">
+            <span className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono font-medium text-neutral-800 dark:text-zinc-300">
+              # Java SE 17 Professional (1Z0-829)
+            </span>
             <span className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono font-medium text-neutral-800 dark:text-zinc-300">
               # OCI DevOps Professional (1Z0-1109-26)
             </span>

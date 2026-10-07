@@ -1,14 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
-import { useToast } from "../common/Toast";
 import {
-  Mail,
-  Phone,
-  Copy,
-  Check,
   ArrowUp,
   Download,
   ExternalLink,
@@ -16,26 +11,6 @@ import {
 import { LinkedinIcon, GithubIcon } from "../common/SocialIcons";
 
 export const RichFooter: React.FC = () => {
-  const { showToast } = useToast();
-  const [copiedEmail, setCopiedEmail] = useState(false);
-  const [copiedPhone, setCopiedPhone] = useState(false);
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(PERSONAL_INFO.email);
-    setCopiedEmail(true);
-    sound.playSuccess();
-    showToast(`Copied ${PERSONAL_INFO.email} to clipboard!`);
-    setTimeout(() => setCopiedEmail(false), 2200);
-  };
-
-  const handleCopyPhone = () => {
-    navigator.clipboard.writeText(PERSONAL_INFO.phone);
-    setCopiedPhone(true);
-    sound.playSuccess();
-    showToast(`Copied ${PERSONAL_INFO.phone} to clipboard!`);
-    setTimeout(() => setCopiedPhone(false), 2200);
-  };
-
   const scrollToTop = () => {
     sound.playClick();
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -44,7 +19,7 @@ export const RichFooter: React.FC = () => {
   return (
     <footer className="w-full">
       {/* ========================================================= */}
-      {/* LAYER 1 (Dark Block): Grid containing Links & Navigation */}
+      {/* MAIN FOOTER LAYER: Grid containing Links, Stack & Credentials */}
       {/* ========================================================= */}
       <div className="bg-[#090b10] text-zinc-300 py-16 sm:py-20 border-t border-zinc-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,7 +30,7 @@ export const RichFooter: React.FC = () => {
               <div className="flex items-center gap-3">
                 <img
                   src="/logo/logo-white.png"
-                  alt="Omar Torbi"
+                  alt="Omar Torbi Logo"
                   className="h-8 w-auto object-contain"
                 />
                 <span className="font-mono text-sm font-bold text-white tracking-tight">
@@ -63,7 +38,7 @@ export const RichFooter: React.FC = () => {
                 </span>
               </div>
               <p className="font-sans text-xs text-zinc-400 leading-relaxed max-w-sm">
-                Software &amp; DevOps Engineer and final-year student at EMSI Rabat (DDSI). Dual certified in Oracle Cloud Infrastructure (OCI DevOps &amp; Architect Professional). Architecting modular enterprise systems and automated cloud pipelines.
+                Software &amp; DevOps Engineer and final-year student at EMSI Rabat (DDSI). Triple-certified in Java SE 17 Developer and Oracle Cloud Infrastructure (OCI DevOps &amp; Architect Professional).
               </p>
               <div className="pt-2 flex items-center gap-2 text-xs font-mono text-zinc-400">
                 <span className="w-2 h-2 rounded-full bg-white" />
@@ -90,19 +65,19 @@ export const RichFooter: React.FC = () => {
                 Technical Stack
               </span>
               <ul className="space-y-2 text-zinc-400">
-                <li><span>Spring Boot 3 &amp; Java 17/21</span></li>
+                <li><span>Java 17/21 &amp; Spring Boot 3</span></li>
                 <li><span>Docker &amp; Linux Hardening</span></li>
                 <li><span>Oracle Cloud (OCI) DevOps</span></li>
                 <li><span>PostgreSQL, MySQL &amp; PL/SQL</span></li>
                 <li><span>Three.js &amp; Wasm OpenCascade</span></li>
-                <li><span>n8n Webhook Automations</span></li>
+                <li><span>REST APIs &amp; Microservices</span></li>
               </ul>
             </div>
 
-            {/* Col 4: Documents & Credentials */}
+            {/* Col 4: Documents & Official Certifications */}
             <div className="space-y-3 font-sans text-xs">
               <span className="font-mono text-xs font-bold text-white uppercase tracking-wider block mb-1">
-                Documents &amp; CVs
+                Credentials &amp; CVs
               </span>
               <ul className="space-y-2 text-zinc-400">
                 <li>
@@ -127,153 +102,68 @@ export const RichFooter: React.FC = () => {
                     <span>CV Français (PDF)</span>
                   </a>
                 </li>
-                <li>
-                  <span className="text-zinc-500 font-mono text-[11px]">OCI DevOps Pro (1Z0-1109-26)</span>
+                <li className="pt-1.5">
+                  <span className="text-zinc-300 font-mono text-[11px] flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white inline-block" />
+                    <span>Java SE 17 Professional (1Z0-829)</span>
+                  </span>
                 </li>
                 <li>
-                  <span className="text-zinc-500 font-mono text-[11px]">OCI Architect Pro (1Z0-997-26)</span>
+                  <span className="text-zinc-400 font-mono text-[11px] flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-500 inline-block" />
+                    <span>OCI DevOps Pro (1Z0-1109-26)</span>
+                  </span>
+                </li>
+                <li>
+                  <span className="text-zinc-400 font-mono text-[11px] flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-500 inline-block" />
+                    <span>OCI Architect Pro (1Z0-997-26)</span>
+                  </span>
                 </li>
               </ul>
             </div>
 
           </div>
-        </div>
-      </div>
 
-      {/* ========================================================= */}
-      {/* LAYER 2 (Contrast Block): Quick Collaboration Channels */}
-      {/* ========================================================= */}
-      <div className="bg-[#fcfcfc] dark:bg-[#000000] text-black dark:text-white py-14 sm:py-20 border-t border-b border-zinc-200/90 dark:border-white/10 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10">
-            {/* Monumental Headline */}
-            <div>
-              <span className="font-mono text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 block mb-3">
-                FAST DIRECT CHANNELS
-              </span>
-              <h2 className="text-3xl sm:text-5xl md:text-6xl font-serif font-black tracking-tight text-black dark:text-white uppercase leading-none transition-colors">
-                DIRECT INBOX &amp; PHONE <br />
-                <span className="text-zinc-400 dark:text-zinc-600">/ 24-HOUR RESPONSE</span>
-              </h2>
+          {/* Social Profiles & Back to Top Strip */}
+          <div className="mt-12 pt-8 border-t border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs">
+            <div className="flex items-center gap-6">
+              <a
+                href={PERSONAL_INFO.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sound.playClick()}
+                className="flex items-center gap-1.5 text-zinc-400 hover:text-white transition-colors"
+              >
+                <GithubIcon className="w-3.5 h-3.5" />
+                <span>GitHub (@TORBIomar)</span>
+              </a>
+              <a
+                href={PERSONAL_INFO.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => sound.playClick()}
+                className="flex items-center gap-1.5 text-zinc-400 hover:text-white transition-colors"
+              >
+                <LinkedinIcon className="w-3.5 h-3.5" />
+                <span>LinkedIn (/in/omar-torbi)</span>
+              </a>
             </div>
 
-            {/* Back to Top */}
             <button
               onClick={scrollToTop}
-              className="w-12 h-12 rounded-full border border-zinc-300 dark:border-zinc-800 flex items-center justify-center text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:border-black dark:hover:border-white transition-colors self-start lg:self-auto cursor-pointer"
-              title="Return to top of page"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white transition-colors cursor-pointer"
             >
-              <ArrowUp className="w-5 h-5" />
+              <span>Back to top</span>
+              <ArrowUp className="w-3.5 h-3.5" />
             </button>
           </div>
 
-          {/* Interactive Contact Channels Tray */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10 sm:mt-12">
-            
-            {/* Email Pill */}
-            <div className="p-4 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between shadow-2xs hover:border-zinc-400 dark:hover:border-zinc-700 transition-colors">
-              <div className="flex items-center gap-3 overflow-hidden">
-                <div className="w-9 h-9 rounded-xl bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center text-black dark:text-white shrink-0">
-                  <Mail className="w-4 h-4" />
-                </div>
-                <div className="truncate">
-                  <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase">Direct Email</div>
-                  <a
-                    href={`mailto:${PERSONAL_INFO.email}`}
-                    className="font-mono text-xs font-bold text-black dark:text-white hover:underline truncate block"
-                  >
-                    {PERSONAL_INFO.email}
-                  </a>
-                </div>
-              </div>
-              <button
-                onClick={handleCopyEmail}
-                className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-black dark:hover:text-white cursor-pointer shrink-0 ml-2 transition-colors"
-                title="Copy email address"
-              >
-                {copiedEmail ? <Check className="w-4 h-4 text-black dark:text-white" /> : <Copy className="w-4 h-4" />}
-              </button>
-            </div>
-
-            {/* Phone / WhatsApp Pill */}
-            <div className="p-4 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between shadow-2xs hover:border-zinc-400 dark:hover:border-zinc-700 transition-colors">
-              <div className="flex items-center gap-3 overflow-hidden">
-                <div className="w-9 h-9 rounded-xl bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center text-black dark:text-white shrink-0">
-                  <Phone className="w-4 h-4" />
-                </div>
-                <div className="truncate">
-                  <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase">Phone &amp; WhatsApp</div>
-                  <a
-                    href={PERSONAL_INFO.whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-mono text-xs font-bold text-black dark:text-white hover:underline truncate block"
-                  >
-                    {PERSONAL_INFO.phone}
-                  </a>
-                </div>
-              </div>
-              <button
-                onClick={handleCopyPhone}
-                className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-black dark:hover:text-white cursor-pointer shrink-0 ml-2 transition-colors"
-                title="Copy phone number"
-              >
-                {copiedPhone ? <Check className="w-4 h-4 text-black dark:text-white" /> : <Copy className="w-4 h-4" />}
-              </button>
-            </div>
-
-            {/* GitHub Pill */}
-            <a
-              href={PERSONAL_INFO.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => sound.playClick()}
-              className="p-4 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between shadow-2xs hover:border-zinc-400 dark:hover:border-zinc-700 transition-colors group cursor-pointer"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-zinc-100 dark:bg-zinc-900 group-hover:bg-black dark:group-hover:bg-white group-hover:text-white dark:group-hover:text-black transition-colors flex items-center justify-center text-black dark:text-white shrink-0">
-                  <GithubIcon className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase">GitHub Profile</div>
-                  <span className="font-mono text-xs font-bold text-black dark:text-white">
-                    @TORBIomar
-                  </span>
-                </div>
-              </div>
-              <ExternalLink className="w-4 h-4 text-zinc-400 group-hover:text-black dark:group-hover:text-white transition-colors" />
-            </a>
-
-            {/* LinkedIn Pill */}
-            <a
-              href={PERSONAL_INFO.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => sound.playClick()}
-              className="p-4 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between shadow-2xs hover:border-zinc-400 dark:hover:border-zinc-700 transition-colors group cursor-pointer"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-zinc-100 dark:bg-zinc-900 group-hover:bg-black dark:group-hover:bg-white group-hover:text-white dark:group-hover:text-black transition-colors flex items-center justify-center text-black dark:text-white shrink-0">
-                  <LinkedinIcon className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase">LinkedIn</div>
-                  <span className="font-mono text-xs font-bold text-black dark:text-white">
-                    Omar Torbi
-                  </span>
-                </div>
-              </div>
-              <ExternalLink className="w-4 h-4 text-zinc-400 group-hover:text-black dark:group-hover:text-white transition-colors" />
-            </a>
-
-          </div>
-
         </div>
       </div>
 
       {/* ========================================================= */}
-      {/* LAYER 3 (Bottom Minimal Bar): Copyright & Telemetry */}
+      {/* BOTTOM TELEMETRY BAR: Copyright & Stack */}
       {/* ========================================================= */}
       <div className="bg-[#050608] text-zinc-500 py-6 text-xs font-mono border-t border-zinc-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">

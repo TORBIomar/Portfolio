@@ -12,13 +12,11 @@ import { ReachOutSection } from "@/components/sections/ReachOutSection";
 import { RichFooter } from "@/components/layout/RichFooter";
 import { ProjectDetailModal } from "@/components/modals/ProjectDetailModal";
 import { CommandPalette } from "@/components/modals/CommandPalette";
-import { ContactModal } from "@/components/modals/ContactModal";
 import { PROJECTS_DATA, Project } from "@/data/portfolioData";
 
 export default function Home() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
-  const [contactModalOpen, setContactModalOpen] = useState(false);
 
   const handleOpenProjectById = (projectId: string) => {
     const found = PROJECTS_DATA.find((p) => p.id === projectId);
@@ -34,11 +32,10 @@ export default function Home() {
           {/* Centered Floating Navigation Bar with Logo & Theme Toggles */}
           <Navbar
             onOpenCommandPalette={() => setCommandPaletteOpen(true)}
-            onOpenContactModal={() => setContactModalOpen(true)}
           />
 
           {/* SECTION 1: ABOUT (Hero with card.svg Showcase, Narrative & Architecture Pillars) */}
-          <HeroSection onOpenContactModal={() => setContactModalOpen(true)} />
+          <HeroSection />
 
           {/* SECTION 2: EXPERIENCES (Zahiri Metal, ONSSA, EMSI Degree Switcher) */}
           <ExperienceSection />
@@ -52,7 +49,7 @@ export default function Home() {
           {/* SECTION 5: REACH OUT (Dedicated Interactive Contact & Dispatch Section) */}
           <ReachOutSection />
 
-          {/* Three-Layered Rich Contrast Footer */}
+          {/* Clean Contrast Footer */}
           <RichFooter />
 
           {/* Interactive Modals */}
@@ -65,11 +62,6 @@ export default function Home() {
             isOpen={commandPaletteOpen}
             onClose={() => setCommandPaletteOpen(false)}
             onSelectProject={(id) => handleOpenProjectById(id)}
-          />
-
-          <ContactModal
-            isOpen={contactModalOpen}
-            onClose={() => setContactModalOpen(false)}
           />
         </main>
       </ToastProvider>

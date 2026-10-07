@@ -197,6 +197,17 @@ export const ReachOutSection: React.FC = () => {
                   <Download className="w-3 h-3 text-zinc-400" />
                 </a>
               </div>
+              <div className="pt-2 border-t border-zinc-100 dark:border-zinc-850 flex flex-wrap gap-1.5 font-mono text-[10px]">
+                <span className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-transparent dark:border-zinc-800">
+                  Java SE 17 Pro
+                </span>
+                <span className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-transparent dark:border-zinc-800">
+                  OCI DevOps Pro
+                </span>
+                <span className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-transparent dark:border-zinc-800">
+                  OCI Architect Pro
+                </span>
+              </div>
             </div>
 
             {/* Social Network Cards */}

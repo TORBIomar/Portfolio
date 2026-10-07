@@ -72,19 +72,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Dark mode logo (white) */}
             <img
               src="/logo/logo-white.png"
-              alt="Omar Torbi"
+              alt="Omar Torbi Logo"
               className="h-6 sm:h-7 w-auto object-contain hidden dark:block transition-transform duration-300 group-hover:scale-105"
             />
             {/* Light mode logo (black) */}
             <img
               src="/logo/logo-black.png"
-              alt="Omar Torbi"
+              alt="Omar Torbi Logo"
               className="h-6 sm:h-7 w-auto object-contain block dark:hidden transition-transform duration-300 group-hover:scale-105"
             />
           </div>
-          <span className="font-mono text-xs font-bold tracking-tight text-black dark:text-white hidden lg:inline-block uppercase">
-            OMAR TORBI
-          </span>
         </a>
 
         {/* Center Minimal Navigation */}
@@ -194,7 +191,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             href="#contact"
             onClick={() => {
               sound.playClick();
-              if (onOpenContactModal) onOpenContactModal();
             }}
             className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-black text-xs font-sans font-bold transition-colors cursor-pointer shadow-2xs"
           >

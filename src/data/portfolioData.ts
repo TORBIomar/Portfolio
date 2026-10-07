@@ -51,6 +51,12 @@ export const PERSONAL_INFO = {
   education: "State Engineering Degree in Computer Science and Networks (DDSI) — EMSI Rabat (2022 – Present)",
   certifications: [
     {
+      name: "Java SE 17 Professional",
+      code: "1Z0-829",
+      issuer: "Oracle Certified Professional",
+      badge: "Java SE 17 Developer",
+    },
+    {
       name: "OCI DevOps Professional",
       code: "1Z0-1109-26",
       issuer: "Oracle Cloud Infrastructure",
