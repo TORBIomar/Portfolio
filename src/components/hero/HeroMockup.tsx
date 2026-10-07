@@ -19,6 +19,7 @@ import {
 import { sound } from "@/utils/sound";
 import { useToast } from "../common/Toast";
 import { PERSONAL_INFO } from "@/data/portfolioData";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const HeroMockup: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"cad" | "elevate" | "matrix" | "cli">("cad");
@@ -211,9 +212,17 @@ export const HeroMockup: React.FC = () => {
           </div>
         </div>
 
-        {/* Tab 1: Zahiri Metal 3D CAD Studio */}
-        {activeTab === "cad" && (
-          <div className="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 bg-[#0a0b0e]">
+        <AnimatePresence mode="wait">
+          {/* Tab 1: Zahiri Metal 3D CAD Studio */}
+          {activeTab === "cad" && (
+            <motion.div
+              key="cad"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 bg-[#0a0b0e]"
+            >
             {/* Visual 3D Canvas Mockup (7 Cols) */}
             <div className="lg:col-span-7 flex flex-col justify-between rounded-xl bg-gradient-to-b from-[#121319] to-[#0c0d11] border border-zinc-800 p-5 relative overflow-hidden min-h-[300px]">
               {/* Background isometric grid */}
@@ -411,12 +420,19 @@ export const HeroMockup: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
 
         {/* Tab 2: Elevate Enterprise Recruitment RBAC */}
         {activeTab === "elevate" && (
-          <div className="p-4 sm:p-6 bg-[#0a0b0e] font-mono text-xs space-y-4">
+          <motion.div
+            key="elevate"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="p-4 sm:p-6 bg-[#0a0b0e] font-mono text-xs space-y-4"
+          >
             <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
               <div className="space-y-0.5">
                 <div className="text-white font-semibold text-sm">Elevate Recruitment Ecosystem</div>
@@ -484,12 +500,19 @@ export const HeroMockup: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
 
         {/* Tab 3: Creator Outreach Matrix */}
         {activeTab === "matrix" && (
-          <div className="p-4 sm:p-6 bg-[#0a0b0e] font-mono text-xs space-y-4">
+          <motion.div
+            key="matrix"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="p-4 sm:p-6 bg-[#0a0b0e] font-mono text-xs space-y-4"
+          >
             <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
               <div className="space-y-0.5">
                 <div className="text-white font-semibold text-sm">Creator Outreach Matrix</div>
@@ -527,12 +550,19 @@ export const HeroMockup: React.FC = () => {
               <div className="text-zinc-500">[00:04:13] Payload aborted: Video stream (.mp4) dropped → Saved 4.2 MB</div>
               <div className="text-emerald-400">[00:04:14] n8n Webhook: Pushed lead payload to Zoho Mail dispatch queue</div>
             </div>
-          </div>
+          </motion.div>
         )}
 
         {/* Tab 4: Interactive CLI Shell */}
         {activeTab === "cli" && (
-          <div className="p-4 sm:p-6 bg-[#0a0b0e] font-mono text-xs space-y-3">
+          <motion.div
+            key="cli"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="p-4 sm:p-6 bg-[#0a0b0e] font-mono text-xs space-y-3"
+          >
             <div className="max-h-[220px] overflow-y-auto space-y-2 pr-1">
               {termHistory.map((item, idx) => (
                 <div key={idx} className="space-y-1">
@@ -567,8 +597,9 @@ export const HeroMockup: React.FC = () => {
                 Run ↵
               </button>
             </div>
-          </div>
+          </motion.div>
         )}
+      </AnimatePresence>
 
       </div>
     </div>

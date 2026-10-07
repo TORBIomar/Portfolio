@@ -44,11 +44,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const navLinks = [
     { label: "About", href: "#about" },
-    { label: "Works", href: "#projects" },
-    { label: "Architecture", href: "#architecture" },
-    { label: "Stack", href: "#stack" },
-    { label: "Experience", href: "#experience" },
-    { label: "Contact", href: "#contact" },
+    { label: "Experiences", href: "#experiences" },
+    { label: "Projects", href: "#projects" },
+    { label: "FAQ", href: "#faq" },
   ];
 
   return (
