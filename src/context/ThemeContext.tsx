@@ -31,9 +31,29 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
       setThemeState(saved);
       applyTheme(saved);
     } else {
-      // Default to dark mode
-      setThemeState("dark");
-      applyTheme("dark");
+      // Check system theme preference (prefers-color-scheme: dark)
+      const prefersDark =
+        typeof window !== "undefined" &&
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const initialTheme: Theme = prefersDark ? "dark" : "light";
+      setThemeState(initialTheme);
+      applyTheme(initialTheme);
+    }
+
+    // Listen for system theme changes if user hasn't explicitly overridden it
+    if (typeof window !== "undefined" && window.matchMedia) {
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      const handleSystemChange = (e: MediaQueryListEvent) => {
+        const userSaved = localStorage.getItem("omartorbi-theme");
+        if (!userSaved) {
+          const sysTheme: Theme = e.matches ? "dark" : "light";
+          setThemeState(sysTheme);
+          applyTheme(sysTheme);
+        }
+      };
+      mediaQuery.addEventListener("change", handleSystemChange);
+      return () => mediaQuery.removeEventListener("change", handleSystemChange);
     }
   }, []);
 

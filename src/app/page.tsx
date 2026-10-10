@@ -12,6 +12,7 @@ import { ReachOutSection } from "@/components/sections/ReachOutSection";
 import { RichFooter } from "@/components/layout/RichFooter";
 import { ProjectDetailModal } from "@/components/modals/ProjectDetailModal";
 import { CommandPalette } from "@/components/modals/CommandPalette";
+import { FloatingChatWidget } from "@/components/chat/FloatingChatWidget";
 import { PROJECTS_DATA, Project } from "@/data/portfolioData";
 
 export default function Home() {
@@ -61,6 +62,11 @@ export default function Home() {
           <CommandPalette
             isOpen={commandPaletteOpen}
             onClose={() => setCommandPaletteOpen(false)}
+            onSelectProject={(id) => handleOpenProjectById(id)}
+          />
+
+          {/* Floating Interactive AI Avatar & Chat Widget */}
+          <FloatingChatWidget
             onSelectProject={(id) => handleOpenProjectById(id)}
           />
         </main>

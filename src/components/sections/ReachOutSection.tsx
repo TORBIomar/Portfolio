@@ -161,7 +161,7 @@ export const ReachOutSection: React.FC = () => {
         >
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-200/80 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold mb-3">
             <MessageSquare className="w-3.5 h-3.5 text-black dark:text-white" />
-            <span>05 // REACH OUT &amp; COLLABORATION</span>
+            <span>06 // REACH OUT &amp; COLLABORATION</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans font-black tracking-tight text-neutral-950 dark:text-white uppercase mb-3 transition-colors">

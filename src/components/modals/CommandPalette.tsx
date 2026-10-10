@@ -11,9 +11,6 @@ import {
   Mail,
   Phone,
   Sparkles,
-  Box,
-  Server,
-  Cloud,
 } from "lucide-react";
 import { LinkedinIcon, GithubIcon } from "../common/SocialIcons";
 
@@ -49,6 +46,19 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   if (!isOpen) return null;
 
   const actions = [
+    {
+      id: "ai-chat",
+      label: "Ask Omar's AI Assistant (Projects, Stack & Hiring)",
+      category: "AI & Actions",
+      icon: Sparkles,
+      action: () => {
+        onClose();
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new CustomEvent("open-ai-chat"));
+        }
+        showToast("Opening Omar's AI Assistant");
+      },
+    },
     {
       id: "resume-en",
       label: "Download English Resume (PDF)",
@@ -223,7 +233,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
           {filteredActions.length === 0 && filteredProjects.length === 0 && (
             <div className="py-8 text-center text-zinc-400 dark:text-zinc-500 font-sans">
-              No results found for "{query}".
+              No results found for &quot;{query}&quot;.
             </div>
           )}
 
