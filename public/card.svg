@@ -1,39 +1,43 @@
 <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">
   <defs>
-    <linearGradient id="terracottaGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#E35336" stop-opacity="0.14"/>
-      <stop offset="50%" stop-color="#E35336" stop-opacity="0.04"/>
-      <stop offset="100%" stop-color="#E35336" stop-opacity="0.0"/>
+    <linearGradient id="terracottaCardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3D160E"/>
+      <stop offset="100%" stop-color="#240B06"/>
     </linearGradient>
     <linearGradient id="titlebarGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#1B1210"/>
-      <stop offset="100%" stop-color="#120B0A"/>
+      <stop offset="0%" stop-color="#4F1E14"/>
+      <stop offset="100%" stop-color="#38130B"/>
+    </linearGradient>
+    <linearGradient id="terracottaGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E35336" stop-opacity="0.25"/>
+      <stop offset="50%" stop-color="#E35336" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#E35336" stop-opacity="0.0"/>
     </linearGradient>
     <linearGradient id="accentLine" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#E35336" stop-opacity="0.8"/>
-      <stop offset="50%" stop-color="#FFB0A1" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="#E35336" stop-opacity="0.1"/>
+      <stop offset="0%" stop-color="#E35336" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#FFB0A1" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#E35336" stop-opacity="0.15"/>
     </linearGradient>
   </defs>
 
-  <!-- Window Container -->
-  <rect x="1" y="1" width="758" height="298" rx="12" fill="#0C0807" stroke="#38231F" stroke-width="1"/>
+  <!-- Window Container with Rich Warm Terracotta Background -->
+  <rect x="1" y="1" width="758" height="298" rx="12" fill="url(#terracottaCardBg)" stroke="#7A2D1F" stroke-width="1.5"/>
   <rect x="1" y="1" width="758" height="298" rx="12" fill="url(#terracottaGlow)"/>
 
   <!-- macOS Window Title Bar -->
   <rect x="1" y="1" width="758" height="36" rx="12" fill="url(#titlebarGrad)"/>
-  <rect x="1" y="24" width="758" height="13" fill="#120B0A"/>
-  <line x1="1" y1="37" x2="759" y2="37" stroke="#2C1B18" stroke-width="1"/>
+  <rect x="1" y="24" width="758" height="13" fill="#38130B"/>
+  <line x1="1" y1="37" x2="759" y2="37" stroke="#6E2314" stroke-width="1"/>
 
   <circle cx="24" cy="19" r="5" fill="#ff5f56"/>
   <circle cx="42" cy="19" r="5" fill="#ffbd2e"/>
   <circle cx="60" cy="19" r="5" fill="#27c93f"/>
-  <text x="380" y="23" text-anchor="middle" fill="#A4615B" font-size="11.5" letter-spacing="0.5">omar@torbi: ~/profile</text>
+  <text x="380" y="23" text-anchor="middle" fill="#E89B8C" font-size="11.5" letter-spacing="0.5">omar@torbi: ~/profile</text>
 
   <!-- Terminal Body -->
   <g font-size="14.5">
     <!-- Command Prompt -->
-    <text x="28" y="72" fill="#E35336" font-weight="700">&gt; <tspan fill="#FAF7F5" font-weight="600">whoami</tspan></text>
+    <text x="28" y="72" fill="#FFB0A1" font-weight="700">&gt; <tspan fill="#FAF7F5" font-weight="600">whoami</tspan></text>
 
     <!-- Name & Subtitle -->
     <text x="28" y="102" fill="#FAF7F5" font-size="21" font-weight="700" letter-spacing="-0.3">Omar Torbi</text>
@@ -43,22 +47,22 @@
     <line x1="28" y1="120" x2="732" y2="120" stroke="url(#accentLine)" stroke-width="1"/>
 
     <!-- Key-Value Metadata -->
-    <text x="28" y="148" fill="#A4615B" font-weight="600">role</text>
+    <text x="28" y="148" fill="#D48A7B" font-weight="600">role</text>
     <text x="150" y="148" fill="#FAF7F5" font-weight="500">Software &amp; DevOps Engineer</text>
 
-    <text x="28" y="174" fill="#A4615B" font-weight="600">focus</text>
+    <text x="28" y="174" fill="#D48A7B" font-weight="600">focus</text>
     <text x="150" y="174" fill="#FAF7F5" font-weight="500">Spring Boot 3 · <tspan fill="#FFB0A1">Docker &amp; Linux</tspan> · OCI</text>
 
-    <text x="28" y="200" fill="#A4615B" font-weight="600">school</text>
+    <text x="28" y="200" fill="#D48A7B" font-weight="600">school</text>
     <text x="150" y="200" fill="#FAF7F5" font-weight="500">EMSI Rabat — DDSI, Software Engineering</text>
 
-    <text x="28" y="226" fill="#A4615B" font-weight="600">based</text>
+    <text x="28" y="226" fill="#D48A7B" font-weight="600">based</text>
     <text x="150" y="226" fill="#FAF7F5" font-weight="500">Rabat / Béni Mellal, Morocco</text>
 
     <!-- Status Indicator in terracotta aura -->
-    <text x="28" y="260" fill="#A4615B" font-weight="600">status</text>
-    <circle cx="158" cy="256" r="6" fill="#E35336" fill-opacity="0.25"/>
-    <circle cx="158" cy="256" r="3.5" fill="#E35336"/>
+    <text x="28" y="260" fill="#D48A7B" font-weight="600">status</text>
+    <circle cx="158" cy="256" r="6" fill="#E35336" fill-opacity="0.35"/>
+    <circle cx="158" cy="256" r="3.5" fill="#FFB0A1"/>
     <text x="172" y="260" fill="#FFB0A1" font-weight="600">available for pfe internship (feb 2027)</text>
   </g>
 </svg>
