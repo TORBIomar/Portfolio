@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChromeBot3D } from "./ChromeBot3D";
 import { AiChatModal } from "./AiChatModal";
 import { sound } from "@/utils/sound";
@@ -134,23 +134,6 @@ export const FloatingChatWidget: React.FC<FloatingChatWidgetProps> = ({
     <div className="chatbot-container">
       {/* Floating 3D Character Trigger in Bottom-Right */}
       <div className="fixed bottom-2 right-2 sm:bottom-5 sm:right-5 z-40 flex flex-col items-end select-none pointer-events-auto">
-        {/* Sleek Floating Prompt Pill */}
-        <AnimatePresence>
-          {!isOpen && !isSleeping && (
-            <motion.div
-              initial={{ opacity: 0, y: 10, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 6, scale: 0.9 }}
-              transition={{ delay: 0.4, duration: 0.25 }}
-              onClick={handleToggleChat}
-              className="mb-1 mr-3 sm:mr-4 px-3 py-1.5 rounded-full bg-white/95 dark:bg-[#121217]/95 border border-zinc-200/90 dark:border-white/10 shadow-lg text-[11px] font-medium text-zinc-800 dark:text-zinc-200 backdrop-blur-md flex items-center gap-1.5 cursor-pointer hover:scale-105 transition-transform"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse shadow-[0_0_6px_rgba(6,182,212,0.8)]" />
-              <span>Ask Maro anything ✦</span>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
         <motion.div
           ref={wrapperRef}
           whileHover={{ scale: 1.04 }}
