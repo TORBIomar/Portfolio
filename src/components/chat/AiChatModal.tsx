@@ -566,7 +566,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                       className={`max-w-[90%] rounded-2xl p-4 transition-all ${
                         isAi
                           ? "bg-zinc-100 dark:bg-zinc-900/90 text-zinc-900 dark:text-zinc-100 border border-zinc-200/90 dark:border-zinc-800 rounded-tl-xs shadow-2xs"
-                          : "bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 font-semibold text-[13px] sm:text-[13.5px] tracking-tight rounded-tr-xs shadow-xs"
+                          : "bg-zinc-900 text-white dark:bg-zinc-800 dark:text-white border border-zinc-950 dark:border-zinc-700/80 font-medium text-[13px] sm:text-[13.5px] tracking-tight rounded-tr-xs shadow-xs"
                       }`}
                     >
                       {/* Maro Sender Title */}
@@ -579,8 +579,14 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                         </div>
                       )}
 
-                      {/* Formatted Content */}
-                      {renderFormattedText(msg.text, isCurrentlyStreaming)}
+                      {/* Content */}
+                      {isAi ? (
+                        renderFormattedText(msg.text, isCurrentlyStreaming)
+                      ) : (
+                        <p className="text-[13px] sm:text-[13.5px] font-medium leading-relaxed text-white whitespace-pre-wrap select-text">
+                          {msg.text}
+                        </p>
+                      )}
 
                       {/* Contextual Action Tiles */}
                       {msg.actions && msg.actions.length > 0 && !isCurrentlyStreaming && (
