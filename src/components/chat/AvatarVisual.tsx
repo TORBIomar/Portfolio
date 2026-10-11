@@ -69,7 +69,7 @@ export const AvatarVisual: React.FC<AvatarVisualProps> = ({
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-400/20 via-zinc-300/25 to-white/30 dark:from-cyan-400/25 dark:via-zinc-500/20 dark:to-white/20 blur-md pointer-events-none"
+        className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-emerald-500/25 via-emerald-950/20 to-white/20 dark:from-emerald-400/30 dark:via-emerald-950/40 dark:to-white/10 blur-md pointer-events-none"
       />
 
       {/* 3D Model Outer Frame Container */}

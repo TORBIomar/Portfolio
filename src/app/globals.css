@@ -13,6 +13,9 @@
   --foreground: #1a1a1a;
   --card-bg: #ffffff;
   --card-border: #e4e4e7;
+  --accent-emerald: #10b981;
+  --accent-spruce: #064e3b;
+  --accent-glow: rgba(16, 185, 129, 0.15);
 }
 
 .dark {
@@ -20,6 +23,9 @@
   --foreground: #fafafa;
   --card-bg: #09090b;
   --card-border: rgba(255, 255, 255, 0.08);
+  --accent-emerald: #34d399;
+  --accent-spruce: #022c22;
+  --accent-glow: rgba(52, 211, 153, 0.2);
 }
 
 body {

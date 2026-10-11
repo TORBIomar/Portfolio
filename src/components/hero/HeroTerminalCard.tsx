@@ -20,19 +20,19 @@ export const HeroTerminalCard: React.FC = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto px-2 sm:px-0">
-      {/* Subtle ambient monochrome background halo */}
+      {/* Subtle ambient emerald background halo */}
       <div className="relative group">
-        <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-white/5 via-white/10 to-white/5 dark:from-white/5 dark:via-white/10 dark:to-white/5 opacity-40 blur-xl group-hover:opacity-75 transition-opacity duration-500" />
+        <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-emerald-500/20 to-emerald-500/10 dark:from-emerald-950/40 dark:via-emerald-500/20 dark:to-emerald-950/40 opacity-40 blur-xl group-hover:opacity-75 transition-opacity duration-500" />
 
         {/* Outer Frame */}
-        <div className="relative rounded-2xl bg-[#09090b] border border-zinc-800 shadow-[0_20px_50px_rgba(0,0,0,0.7)] overflow-hidden">
+        <div className="relative rounded-2xl bg-[#09090b] border border-zinc-800 hover:border-emerald-500/30 transition-colors shadow-[0_20px_50px_rgba(0,0,0,0.7)] overflow-hidden">
           
           {/* Subtle Top Metadata Bar */}
           <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-[#121214] border-b border-zinc-800 text-xs font-mono select-none">
             <div className="flex items-center gap-2">
               <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-40" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
               <span className="text-zinc-300 text-[11px] sm:text-xs">
                 terminal-card.svg
@@ -47,13 +47,13 @@ export const HeroTerminalCard: React.FC = () => {
               {/* Copy Command Button */}
               <button
                 onClick={handleCopyCommand}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-800/80 hover:bg-zinc-700 text-zinc-200 hover:text-white border border-zinc-700 text-[11px] transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-zinc-800/80 hover:bg-zinc-700 text-zinc-200 hover:text-white border border-zinc-700 hover:border-emerald-500/40 text-[11px] transition-all cursor-pointer"
                 title="Copy terminal runner command"
               >
                 {copied ? (
                   <>
-                    <Check className="w-3 h-3 text-white" />
-                    <span className="text-white font-bold">Copied</span>
+                    <Check className="w-3 h-3 text-emerald-400 font-bold" />
+                    <span className="text-emerald-400 font-bold">Copied</span>
                   </>
                 ) : (
                   <>
@@ -98,8 +98,8 @@ export const HeroTerminalCard: React.FC = () => {
           {/* Bottom Telemetry Strip */}
           <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 bg-[#0e0e11] border-t border-zinc-800 text-[11px] font-mono text-zinc-400">
             <div className="flex items-center gap-2">
-              <span className="text-white font-bold">●</span>
-              <span className="text-zinc-300">Available for high-impact engineering roles</span>
+              <span className="text-emerald-400 font-bold">●</span>
+              <span className="text-zinc-200 font-medium">Available for high-impact engineering roles</span>
             </div>
 
             <div className="flex items-center gap-4 text-zinc-400">

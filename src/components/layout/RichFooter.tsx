@@ -41,7 +41,7 @@ export const RichFooter: React.FC = () => {
                 Software &amp; DevOps Engineer and final-year student at EMSI Rabat (DDSI). Triple-certified in Java SE 17 Developer and Oracle Cloud Infrastructure (OCI DevOps &amp; Architect Professional).
               </p>
               <div className="pt-2 flex items-center gap-2 text-xs font-mono text-zinc-400">
-                <span className="w-2 h-2 rounded-full bg-white" />
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
                 <span>Available for PFE Internship (Feb 2027)</span>
               </div>
             </div>
@@ -52,10 +52,10 @@ export const RichFooter: React.FC = () => {
                 Engineered Systems
               </span>
               <ul className="space-y-2 text-zinc-400">
-                <li><a href="#projects" className="hover:text-white transition-colors">Zahiri Metal 3D CAD</a></li>
-                <li><a href="#projects" className="hover:text-white transition-colors">Elevate Recruitment RBAC</a></li>
-                <li><a href="#projects" className="hover:text-white transition-colors">Sofia Intelligent Library</a></li>
-                <li><a href="#projects" className="hover:text-white transition-colors">Creator Outreach Matrix</a></li>
+                <li><a href="#projects" className="hover:text-emerald-400 transition-colors">Zahiri Metal 3D CAD</a></li>
+                <li><a href="#projects" className="hover:text-emerald-400 transition-colors">Elevate Recruitment RBAC</a></li>
+                <li><a href="#projects" className="hover:text-emerald-400 transition-colors">Sofia Intelligent Library</a></li>
+                <li><a href="#projects" className="hover:text-emerald-400 transition-colors">Creator Outreach Matrix</a></li>
               </ul>
             </div>
 
@@ -85,7 +85,7 @@ export const RichFooter: React.FC = () => {
                     href={PERSONAL_INFO.resumeUrlEn}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 hover:text-white transition-colors"
+                    className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors"
                   >
                     <Download className="w-3 h-3 text-zinc-500" />
                     <span>English Resume (PDF)</span>
@@ -96,7 +96,7 @@ export const RichFooter: React.FC = () => {
                     href={PERSONAL_INFO.resumeUrlFr}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 hover:text-white transition-colors"
+                    className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors"
                   >
                     <Download className="w-3 h-3 text-zinc-500" />
                     <span>CV Français (PDF)</span>
@@ -104,19 +104,19 @@ export const RichFooter: React.FC = () => {
                 </li>
                 <li className="pt-1.5">
                   <span className="text-zinc-300 font-mono text-[11px] flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white inline-block" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block shadow-[0_0_6px_rgba(52,211,153,0.8)]" />
                     <span>Java SE 17 Professional (1Z0-829)</span>
                   </span>
                 </li>
                 <li>
-                  <span className="text-zinc-400 font-mono text-[11px] flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-500 inline-block" />
+                  <span className="text-zinc-300 font-mono text-[11px] flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 inline-block shadow-[0_0_6px_rgba(52,211,153,0.5)]" />
                     <span>OCI DevOps Pro (1Z0-1109-26)</span>
                   </span>
                 </li>
                 <li>
-                  <span className="text-zinc-400 font-mono text-[11px] flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-zinc-500 inline-block" />
+                  <span className="text-zinc-300 font-mono text-[11px] flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 inline-block shadow-[0_0_6px_rgba(52,211,153,0.5)]" />
                     <span>OCI Architect Pro (1Z0-997-26)</span>
                   </span>
                 </li>
@@ -133,7 +133,7 @@ export const RichFooter: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playClick()}
-                className="flex items-center gap-1.5 text-zinc-400 hover:text-white transition-colors"
+                className="flex items-center gap-1.5 text-zinc-400 hover:text-emerald-400 transition-colors"
               >
                 <GithubIcon className="w-3.5 h-3.5" />
                 <span>GitHub (@TORBIomar)</span>
@@ -143,7 +143,7 @@ export const RichFooter: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playClick()}
-                className="flex items-center gap-1.5 text-zinc-400 hover:text-white transition-colors"
+                className="flex items-center gap-1.5 text-zinc-400 hover:text-emerald-400 transition-colors"
               >
                 <LinkedinIcon className="w-3.5 h-3.5" />
                 <span>LinkedIn (/in/omar-torbi)</span>
@@ -152,7 +152,7 @@ export const RichFooter: React.FC = () => {
 
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white transition-colors cursor-pointer"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-emerald-500/50 text-zinc-300 hover:text-emerald-300 transition-colors cursor-pointer"
             >
               <span>Back to top</span>
               <ArrowUp className="w-3.5 h-3.5" />
@@ -175,8 +175,8 @@ export const RichFooter: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-white inline-block" />
-            <span className="text-zinc-300">All systems operational</span>
+            <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block shadow-[0_0_8px_rgba(16,185,129,0.9)] animate-pulse" />
+            <span className="text-emerald-400 font-semibold">All systems operational</span>
             <span className="text-zinc-700">•</span>
             <span className="text-zinc-400">{PERSONAL_INFO.coordinates}</span>
           </div>

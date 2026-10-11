@@ -25,8 +25,8 @@ export const ExperienceSection: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mb-14 sm:mb-18"
         >
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-200/80 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold mb-3">
-            <Briefcase className="w-3.5 h-3.5 text-black dark:text-white" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-950/40 border border-emerald-500/30 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-400 text-xs font-mono font-semibold mb-3 shadow-2xs">
+            <Briefcase className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
             <span>{t.experiences.tag}</span>
           </div>
 
@@ -60,15 +60,15 @@ export const ExperienceSection: React.FC = () => {
                   }}
                   className={`w-full p-5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex items-center justify-between ${
                     isActive
-                      ? "bg-neutral-950 dark:bg-white text-white dark:text-black border-neutral-950 dark:border-white shadow-md ring-1 ring-neutral-950/20 dark:ring-white/30"
-                      : "bg-white dark:bg-[#09090b] text-neutral-800 dark:text-neutral-200 border-zinc-200 dark:border-white/10 hover:border-zinc-400 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900"
+                      ? "bg-neutral-950 dark:bg-[#09090b] text-white border-emerald-500/80 shadow-md ring-1 ring-emerald-500/30"
+                      : "bg-white dark:bg-[#09090b] text-neutral-800 dark:text-neutral-200 border-zinc-200 dark:border-white/10 hover:border-emerald-500/30 hover:bg-zinc-50 dark:hover:bg-zinc-900"
                   }`}
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
                       <span className={`font-mono text-xs font-bold tracking-wider uppercase ${
                         isActive 
-                          ? "text-neutral-300 dark:text-neutral-700" 
+                          ? "text-emerald-400" 
                           : "text-neutral-500 dark:text-neutral-400"
                       }`}>
                         {exp.company}
@@ -76,14 +76,14 @@ export const ExperienceSection: React.FC = () => {
                     </div>
                     <div className={`font-sans text-sm font-bold line-clamp-1 ${
                       isActive 
-                        ? "text-white dark:text-black" 
+                        ? "text-white" 
                         : "text-neutral-950 dark:text-white"
                     }`}>
                       {exp.role}
                     </div>
                     <div className={`font-mono text-[11px] ${
                       isActive 
-                        ? "text-neutral-400 dark:text-neutral-600" 
+                        ? "text-neutral-300 dark:text-neutral-400" 
                         : "text-neutral-400 dark:text-neutral-500"
                     }`}>
                       {exp.period}
@@ -92,7 +92,7 @@ export const ExperienceSection: React.FC = () => {
 
                   <ChevronRight className={`w-4 h-4 shrink-0 transition-transform ${
                     isActive 
-                      ? "text-white dark:text-black translate-x-1" 
+                      ? "text-emerald-400 translate-x-1" 
                       : "text-neutral-400 dark:text-neutral-500"
                   }`} />
                 </motion.button>
@@ -139,12 +139,12 @@ export const ExperienceSection: React.FC = () => {
                   {activeExp.metrics.map((m, mIdx) => (
                     <div
                       key={mIdx}
-                      className="p-3.5 rounded-xl bg-[#f9f9fa] dark:bg-[#121214] border border-zinc-200 dark:border-zinc-800 text-center transition-colors"
+                      className="p-3.5 rounded-xl bg-[#f9f9fa] dark:bg-[#121214] border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/30 text-center transition-colors"
                     >
                       <div className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 uppercase">
                         {m.label}
                       </div>
-                      <div className="font-mono text-xs sm:text-sm font-bold text-neutral-950 dark:text-white mt-1">
+                      <div className="font-mono text-xs sm:text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-1">
                         {m.value}
                       </div>
                     </div>
@@ -164,7 +164,7 @@ export const ExperienceSection: React.FC = () => {
                       transition={{ duration: 0.25, delay: hIdx * 0.05 }}
                       className="flex items-start gap-3 font-sans text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed"
                     >
-                      <CheckCircle2 className="w-4 h-4 text-neutral-950 dark:text-white shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
                       <span>{h}</span>
                     </motion.div>
                   ))}
@@ -178,7 +178,7 @@ export const ExperienceSection: React.FC = () => {
                   {activeExp.tech.map((t, tIdx) => (
                     <span
                       key={tIdx}
-                      className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-neutral-800 dark:text-zinc-200 text-xs font-mono font-medium transition-colors"
+                      className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/40 hover:bg-emerald-500/5 dark:hover:bg-emerald-950/30 text-neutral-800 dark:text-zinc-200 text-xs font-mono font-medium transition-colors"
                     >
                       {t}
                     </span>

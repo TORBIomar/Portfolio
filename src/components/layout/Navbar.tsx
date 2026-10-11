@@ -39,11 +39,11 @@ export const Navbar: React.FC<NavbarProps> = () => {
       <div
         className="relative w-full max-w-5xl rounded-full bg-[#fcfcfc]/95 dark:bg-[#09090b]/95 backdrop-blur-md border border-zinc-200 dark:border-white/10 shadow-[0_12px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_12px_32px_rgba(0,0,0,0.5)] py-2.5 px-4 sm:px-6 flex items-center justify-between gap-4 pointer-events-auto"
       >
-        {/* Brand Left with official Logo image */}
+        {/* Brand Left with official Logo image & Live Emerald Telemetry Dot */}
         <a
           href="#"
           onClick={() => sound.playClick()}
-          className="flex items-center gap-2.5 group cursor-pointer shrink-0 z-10"
+          className="flex items-center gap-2 group cursor-pointer shrink-0 z-10"
           aria-label="Omar Torbi Portfolio Home"
         >
           <div className="h-7 sm:h-8 flex items-center justify-center">
@@ -60,6 +60,10 @@ export const Navbar: React.FC<NavbarProps> = () => {
               className="h-6 sm:h-7 w-auto object-contain block dark:hidden transition-transform duration-300 group-hover:scale-105"
             />
           </div>
+          <span className="relative flex h-1.5 w-1.5" title="Omar Torbi • Online">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+          </span>
         </a>
 
         {/* Center Minimal Navigation - Mathematically centered in the navbar */}
@@ -70,7 +74,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
               href={link.href}
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
-              className="hover:text-black dark:hover:text-white transition-colors cursor-pointer whitespace-nowrap"
+              className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer whitespace-nowrap"
             >
               {link.label}
             </a>
