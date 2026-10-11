@@ -14,8 +14,8 @@
   --foreground: #1a1a1a;
   --card-bg: #ffffff;
   --card-border: #e4e4e7;
-  --accent: #000068;
-  --accent-glow: rgba(0, 0, 104, 0.15);
+  --accent: #A42F17; /* Figma Terracotta Shade: Deep Warm Fired-Clay */
+  --accent-glow: rgba(227, 83, 54, 0.18);
 }
 
 .dark {
@@ -23,8 +23,8 @@
   --foreground: #fafafa;
   --card-bg: #09090b;
   --card-border: rgba(255, 255, 255, 0.08);
-  --accent: #90caf9;
-  --accent-glow: rgba(144, 202, 249, 0.22);
+  --accent: #FFB0A1; /* Figma Terracotta Tint: Luminous Warm Clay Peach */
+  --accent-glow: rgba(255, 176, 161, 0.22);
 }
 
 ::selection {
@@ -80,24 +80,24 @@ body {
 
 /* High-contrast text selection for light and dark modes */
 ::selection {
-  background-color: #18181b !important;
+  background-color: var(--accent) !important;
   color: #ffffff !important;
 }
 
 ::-moz-selection {
-  background-color: #18181b !important;
+  background-color: var(--accent) !important;
   color: #ffffff !important;
 }
 
 .dark ::selection,
 [data-theme="dark"] ::selection {
-  background-color: #ffffff !important;
+  background-color: var(--accent) !important;
   color: #000000 !important;
 }
 
 .dark ::-moz-selection,
 [data-theme="dark"] ::-moz-selection {
-  background-color: #ffffff !important;
+  background-color: var(--accent) !important;
   color: #000000 !important;
 }
 
