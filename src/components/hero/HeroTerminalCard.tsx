@@ -25,20 +25,20 @@ export const HeroTerminalCard: React.FC = () => {
         <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-accent/20 via-accent/10 to-accent/20 opacity-40 blur-xl group-hover:opacity-75 transition-opacity duration-500 pointer-events-none" />
 
         {/* Outer Frame */}
-        <div className="relative rounded-2xl bg-[#FFF5F2] dark:bg-gradient-to-b dark:from-[#3D160E] dark:to-[#240B06] border border-[#F0CDC4] dark:border-[#6E2314] hover:border-accent/40 transition-colors shadow-[0_20px_50px_rgba(0,0,0,0.12)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden">
+        <div className="relative rounded-2xl bg-gradient-to-b from-[#3D160E] to-[#240B06] border border-[#6E2314] dark:bg-gradient-to-b dark:from-[#FFF7F4] dark:to-[#FDF0EC] dark:border-[#ECC6BC] hover:border-accent/40 transition-colors shadow-[0_20px_50px_rgba(61,22,14,0.3)] dark:shadow-[0_20px_50px_rgba(255,176,161,0.18)] overflow-hidden">
           
           {/* Subtle Top Metadata Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-[#F8DFD7] dark:bg-[#4A1D13] border-b border-[#F0CDC4] dark:border-[#6E2314] text-xs font-mono select-none">
+          <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-[#4A1D13] dark:bg-[#F8DFD7] border-b border-[#6E2314] dark:border-[#ECC6BC] text-xs font-mono select-none">
             <div className="flex items-center gap-2">
               <span className="flex h-2 w-2 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
               </span>
-              <span className="text-neutral-800 dark:text-zinc-200 font-semibold text-[11px] sm:text-xs">
+              <span className="text-zinc-200 dark:text-neutral-800 font-semibold text-[11px] sm:text-xs">
                 terminal-card.svg
               </span>
-              <span className="text-neutral-400 dark:text-zinc-600 hidden sm:inline">|</span>
-              <span className="text-neutral-600 dark:text-zinc-400 hidden sm:inline text-[11px]">
+              <span className="text-zinc-500 dark:text-neutral-400 hidden sm:inline">|</span>
+              <span className="text-zinc-400 dark:text-neutral-600 hidden sm:inline text-[11px]">
                 profile spec v2.4
               </span>
             </div>
@@ -47,7 +47,7 @@ export const HeroTerminalCard: React.FC = () => {
               {/* Copy Command Button */}
               <button
                 onClick={handleCopyCommand}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/80 dark:bg-zinc-800/80 hover:bg-white dark:hover:bg-zinc-700 text-neutral-800 dark:text-zinc-200 border border-[#ECC6BC] dark:border-zinc-700 hover:border-accent/40 text-[11px] transition-all cursor-pointer shadow-2xs"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 dark:bg-white/80 dark:hover:bg-white text-white dark:text-neutral-800 border border-white/20 dark:border-[#ECC6BC] hover:border-accent/60 text-[11px] transition-all cursor-pointer shadow-2xs"
                 title="Copy terminal runner command"
               >
                 {copied ? (
@@ -57,9 +57,9 @@ export const HeroTerminalCard: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    <Terminal className="w-3 h-3 text-neutral-500 dark:text-zinc-400" />
+                    <Terminal className="w-3 h-3 text-zinc-300 dark:text-neutral-500" />
                     <span>npx omar-torbi</span>
-                    <Copy className="w-3 h-3 text-neutral-500 dark:text-zinc-400 ml-0.5" />
+                    <Copy className="w-3 h-3 text-zinc-300 dark:text-neutral-500 ml-0.5" />
                   </>
                 )}
               </button>
@@ -70,7 +70,7 @@ export const HeroTerminalCard: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 download="omar-torbi-card.svg"
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white/50 dark:bg-zinc-800/40 hover:bg-white dark:hover:bg-zinc-800 text-neutral-700 dark:text-zinc-300 border border-[#ECC6BC] dark:border-zinc-800 text-[11px] transition-all"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white/10 hover:bg-white/20 dark:bg-white/70 dark:hover:bg-white text-white dark:text-neutral-900 border border-white/20 dark:border-[#ECC6BC] text-[11px] transition-all shadow-2xs"
                 title="Download raw SVG card"
               >
                 <Download className="w-3 h-3" />
@@ -80,37 +80,39 @@ export const HeroTerminalCard: React.FC = () => {
           </div>
 
           {/* Card Presentation Container */}
-          <div className="relative p-2 sm:p-4 bg-[#FFF8F5] dark:bg-[#2B0E07] flex items-center justify-center transition-colors">
+          <div className="relative p-2 sm:p-4 bg-[#2B0E07] dark:bg-[#FFF9F7] flex items-center justify-center transition-colors">
             <motion.div
               whileHover={{ scale: 1.004 }}
               transition={{ duration: 0.2 }}
               className="w-full flex justify-center"
             >
+              {/* Light Mode: Displays the Darker Terracotta Card */}
               <img
                 src="/card.svg"
                 alt="Omar Torbi — Terminal Profile Card ($ whoami)"
-                className="w-full h-auto max-w-[760px] rounded-lg shadow-xl select-none hidden dark:block"
+                className="w-full h-auto max-w-[760px] rounded-lg shadow-xl select-none block dark:hidden"
                 loading="eager"
               />
+              {/* Dark Mode: Displays the Inverted Light/White Terracotta Card */}
               <img
                 src="/card-light.svg"
                 alt="Omar Torbi — Terminal Profile Card ($ whoami)"
-                className="w-full h-auto max-w-[760px] rounded-lg shadow-xl select-none block dark:hidden"
+                className="w-full h-auto max-w-[760px] rounded-lg shadow-xl select-none hidden dark:block"
                 loading="eager"
               />
             </motion.div>
           </div>
 
           {/* Bottom Telemetry Strip */}
-          <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 bg-[#F8DFD7] dark:bg-[#3A140D] border-t border-[#F0CDC4] dark:border-[#6E2314] text-[11px] font-mono text-neutral-700 dark:text-zinc-300 transition-colors">
+          <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 bg-[#3A140D] dark:bg-[#F8DFD7] border-t border-[#6E2314] dark:border-[#ECC6BC] text-[11px] font-mono text-zinc-300 dark:text-neutral-700 transition-colors">
             <div className="flex items-center gap-2">
               <span className="text-accent font-bold">●</span>
-              <span className="font-semibold text-neutral-900 dark:text-zinc-100">Available for high-impact engineering roles</span>
+              <span className="font-semibold text-zinc-100 dark:text-neutral-900">Available for high-impact engineering roles</span>
             </div>
 
-            <div className="flex items-center gap-4 text-neutral-600 dark:text-zinc-400">
+            <div className="flex items-center gap-4 text-zinc-300 dark:text-neutral-600">
               <span className="hidden md:inline">EMSI Rabat — Computer Engineering</span>
-              <span className="font-semibold text-neutral-800 dark:text-zinc-200">Rabat / Béni Mellal, MA</span>
+              <span className="font-semibold text-zinc-200 dark:text-neutral-800">Rabat / Béni Mellal, MA</span>
             </div>
           </div>
 
