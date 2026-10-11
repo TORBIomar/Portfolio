@@ -17,13 +17,13 @@ export interface ChatMessage {
 }
 
 export const INITIAL_SUGGESTIONS: string[] = [
-  "🤖 Who is Maro?",
-  "💼 Are you available for hire / internship?",
-  "🚀 Tell me about your flagship projects",
-  "☁️ What OCI certifications do you hold?",
-  "🛠️ What is your backend & DevOps tech stack?",
-  "📄 Can I download your CV / Resume?",
-  "📞 How can I contact or hire Omar?",
+  "Who is Maro?",
+  "Are you available for hire / internship?",
+  "Tell me about your flagship projects",
+  "What OCI certifications do you hold?",
+  "What is your backend & DevOps tech stack?",
+  "Can I download your CV / Resume?",
+  "How can I contact or hire Omar?",
 ];
 
 // Rich grounded system prompt for LLM integrations (Gemini, etc.)
@@ -110,7 +110,7 @@ export function getLocalAiResponse(query: string): QueryResult {
     q.includes("c'est quoi ton nom")
   ) {
     return {
-      text: `I'm **Maro**! 🤖 Omar Torbi's personal AI assistant and engineering copilot.
+      text: `I'm **Maro**! Omar Torbi's personal AI assistant and engineering copilot.
 
 I was built to help recruiters, engineering managers, and fellow engineers explore Omar's:
 • **Backend Engineering**: Modular Spring Boot 3 microservices, JPA/Hibernate performance, stateless JWT authentication.
@@ -120,10 +120,10 @@ I was built to help recruiters, engineering managers, and fellow engineers explo
 
 Feel free to ask me anything about Omar's architecture, projects, code, or background!`,
       suggestions: [
-        "💼 Are you available for hire / internship?",
-        "🚀 Tell me about your flagship projects",
-        "☁️ What OCI certifications do you hold?",
-        "📄 Download Resume / CV",
+        "Are you available for hire / internship?",
+        "Tell me about your flagship projects",
+        "What OCI certifications do you hold?",
+        "Download Resume / CV",
       ],
       actions: [
         {
@@ -155,7 +155,7 @@ Feel free to ask me anything about Omar's architecture, projects, code, or backg
     )
   ) {
     return {
-      text: `Hello! 👋 I'm **Maro**, Omar Torbi's personal AI assistant and engineering copilot.
+      text: `Hello! I'm **Maro**, Omar Torbi's personal AI assistant and engineering copilot.
 
 I can answer any questions about Omar's:
 • **Backend & DevOps Engineering expertise** (Spring Boot 3, Docker, Linux, OCI)
@@ -165,10 +165,10 @@ I can answer any questions about Omar's:
 
 How can I help you today?`,
       suggestions: [
-        "💼 Are you available for hire / internship?",
-        "🚀 Tell me about your flagship projects",
-        "☁️ What OCI certifications do you hold?",
-        "📄 Download Resume / CV",
+        "Are you available for hire / internship?",
+        "Tell me about your flagship projects",
+        "What OCI certifications do you hold?",
+        "Download Resume / CV",
       ],
       actions: [
         {
@@ -201,7 +201,7 @@ How can I help you today?`,
     q.includes("relocat")
   ) {
     return {
-      text: `🎯 **Hiring & Availability Status**:
+      text: `**Hiring & Availability Status**:
 
 • **End-of-Studies (PFE) Internship**: Available starting **February 2027** (minimum 4 to 6 months).
 • **Full-Time Roles**: Open to **Software Engineer**, **DevOps Engineer**, and **Backend/Cloud Systems Engineer** positions.
@@ -212,10 +212,10 @@ How can I help you today?`,
 
 Would you like to schedule a call or review his complete credentials?`,
       suggestions: [
-        "📄 Download English Resume",
-        "📄 Download French CV",
-        "📞 How can I contact Omar directly?",
-        "🛠️ What is your core tech stack?",
+        "Download English Resume",
+        "Download French CV",
+        "How can I contact Omar directly?",
+        "What is your core tech stack?",
       ],
       actions: [
         {
@@ -251,7 +251,7 @@ Would you like to schedule a call or review his complete credentials?`,
     q.includes("credentials")
   ) {
     return {
-      text: `🏆 **Omar holds 3 verified Oracle Professional Certifications**:
+      text: `**Omar holds 3 verified Oracle Professional Certifications**:
 
 1. **OCI DevOps Professional** (\`1Z0-1109-26\`)
    • Oracle Cloud Infrastructure CI/CD pipelines, container instances, Artifact Registry, OKE Kubernetes, and automated deployment architectures.
@@ -262,9 +262,9 @@ Would you like to schedule a call or review his complete credentials?`,
 3. **Java SE 17 Developer** (\`1Z0-829\`)
    • Oracle Certified Professional covering modern Java features, concurrency, streams, JVM memory model, and object-oriented architecture.`,
       suggestions: [
-        "🛠️ Tell me about your backend stack",
-        "🚀 What projects demonstrate your DevOps skills?",
-        "📄 Download Resume with Credentials",
+        "Tell me about your backend stack",
+        "What projects demonstrate your DevOps skills?",
+        "Download Resume with Credentials",
       ],
       actions: [
         {
@@ -297,7 +297,7 @@ Would you like to schedule a call or review his complete credentials?`,
   ) {
     const proj = PROJECTS_DATA.find((p) => p.id === "zahiri-metal-cad");
     return {
-      text: `📐 **Zahiri Metal — Web CAD Studio**:
+      text: `**Zahiri Metal — Web CAD Studio**:
 
 An industrial production platform for parametric 3D metal tube modeling and fiber laser cutting preparation.
 
@@ -307,9 +307,9 @@ An industrial production platform for parametric 3D metal tube modeling and fibe
 • **CNC Automation**: Generates ISO-6983 4-axis **G-code** with rotary A-axis interpolation and STEP export directly compatible with Tube Pro CNC machines.
 • **Tech Stack**: React, Three.js, OpenCascade.js, WebAssembly, TypeScript, Tailwind CSS, Spring Boot.`,
       suggestions: [
-        "🚀 Tell me about Elevate recruitment project",
-        "🔍 Tell me about Sofia AI library platform",
-        "🛠️ What is your backend architecture?",
+        "Tell me about Elevate recruitment project",
+        "Tell me about Sofia AI library platform",
+        "What is your backend architecture?",
       ],
       actions: [
         {
@@ -338,7 +338,7 @@ An industrial production platform for parametric 3D metal tube modeling and fibe
   ) {
     const proj = PROJECTS_DATA.find((p) => p.id === "elevate-recruitment");
     return {
-      text: `💼 **Elevate — Enterprise Recruitment Ecosystem**:
+      text: `**Elevate — Enterprise Recruitment Ecosystem**:
 
 A full-stack hiring pipeline platform connecting recruiters, candidates, and job lifecycles with strict governance.
 
@@ -348,9 +348,9 @@ A full-stack hiring pipeline platform connecting recruiters, candidates, and job
 • **Architecture**: SOLID domain services with clean DTO projections to prevent data leakage and minimize over-the-wire payloads.
 • **Tech Stack**: Spring Boot 3, Spring Security, React, TypeScript, MySQL, JPA/Hibernate.`,
       suggestions: [
-        "🔍 Tell me about the Sofia AI RAG platform",
-        "🤖 Tell me about Creator Outreach Matrix",
-        "📄 Download Resume",
+        "Tell me about the Sofia AI RAG platform",
+        "Tell me about Creator Outreach Matrix",
+        "Download Resume",
       ],
       actions: [
         {
@@ -375,7 +375,7 @@ A full-stack hiring pipeline platform connecting recruiters, candidates, and job
   ) {
     const proj = PROJECTS_DATA.find((p) => p.id === "sofia-library");
     return {
-      text: `📚 **Sofia — Intelligent AI Library Platform**:
+      text: `**Sofia — Intelligent AI Library Platform**:
 
 A full-stack digital knowledge platform featuring dense vector retrieval and grounded generative summarization.
 
@@ -384,9 +384,9 @@ A full-stack digital knowledge platform featuring dense vector retrieval and gro
 • **Grounded AI**: Synthesizes top-K retrieved document excerpts with the **Google Gemini API** to generate grounded summaries with direct source citation, preventing hallucinations.
 • **Tech Stack**: Spring Boot, React, ChromaDB, Google Gemini API, MySQL, REST APIs, Tailwind CSS.`,
       suggestions: [
-        "🤖 Tell me about Creator Outreach Matrix",
-        "📐 Tell me about Zahiri Metal CAD",
-        "🛠️ What other AI tools do you work with?",
+        "Tell me about Creator Outreach Matrix",
+        "Tell me about Zahiri Metal CAD",
+        "What other AI tools do you work with?",
       ],
       actions: [
         {
@@ -411,7 +411,7 @@ A full-stack digital knowledge platform featuring dense vector retrieval and gro
   ) {
     const proj = PROJECTS_DATA.find((p) => p.id === "creator-outreach-matrix");
     return {
-      text: `🤖 **Creator Outreach Matrix — Autonomous Scraping & Outreach Engine**:
+      text: `**Creator Outreach Matrix — Autonomous Scraping & Outreach Engine**:
 
 An end-to-end influencer acquisition pipeline engineered for high-throughput, evasive data extraction and event-driven dispatch.
 
@@ -421,9 +421,9 @@ An end-to-end influencer acquisition pipeline engineered for high-throughput, ev
 • **Event Orchestration**: n8n workflow engine connected to verified webhooks, Zoho Mail API automated delivery, and real-time Telegram bot alerts.
 • **Inbound AI**: Integrates local LLM intent classification (Qwen/Hermes) to evaluate replies and draft contextual responses.`,
       suggestions: [
-        "🚀 Tell me about other flagship projects",
-        "☁️ What are your DevOps credentials?",
-        "📞 Contact Omar",
+        "Tell me about other flagship projects",
+        "What are your DevOps credentials?",
+        "Contact Omar",
       ],
       actions: [
         {
@@ -445,7 +445,7 @@ An end-to-end influencer acquisition pipeline engineered for high-throughput, ev
     q.includes("portfolio items")
   ) {
     return {
-      text: `🚀 **Omar's 4 Flagship Engineering Projects**:
+      text: `**Omar's 4 Flagship Engineering Projects**:
 
 1. **Zahiri Metal — Web CAD Studio**
    • Industrial 3D tube modeling & CNC laser G-code preparation using Three.js & OpenCascade.js WebAssembly (60 FPS WebGL).
@@ -458,10 +458,10 @@ An end-to-end influencer acquisition pipeline engineered for high-throughput, ev
 
 Which project would you like to explore deeper?`,
       suggestions: [
-        "📐 Zahiri Metal 3D CAD details",
-        "💼 Elevate Recruitment details",
-        "📚 Sofia AI Library details",
-        "🤖 Creator Outreach Matrix details",
+        "Zahiri Metal 3D CAD details",
+        "Elevate Recruitment details",
+        "Sofia AI Library details",
+        "Creator Outreach Matrix details",
       ],
       actions: [
         {
@@ -494,7 +494,7 @@ Which project would you like to explore deeper?`,
     q.includes("sql")
   ) {
     return {
-      text: `🛠️ **Omar Torbi's Technical Stack**:
+      text: `**Omar Torbi's Technical Stack**:
 
 • **Backend Core**: Java 17/21, Spring Boot 3, Spring Security, JPA/Hibernate, RESTful APIs, Clean Architecture.
 • **Cloud & Infrastructure**: Oracle Cloud (OCI Certified DevOps & Architect), Docker (multi-stage Alpine builds), Linux server administration (systemd, bash).
@@ -502,9 +502,9 @@ Which project would you like to explore deeper?`,
 • **Frontend & Graphics**: React 19, Next.js (App Router), TypeScript, Three.js, WebAssembly (OpenCascade.js), Tailwind CSS.
 • **Automation & AI**: Python 3 (Playwright), n8n workflow engine, Google Gemini API, Local LLMs (Ollama).`,
       suggestions: [
-        "☁️ Tell me about your OCI certifications",
-        "💼 Are you available for hire / internship?",
-        "📄 Download Resume (PDF)",
+        "Tell me about your OCI certifications",
+        "Are you available for hire / internship?",
+        "Download Resume (PDF)",
       ],
       actions: [
         {
@@ -534,16 +534,16 @@ Which project would you like to explore deeper?`,
     q.includes("student")
   ) {
     return {
-      text: `🎓 **Academic Background**:
+      text: `**Academic Background**:
 
 • **Degree**: State Engineering Degree in Computer Science and Networks (*Diplôme d'Ingénieur d'État en Ingénierie Informatique et Réseaux - DDSI*).
 • **Institution**: **EMSI Rabat** (École Marocaine des Sciences de l'Ingénieur), Morocco.
 • **Period**: 2022 — Present (**Final Year Student**, Class of 2027).
 • **Key Focus**: Software architecture, enterprise Java, distributed systems, network security, cloud infrastructures, and algorithm design.`,
       suggestions: [
-        "💼 Availability for End-of-Studies PFE Internship",
-        "☁️ Oracle Certifications held",
-        "📄 Download Resume / CV",
+        "Availability for End-of-Studies PFE Internship",
+        "Oracle Certifications held",
+        "Download Resume / CV",
       ],
       actions: [
         {
@@ -571,7 +571,7 @@ Which project would you like to explore deeper?`,
     q.includes("career")
   ) {
     return {
-      text: `💼 **Professional Engineering Experience**:
+      text: `**Professional Engineering Experience**:
 
 1. **Zahiri Metal** (Summer 2026 — 2 Months)
    • *Full-Stack & 3D Software Developer Intern*
@@ -583,9 +583,9 @@ Which project would you like to explore deeper?`,
    • *Software Engineering Intern*
    • Analyzed operational workflows and structured relational database schemas with ACID consistency for public administrative digitization.`,
       suggestions: [
-        "📐 More about Zahiri CAD project",
-        "💼 Availability for 2027 PFE / Full-Time",
-        "📄 Download Resume (PDF)",
+        "More about Zahiri CAD project",
+        "Availability for 2027 PFE / Full-Time",
+        "Download Resume (PDF)",
       ],
       actions: [
         {
@@ -612,16 +612,16 @@ Which project would you like to explore deeper?`,
     q.includes("pdf")
   ) {
     return {
-      text: `📄 **Omar Torbi's Resumes & Credentials**:
+      text: `**Omar Torbi's Resumes & Credentials**:
 
 You can download Omar's latest verified resumes directly below:
 
 • **English Resume**: Updated with OCI DevOps & Architect certifications, flagship projects, and technical metrics.
 • **French CV**: Formatted for European & Moroccan engineering requisitions.`,
       suggestions: [
-        "💼 Are you available for hire / internship?",
-        "📞 Contact Omar directly",
-        "🚀 Explore flagship projects",
+        "Are you available for hire / internship?",
+        "Contact Omar directly",
+        "Explore flagship projects",
       ],
       actions: [
         {
@@ -653,7 +653,7 @@ You can download Omar's latest verified resumes directly below:
     q.includes("call")
   ) {
     return {
-      text: `📬 **How to Connect with Omar Torbi**:
+      text: `**How to Connect with Omar Torbi**:
 
 • **Direct Email**: [${PERSONAL_INFO.email}](mailto:${PERSONAL_INFO.email})
 • **WhatsApp / Mobile**: [${PERSONAL_INFO.phone}](${PERSONAL_INFO.whatsappUrl})
@@ -663,9 +663,9 @@ You can download Omar's latest verified resumes directly below:
 
 Feel free to reach out directly via WhatsApp or email, or drop a message via the portfolio contact form!`,
       suggestions: [
-        "📄 Download English Resume",
-        "💼 Availability for internships & jobs",
-        "🚀 Tell me about your flagship projects",
+        "Download English Resume",
+        "Availability for internships & jobs",
+        "Tell me about your flagship projects",
       ],
       actions: [
         {
@@ -705,7 +705,7 @@ Feel free to reach out directly via WhatsApp or email, or drop a message via the
     q.includes("disponib")
   ) {
     return {
-      text: `Bonjour ! 👋 Je suis **Maro**, l'assistant IA et copilote technique d'**Omar Torbi**.
+      text: `Bonjour ! Je suis **Maro**, l'assistant IA et copilote technique d'**Omar Torbi**.
 
 Omar est élève ingénieur en dernière année à l'**EMSI Rabat (DDSI)** et certifié **Oracle Cloud (OCI DevOps & Architect Professional)**.
 
@@ -715,9 +715,9 @@ Omar est élève ingénieur en dernière année à l'**EMSI Rabat (DDSI)** et ce
 
 Comment puis-je vous aider ?`,
       suggestions: [
-        "📄 Télécharger le CV en Français",
-        "💼 Disponibilité pour stage PFE 2027",
-        "📞 Contacter Omar",
+        "Télécharger le CV en Français",
+        "Disponibilité pour stage PFE 2027",
+        "Contacter Omar",
       ],
       actions: [
         {
@@ -746,11 +746,11 @@ Comment puis-je vous aider ?`,
 
 What would you like to explore?`,
     suggestions: [
-      "💼 Are you available for hire / internship?",
-      "🚀 Tell me about your flagship projects",
-      "☁️ What OCI certifications do you hold?",
-      "📄 Download English Resume",
-      "📞 How can I contact Omar?",
+      "Are you available for hire / internship?",
+      "Tell me about your flagship projects",
+      "What OCI certifications do you hold?",
+      "Download English Resume",
+      "How can I contact Omar?",
     ],
     actions: [
       {

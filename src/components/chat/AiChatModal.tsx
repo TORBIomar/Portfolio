@@ -6,14 +6,7 @@ import {
   X,
   Send,
   RotateCcw,
-  ExternalLink,
-  Download,
-  Mail,
-  Copy,
-  Check,
-  Sparkles,
 } from "lucide-react";
-import { LinkedinIcon, GithubIcon, WhatsappIcon } from "../common/SocialIcons";
 import { AvatarVisual } from "./AvatarVisual";
 import {
   ChatMessage,
@@ -36,7 +29,7 @@ function getLocalTimeString(): string {
 }
 
 const STARTER_PROMPTS = [
-  "🤖 Who is Maro?",
+  "Who is Maro?",
   "Tell me about Omar",
   "Key projects & tech stack",
   "Internship & availability",
@@ -74,19 +67,13 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, language = "code" }) => {
         <button
           type="button"
           onClick={handleCopy}
-          className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md hover:bg-zinc-800 text-zinc-300 hover:text-white transition-colors cursor-pointer text-[10.5px] font-mono font-medium"
+          className="inline-flex items-center px-2 py-0.5 rounded-md hover:bg-zinc-800 text-zinc-300 hover:text-white transition-colors cursor-pointer text-[10.5px] font-mono font-medium"
           title="Copy code"
         >
           {copied ? (
-            <>
-              <Check className="w-3 h-3 text-emerald-400" />
-              <span className="text-emerald-400 font-bold">Copied</span>
-            </>
+            <span className="text-emerald-400 font-bold">Copied</span>
           ) : (
-            <>
-              <Copy className="w-3 h-3 text-zinc-400" />
-              <span className="font-semibold">Copy</span>
-            </>
+            <span className="font-semibold">Copy</span>
           )}
         </button>
       </div>
@@ -117,7 +104,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
     {
       id: "welcome",
       sender: "ai",
-      text: "Hello! 👋 I'm **Maro**, Omar's personal AI assistant and engineering copilot.\n\nAsk me anything about Omar's backend engineering (Spring Boot 3, REST APIs), DevOps & OCI Cloud infrastructure, 3D Web CAD (Three.js/Wasm), or his availability for internships and engineering roles.",
+      text: "Hello! I'm **Maro**, Omar's personal AI assistant and engineering copilot.\n\nAsk me anything about Omar's backend engineering (Spring Boot 3, REST APIs), DevOps & OCI Cloud infrastructure, 3D Web CAD (Three.js/Wasm), or his availability for internships and engineering roles.",
       timestamp: "Just now",
     },
   ]);
@@ -385,10 +372,9 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                           href={linkMatch[2]}
                           target="_blank"
                           rel="noreferrer"
-                          className="font-bold underline underline-offset-3 text-cyan-600 dark:text-cyan-400 hover:opacity-85 inline-flex items-center gap-0.5"
+                          className="font-bold underline underline-offset-3 text-cyan-600 dark:text-cyan-400 hover:opacity-85"
                         >
                           {linkMatch[1]}
-                          <ExternalLink className="w-2.5 h-2.5 inline-block opacity-80 ml-0.5" />
                         </a>
                       );
                       cur = cur.slice(linkMatch[0].length);
@@ -500,30 +486,9 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                 showStatus={false}
               />
               <div className="text-left">
-                <div className="flex items-center gap-1.5">
-                  <h3 className="text-base font-bold text-zinc-950 dark:text-white tracking-tight leading-none">
-                    Maro
-                  </h3>
-                  <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded-md bg-cyan-500/10 dark:bg-cyan-400/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20 leading-none">
-                    AI
-                  </span>
-                </div>
-                <div className="flex items-center gap-1.5 mt-1.5">
-                  <span
-                    className={`w-2 h-2 rounded-full ${
-                      isReplying || isTyping
-                        ? "bg-cyan-500 animate-ping"
-                        : "bg-emerald-500 animate-pulse"
-                    }`}
-                  />
-                  <span className="text-[11px] font-mono font-semibold text-zinc-500 dark:text-zinc-400 leading-none tracking-wide">
-                    {isReplying
-                      ? "Maro is speaking..."
-                      : isTyping
-                      ? "Maro is thinking..."
-                      : "ONLINE // AUTONOMOUS"}
-                  </span>
-                </div>
+                <h3 className="text-base font-bold text-zinc-950 dark:text-white tracking-tight leading-none">
+                  Maro
+                </h3>
               </div>
             </div>
 
@@ -573,10 +538,9 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                         : "bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-semibold text-[13px] sm:text-[13.5px] tracking-tight rounded-tr-sm shadow-md"
                     }`}
                   >
-                    {/* AI identity mini badge */}
+                    {/* Maro identity header */}
                     {isAi && (
-                      <div className="flex items-center gap-1.5 mb-2 text-xs font-bold text-cyan-700 dark:text-cyan-400 select-none tracking-tight">
-                        <Sparkles className="w-3.5 h-3.5 text-cyan-500 animate-pulse" />
+                      <div className="flex items-center gap-1.5 mb-2 text-xs font-bold text-zinc-900 dark:text-white select-none tracking-tight">
                         <span>Maro</span>
                         <span className="text-[11px] text-zinc-400 dark:text-zinc-500 font-mono font-normal">
                           // Engineering Copilot
@@ -595,14 +559,8 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                             key={actIdx}
                             type="button"
                             onClick={() => handleActionClick(act)}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 text-xs font-semibold tracking-tight transition-all cursor-pointer border border-zinc-200/90 dark:border-white/10 shadow-xs hover:scale-[1.02]"
+                            className="inline-flex items-center px-3 py-1.5 rounded-full bg-white hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 text-xs font-semibold tracking-tight transition-all cursor-pointer border border-zinc-200/90 dark:border-white/10 shadow-xs hover:scale-[1.02]"
                           >
-                            {act.icon === "download" && <Download className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />}
-                            {act.icon === "mail" && <Mail className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />}
-                            {act.icon === "external" && <ExternalLink className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />}
-                            {act.icon === "linkedin" && <LinkedinIcon className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />}
-                            {act.icon === "github" && <GithubIcon className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />}
-                            {act.icon === "whatsapp" && <WhatsappIcon className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />}
                             <span>{act.label}</span>
                           </button>
                         ))}
