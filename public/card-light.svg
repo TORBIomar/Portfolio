@@ -1,19 +1,19 @@
 <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">
   <defs>
     <linearGradient id="accentLineLight" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#A42F17" stop-opacity="0.8"/>
-      <stop offset="50%" stop-color="#E35336" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#A42F17" stop-opacity="0.1"/>
+      <stop offset="0%" stop-color="#A42F17" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#E35336" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#A42F17" stop-opacity="0.15"/>
     </linearGradient>
   </defs>
 
-  <!-- Window Container with Transparent Background & Clean Terracotta Tinted Border -->
-  <rect x="1" y="1" width="758" height="298" rx="12" fill="none" stroke="#E8BAAF" stroke-width="1.5" stroke-opacity="0.8"/>
+  <!-- Window Container with Transparent Background & Rich Darker Terracotta Border -->
+  <rect x="1" y="1" width="758" height="298" rx="12" fill="none" stroke="#A42F17" stroke-width="1.5" stroke-opacity="0.35"/>
 
-  <!-- macOS Window Title Bar (Subtle Translucent Glass) -->
-  <rect x="1" y="1" width="758" height="36" rx="12" fill="rgba(248, 229, 223, 0.45)"/>
-  <rect x="1" y="24" width="758" height="13" fill="rgba(242, 215, 207, 0.45)"/>
-  <line x1="1" y1="37" x2="759" y2="37" stroke="#E2ABA0" stroke-width="1" stroke-opacity="0.5"/>
+  <!-- macOS Window Title Bar (Subtle Terracotta Glass) -->
+  <rect x="1" y="1" width="758" height="36" rx="12" fill="rgba(164, 47, 23, 0.08)"/>
+  <rect x="1" y="24" width="758" height="13" fill="rgba(164, 47, 23, 0.06)"/>
+  <line x1="1" y1="37" x2="759" y2="37" stroke="#A42F17" stroke-width="1" stroke-opacity="0.25"/>
 
   <circle cx="24" cy="19" r="5" fill="#ff5f56"/>
   <circle cx="42" cy="19" r="5" fill="#ffbd2e"/>
@@ -45,7 +45,7 @@
     <text x="28" y="226" fill="#8C4435" font-weight="600">based</text>
     <text x="150" y="226" fill="#1A1513" font-weight="500">Rabat / Béni Mellal, Morocco</text>
 
-    <!-- Status Indicator in terracotta aura -->
+    <!-- Status Indicator in darker terracotta aura -->
     <text x="28" y="260" fill="#8C4435" font-weight="600">status</text>
     <circle cx="158" cy="256" r="6" fill="#A42F17" fill-opacity="0.18"/>
     <circle cx="158" cy="256" r="3.5" fill="#A42F17"/>

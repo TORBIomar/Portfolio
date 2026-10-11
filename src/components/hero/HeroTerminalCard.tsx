@@ -35,21 +35,21 @@ export const HeroTerminalCard: React.FC = () => {
       <div className="relative group">
         <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-accent/20 via-accent/10 to-accent/20 opacity-30 blur-xl group-hover:opacity-60 transition-opacity duration-500 pointer-events-none" />
 
-        {/* Outer Frame: Translucent Glass in White Mode, Dark Terracotta Glass in Dark Mode */}
-        <div className="relative rounded-2xl bg-white/40 dark:bg-[#120704]/60 backdrop-blur-xl border border-zinc-200/90 dark:border-[#6E2314]/50 hover:border-accent/40 dark:hover:border-accent/40 transition-colors shadow-[0_12px_40px_rgba(0,0,0,0.04)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.6)] overflow-hidden">
+        {/* Outer Frame: Translucent Glass in White Mode (Darker Terracotta), Dark Terracotta Glass in Dark Mode (Luminous Accents) */}
+        <div className="relative rounded-2xl bg-white/60 dark:bg-[#120704]/80 backdrop-blur-xl border border-[#A42F17]/25 dark:border-[#FFB0A1]/30 hover:border-[#A42F17]/50 dark:hover:border-[#FFB0A1]/60 transition-colors shadow-[0_12px_40px_rgba(164,47,23,0.06)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden">
           
           {/* Subtle Top Metadata Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-zinc-100/60 dark:bg-[#1C0B06]/60 backdrop-blur-md border-b border-zinc-200/90 dark:border-[#6E2314]/50 text-xs font-mono select-none">
+          <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 bg-[#A42F17]/[0.06] dark:bg-[#250E07]/80 backdrop-blur-md border-b border-[#A42F17]/15 dark:border-[#FFB0A1]/20 text-xs font-mono select-none">
             <div className="flex items-center gap-2">
               <span className="flex h-2 w-2 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
               </span>
-              <span className="text-zinc-700 dark:text-zinc-300 font-semibold text-[11px] sm:text-xs">
+              <span className="text-[#5C1A0D] dark:text-[#FFB0A1] font-semibold text-[11px] sm:text-xs">
                 terminal-card.svg
               </span>
-              <span className="text-zinc-400 dark:text-zinc-600 hidden sm:inline">|</span>
-              <span className="text-zinc-500 dark:text-zinc-400 hidden sm:inline text-[11px]">
+              <span className="text-[#8C4435]/60 dark:text-[#D48A7B]/60 hidden sm:inline">|</span>
+              <span className="text-[#8C4435] dark:text-[#D48A7B] hidden sm:inline text-[11px]">
                 profile spec v2.4
               </span>
             </div>
@@ -58,7 +58,7 @@ export const HeroTerminalCard: React.FC = () => {
               {/* Copy Command Button */}
               <button
                 onClick={handleCopyCommand}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/80 hover:bg-white dark:bg-white/10 dark:hover:bg-white/20 text-neutral-800 dark:text-zinc-200 border border-zinc-200/90 dark:border-[#6E2314]/60 hover:border-accent/60 text-[11px] transition-all cursor-pointer shadow-2xs"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/90 hover:bg-white dark:bg-white/10 dark:hover:bg-white/20 text-[#5C1A0D] dark:text-[#FAF7F5] border border-[#A42F17]/25 dark:border-[#FFB0A1]/30 hover:border-[#A42F17]/60 dark:hover:border-[#FFB0A1] text-[11px] transition-all cursor-pointer shadow-2xs"
                 title="Copy terminal runner command"
               >
                 {copied ? (
@@ -68,9 +68,9 @@ export const HeroTerminalCard: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    <Terminal className="w-3 h-3 text-zinc-500 dark:text-zinc-400" />
+                    <Terminal className="w-3 h-3 text-[#8C4435] dark:text-[#FFB0A1]" />
                     <span>npx omar-torbi</span>
-                    <Copy className="w-3 h-3 text-zinc-500 dark:text-zinc-400 ml-0.5" />
+                    <Copy className="w-3 h-3 text-[#8C4435] dark:text-[#FFB0A1] ml-0.5" />
                   </>
                 )}
               </button>
@@ -81,7 +81,7 @@ export const HeroTerminalCard: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 download={isDark ? "omar-torbi-card.svg" : "omar-torbi-card-transparent.svg"}
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white/80 hover:bg-white dark:bg-white/10 dark:hover:bg-white/20 text-neutral-800 dark:text-zinc-200 border border-zinc-200/90 dark:border-[#6E2314]/60 text-[11px] transition-all shadow-2xs"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white/90 hover:bg-white dark:bg-white/10 dark:hover:bg-white/20 text-[#5C1A0D] dark:text-[#FAF7F5] border border-[#A42F17]/25 dark:border-[#FFB0A1]/30 hover:border-[#A42F17]/60 dark:hover:border-[#FFB0A1] text-[11px] transition-all shadow-2xs"
                 title="Download raw SVG card"
               >
                 <Download className="w-3 h-3" />
@@ -115,15 +115,15 @@ export const HeroTerminalCard: React.FC = () => {
           </div>
 
           {/* Bottom Telemetry Strip */}
-          <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 bg-zinc-100/60 dark:bg-[#1C0B06]/60 backdrop-blur-md border-t border-zinc-200/90 dark:border-[#6E2314]/50 text-[11px] font-mono text-zinc-600 dark:text-zinc-400 transition-colors">
+          <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 bg-[#A42F17]/[0.06] dark:bg-[#250E07]/80 backdrop-blur-md border-t border-[#A42F17]/15 dark:border-[#FFB0A1]/20 text-[11px] font-mono text-[#6B2011] dark:text-[#E89B8C] transition-colors">
             <div className="flex items-center gap-2">
               <span className="text-accent font-bold">●</span>
-              <span className="font-semibold text-neutral-900 dark:text-zinc-100">Available for high-impact engineering roles</span>
+              <span className="font-semibold text-[#3D160E] dark:text-[#FAF7F5]">Available for high-impact engineering roles</span>
             </div>
 
-            <div className="flex items-center gap-4 text-zinc-600 dark:text-zinc-400">
+            <div className="flex items-center gap-4 text-[#6B2011] dark:text-[#D48A7B]">
               <span className="hidden md:inline">EMSI Rabat — Computer Engineering</span>
-              <span className="font-semibold text-neutral-800 dark:text-zinc-200">Rabat / Béni Mellal, MA</span>
+              <span className="font-semibold text-[#3D160E] dark:text-[#FFB0A1]">Rabat / Béni Mellal, MA</span>
             </div>
           </div>
 
