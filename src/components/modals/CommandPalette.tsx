@@ -48,7 +48,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   const actions = [
     {
       id: "ai-chat",
-      label: "Ask Omar's AI Assistant (Projects, Stack & Hiring)",
+      label: "Ask Maro — AI Assistant (Projects, Stack & Hiring)",
       category: "AI & Actions",
       icon: Sparkles,
       action: () => {
@@ -56,7 +56,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
         if (typeof window !== "undefined") {
           window.dispatchEvent(new CustomEvent("open-ai-chat"));
         }
-        showToast("Opening Omar's AI Assistant");
+        showToast("Opening Maro — AI Assistant");
       },
     },
     {

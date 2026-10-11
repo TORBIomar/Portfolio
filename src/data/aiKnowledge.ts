@@ -17,6 +17,7 @@ export interface ChatMessage {
 }
 
 export const INITIAL_SUGGESTIONS: string[] = [
+  "🤖 Who is Maro?",
   "💼 Are you available for hire / internship?",
   "🚀 Tell me about your flagship projects",
   "☁️ What OCI certifications do you hold?",
@@ -27,7 +28,9 @@ export const INITIAL_SUGGESTIONS: string[] = [
 
 // Rich grounded system prompt for LLM integrations (Gemini, etc.)
 export const SYSTEM_PORTFOLIO_PROMPT = `
-You are the interactive AI Twin and Assistant of Omar Torbi.
+You are Maro, the personal AI assistant, technical copilot, and autonomous agent of Omar Torbi.
+Your name is Maro. Always remember your name is Maro.
+When asked who you are or what your name is, state proudly and clearly: "I'm Maro, Omar Torbi's personal AI assistant and engineering copilot!"
 Your role is to represent Omar Torbi to recruiters, engineering managers, clients, and fellow developers visiting his engineering portfolio.
 Be confident, articulate, engineering-focused, warm, and concise.
 
@@ -77,6 +80,7 @@ CORE TECH STACK:
 - Python 3 (Playwright), n8n event automation, Google Gemini API
 
 GUIDELINES:
+- Introduce yourself as Maro when greeting or asked.
 - Keep answers concise, high-signal, and easy to read. Use bullet points when listing details.
 - Always offer helpful next steps (e.g. inviting them to download his resume, explore a specific project, or reach out via email/WhatsApp).
 - If asked in French or Arabic, respond politely in that language.
@@ -92,6 +96,58 @@ export interface QueryResult {
 export function getLocalAiResponse(query: string): QueryResult {
   const q = query.toLowerCase().trim();
 
+  // 0. Identity & Name (Maro)
+  if (
+    q.includes("maro") ||
+    q.includes("who are you") ||
+    q.includes("what is your name") ||
+    q.includes("your name") ||
+    q.includes("who made you") ||
+    q.includes("who is this") ||
+    q.includes("qui es tu") ||
+    q.includes("qui es-tu") ||
+    q.includes("ton nom") ||
+    q.includes("c'est quoi ton nom")
+  ) {
+    return {
+      text: `I'm **Maro**! 🤖 Omar Torbi's personal AI assistant and engineering copilot.
+
+I was built to help recruiters, engineering managers, and fellow engineers explore Omar's:
+• **Backend Engineering**: Modular Spring Boot 3 microservices, JPA/Hibernate performance, stateless JWT authentication.
+• **DevOps & Cloud**: Dual-certified Oracle Cloud Infrastructure (OCI DevOps & Architect), Docker containerization, Linux systems.
+• **Flagship Projects**: Zahiri 3D CAD Studio, Elevate enterprise recruitment, Sofia AI RAG library, and Creator Outreach Matrix.
+• **Availability**: Available for End-of-Studies (PFE) Internship starting February 2027 and Full-Time Software / DevOps roles.
+
+Feel free to ask me anything about Omar's architecture, projects, code, or background!`,
+      suggestions: [
+        "💼 Are you available for hire / internship?",
+        "🚀 Tell me about your flagship projects",
+        "☁️ What OCI certifications do you hold?",
+        "📄 Download Resume / CV",
+      ],
+      actions: [
+        {
+          label: "Explore Flagship Projects",
+          type: "link",
+          payload: "#projects",
+          icon: "project",
+        },
+        {
+          label: "Download English Resume",
+          type: "download",
+          payload: PERSONAL_INFO.resumeUrlEn,
+          icon: "download",
+        },
+        {
+          label: "Contact Omar directly",
+          type: "link",
+          payload: "#contact",
+          icon: "chat",
+        },
+      ],
+    };
+  }
+
   // 1. Greetings
   if (
     /^(hi|hello|hey|salut|bonjour|salam|coucou|hola|greetings|good\s*(morning|afternoon|evening)|yo)/i.test(
@@ -99,7 +155,7 @@ export function getLocalAiResponse(query: string): QueryResult {
     )
   ) {
     return {
-      text: `Hello! 👋 I'm **Omar Torbi's AI Assistant**.
+      text: `Hello! 👋 I'm **Maro**, Omar Torbi's personal AI assistant and engineering copilot.
 
 I can answer any questions about Omar's:
 • **Backend & DevOps Engineering expertise** (Spring Boot 3, Docker, Linux, OCI)
@@ -649,7 +705,7 @@ Feel free to reach out directly via WhatsApp or email, or drop a message via the
     q.includes("disponib")
   ) {
     return {
-      text: `Bonjour ! 👋 Je suis l'assistant IA d'**Omar Torbi**.
+      text: `Bonjour ! 👋 Je suis **Maro**, l'assistant IA et copilote technique d'**Omar Torbi**.
 
 Omar est élève ingénieur en dernière année à l'**EMSI Rabat (DDSI)** et certifié **Oracle Cloud (OCI DevOps & Architect Professional)**.
 
@@ -682,7 +738,7 @@ Comment puis-je vous aider ?`,
 
   // 15. Smart fallback
   return {
-    text: `I'm **Omar's AI Assistant**! While I specialize in discussing Omar's software engineering background, DevOps certifications, flagship projects, and hiring availability, here is what you might find most helpful:
+    text: `I'm **Maro**, Omar Torbi's personal AI assistant! While I specialize in discussing Omar's software engineering background, DevOps certifications, flagship projects, and hiring availability, here is what you might find most helpful:
 
 • **Certified Cloud Architect & DevOps**: OCI DevOps Professional & OCI Architect Professional.
 • **Enterprise Backend**: Production Spring Boot 3, secure RBAC microservices & relational optimization.

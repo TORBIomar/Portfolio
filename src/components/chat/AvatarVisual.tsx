@@ -88,7 +88,7 @@ export const AvatarVisual: React.FC<AvatarVisualProps> = ({
       {showStatus && (
         <span
           className={`absolute bottom-0 right-0 ${badgeSizeMap[size]} rounded-full bg-emerald-500 border-2 border-white dark:border-black shadow-xs flex items-center justify-center z-10`}
-          title="3D AI Copilot Online"
+          title="Maro — 3D AI Assistant Online"
         >
           <span className="w-full h-full rounded-full bg-emerald-400 animate-ping opacity-60" />
         </span>

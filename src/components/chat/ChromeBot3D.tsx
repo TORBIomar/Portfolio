@@ -37,6 +37,9 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
   const mouseRef = useRef({ x: 0, y: 0 });
   const externalMouseRef = useRef(externalMousePos);
   const clickBopRef = useRef(0);
+  const spinProgressRef = useRef(0);
+  const spinVelocityRef = useRef(0);
+  const isWinkingRef = useRef(false);
 
   // Read portfolio theme
   const { theme } = useTheme();
@@ -47,6 +50,13 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
   }, [theme]);
 
   useEffect(() => {
+    // When finishing speech, trigger a celebratory friendly wink
+    if (stateRef.current === "replying" && state === "idle") {
+      isWinkingRef.current = true;
+      setTimeout(() => {
+        isWinkingRef.current = false;
+      }, 350);
+    }
     stateRef.current = state;
   }, [state]);
 
@@ -63,8 +73,13 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
   }, [externalMousePos]);
 
   const handleContainerClick = () => {
-    // Trigger cool 3D springy bop on click
+    // Trigger cool 3D springy bop and joyful acrobatic spin
     clickBopRef.current = 1.0;
+    spinVelocityRef.current = Math.PI * 3.5;
+    isWinkingRef.current = true;
+    setTimeout(() => {
+      isWinkingRef.current = false;
+    }, 380);
     if (onClickReaction) onClickReaction();
   };
 
@@ -123,6 +138,15 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
       emissiveIntensity: isDarkInitial ? 1.2 : 0.0,
     });
 
+    // Cybernetic Orbital Halo Material
+    const haloMaterial = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(isDarkInitial ? 0x00f2fe : 0x828e9c),
+      roughness: isDarkInitial ? 0.12 : 0.18,
+      metalness: isDarkInitial ? 0.9 : 0.95,
+      emissive: new THREE.Color(isDarkInitial ? 0x00f2fe : 0x0c0f17),
+      emissiveIntensity: isDarkInitial ? 1.6 : 0.25,
+    });
+
     // 4. Root Face Group
     const faceGroup = new THREE.Group();
     scene.add(faceGroup);
@@ -133,6 +157,13 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
     const headMesh = new THREE.Mesh(headGeometry, chromeMaterial);
     headMesh.scale.set(1, 1.05, 1);
     faceGroup.add(headMesh);
+
+    // Cybernetic Orbital Halo Ring
+    const haloGeo = new THREE.TorusGeometry(0.88, 0.022, 16, 64);
+    const haloMesh = new THREE.Mesh(haloGeo, haloMaterial);
+    haloMesh.rotation.x = Math.PI / 2.3;
+    haloMesh.position.set(0, 0.95, 0);
+    faceGroup.add(haloMesh);
 
     // Hair Top Left: Sphere [0.35, 32, 32] scale [1, 1.8, 1] pos [-0.5, 0.8, 0.4] rot [0.4, -0.2, -0.5]
     const hairTLGeo = new THREE.SphereGeometry(0.35, 32, 32);
@@ -320,6 +351,10 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
           eyeMaterial.metalness = 0.4;
           eyeMaterial.roughness = 0.1;
 
+          haloMaterial.color.setHex(0x00f2fe);
+          haloMaterial.emissive.setHex(0x00f2fe);
+          haloMaterial.emissiveIntensity = 1.6;
+
           ambientLight.color.setHex(0x0f172a);
           ambientLight.intensity = 1.0;
           keyLight.intensity = 2.6;
@@ -341,6 +376,10 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
           eyeMaterial.emissiveIntensity = 0.0;
           eyeMaterial.metalness = 0.85;
           eyeMaterial.roughness = 0.12;
+
+          haloMaterial.color.setHex(0x828e9c);
+          haloMaterial.emissive.setHex(0x0c0f17);
+          haloMaterial.emissiveIntensity = 0.25;
 
           ambientLight.color.setHex(0x94a3b8);
           ambientLight.intensity = 0.75;
@@ -366,13 +405,66 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
         Math.sin(t * floatSpeed) * floatAmplitude +
         Math.cos(t * 0.7) * 0.02;
 
+      // Organic fluid liquid metal hair ripples
+      const hairWave = Math.sin(t * 2.8) * 0.025;
+      hairTLMesh.position.y = 0.8 + hairWave;
+      hairTMMesh.position.y = 0.95 + Math.cos(t * 2.5) * 0.028;
+      hairTRMesh.position.y = 0.8 - hairWave;
+      hairBLMesh.position.x = -0.8 + Math.sin(t * 2.1) * 0.015;
+      hairBRMesh.position.x = 0.8 - Math.sin(t * 2.1) * 0.015;
+
+      // Ears reactive micro-motion
+      earLeft.rotation.z = 0.3 + Math.sin(t * 2.3) * 0.035;
+      earRight.rotation.z = -0.3 - Math.sin(t * 2.3) * 0.035;
+
+      // Breathing body expansion
+      const breath = actuallySleeping ? Math.sin(t * 1.2) * 0.018 : Math.sin(t * 1.8) * 0.014;
+      headMesh.scale.set(1 + breath, 1.05 + breath * 1.2, 1 + breath);
+
+      // Cybernetic Orbital Halo dynamic physics & reactions
+      if (currentState === "thinking") {
+        haloMesh.rotation.z += 0.07; // Rapid analytical spin
+        const haloPulse = (Math.sin(t * 12) + 1) * 0.5;
+        haloMaterial.emissiveIntensity = isDark ? 1.5 + 1.2 * haloPulse : 0.3 + 0.5 * haloPulse;
+        haloMesh.position.y = 0.98 + Math.sin(t * 4) * 0.04;
+      } else if (currentState === "replying") {
+        haloMesh.rotation.z += 0.03;
+        const voicePulse = (Math.sin(t * 8) + 1) * 0.5;
+        const haloScale = 1 + voicePulse * 0.07;
+        haloMesh.scale.set(haloScale, haloScale, haloScale);
+        haloMaterial.emissiveIntensity = isDark ? 1.8 + 0.8 * voicePulse : 0.4 + 0.4 * voicePulse;
+        haloMesh.position.y = 0.95 + Math.sin(t * 3) * 0.03;
+      } else if (actuallySleeping) {
+        haloMesh.rotation.z += 0.003;
+        haloMaterial.emissiveIntensity = isDark ? 0.2 : 0.06;
+        haloMesh.position.y = THREE.MathUtils.lerp(haloMesh.position.y, 0.84, 0.05);
+      } else {
+        // Idle graceful hover & orbital tilt
+        haloMesh.rotation.z += 0.014;
+        haloMesh.position.y = 0.95 + Math.sin(t * 1.6) * 0.025;
+        haloMaterial.emissiveIntensity = isDark ? 1.5 : 0.25;
+        haloMesh.scale.set(1, 1, 1);
+      }
+
       // Handle interactive click spring bop
       if (clickBopRef.current > 0.01) {
         clickBopRef.current *= 0.90; // spring decay
-        const bopScale = 1 + Math.sin(clickBopRef.current * Math.PI) * 0.14;
+        const bopScale = 1 + Math.sin(clickBopRef.current * Math.PI) * 0.16;
         faceGroup.scale.set(bopScale, bopScale, bopScale);
       } else {
         faceGroup.scale.set(1, 1, 1);
+      }
+
+      // Acrobatic celebratory spin physics
+      if (Math.abs(spinVelocityRef.current) > 0.08) {
+        spinProgressRef.current += spinVelocityRef.current * 0.016;
+        spinVelocityRef.current *= 0.90; // smooth exponential decay
+      } else {
+        spinVelocityRef.current = 0;
+        if (spinProgressRef.current !== 0) {
+          spinProgressRef.current = THREE.MathUtils.lerp(spinProgressRef.current, 0, 0.14);
+          if (Math.abs(spinProgressRef.current) < 0.01) spinProgressRef.current = 0;
+        }
       }
 
       // Target Yaw & Pitch angles
@@ -392,8 +484,8 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
 
       if (currentChatOpen) {
         // Look towards chat conversation window
-        targetYaw = -0.35;
-        targetPitch = 0.05;
+        targetYaw = -0.32;
+        targetPitch = 0.04;
         targetZ = -0.02;
       } else if (actuallySleeping) {
         // Nod head down into peaceful sleep
@@ -407,45 +499,61 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
 
       // Cognitive State Variations
       if (currentState === "thinking") {
-        targetZ = -0.10; // Thoughtful head tilt
-        targetPitch -= 0.05;
+        targetYaw += 0.24; // Pondering look up-right
+        targetPitch -= 0.14;
+        targetZ = -0.12;
       } else if (currentState === "replying") {
-        const speechNod = Math.sin(t * 5.2) * 0.05;
+        const speechNod = Math.sin(t * 5.6) * 0.055;
         targetPitch += speechNod; // Affirmative nodding
       }
 
-      // Smooth interpolation for head rotations
-      faceGroup.rotation.y = THREE.MathUtils.lerp(faceGroup.rotation.y, targetYaw, 0.08);
+      // Smooth interpolation for head rotations + spin
+      faceGroup.rotation.y = THREE.MathUtils.lerp(faceGroup.rotation.y, targetYaw, 0.08) + spinProgressRef.current;
       faceGroup.rotation.x = THREE.MathUtils.lerp(faceGroup.rotation.x, targetPitch, 0.08);
       faceGroup.rotation.z = THREE.MathUtils.lerp(faceGroup.rotation.z, targetZ, 0.1);
 
-      // Eyes Scale Logic (blinking, sleep, or attentive gaze)
-      const targetEyeScaleY = actuallySleeping ? 0.06 : isBlinking ? 0.09 : 2.5;
-      const targetEyeScaleX = currentState === "thinking" ? 0.9 : currentState === "replying" ? 1.1 : 1.0;
+      // Eyes Scale Logic (blinking, sleep, attentive gaze, and winking)
+      const baseEyeScaleY = actuallySleeping ? 0.06 : isBlinking ? 0.09 : 2.5;
+      let leftTargetScaleY = baseEyeScaleY;
+      let rightTargetScaleY = baseEyeScaleY;
 
-      leftEyeMesh.scale.y = THREE.MathUtils.lerp(leftEyeMesh.scale.y, targetEyeScaleY, 0.22);
-      rightEyeMesh.scale.y = THREE.MathUtils.lerp(rightEyeMesh.scale.y, targetEyeScaleY, 0.22);
+      // Playful asymmetric wink
+      if (isWinkingRef.current && !actuallySleeping) {
+        leftTargetScaleY = 0.08; // left eye wink!
+        rightTargetScaleY = 2.6; // right eye stays wide and happy!
+      } else if (currentState === "replying") {
+        // Voice acoustic frequency eye modulation
+        const voiceAcousticMod = Math.sin(t * 9.5) * 0.3;
+        leftTargetScaleY = Math.max(0.4, baseEyeScaleY + voiceAcousticMod);
+        rightTargetScaleY = Math.max(0.4, baseEyeScaleY + voiceAcousticMod);
+      }
 
-      leftEyeMesh.scale.x = THREE.MathUtils.lerp(leftEyeMesh.scale.x, targetEyeScaleX, 0.1);
-      rightEyeMesh.scale.x = THREE.MathUtils.lerp(rightEyeMesh.scale.x, targetEyeScaleX, 0.1);
+      const targetEyeScaleX = currentState === "thinking" ? 0.9 : currentState === "replying" ? 1.12 : 1.0;
+
+      leftEyeMesh.scale.y = THREE.MathUtils.lerp(leftEyeMesh.scale.y, leftTargetScaleY, 0.24);
+      rightEyeMesh.scale.y = THREE.MathUtils.lerp(rightEyeMesh.scale.y, rightTargetScaleY, 0.24);
+
+      leftEyeMesh.scale.x = THREE.MathUtils.lerp(leftEyeMesh.scale.x, targetEyeScaleX, 0.12);
+      rightEyeMesh.scale.x = THREE.MathUtils.lerp(rightEyeMesh.scale.x, targetEyeScaleX, 0.12);
 
       // Eye Glow Reactions for Thinking / Replying
       if (currentState === "thinking") {
-        const pulse = (Math.sin(t * 7) + 1) * 0.5;
+        const pulse = (Math.sin(t * 8) + 1) * 0.5;
         if (isDark) {
           eyeMaterial.emissive.setRGB(0.1 * pulse, 0.8 + 0.2 * pulse, 1.0);
-          eyeMaterial.emissiveIntensity = 1.0 + 0.8 * pulse;
+          eyeMaterial.emissiveIntensity = 1.2 + 0.9 * pulse;
         } else {
           eyeMaterial.emissive.setRGB(0.02 * pulse, 0.55 * pulse, 0.85 * pulse);
           eyeMaterial.emissiveIntensity = 1.0 * pulse;
         }
       } else if (currentState === "replying") {
+        const voicePulse = (Math.sin(t * 10) + 1) * 0.5;
         if (isDark) {
-          eyeMaterial.emissive.setRGB(0.2, 0.95, 0.8);
-          eyeMaterial.emissiveIntensity = 1.4;
+          eyeMaterial.emissive.setRGB(0.2, 0.95, 0.85);
+          eyeMaterial.emissiveIntensity = 1.4 + 0.6 * voicePulse;
         } else {
           eyeMaterial.emissive.setRGB(0.05, 0.70, 0.50);
-          eyeMaterial.emissiveIntensity = 0.9;
+          eyeMaterial.emissiveIntensity = 0.9 + 0.4 * voicePulse;
         }
       } else {
         if (isDark) {
@@ -477,6 +585,7 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
       roomEnv.dispose();
 
       headGeometry.dispose();
+      haloGeo.dispose();
       hairTLGeo.dispose();
       hairTMGeo.dispose();
       hairTRGeo.dispose();
@@ -489,6 +598,7 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
 
       chromeMaterial.dispose();
       eyeMaterial.dispose();
+      haloMaterial.dispose();
     };
   }, [size, interactive, externalMousePos]);
 
