@@ -1,17 +1,12 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  X,
-  Send,
-  RotateCcw,
-} from "lucide-react";
+import { X, Send, RotateCcw } from "lucide-react";
 import { AvatarVisual } from "./AvatarVisual";
 import {
   ChatMessage,
   ChatAction,
-  INITIAL_SUGGESTIONS,
   getLocalAiResponse,
 } from "@/data/aiKnowledge";
 import { sound } from "@/utils/sound";
@@ -29,13 +24,25 @@ function getLocalTimeString(): string {
 }
 
 const STARTER_PROMPTS = [
-  "Who is Maro?",
-  "Tell me about Omar",
-  "Key projects & tech stack",
-  "Internship & availability",
+  {
+    title: "Who is Maro?",
+    subtitle: "Architecture, background, and capabilities",
+  },
+  {
+    title: "Backend & DevOps Stack",
+    subtitle: "Spring Boot 3, Docker, Linux, and OCI",
+  },
+  {
+    title: "Dual OCI Certifications",
+    subtitle: "DevOps & Architect Professional credentials",
+  },
+  {
+    title: "Internship Availability",
+    subtitle: "2027 End-of-Studies PFE and engineering roles",
+  },
 ];
 
-// Interactive Syntax-highlighted Terminal Code Block with Copy Feedback
+// Precision Syntax-styled Code Block (Zero Fake Traffic-light Orbs)
 interface CodeBlockProps {
   code: string;
   language?: string;
@@ -54,21 +61,16 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, language = "code" }) => {
   };
 
   return (
-    <div className="my-2.5 rounded-xl overflow-hidden border border-zinc-300 dark:border-white/10 bg-[#09090c] text-zinc-100 shadow-md">
-      <div className="px-3.5 py-1.5 bg-[#121217] border-b border-zinc-800 flex items-center justify-between text-[11px] font-mono">
-        <div className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-red-500/80" />
-          <span className="w-2 h-2 rounded-full bg-amber-500/80" />
-          <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
-          <span className="ml-2 text-zinc-300 text-[10px] uppercase tracking-wider font-bold">
-            {language || "code"}
-          </span>
-        </div>
+    <div className="my-3 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-[#0c0c10] text-zinc-100 shadow-xs">
+      <div className="px-3.5 py-1.5 bg-[#14141a] border-b border-zinc-800 flex items-center justify-between text-[11px] font-mono">
+        <span className="text-zinc-400 font-semibold uppercase tracking-wider text-[10px]">
+          {language || "code"}
+        </span>
         <button
           type="button"
           onClick={handleCopy}
-          className="inline-flex items-center px-2 py-0.5 rounded-md hover:bg-zinc-800 text-zinc-300 hover:text-white transition-colors cursor-pointer text-[10.5px] font-mono font-medium"
-          title="Copy code"
+          className="inline-flex items-center px-2 py-0.5 rounded-md hover:bg-zinc-800 text-zinc-300 hover:text-white transition-colors cursor-pointer text-[10.5px] font-mono font-medium focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-cyan-500"
+          title="Copy code to clipboard"
         >
           {copied ? (
             <span className="text-emerald-400 font-bold">Copied</span>
@@ -77,7 +79,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, language = "code" }) => {
           )}
         </button>
       </div>
-      <pre className="p-3.5 overflow-x-auto text-xs font-mono font-medium leading-relaxed text-zinc-200">
+      <pre className="p-3.5 overflow-x-auto text-xs font-mono font-medium leading-relaxed text-zinc-200 selection:bg-cyan-900 selection:text-white">
         <code>{code}</code>
       </pre>
     </div>
@@ -100,6 +102,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
   const [isTyping, setIsTyping] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
   const [streamingMsgId, setStreamingMsgId] = useState<string | null>(null);
+
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "welcome",
@@ -112,19 +115,22 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto scroll to bottom
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
       scrollToBottom();
-      setTimeout(() => inputRef.current?.focus(), 250);
+      // Auto-focus input when modal opens
+      const timer = setTimeout(() => {
+        inputRef.current?.focus();
+      }, 120);
+      return () => clearTimeout(timer);
     }
-  }, [isOpen, messages, isTyping, isReplying]);
+  }, [isOpen, messages, scrollToBottom]);
 
-  // Keyboard shortcut: Escape to close
+  // Global Esc key dismissal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isOpen) {
@@ -139,16 +145,15 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
     sound.playClick();
     setMessages([
       {
-        id: createMsgId("cleared"),
+        id: createMsgId("ai-welcome"),
         sender: "ai",
-        text: "Conversation reset! I'm **Maro** — what would you like to explore about Omar's architecture, projects, or credentials?",
+        text: "Conversation reset. What would you like to explore about Omar's engineering work?",
         timestamp: getLocalTimeString(),
       },
     ]);
-    showToast("Chat history reset");
+    showToast("Conversation cleared");
   };
 
-  // Helper to stream typewriter response smoothly with adaptive human typing cadence
   const streamAiResponse = async (
     fullText: string,
     actions?: ChatAction[],
@@ -159,7 +164,6 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
     setIsReplying(true);
     sound.playSuccess();
 
-    // Create placeholder message
     const newMsg: ChatMessage = {
       id: msgId,
       sender: "ai",
@@ -170,7 +174,6 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
     setMessages((prev) => [...prev, newMsg]);
 
     const totalLen = fullText.length;
-    // Dynamic step size: fast fluid water stream for long text, precise for short
     const stepSize = totalLen > 350 ? 3 : totalLen > 140 ? 2 : 1;
     let index = 0;
 
@@ -183,26 +186,23 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
         prev.map((m) => (m.id === msgId ? { ...m, text: partial } : m))
       );
 
-      // Soft keystroke sound periodically
       if (index % 18 === 0 && !sound.isMuted()) {
         sound.playHover();
       }
 
-      // Natural speech punctuation cadence pauses
       const lastChar = fullText[index - 1];
       let delay = 12;
       if (lastChar === "." || lastChar === "!" || lastChar === "?") {
-        delay = 44; // natural thought pause
+        delay = 40;
       } else if (lastChar === "," || lastChar === ";" || lastChar === ":") {
-        delay = 24;
+        delay = 22;
       } else if (lastChar === "\n") {
-        delay = 32;
+        delay = 28;
       }
 
       await new Promise((r) => setTimeout(r, delay));
     }
 
-    // Attach actions and suggestions once stream concludes
     setMessages((prev) =>
       prev.map((m) =>
         m.id === msgId
@@ -219,7 +219,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
     setStreamingMsgId(null);
     setTimeout(() => {
       setIsReplying(false);
-    }, 1000);
+    }, 800);
   };
 
   const handleSendMessage = async (queryText?: string) => {
@@ -244,7 +244,6 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
       let replyActions: ChatAction[] | undefined;
       let replySuggestions: string[] | undefined;
 
-      // 1. Call Next.js /api/chat (powered by Gemini)
       try {
         const res = await fetch("/api/chat", {
           method: "POST",
@@ -268,9 +267,8 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
         console.warn("Server API chat route unavailable, using local fallback:", err);
       }
 
-      // 2. Local Fallback if server timed out
       if (!answered) {
-        await new Promise((r) => setTimeout(r, 350));
+        await new Promise((r) => setTimeout(r, 250));
         const local = getLocalAiResponse(textToSend);
         replyText = local.text;
         replyActions = local.actions;
@@ -308,9 +306,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
     }
   };
 
-  // Markdown formatting for code blocks, headers, inline code, bold, links, and bullet points
   const renderFormattedText = (rawText: string, isStreamingActive: boolean) => {
-    // Separate fenced code blocks (```lang\n...\n```) from standard text
     const codeBlockRegex = /```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g;
     const blocks: Array<{ type: "code"; lang: string; code: string } | { type: "text"; content: string }> = [];
     let lastIndex = 0;
@@ -339,7 +335,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
     }
 
     return (
-      <div className="relative space-y-2 text-[13px] sm:text-[13.5px] font-medium leading-relaxed tracking-[-0.01em]">
+      <div className="relative space-y-2 text-[13.5px] font-medium leading-relaxed tracking-[-0.01em]">
         {blocks.map((block, bIdx) => {
           if (block.type === "code") {
             return <CodeBlock key={`cb-${bIdx}`} code={block.code} language={block.lang} />;
@@ -363,7 +359,6 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                   let pKey = 0;
 
                   while (cur.length > 0) {
-                    // Links: [label](url)
                     const linkMatch = cur.match(/^\[([^\]]+)\]\(([^)]+)\)/);
                     if (linkMatch) {
                       parts.push(
@@ -372,7 +367,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                           href={linkMatch[2]}
                           target="_blank"
                           rel="noreferrer"
-                          className="font-bold underline underline-offset-3 text-cyan-600 dark:text-cyan-400 hover:opacity-85"
+                          className="font-bold underline underline-offset-3 text-cyan-700 dark:text-cyan-400 hover:opacity-80 transition-opacity"
                         >
                           {linkMatch[1]}
                         </a>
@@ -381,11 +376,13 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                       continue;
                     }
 
-                    // Bold: **text**
                     const boldMatch = cur.match(/^\*\*([^*]+)\*\*/);
                     if (boldMatch) {
                       parts.push(
-                        <strong key={`b-${lIdx}-${pKey++}`} className="font-bold text-zinc-950 dark:text-white tracking-tight">
+                        <strong
+                          key={`b-${lIdx}-${pKey++}`}
+                          className="font-bold text-zinc-950 dark:text-white tracking-tight"
+                        >
                           {boldMatch[1]}
                         </strong>
                       );
@@ -393,7 +390,6 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                       continue;
                     }
 
-                    // Inline code: `code`
                     const codeMatch = cur.match(/^`([^`]+)`/);
                     if (codeMatch) {
                       parts.push(
@@ -425,7 +421,10 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
 
                 if (isHeader) {
                   return (
-                    <h4 key={lIdx} className="font-bold text-sm sm:text-[14px] text-zinc-950 dark:text-white pt-2 pb-1 tracking-tight border-b border-zinc-200/60 dark:border-white/5">
+                    <h4
+                      key={lIdx}
+                      className="font-bold text-sm sm:text-[14px] text-zinc-950 dark:text-white pt-2 pb-1 tracking-tight border-b border-zinc-200/80 dark:border-zinc-800"
+                    >
                       {parseInline(cleanLine)}
                     </h4>
                   );
@@ -433,9 +432,14 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
 
                 if (isBullet) {
                   return (
-                    <div key={lIdx} className="flex items-start gap-2.5 my-1 text-[13px] sm:text-[13.5px] font-medium leading-relaxed">
-                      <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 mt-2 shrink-0 shadow-[0_0_8px_rgba(6,182,212,0.85)]" />
-                      <div className="flex-1 text-zinc-900 dark:text-zinc-100">{parseInline(cleanLine)}</div>
+                    <div
+                      key={lIdx}
+                      className="flex items-start gap-2.5 my-1 text-[13.5px] font-medium leading-relaxed"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-600 dark:bg-cyan-400 mt-2 shrink-0" />
+                      <div className="flex-1 text-zinc-900 dark:text-zinc-100">
+                        {parseInline(cleanLine)}
+                      </div>
                     </div>
                   );
                 }
@@ -445,7 +449,10 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                 }
 
                 return (
-                  <p key={lIdx} className="my-1 text-[13px] sm:text-[13.5px] font-medium leading-relaxed text-zinc-900 dark:text-zinc-100">
+                  <p
+                    key={lIdx}
+                    className="my-1 text-[13.5px] font-medium leading-relaxed text-zinc-900 dark:text-zinc-100"
+                  >
                     {parseInline(line)}
                   </p>
                 );
@@ -454,9 +461,8 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
           );
         })}
 
-        {/* Live typing cyber pulse cursor */}
         {isStreamingActive && (
-          <span className="inline-block w-1.5 h-4 ml-1.5 rounded-full bg-gradient-to-b from-cyan-400 to-sky-500 shadow-[0_0_12px_rgba(6,182,212,0.9)] animate-pulse align-middle" />
+          <span className="inline-block w-1.5 h-3.5 ml-1 rounded-sm bg-cyan-500 animate-pulse align-middle" />
         )}
       </div>
     );
@@ -465,188 +471,225 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: 24, scale: 0.95 }}
-          animate={{
-            opacity: 1,
-            y: 0,
-            scale: 1,
-          }}
-          exit={{ opacity: 0, y: 16, scale: 0.95 }}
-          transition={{ type: "spring", damping: 26, stiffness: 320 }}
-          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col w-[min(440px,calc(100vw-2rem))] h-[min(600px,calc(100vh-5rem))] rounded-3xl bg-white/95 dark:bg-[#0a0a0d]/95 border border-zinc-200/90 dark:border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.15)] dark:shadow-[0_24px_70px_rgba(0,0,0,0.85)] overflow-hidden font-sans backdrop-blur-2xl"
-        >
-          {/* Header - Simple & Clean Window Chrome */}
-          <div className="px-4 py-3.5 border-b border-zinc-200/80 dark:border-white/10 bg-zinc-50/90 dark:bg-[#0c0c10]/90 flex items-center justify-between gap-3 shrink-0">
-            <div className="flex items-center gap-3">
-              <AvatarVisual
-                size="sm"
-                isTyping={isTyping}
-                isSpeaking={isReplying}
-                showStatus={false}
-              />
-              <div className="text-left">
-                <h3 className="text-base font-bold text-zinc-950 dark:text-white tracking-tight leading-none">
-                  Maro
-                </h3>
-              </div>
-            </div>
+        <>
+          {/* Subtle Dimmed Backdrop for Focus (Zero Cluttered Blur) */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px] transition-opacity"
+            aria-hidden="true"
+          />
 
-            {/* Header Controls: Clean Reset & Close */}
-            <div className="flex items-center gap-1">
-              <button
-                type="button"
-                onClick={handleClearChat}
-                title="Reset conversation"
-                className="p-1.5 rounded-xl text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
-              >
-                <RotateCcw className="w-4 h-4" />
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  sound.playClick();
-                  onClose();
-                }}
-                title="Close chat (Esc)"
-                className="p-1.5 rounded-xl text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          {/* Messages Stream Container */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 text-xs sm:text-sm">
-            {messages.map((msg) => {
-              const isCurrentlyStreaming = streamingMsgId === msg.id;
-              const isAi = msg.sender === "ai";
-
-              return (
-                <motion.div
-                  key={msg.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className={`flex flex-col ${isAi ? "items-start" : "items-end"}`}
-                >
-                  <div
-                    className={`max-w-[88%] rounded-2xl p-4 transition-all shadow-2xs ${
-                      isAi
-                        ? "bg-zinc-100/95 dark:bg-[#0c0c10]/95 text-zinc-900 dark:text-zinc-100 border border-zinc-200/90 dark:border-white/10 rounded-tl-sm backdrop-blur-xl shadow-xs"
-                        : "bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-semibold text-[13px] sm:text-[13.5px] tracking-tight rounded-tr-sm shadow-md"
-                    }`}
-                  >
-                    {/* Maro identity header */}
-                    {isAi && (
-                      <div className="flex items-center gap-1.5 mb-2 text-xs font-bold text-zinc-900 dark:text-white select-none tracking-tight">
-                        <span>Maro</span>
-                        <span className="text-[11px] text-zinc-400 dark:text-zinc-500 font-mono font-normal">
-                          // Engineering Copilot
-                        </span>
-                      </div>
-                    )}
-
-                    {/* Rendered Text */}
-                    {renderFormattedText(msg.text, isCurrentlyStreaming)}
-
-                    {/* Contextual Action Buttons */}
-                    {msg.actions && msg.actions.length > 0 && !isCurrentlyStreaming && (
-                      <div className="mt-3.5 pt-2.5 border-t border-zinc-200/80 dark:border-white/10 flex flex-wrap gap-1.5">
-                        {msg.actions.map((act, actIdx) => (
-                          <button
-                            key={actIdx}
-                            type="button"
-                            onClick={() => handleActionClick(act)}
-                            className="inline-flex items-center px-3 py-1.5 rounded-full bg-white hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-900 dark:text-zinc-100 text-xs font-semibold tracking-tight transition-all cursor-pointer border border-zinc-200/90 dark:border-white/10 shadow-xs hover:scale-[1.02]"
-                          >
-                            <span>{act.label}</span>
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Timestamp */}
-                  <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-mono font-semibold mt-1 px-1">
-                    {msg.timestamp}
-                  </span>
-                </motion.div>
-              );
-            })}
-
-            {/* Simple starter prompt pills right beneath initial greeting */}
-            {messages.length === 1 && (
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="flex flex-wrap gap-1.5 pt-1"
-              >
-                {STARTER_PROMPTS.map((promptText, pIdx) => (
-                  <button
-                    key={pIdx}
-                    type="button"
-                    onClick={() => handleSendMessage(promptText)}
-                    className="px-3.5 py-1.5 rounded-full bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-850 dark:text-zinc-200 text-xs font-semibold transition-all cursor-pointer border border-zinc-200/90 dark:border-white/10 hover:scale-[1.02]"
-                  >
-                    {promptText}
-                  </button>
-                ))}
-              </motion.div>
-            )}
-
-            {/* Modern Animated Synthesizing / Typing Indicator */}
-            {isTyping && (
-              <motion.div
-                initial={{ opacity: 0, y: 6, scale: 0.98 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl rounded-tl-sm bg-zinc-100/95 dark:bg-[#0c0c10]/95 border border-zinc-200/90 dark:border-white/10 w-fit backdrop-blur-xl shadow-xs"
-              >
-                <div className="flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-bounce [animation-delay:-0.3s] shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-                  <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-bounce [animation-delay:-0.15s] shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-                  <span className="w-2 h-2 rounded-full bg-cyan-500 dark:bg-cyan-400 animate-bounce shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-                </div>
-                <span className="text-xs font-mono font-semibold text-zinc-600 dark:text-zinc-300">
-                  Maro is synthesizing response...
-                </span>
-              </motion.div>
-            )}
-
-            <div ref={messagesEndRef} />
-          </div>
-
-          {/* Clean Input Bar */}
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSendMessage();
-            }}
-            className="p-3 sm:p-3.5 border-t border-zinc-200/80 dark:border-white/10 bg-zinc-50/90 dark:bg-[#0c0c10]/90 flex items-center gap-2 shrink-0"
+          {/* Dialog Container: Full-bleed bottom sheet on mobile, clean window on desktop */}
+          <motion.div
+            role="dialog"
+            aria-label="Maro — Technical Assistant"
+            aria-modal="true"
+            initial={{ opacity: 0, y: 20, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 16, scale: 0.98 }}
+            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-x-0 bottom-0 sm:inset-x-auto sm:bottom-6 sm:right-6 z-50 flex flex-col w-full sm:w-[480px] h-[90vh] sm:h-[640px] sm:max-h-[calc(100vh-3.5rem)] rounded-t-3xl sm:rounded-2xl bg-white dark:bg-[#0c0c10] border border-zinc-200 dark:border-zinc-800 shadow-2xl overflow-hidden font-sans"
           >
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={() => {
-                if (!sound.isMuted()) sound.playKey();
+            {/* Mobile Drag Indicator Bar */}
+            <div className="sm:hidden flex items-center justify-center pt-2.5 pb-1">
+              <span className="w-10 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700" />
+            </div>
+
+            {/* Header: Clean Precision Engineering Header */}
+            <header className="px-4 py-3 sm:py-3.5 border-b border-zinc-200/90 dark:border-zinc-800/90 bg-zinc-50/90 dark:bg-[#101014] flex items-center justify-between gap-3 shrink-0">
+              <div className="flex items-center gap-3">
+                <AvatarVisual
+                  size="sm"
+                  isTyping={isTyping}
+                  isSpeaking={isReplying}
+                  showStatus={false}
+                />
+                <div className="flex flex-col text-left">
+                  <h2 className="text-sm font-bold text-zinc-950 dark:text-zinc-50 tracking-tight leading-none">
+                    Maro
+                  </h2>
+                  <span className="text-[11px] font-mono font-medium text-zinc-500 dark:text-zinc-400 mt-1 leading-none">
+                    Omar Torbi • Technical Copilot
+                  </span>
+                </div>
+              </div>
+
+              {/* Window Controls */}
+              <div className="flex items-center gap-1.5">
+                <span className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono font-medium text-zinc-400 dark:text-zinc-500 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 select-none">
+                  Esc
+                </span>
+
+                <button
+                  type="button"
+                  onClick={handleClearChat}
+                  aria-label="Reset conversation"
+                  title="Reset conversation"
+                  className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-cyan-500 cursor-pointer"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playClick();
+                    onClose();
+                  }}
+                  aria-label="Close assistant"
+                  title="Close assistant (Esc)"
+                  className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-cyan-500 cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </header>
+
+            {/* Conversation Stream */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 text-xs sm:text-sm">
+              {messages.map((msg) => {
+                const isCurrentlyStreaming = streamingMsgId === msg.id;
+                const isAi = msg.sender === "ai";
+
+                return (
+                  <motion.div
+                    key={msg.id}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.18 }}
+                    className={`flex flex-col ${isAi ? "items-start" : "items-end"}`}
+                  >
+                    <div
+                      className={`max-w-[90%] rounded-2xl p-4 transition-all ${
+                        isAi
+                          ? "bg-zinc-100 dark:bg-zinc-900/90 text-zinc-900 dark:text-zinc-100 border border-zinc-200/90 dark:border-zinc-800 rounded-tl-xs shadow-2xs"
+                          : "bg-zinc-950 text-white dark:bg-zinc-100 dark:text-zinc-950 font-semibold text-[13px] sm:text-[13.5px] tracking-tight rounded-tr-xs shadow-xs"
+                      }`}
+                    >
+                      {/* Maro Sender Title */}
+                      {isAi && (
+                        <div className="flex items-center gap-2 mb-2 text-xs font-bold text-zinc-900 dark:text-white select-none tracking-tight">
+                          <span>Maro</span>
+                          <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-mono font-normal">
+                            {msg.timestamp}
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Formatted Content */}
+                      {renderFormattedText(msg.text, isCurrentlyStreaming)}
+
+                      {/* Contextual Action Tiles */}
+                      {msg.actions && msg.actions.length > 0 && !isCurrentlyStreaming && (
+                        <div className="mt-3.5 pt-2.5 border-t border-zinc-200/90 dark:border-zinc-800 flex flex-wrap gap-1.5">
+                          {msg.actions.map((act, actIdx) => (
+                            <button
+                              key={actIdx}
+                              type="button"
+                              onClick={() => handleActionClick(act)}
+                              className="inline-flex items-center px-3 py-1.5 rounded-lg bg-white hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-750 text-zinc-900 dark:text-zinc-100 text-xs font-semibold tracking-tight transition-all cursor-pointer border border-zinc-200 dark:border-zinc-700 shadow-2xs hover:border-zinc-300 dark:hover:border-zinc-600 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-cyan-500"
+                            >
+                              <span>{act.label}</span>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Timestamp for user messages */}
+                    {!isAi && (
+                      <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-mono font-semibold mt-1 px-1">
+                        {msg.timestamp}
+                      </span>
+                    )}
+                  </motion.div>
+                );
+              })}
+
+              {/* First-Run Structured Inquiry Tiles (Anti-Slop Content Architecture) */}
+              {messages.length === 1 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="pt-2"
+                >
+                  <p className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 mb-2 uppercase tracking-wider font-semibold">
+                    Inquiry Topics
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {STARTER_PROMPTS.map((prompt, pIdx) => (
+                      <button
+                        key={pIdx}
+                        type="button"
+                        onClick={() => handleSendMessage(prompt.title)}
+                        className="text-left p-3 rounded-xl bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-900/80 dark:hover:bg-zinc-800/90 border border-zinc-200/90 dark:border-zinc-800 transition-colors group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-cyan-500"
+                      >
+                        <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 transition-colors block leading-tight">
+                          {prompt.title}
+                        </span>
+                        <span className="text-[11px] text-zinc-500 dark:text-zinc-400 block mt-1 leading-tight font-medium">
+                          {prompt.subtitle}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Calm, Truthful Synthesizing State (No Endless Looping Balls) */}
+              {isTyping && (
+                <motion.div
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-300 w-fit"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse" />
+                  <span>Maro is synthesizing response...</span>
+                </motion.div>
+              )}
+
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* Input Form Bar */}
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSendMessage();
               }}
-              placeholder="Ask Maro anything about Omar..."
-              className="flex-1 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-full px-4 py-2.5 text-xs sm:text-sm font-medium text-zinc-950 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-hidden focus:border-cyan-500 dark:focus:border-cyan-400 focus:ring-1 focus:ring-cyan-500/20"
-            />
-            <button
-              type="submit"
-              disabled={!input.trim() || isTyping || isReplying}
-              className="p-2.5 rounded-full bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 disabled:opacity-30 hover:opacity-90 transition-opacity cursor-pointer shadow-xs shrink-0 flex items-center justify-center"
-              title="Send message"
+              className="p-3 sm:p-3.5 border-t border-zinc-200/90 dark:border-zinc-800/90 bg-zinc-50/95 dark:bg-[#101014] flex items-center gap-2 shrink-0"
             >
-              <Send className="w-4 h-4" />
-            </button>
-          </form>
-        </motion.div>
+              <div className="relative flex-1">
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={() => {
+                    if (!sound.isMuted()) sound.playKey();
+                  }}
+                  placeholder="Ask about Omar's backend, OCI cloud, or projects..."
+                  className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium text-zinc-950 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-hidden focus:border-cyan-500 dark:focus:border-cyan-400 focus:ring-1 focus:ring-cyan-500/20 transition-all"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={!input.trim() || isTyping || isReplying}
+                aria-label="Send message"
+                title="Send message (Enter)"
+                className="inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-semibold text-xs disabled:opacity-30 disabled:cursor-not-allowed hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all cursor-pointer shadow-xs shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-cyan-500"
+              >
+                <span className="hidden sm:inline">Send</span>
+                <Send className="w-3.5 h-3.5" />
+              </button>
+            </form>
+          </motion.div>
+        </>
       )}
     </AnimatePresence>
   );
