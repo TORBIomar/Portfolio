@@ -43,11 +43,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-950/40 border border-emerald-500/30 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-400 text-xs font-mono font-semibold mb-6 shadow-2xs"
+          className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#064e3b]/15 dark:bg-[#064e3b]/35 border border-green-600/30 dark:border-green-500/30 text-green-900 dark:text-green-400 text-xs font-mono font-semibold mb-6 shadow-2xs"
         >
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-600" />
           </span>
           <span>{t.hero.tag}</span>
         </motion.div>
@@ -129,10 +129,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => sound.playClick()}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-950 hover:bg-neutral-900 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 text-xs sm:text-sm font-sans font-bold transition-all cursor-pointer shadow-md hover:shadow-[0_0_24px_rgba(16,185,129,0.25)] border border-transparent hover:border-emerald-500/40 uppercase"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-950 hover:bg-neutral-900 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 text-xs sm:text-sm font-sans font-bold transition-all cursor-pointer shadow-md hover:shadow-[0_0_24px_rgba(34,197,94,0.22)] border border-transparent hover:border-green-600/40 uppercase"
           >
             <span>{t.hero.projectsCta}</span>
-            <ArrowRight className="w-3.5 h-3.5 text-emerald-400 dark:text-emerald-600" />
+            <ArrowRight className="w-3.5 h-3.5 text-green-600 dark:text-green-500" />
           </motion.a>
 
           {/* Secondary Action Button */}
@@ -141,7 +141,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => sound.playClick()}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-zinc-100 text-neutral-950 border border-zinc-300 dark:bg-[#0e0f12] dark:hover:bg-zinc-900 dark:text-white dark:border-zinc-800 text-xs sm:text-sm font-sans font-bold transition-all cursor-pointer shadow-xs hover:border-emerald-500/30 uppercase"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-zinc-100 text-neutral-950 border border-zinc-300 dark:bg-[#0e0f12] dark:hover:bg-zinc-900 dark:text-white dark:border-zinc-800 text-xs sm:text-sm font-sans font-bold transition-all cursor-pointer shadow-xs hover:border-green-600/30 uppercase"
           >
             <span>{t.hero.contactCta}</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -152,14 +152,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleCopyCli}
-            className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 dark:bg-[#0e0f12] dark:hover:bg-zinc-900 dark:border-zinc-800 text-neutral-900 dark:text-zinc-200 text-xs font-mono font-medium transition-all cursor-pointer shadow-2xs hover:border-emerald-500/40"
+            className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 dark:bg-[#0e0f12] dark:hover:bg-zinc-900 dark:border-zinc-800 text-neutral-900 dark:text-zinc-200 text-xs font-mono font-medium transition-all cursor-pointer shadow-2xs hover:border-green-600/40"
             title="Click to copy terminal command"
           >
-            <span className="text-emerald-600 dark:text-emerald-400 font-bold">&gt;</span>
+            <span className="text-green-600 dark:text-green-500 font-bold">&gt;</span>
             <span className="font-bold">{PERSONAL_INFO.npmCommand}</span>
             <span className="text-zinc-300 dark:text-zinc-700">|</span>
             {copied ? (
-              <Check className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400 font-bold" />
+              <Check className="w-3.5 h-3.5 text-green-600 dark:text-green-500 font-bold" />
             ) : (
               <Copy className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400" />
             )}
@@ -182,10 +182,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="w-full max-w-4xl bg-white dark:bg-[#09090b] border border-zinc-200 dark:border-white/10 hover:border-emerald-500/30 rounded-3xl p-7 sm:p-10 text-left shadow-xs mb-14 transition-all"
+          className="w-full max-w-4xl bg-white dark:bg-[#09090b] border border-zinc-200 dark:border-white/10 hover:border-green-600/30 rounded-3xl p-7 sm:p-10 text-left shadow-xs mb-14 transition-all"
         >
           <div className="flex items-center gap-2 font-mono text-xs font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
+            <Sparkles className="w-3.5 h-3.5 text-green-600 dark:text-green-500" />
             <span>{language === "fr" ? "À PROPOS D'OMAR TORBI" : "ABOUT OMAR TORBI"}</span>
           </div>
 
@@ -208,16 +208,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           </p>
 
           <div className="flex flex-wrap items-center gap-2 pt-2">
-            <span className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/40 hover:bg-emerald-500/5 dark:hover:bg-emerald-950/30 text-xs font-mono font-medium text-neutral-800 dark:text-zinc-300 transition-colors">
+            <span className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-green-600/40 hover:bg-green-600/5 dark:hover:bg-[#064e3b]/30 text-xs font-mono font-medium text-neutral-800 dark:text-zinc-300 transition-colors">
               # Java SE 17 Professional (1Z0-829)
             </span>
-            <span className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/40 hover:bg-emerald-500/5 dark:hover:bg-emerald-950/30 text-xs font-mono font-medium text-neutral-800 dark:text-zinc-300 transition-colors">
+            <span className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-green-600/40 hover:bg-green-600/5 dark:hover:bg-[#064e3b]/30 text-xs font-mono font-medium text-neutral-800 dark:text-zinc-300 transition-colors">
               # OCI DevOps Professional (1Z0-1109-26)
             </span>
-            <span className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/40 hover:bg-emerald-500/5 dark:hover:bg-emerald-950/30 text-xs font-mono font-medium text-neutral-800 dark:text-zinc-300 transition-colors">
+            <span className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-green-600/40 hover:bg-green-600/5 dark:hover:bg-[#064e3b]/30 text-xs font-mono font-medium text-neutral-800 dark:text-zinc-300 transition-colors">
               # OCI Architect Professional (1Z0-997-26)
             </span>
-            <span className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/40 hover:bg-emerald-500/5 dark:hover:bg-emerald-950/30 text-xs font-mono font-medium text-neutral-800 dark:text-zinc-300 transition-colors">
+            <span className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-green-600/40 hover:bg-green-600/5 dark:hover:bg-[#064e3b]/30 text-xs font-mono font-medium text-neutral-800 dark:text-zinc-300 transition-colors">
               # EMSI State Engineering Degree (DDSI)
             </span>
           </div>
@@ -235,19 +235,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: idx * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="rounded-3xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 hover:border-emerald-500/40 dark:hover:border-emerald-500/40 hover:shadow-[0_10px_30px_rgba(16,185,129,0.06)] p-7 flex flex-col justify-between transition-all shadow-xs group"
+                className="rounded-3xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 hover:border-green-600/40 dark:hover:border-green-500/40 hover:shadow-[0_10px_30px_rgba(34,197,94,0.06)] p-7 flex flex-col justify-between transition-all shadow-xs group"
               >
                 <div>
                   <div className="flex items-center justify-between pb-5 border-b border-zinc-100 dark:border-zinc-800 mb-5">
                     <span className="font-mono text-sm font-bold text-neutral-400 dark:text-neutral-500">
                       {pillar.number}
                     </span>
-                    <span className="font-mono text-xs font-bold tracking-widest text-neutral-900 dark:text-neutral-100 uppercase px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-transparent dark:border-zinc-800 group-hover:border-emerald-500/30 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
+                    <span className="font-mono text-xs font-bold tracking-widest text-neutral-900 dark:text-neutral-100 uppercase px-2.5 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-transparent dark:border-zinc-800 group-hover:border-green-600/30 group-hover:text-green-700 dark:group-hover:text-green-400 transition-colors">
                       {pillar.tag}
                     </span>
                   </div>
 
-                  <div className="w-9 h-9 rounded-xl bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center text-black dark:text-white mb-4 group-hover:bg-emerald-500/10 dark:group-hover:bg-emerald-950/40 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                  <div className="w-9 h-9 rounded-xl bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center text-black dark:text-white mb-4 group-hover:bg-[#064e3b]/20 dark:group-hover:bg-[#064e3b]/40 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
                     <Icon className="w-4 h-4" />
                   </div>
 
@@ -263,7 +263,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
                 <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 space-y-1.5 font-mono text-[11px] text-neutral-600 dark:text-neutral-400 font-medium">
                   {pillar.bullets.map((b, bIdx) => (
                     <div key={bIdx} className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-600 dark:bg-green-500" />
                       <span>{b}</span>
                     </div>
                   ))}

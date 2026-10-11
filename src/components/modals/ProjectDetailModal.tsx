@@ -51,7 +51,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
               {project.categoryLabel}
             </span>
             {project.featured && (
-              <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 font-mono text-[10px] font-bold">
+              <span className="px-2.5 py-0.5 rounded-full bg-[#064e3b]/15 dark:bg-[#064e3b]/40 text-green-800 dark:text-green-400 border border-green-600/30 font-mono text-[10px] font-bold">
                 FEATURED
               </span>
             )}
@@ -101,7 +101,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                   <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase">
                     {m.label}
                   </div>
-                  <div className="font-mono text-xs sm:text-sm font-bold text-emerald-600 dark:text-emerald-400 mt-1">
+                  <div className="font-mono text-xs sm:text-sm font-bold text-green-700 dark:text-green-400 mt-1">
                     {m.value}
                   </div>
                 </div>
@@ -120,7 +120,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
                   key={idx}
                   className="flex items-start gap-2.5 text-xs sm:text-[13px] text-zinc-700 dark:text-zinc-300"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-green-600 dark:text-green-500 shrink-0 mt-0.5" />
                   <span>{h}</span>
                 </div>
               ))}
@@ -135,7 +135,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
 
             <div className="p-4 rounded-xl bg-zinc-900 dark:bg-[#121214] border border-transparent dark:border-zinc-800 text-zinc-300 text-xs font-mono space-y-2">
               <div className="text-white font-bold flex items-center gap-1.5">
-                <Cpu className="w-3.5 h-3.5 text-emerald-400" />
+                <Cpu className="w-3.5 h-3.5 text-green-500" />
                 <span>Architecture Overview:</span>
               </div>
               <p className="text-zinc-400 leading-relaxed">
@@ -180,7 +180,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => sound.playClick()}
-            className="inline-flex items-center gap-2 text-xs font-mono font-bold text-zinc-800 dark:text-zinc-200 hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-mono font-bold text-zinc-800 dark:text-zinc-200 hover:text-green-700 dark:hover:text-green-400 hover:underline transition-colors"
           >
             <GithubIcon className="w-4 h-4" />
             <span>View Source on GitHub</span>
@@ -192,7 +192,7 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => sound.playSuccess()}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black dark:bg-white text-white dark:text-black text-xs font-sans font-bold hover:bg-emerald-600 dark:hover:bg-emerald-500 hover:text-white dark:hover:text-black transition-colors shadow-xs"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black dark:bg-white text-white dark:text-black text-xs font-sans font-bold hover:bg-green-600 dark:hover:bg-green-600 hover:text-white dark:hover:text-white transition-colors shadow-xs"
             >
               <span>Launch Live System</span>
               <ExternalLink className="w-3.5 h-3.5" />

@@ -61,8 +61,8 @@ export const Navbar: React.FC<NavbarProps> = () => {
             />
           </div>
           <span className="relative flex h-1.5 w-1.5" title="Omar Torbi • Online">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-600" />
           </span>
         </a>
 
@@ -74,7 +74,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
               href={link.href}
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
-              className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer whitespace-nowrap"
+              className="hover:text-green-600 dark:hover:text-green-500 transition-colors cursor-pointer whitespace-nowrap"
             >
               {link.label}
             </a>

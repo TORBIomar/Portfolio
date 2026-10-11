@@ -28,8 +28,8 @@ export const FaqSection: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center max-w-2xl mx-auto mb-14"
         >
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-950/40 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs font-mono font-semibold mb-4">
-            <HelpCircle className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#064e3b]/15 dark:bg-[#064e3b]/35 border border-green-600/30 text-green-900 dark:text-green-400 text-xs font-mono font-semibold mb-4">
+            <HelpCircle className="w-3.5 h-3.5 text-green-600 dark:text-green-500" />
             <span>{t.faq.tag}</span>
           </div>
 
@@ -54,7 +54,7 @@ export const FaqSection: React.FC = () => {
                 transition={{ duration: 0.35, delay: idx * 0.08 }}
                 className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
                   isOpen
-                    ? "bg-white dark:bg-[#0e0f12] border-emerald-500/50 dark:border-emerald-500/40 shadow-sm ring-1 ring-emerald-500/20"
+                    ? "bg-white dark:bg-[#0e0f12] border-green-600/40 dark:border-green-500/40 shadow-sm ring-1 ring-green-600/20"
                     : "bg-white/80 dark:bg-[#09090b] border-zinc-200 dark:border-white/10 hover:border-zinc-400 dark:hover:border-zinc-700"
                 }`}
               >
@@ -66,7 +66,7 @@ export const FaqSection: React.FC = () => {
                 >
                   <div className="flex items-center gap-3.5 sm:gap-4 flex-1">
                     <span className={`font-mono text-xs sm:text-sm font-bold shrink-0 transition-colors ${
-                      isOpen ? "text-emerald-600 dark:text-emerald-400" : "text-neutral-400 dark:text-neutral-500"
+                      isOpen ? "text-green-700 dark:text-green-400" : "text-neutral-400 dark:text-neutral-500"
                     }`}>
                       0{idx + 1}.
                     </span>
@@ -74,7 +74,7 @@ export const FaqSection: React.FC = () => {
                       <div className="flex items-center gap-2">
                         <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold tracking-wider border transition-colors ${
                           isOpen
-                            ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/30"
+                            ? "bg-[#064e3b]/15 dark:bg-[#064e3b]/40 text-green-800 dark:text-green-400 border-green-600/30"
                             : "bg-zinc-100 dark:bg-zinc-800 text-neutral-700 dark:text-zinc-300 border-transparent dark:border-zinc-700"
                         }`}>
                           {item.tag}
@@ -91,7 +91,7 @@ export const FaqSection: React.FC = () => {
                     transition={{ duration: 0.25, ease: "easeInOut" }}
                     className={`p-1.5 rounded-full border shrink-0 transition-colors ${
                       isOpen
-                        ? "bg-emerald-600 dark:bg-emerald-500 text-white dark:text-black border-emerald-600 dark:border-emerald-500"
+                        ? "bg-green-600 dark:bg-green-600 text-white dark:text-white border-green-600 dark:border-green-600"
                         : "bg-zinc-100 dark:bg-zinc-800 text-neutral-500 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700"
                     }`}
                   >
@@ -133,10 +133,10 @@ export const FaqSection: React.FC = () => {
             <a
               href="#contact"
               onClick={() => sound.playClick()}
-              className="font-bold text-neutral-950 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline flex items-center gap-1 transition-colors"
+              className="font-bold text-neutral-950 dark:text-white hover:text-green-700 dark:hover:text-green-400 hover:underline flex items-center gap-1 transition-colors"
             >
               <span>Reach out directly</span>
-              <ArrowRight className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+              <ArrowRight className="w-3 h-3 text-green-600 dark:text-green-500" />
             </a>
           </div>
         </motion.div>

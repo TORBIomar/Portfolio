@@ -29,19 +29,19 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
     switch (project.mockupType) {
       case "cad":
         return (
-          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-emerald-500/30 transition-colors">
+          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-green-600/30 transition-colors">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
               <span className="flex items-center gap-1.5 text-white font-semibold">
-                <Box className="w-3.5 h-3.5 text-emerald-400" /> Wasm CSG Engine
+                <Box className="w-3.5 h-3.5 text-green-500" /> Wasm CSG Engine
               </span>
-              <span className="text-emerald-400 font-bold font-mono">60.2 FPS</span>
+              <span className="text-green-500 font-bold font-mono">60.2 FPS</span>
             </div>
 
             {/* 3D Wireframe Graphic */}
             <div className="flex items-center justify-center py-2 relative">
               <div className="w-40 h-14 border border-zinc-700 rounded-full bg-zinc-900/60 flex items-center justify-center relative shadow-sm">
-                <div className="w-5 h-5 rounded-full border border-emerald-400/90 border-dashed animate-spin" />
-                <span className="absolute -top-2.5 left-10 text-[9px] font-mono text-emerald-300 bg-[#09090b] px-1.5 border border-emerald-500/40 rounded">
+                <div className="w-5 h-5 rounded-full border border-green-500/90 border-dashed animate-spin" />
+                <span className="absolute -top-2.5 left-10 text-[9px] font-mono text-green-400 bg-[#09090b] px-1.5 border border-green-600/40 rounded">
                   Ø80mm Extrusion
                 </span>
               </div>
@@ -49,19 +49,19 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
 
             <div className="text-[11px] font-mono text-zinc-400 flex justify-between pt-2 border-t border-zinc-800">
               <span>Toolpath: ISO-6983</span>
-              <span className="text-emerald-400">STEP 3D CNC</span>
+              <span className="text-green-500">STEP 3D CNC</span>
             </div>
           </div>
         );
 
       case "recruitment":
         return (
-          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-emerald-500/30 transition-colors">
+          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-green-600/30 transition-colors">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
               <span className="flex items-center gap-1.5 text-white font-semibold">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> Spring Boot 3
+                <ShieldCheck className="w-3.5 h-3.5 text-green-500" /> Spring Boot 3
               </span>
-              <span className="text-emerald-400 font-mono">RBAC + JWT</span>
+              <span className="text-green-500 font-mono">RBAC + JWT</span>
             </div>
 
             {/* Pipeline Stage Blocks */}
@@ -76,7 +76,7 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
               </div>
               <div className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-[10px] font-mono text-center">
                 <div className="text-zinc-500">OFFERS</div>
-                <div className="text-emerald-400 font-bold text-sm mt-0.5">6</div>
+                <div className="text-green-500 font-bold text-sm mt-0.5">6</div>
               </div>
             </div>
 
@@ -89,12 +89,12 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
 
       case "library":
         return (
-          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-emerald-500/30 transition-colors">
+          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-green-600/30 transition-colors">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
               <span className="flex items-center gap-1.5 text-white font-semibold">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-400" /> Gemini &amp; Chroma
+                <Sparkles className="w-3.5 h-3.5 text-green-500" /> Gemini &amp; Chroma
               </span>
-              <span className="text-emerald-400 font-mono">Dense RAG</span>
+              <span className="text-green-500 font-mono">Dense RAG</span>
             </div>
 
             {/* Vector Similarity Nodes */}
@@ -102,11 +102,11 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
               <div className="w-8 h-8 rounded-full border border-zinc-600 bg-zinc-900 flex items-center justify-center text-[10px] font-mono text-white shadow-sm">
                 q
               </div>
-              <div className="h-0.5 w-10 bg-emerald-500/40 dashed" />
-              <div className="w-8 h-8 rounded-full border border-emerald-500/40 bg-zinc-900 flex items-center justify-center text-[10px] font-mono text-emerald-300 shadow-sm">
+              <div className="h-0.5 w-10 bg-green-600/40 dashed" />
+              <div className="w-8 h-8 rounded-full border border-green-600/40 bg-zinc-900 flex items-center justify-center text-[10px] font-mono text-green-400 shadow-sm">
                 d₁
               </div>
-              <div className="h-0.5 w-10 bg-emerald-500/40 dashed" />
+              <div className="h-0.5 w-10 bg-green-600/40 dashed" />
               <div className="w-8 h-8 rounded-full border border-zinc-600 bg-zinc-900 flex items-center justify-center text-[10px] font-mono text-zinc-300 shadow-sm">
                 d₂
               </div>
@@ -114,7 +114,7 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
 
             <div className="text-[11px] font-mono text-zinc-400 flex justify-between pt-2 border-t border-zinc-800">
               <span>Reciprocal Rank Fusion</span>
-              <span className="text-emerald-400">Cos 0.941</span>
+              <span className="text-green-500">Cos 0.941</span>
             </div>
           </div>
         );
@@ -122,17 +122,17 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
       case "matrix":
       default:
         return (
-          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-emerald-500/30 transition-colors">
+          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-green-600/30 transition-colors">
             <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
               <span className="flex items-center gap-1.5 text-white font-semibold">
-                <Workflow className="w-3.5 h-3.5 text-emerald-400" /> n8n Orchestrator
+                <Workflow className="w-3.5 h-3.5 text-green-500" /> n8n Orchestrator
               </span>
-              <span className="text-emerald-400 font-mono">24/7 Webhooks</span>
+              <span className="text-green-500 font-mono">24/7 Webhooks</span>
             </div>
 
             {/* Playwright Headless Flow */}
             <div className="flex flex-col items-center justify-center py-2 text-center">
-              <div className="font-mono text-sm text-emerald-400 font-bold">
+              <div className="font-mono text-sm text-green-500 font-bold">
                 10,000+ Profiles Scraped
               </div>
               <span className="text-[10px] text-zinc-400 font-mono mt-0.5">Media Route Abort Stream</span>
@@ -159,8 +159,8 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
           transition={{ duration: 0.5 }}
           className="max-w-3xl mb-14 sm:mb-18"
         >
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-950/40 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs font-mono font-semibold mb-3">
-            <Cpu className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#064e3b]/15 dark:bg-[#064e3b]/35 border border-green-600/30 text-green-900 dark:text-green-400 text-xs font-mono font-semibold mb-3">
+            <Cpu className="w-3.5 h-3.5 text-green-600 dark:text-green-500" />
             <span>{t.projects.tag}</span>
           </div>
 
@@ -191,7 +191,7 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
                 sound.playClick();
                 onSelectProject(project);
               }}
-              className="rounded-3xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 p-6 sm:p-7 flex flex-col justify-between transition-all duration-200 hover:border-emerald-500/50 dark:hover:border-emerald-400/40 hover:shadow-lg dark:hover:shadow-[0_12px_32px_-4px_rgba(16,185,129,0.12)] group cursor-pointer shadow-xs"
+              className="rounded-3xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 p-6 sm:p-7 flex flex-col justify-between transition-all duration-200 hover:border-green-600/40 dark:hover:border-green-500/40 hover:shadow-lg dark:hover:shadow-[0_12px_32px_-4px_rgba(34,197,94,0.12)] group cursor-pointer shadow-xs"
             >
               <div>
                 {/* Visual Thumbnail */}
@@ -204,13 +204,13 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
                   <span className="text-xs font-mono font-bold uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
                     {project.categoryLabel}
                   </span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 text-[10px] font-mono font-semibold">
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#064e3b]/15 dark:bg-[#064e3b]/40 text-green-800 dark:text-green-400 border border-green-600/30 text-[10px] font-mono font-semibold">
                     FEATURED
                   </span>
                 </div>
 
                 {/* Title */}
-                <h3 className="font-sans font-black text-xl text-neutral-950 dark:text-white mb-1.5 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
+                <h3 className="font-sans font-black text-xl text-neutral-950 dark:text-white mb-1.5 group-hover:text-green-700 dark:group-hover:text-green-400 transition-colors">
                   {project.title}
                 </h3>
 
@@ -240,9 +240,9 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
 
                 {/* Card Action Row */}
                 <div className="flex items-center justify-between pt-2 border-t border-zinc-100 dark:border-zinc-800/80">
-                  <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-neutral-950 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 group-hover:translate-x-1 transition-all">
+                  <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-neutral-950 dark:text-white group-hover:text-green-700 dark:group-hover:text-green-400 group-hover:translate-x-1 transition-all">
                     <span>{language === "fr" ? "Explorer l'Architecture" : "Inspect Architecture"}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <ArrowRight className="w-3.5 h-3.5 text-green-600 dark:text-green-500" />
                   </div>
 
                   <div className="flex items-center gap-3 text-neutral-400 dark:text-zinc-500">
