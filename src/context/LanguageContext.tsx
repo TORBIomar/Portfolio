@@ -87,7 +87,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       resumeFr: "CV (Français PDF)",
     },
     hero: {
-      tag: "01 // PROFILE & PHILOSOPHY",
+      tag: "PROFILE & PHILOSOPHY",
       title: "Software & DevOps Engineer",
       tagline:
         "Final-year Computer Science & Networks (DDSI) student at EMSI Rabat. Certified OCI DevOps Professional & OCI Architect Professional. Building robust backend services with Spring Boot and containerized cloud systems with Docker, Linux, and OCI.",
@@ -101,13 +101,13 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       availabilityBadge: "Open to PFE Internship (Feb 2027) & Full-Time Roles",
     },
     experiences: {
-      tag: "02 // TRACK RECORD",
+      tag: "TRACK RECORD",
       title: "Engineering Experience",
       subtitle:
         "Industrial software engineering internships and rigorous academic milestones in distributed systems.",
     },
     projects: {
-      tag: "03 // SYSTEMS ARCHITECTURE",
+      tag: "SYSTEMS ARCHITECTURE",
       title: "Flagship Engineering Projects",
       subtitle:
         "Modular backend architectures, 3D parametric CAD engines, and event-driven automation pipelines.",
@@ -120,13 +120,13 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       githubRepo: "View Source Code",
     },
     faq: {
-      tag: "04 // SPECIFICATIONS",
+      tag: "SPECIFICATIONS",
       title: "Technical Inquiries & FAQ",
       subtitle:
         "Direct architectural answers regarding backend engineering, OCI certifications, and internship availability.",
     },
     contact: {
-      tag: "05 // DIRECT CHANNEL",
+      tag: "DIRECT CHANNEL",
       title: "Get in Touch",
       subtitle:
         "Available for End-of-Studies (PFE) Internship starting February 2027 and Full-Time Software / DevOps roles.",
@@ -162,7 +162,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       resumeFr: "CV (Français PDF)",
     },
     hero: {
-      tag: "01 // PROFIL & PHILOSOPHIE",
+      tag: "PROFIL & PHILOSOPHIE",
       title: "Ingénieur Logiciel & DevOps",
       tagline:
         "Élève-Ingénieur en dernière année à l'EMSI Rabat (DDSI). Doublement certifié Oracle Cloud (OCI DevOps & Architect Professional). Conception d'architectures backend modulaires avec Spring Boot et d'infrastructures cloud conteneurisées avec Docker, Linux et OCI.",
@@ -176,13 +176,13 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       availabilityBadge: "Disponible pour Stage PFE (Fév 2027) & Postes CDI",
     },
     experiences: {
-      tag: "02 // PARCOURS TECHNIQUE",
+      tag: "PARCOURS TECHNIQUE",
       title: "Expériences en Ingénierie",
       subtitle:
         "Stages en ingénierie logicielle et cursus académique d'excellence en systèmes distribués.",
     },
     projects: {
-      tag: "03 // ARCHITECTURE SYSTÈMES",
+      tag: "ARCHITECTURE SYSTÈMES",
       title: "Projets d'Ingénierie Phares",
       subtitle:
         "Architectures backend modulaires, moteurs de CAO 3D paramétrique et pipelines d'automatisation.",
@@ -195,13 +195,13 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       githubRepo: "Consulter le Code Source",
     },
     faq: {
-      tag: "04 // SPÉCIFICATIONS",
+      tag: "SPÉCIFICATIONS",
       title: "Questions Techniques & FAQ",
       subtitle:
         "Réponses directes concernant l'architecture backend, les certifications OCI et la disponibilité de stage.",
     },
     contact: {
-      tag: "05 // CANAL DIRECT",
+      tag: "CANAL DIRECT",
       title: "Entrer en Contact",
       subtitle:
         "Disponible pour un stage de fin d'études (PFE) dès Février 2027 et pour des opportunités en CDI.",
