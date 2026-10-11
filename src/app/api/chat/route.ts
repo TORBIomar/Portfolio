@@ -31,9 +31,9 @@ export async function POST(request: Request) {
       try {
         const contents: Array<{ role: string; parts: Array<{ text: string }> }> = [];
 
-        // Format history (last 4 turns for context)
+        // Format history (last 6 turns for conversation context)
         if (Array.isArray(history) && history.length > 0) {
-          const recentHistory = history.slice(-4);
+          const recentHistory = history.slice(-6);
           for (const item of recentHistory) {
             if (item.sender === "user" || item.sender === "ai") {
               contents.push({
@@ -52,81 +52,100 @@ export async function POST(request: Request) {
 
         const langPrompt =
           activeLang === "fr"
-            ? "\n\nCRITICAL LANGUAGE INSTRUCTION: The user portfolio interface is set to FRENCH. Respond completely in fluent, professional FRENCH."
+            ? "\n\nCRITICAL LANGUAGE INSTRUCTION: The user portfolio interface is set to FRENCH. Respond completely in fluent, natural, professional FRENCH."
             : "\n\nCRITICAL LANGUAGE INSTRUCTION: The user portfolio interface is set to ENGLISH. Respond in ENGLISH.";
 
-        const geminiRes = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${geminiKey}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              systemInstruction: {
-                parts: [{ text: `${SYSTEM_PORTFOLIO_PROMPT}${langPrompt}` }],
-              },
-              contents: contents,
-              generationConfig: {
-                temperature: 0.3,
-                maxOutputTokens: 600,
-              },
-            }),
+        const candidateModels = ["gemini-3.5-flash-lite", "gemini-flash-latest"];
+        let candidateText: string | null = null;
+        let activeModelUsed = "gemini-3.5-flash-lite";
+
+        for (const modelName of candidateModels) {
+          try {
+            const geminiRes = await fetch(
+              `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${geminiKey}`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  systemInstruction: {
+                    parts: [{ text: `${SYSTEM_PORTFOLIO_PROMPT}${langPrompt}` }],
+                  },
+                  contents: contents,
+                  generationConfig: {
+                    temperature: 0.7,
+                    maxOutputTokens: 1000,
+                  },
+                }),
+              }
+            );
+
+            if (geminiRes.ok) {
+              const data = await geminiRes.json();
+              const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+              if (text && typeof text === "string" && text.trim()) {
+                candidateText = text;
+                activeModelUsed = modelName;
+                break;
+              }
+            } else {
+              const errBody = await geminiRes.text();
+              console.warn(`Model ${modelName} returned status ${geminiRes.status}:`, errBody);
+            }
+          } catch (modelErr) {
+            console.warn(`Error querying model ${modelName}:`, modelErr);
           }
-        );
+        }
 
-        if (geminiRes.ok) {
-          const data = await geminiRes.json();
-          const candidateText =
-            data.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (candidateText) {
+          // Augment with smart actions based on content intent
+          const actions: ChatAction[] = [];
+          const lowerRes = candidateText.toLowerCase();
 
-          if (candidateText && typeof candidateText === "string") {
-            // Augment with smart actions based on content intent
-            const actions: ChatAction[] = [];
-            const lowerRes = candidateText.toLowerCase();
-
-            if (lowerRes.includes("resume") || lowerRes.includes("cv")) {
-              actions.push({
-                label: "Download English Resume (PDF)",
-                type: "download",
-                payload: PERSONAL_INFO.resumeUrlEn,
-                icon: "download",
-              });
-            }
-            if (
-              lowerRes.includes("contact") ||
-              lowerRes.includes("email") ||
-              lowerRes.includes("hire")
-            ) {
-              actions.push({
-                label: "Email Omar",
-                type: "contact",
-                payload: `mailto:${PERSONAL_INFO.email}`,
-                icon: "mail",
-              });
-              actions.push({
-                label: "WhatsApp Chat",
-                type: "link",
-                payload: PERSONAL_INFO.whatsappUrl,
-                icon: "whatsapp",
-              });
-            }
-            if (lowerRes.includes("zahiri") || lowerRes.includes("cad")) {
-              actions.push({
-                label: "Zahiri CAD Demo",
-                type: "link",
-                payload: "https://zahiri-metal-3d-cad.vercel.app/",
-                icon: "external",
-              });
-            }
-
-            return NextResponse.json({
-              success: true,
-              answer: candidateText,
-              actions: actions.length > 0 ? actions : undefined,
-              source: "gemini",
+          if (lowerRes.includes("resume") || lowerRes.includes("cv")) {
+            actions.push({
+              label: activeLang === "fr" ? "Télécharger le CV (PDF)" : "Download Resume (PDF)",
+              type: "download",
+              payload: activeLang === "fr" ? PERSONAL_INFO.resumeUrlFr : PERSONAL_INFO.resumeUrlEn,
+              icon: "download",
             });
           }
+          if (
+            lowerRes.includes("contact") ||
+            lowerRes.includes("email") ||
+            lowerRes.includes("hire") ||
+            lowerRes.includes("recrut")
+          ) {
+            actions.push({
+              label: activeLang === "fr" ? "Envoyer un Email" : "Email Omar",
+              type: "contact",
+              payload: `mailto:${PERSONAL_INFO.email}`,
+              icon: "mail",
+            });
+            actions.push({
+              label: "WhatsApp",
+              type: "link",
+              payload: PERSONAL_INFO.whatsappUrl,
+              icon: "whatsapp",
+            });
+          }
+          if (lowerRes.includes("zahiri") || lowerRes.includes("cad")) {
+            actions.push({
+              label: "Zahiri CAD Demo",
+              type: "link",
+              payload: "https://zahiri-metal-3d-cad.vercel.app/",
+              icon: "external",
+            });
+          }
+
+          return NextResponse.json({
+            success: true,
+            answer: candidateText,
+            actions: actions.length > 0 ? actions : undefined,
+            model: activeModelUsed,
+            source: "gemini",
+          });
         }
       } catch (geminiError) {
         console.warn("Gemini API call failed, falling back to local engine:", geminiError);

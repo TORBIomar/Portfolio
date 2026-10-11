@@ -195,7 +195,9 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
   const streamAiResponse = async (
     fullText: string,
     actions?: ChatAction[],
-    suggestions?: string[]
+    suggestions?: string[],
+    source?: "gemini" | "local" | "fallback",
+    model?: string
   ) => {
     const msgId = createMsgId("ai");
     setStreamingMsgId(msgId);
@@ -207,6 +209,8 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
       sender: "ai",
       text: "",
       timestamp: getLocalTimeString(),
+      source,
+      model,
     };
 
     setMessages((prev) => [...prev, newMsg]);
@@ -249,6 +253,8 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
               text: fullText,
               actions,
               suggestions,
+              source,
+              model,
             }
           : m
       )
@@ -281,6 +287,8 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
       let replyText = "";
       let replyActions: ChatAction[] | undefined;
       let replySuggestions: string[] | undefined;
+      let replySource: "gemini" | "local" | "fallback" = "local";
+      let replyModel: string | undefined;
 
       try {
         const res = await fetch("/api/chat", {
@@ -288,7 +296,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             message: textToSend,
-            history: messages.slice(-4),
+            history: messages.slice(-6),
             language,
           }),
         });
@@ -299,6 +307,8 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
             replyText = data.answer;
             replyActions = data.actions;
             replySuggestions = data.suggestions;
+            replySource = data.source || "gemini";
+            replyModel = data.model;
             answered = true;
           }
         }
@@ -312,10 +322,11 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
         replyText = local.text;
         replyActions = local.actions;
         replySuggestions = local.suggestions;
+        replySource = "local";
       }
 
       setIsTyping(false);
-      await streamAiResponse(replyText, replyActions, replySuggestions);
+      await streamAiResponse(replyText, replyActions, replySuggestions, replySource, replyModel);
     } catch {
       setIsTyping(false);
       showToast(
@@ -551,9 +562,15 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                   showStatus={false}
                 />
                 <div className="flex flex-col text-left">
-                  <h2 className="text-sm font-bold text-zinc-950 dark:text-zinc-50 tracking-tight leading-none">
-                    Maro
-                  </h2>
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-sm font-bold text-zinc-950 dark:text-zinc-50 tracking-tight leading-none">
+                      Maro
+                    </h2>
+                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-2xs">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      Gemini Live
+                    </span>
+                  </div>
                   <span className="text-[11px] font-mono font-medium text-zinc-500 dark:text-zinc-400 mt-1 leading-none">
                     {t.chat.subtitle}
                   </span>
@@ -616,7 +633,16 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                       {isAi && (
                         <div className="flex items-center gap-2 mb-2 text-xs font-bold text-zinc-900 dark:text-white select-none tracking-tight">
                           <span>Maro</span>
-                          <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-mono font-normal">
+                          {msg.source === "gemini" ? (
+                            <span className="inline-flex items-center gap-1 text-[9.5px] font-mono font-medium px-1.5 py-0.5 rounded-md bg-accent/10 text-accent border border-accent/25">
+                              <span className="text-[10px] leading-none">✦</span> Gemini AI
+                            </span>
+                          ) : msg.source === "local" || msg.source === "fallback" ? (
+                            <span className="inline-flex items-center gap-1 text-[9px] font-mono font-medium px-1.5 py-0.5 rounded-md bg-zinc-200/80 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-300/60 dark:border-zinc-700">
+                              Offline Mode
+                            </span>
+                          ) : null}
+                          <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-mono font-normal ml-auto">
                             {msg.timestamp}
                           </span>
                         </div>
