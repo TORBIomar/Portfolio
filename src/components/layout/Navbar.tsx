@@ -9,7 +9,7 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
 import { useTheme } from "@/context/ThemeContext";
@@ -93,48 +93,26 @@ export const Navbar: React.FC<NavbarProps> = () => {
             )}
           </button>
 
-          {/* Smooth Language Switcher (EN / FR) */}
+          {/* Single-Button Smooth Language Switcher (EN or FR) */}
           <button
             type="button"
             onClick={toggleLanguage}
-            className="relative flex items-center h-8 px-1 rounded-full bg-zinc-100 dark:bg-zinc-800/90 border border-zinc-200/90 dark:border-zinc-700/80 text-[11px] font-mono font-bold cursor-pointer select-none transition-colors hover:border-zinc-300 dark:hover:border-zinc-600 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-cyan-500"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700 transition-colors cursor-pointer select-none overflow-hidden"
             title={language === "en" ? "Passer en Français (FR)" : "Switch to English (EN)"}
-            aria-label={`Language: ${language.toUpperCase()}. Switch to ${language === "en" ? "French" : "English"}`}
+            aria-label={`Language: ${language.toUpperCase()}. Click to switch to ${language === "en" ? "French" : "English"}`}
           >
-            <div className="relative flex items-center h-6">
-              {/* Smooth spring sliding indicator pill */}
-              <motion.div
-                className="absolute top-0 bottom-0 left-0 rounded-full bg-white dark:bg-zinc-950 shadow-xs border border-zinc-200/80 dark:border-white/10"
-                initial={false}
-                animate={{
-                  x: language === "en" ? 0 : 26,
-                  width: 26,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 480,
-                  damping: 32,
-                }}
-              />
-              <span
-                className={`relative z-10 w-[26px] h-6 flex items-center justify-center transition-colors duration-200 ${
-                  language === "en"
-                    ? "text-zinc-950 dark:text-white font-extrabold"
-                    : "text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400"
-                }`}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={language}
+                initial={{ y: 7, opacity: 0, scale: 0.9 }}
+                animate={{ y: 0, opacity: 1, scale: 1 }}
+                exit={{ y: -7, opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.16, ease: "easeOut" }}
+                className="text-[11px] font-mono font-bold leading-none select-none uppercase tracking-tight"
               >
-                EN
-              </span>
-              <span
-                className={`relative z-10 w-[26px] h-6 flex items-center justify-center transition-colors duration-200 ${
-                  language === "fr"
-                    ? "text-zinc-950 dark:text-white font-extrabold"
-                    : "text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400"
-                }`}
-              >
-                FR
-              </span>
-            </div>
+                {language}
+              </motion.span>
+            </AnimatePresence>
           </button>
 
           {/* Resume / Dossier Dropdown */}
@@ -231,43 +209,22 @@ export const Navbar: React.FC<NavbarProps> = () => {
               <button
                 type="button"
                 onClick={toggleLanguage}
-                className="relative flex items-center h-8 px-1 rounded-full bg-zinc-100 dark:bg-zinc-800/90 border border-zinc-200/90 dark:border-zinc-700/80 text-[11px] font-mono font-bold cursor-pointer select-none"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 cursor-pointer select-none overflow-hidden"
                 title={language === "en" ? "Passer en Français (FR)" : "Switch to English (EN)"}
-                aria-label={`Language: ${language.toUpperCase()}. Switch to ${language === "en" ? "French" : "English"}`}
+                aria-label={`Language: ${language.toUpperCase()}. Click to switch to ${language === "en" ? "French" : "English"}`}
               >
-                <div className="relative flex items-center h-6">
-                  <motion.div
-                    className="absolute top-0 bottom-0 left-0 rounded-full bg-white dark:bg-zinc-950 shadow-xs border border-zinc-200/80 dark:border-white/10"
-                    initial={false}
-                    animate={{
-                      x: language === "en" ? 0 : 26,
-                      width: 26,
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 480,
-                      damping: 32,
-                    }}
-                  />
-                  <span
-                    className={`relative z-10 w-[26px] h-6 flex items-center justify-center transition-colors duration-200 ${
-                      language === "en"
-                        ? "text-zinc-950 dark:text-white font-extrabold"
-                        : "text-zinc-400 dark:text-zinc-500"
-                    }`}
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={language}
+                    initial={{ y: 7, opacity: 0, scale: 0.9 }}
+                    animate={{ y: 0, opacity: 1, scale: 1 }}
+                    exit={{ y: -7, opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.16, ease: "easeOut" }}
+                    className="text-xs font-mono font-bold leading-none select-none uppercase tracking-tight"
                   >
-                    EN
-                  </span>
-                  <span
-                    className={`relative z-10 w-[26px] h-6 flex items-center justify-center transition-colors duration-200 ${
-                      language === "fr"
-                        ? "text-zinc-950 dark:text-white font-extrabold"
-                        : "text-zinc-400 dark:text-zinc-500"
-                    }`}
-                  >
-                    FR
-                  </span>
-                </div>
+                    {language}
+                  </motion.span>
+                </AnimatePresence>
               </button>
             </div>
 
