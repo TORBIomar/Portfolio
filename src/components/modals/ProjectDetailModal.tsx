@@ -132,12 +132,12 @@ export const ProjectDetailModal: React.FC<ProjectDetailModalProps> = ({
               Engineering Analysis
             </h3>
 
-            <div className="p-4 rounded-xl bg-zinc-900 dark:bg-[#121214] border border-transparent dark:border-zinc-800 text-zinc-300 text-xs font-mono space-y-2">
-              <div className="text-white font-bold flex items-center gap-1.5">
+            <div className="p-4 rounded-xl bg-zinc-50 dark:bg-[#121214] border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-mono space-y-2">
+              <div className="text-zinc-950 dark:text-white font-bold flex items-center gap-1.5">
                 <Cpu className="w-3.5 h-3.5 text-accent" />
                 <span>Architecture Overview:</span>
               </div>
-              <p className="text-zinc-400 leading-relaxed">
+              <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed font-sans text-xs">
                 {project.architectureDetails.overview}
               </p>
             </div>

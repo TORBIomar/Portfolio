@@ -29,92 +29,121 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
     switch (project.mockupType) {
       case "cad":
         return (
-          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-accent/40 transition-colors">
-            <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-              <span className="flex items-center gap-1.5 text-white font-semibold">
+          <div className="w-full h-48 rounded-2xl bg-gradient-to-b from-neutral-50 to-neutral-100/80 dark:from-[#09090b] dark:to-[#121214] border border-neutral-200/90 dark:border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-accent/40 transition-all duration-300 shadow-inner">
+            <div className="flex items-center justify-between text-xs font-mono text-neutral-600 dark:text-zinc-400">
+              <span className="flex items-center gap-1.5 text-neutral-900 dark:text-white font-bold">
                 <Box className="w-3.5 h-3.5 text-accent" /> Wasm CSG Engine
               </span>
-              <span className="text-accent font-bold font-mono">60.2 FPS</span>
+              <span className="px-2 py-0.5 rounded-full bg-accent/10 text-accent font-bold font-mono text-[11px] border border-accent/20">
+                60.2 FPS
+              </span>
             </div>
 
-            {/* 3D Wireframe Graphic */}
+            {/* 3D Wireframe Blueprint Graphic */}
             <div className="flex items-center justify-center py-2 relative">
-              <div className="w-40 h-14 border border-zinc-700 rounded-full bg-zinc-900/60 flex items-center justify-center relative shadow-sm">
-                <div className="w-5 h-5 rounded-full border border-accent border-dashed animate-spin" />
-                <span className="absolute -top-2.5 left-10 text-[9px] font-mono text-accent bg-[#09090b] px-1.5 border border-accent/40 rounded">
+              <div className="w-48 h-16 border border-neutral-300 dark:border-zinc-700 rounded-full bg-white dark:bg-zinc-900/80 flex items-center justify-center relative shadow-xs">
+                <div className="w-6 h-6 rounded-full border-2 border-accent border-dashed animate-spin" />
+                <span className="absolute -top-3 left-6 text-[9.5px] font-mono text-accent bg-white dark:bg-[#09090b] px-2 py-0.5 border border-accent/30 rounded-full shadow-2xs font-semibold">
                   Ø80mm Extrusion
+                </span>
+                <span className="absolute -bottom-2.5 right-6 text-[9px] font-mono text-neutral-500 dark:text-zinc-400 bg-white dark:bg-[#09090b] px-1.5 border border-neutral-200 dark:border-zinc-800 rounded">
+                  X:140.2 Y:88.4
                 </span>
               </div>
             </div>
 
-            <div className="text-[11px] font-mono text-zinc-400 flex justify-between pt-2 border-t border-zinc-800">
+            <div className="text-[11px] font-mono text-neutral-500 dark:text-zinc-400 flex justify-between pt-2 border-t border-neutral-200/90 dark:border-zinc-800">
               <span>Toolpath: ISO-6983</span>
-              <span className="text-accent">STEP 3D CNC</span>
+              <span className="text-accent font-semibold">STEP 3D CNC</span>
             </div>
           </div>
         );
 
       case "recruitment":
         return (
-          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-accent/40 transition-colors">
-            <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-              <span className="flex items-center gap-1.5 text-white font-semibold">
+          <div className="w-full h-48 rounded-2xl bg-gradient-to-b from-neutral-50 to-neutral-100/80 dark:from-[#09090b] dark:to-[#121214] border border-neutral-200/90 dark:border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-accent/40 transition-all duration-300 shadow-inner">
+            <div className="flex items-center justify-between text-xs font-mono text-neutral-600 dark:text-zinc-400">
+              <span className="flex items-center gap-1.5 text-neutral-900 dark:text-white font-bold">
                 <ShieldCheck className="w-3.5 h-3.5 text-accent" /> Spring Boot 3
               </span>
-              <span className="text-accent font-mono">RBAC + JWT</span>
+              <span className="px-2 py-0.5 rounded-full bg-accent/10 text-accent font-semibold font-mono text-[11px] border border-accent/20">
+                RBAC + JWT
+              </span>
             </div>
 
             {/* Pipeline Stage Blocks */}
-            <div className="grid grid-cols-3 gap-2 py-2">
-              <div className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-[10px] font-mono text-center">
-                <div className="text-zinc-500">APPLICANTS</div>
-                <div className="text-white font-bold text-sm mt-0.5">142</div>
+            <div className="grid grid-cols-3 gap-2.5 py-1.5">
+              <div className="p-2.5 rounded-xl bg-white dark:bg-zinc-900 border border-neutral-200/90 dark:border-zinc-800 text-center shadow-xs">
+                <div className="text-[10px] font-mono text-neutral-500 dark:text-zinc-400 uppercase font-semibold">APPLICANTS</div>
+                <div className="text-neutral-950 dark:text-white font-bold text-sm mt-0.5">142</div>
               </div>
-              <div className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-[10px] font-mono text-center">
-                <div className="text-zinc-500">PIPELINE</div>
-                <div className="text-zinc-200 font-bold text-sm mt-0.5">28</div>
+              <div className="p-2.5 rounded-xl bg-white dark:bg-zinc-900 border border-neutral-200/90 dark:border-zinc-800 text-center shadow-xs">
+                <div className="text-[10px] font-mono text-neutral-500 dark:text-zinc-400 uppercase font-semibold">PIPELINE</div>
+                <div className="text-neutral-800 dark:text-zinc-200 font-bold text-sm mt-0.5">28</div>
               </div>
-              <div className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-[10px] font-mono text-center">
-                <div className="text-zinc-500">OFFERS</div>
-                <div className="text-accent font-bold text-sm mt-0.5">6</div>
+              <div className="p-2.5 rounded-xl bg-white dark:bg-zinc-900 border border-accent/30 dark:border-accent/40 text-center shadow-xs relative overflow-hidden">
+                <div className="text-[10px] font-mono text-accent uppercase font-semibold">OFFERS</div>
+                <div className="text-accent font-black text-sm mt-0.5">6</div>
+                <div className="absolute bottom-0 inset-x-0 h-0.5 bg-accent" />
               </div>
             </div>
 
-            <div className="text-[11px] font-mono text-zinc-400 flex justify-between pt-2 border-t border-zinc-800">
+            <div className="text-[11px] font-mono text-neutral-500 dark:text-zinc-400 flex justify-between pt-2 border-t border-neutral-200/90 dark:border-zinc-800">
               <span>Zero N+1 Overhead</span>
-              <span className="text-zinc-300">MySQL 8.0</span>
+              <span className="text-neutral-800 dark:text-zinc-200 font-semibold">MySQL 8.0 Indexed</span>
             </div>
           </div>
         );
 
       case "library":
         return (
-          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-accent/40 transition-colors">
-            <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-              <span className="flex items-center gap-1.5 text-white font-semibold">
+          <div className="w-full h-48 rounded-2xl bg-gradient-to-b from-neutral-50 to-neutral-100/80 dark:from-[#09090b] dark:to-[#121214] border border-neutral-200/90 dark:border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-accent/40 transition-all duration-300 shadow-inner">
+            <div className="flex items-center justify-between text-xs font-mono text-neutral-600 dark:text-zinc-400">
+              <span className="flex items-center gap-1.5 text-neutral-900 dark:text-white font-bold">
                 <Sparkles className="w-3.5 h-3.5 text-accent" /> Gemini &amp; Chroma
               </span>
-              <span className="text-accent font-mono">Dense RAG</span>
+              <span className="px-2 py-0.5 rounded-full bg-accent/10 text-accent font-semibold font-mono text-[11px] border border-accent/20">
+                Dense RAG
+              </span>
             </div>
 
             {/* Vector Similarity Nodes */}
-            <div className="flex items-center justify-center gap-3 py-3">
-              <div className="w-8 h-8 rounded-full border border-zinc-600 bg-zinc-900 flex items-center justify-center text-[10px] font-mono text-white shadow-sm">
-                q
+            <div className="flex items-center justify-center gap-3 py-2">
+              <div className="flex flex-col items-center gap-1">
+                <div className="w-9 h-9 rounded-xl border border-neutral-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 flex items-center justify-center text-xs font-mono font-bold text-neutral-800 dark:text-white shadow-xs">
+                  q
+                </div>
+                <span className="text-[9px] font-mono text-neutral-400 dark:text-zinc-500 uppercase">Query</span>
               </div>
-              <div className="h-0.5 w-10 bg-accent/40 dashed" />
-              <div className="w-8 h-8 rounded-full border border-accent/40 bg-zinc-900 flex items-center justify-center text-[10px] font-mono text-accent shadow-sm">
-                d₁
+              
+              <div className="flex items-center">
+                <div className="h-0.5 w-6 bg-accent/40 border-t border-dashed border-accent" />
+                <span className="w-1.5 h-1.5 rounded-full bg-accent" />
               </div>
-              <div className="h-0.5 w-10 bg-accent/40 dashed" />
-              <div className="w-8 h-8 rounded-full border border-zinc-600 bg-zinc-900 flex items-center justify-center text-[10px] font-mono text-zinc-300 shadow-sm">
-                d₂
+
+              <div className="flex flex-col items-center gap-1">
+                <div className="w-9 h-9 rounded-xl border border-accent/50 bg-accent/10 dark:bg-accent/15 flex items-center justify-center text-xs font-mono font-black text-accent shadow-xs">
+                  d₁
+                </div>
+                <span className="text-[9px] font-mono text-accent font-bold uppercase">Top-1</span>
+              </div>
+
+              <div className="flex items-center">
+                <div className="h-0.5 w-6 bg-neutral-300 dark:bg-zinc-700 border-t border-dashed border-neutral-400" />
+                <span className="w-1.5 h-1.5 rounded-full bg-neutral-400 dark:bg-zinc-600" />
+              </div>
+
+              <div className="flex flex-col items-center gap-1">
+                <div className="w-9 h-9 rounded-xl border border-neutral-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 flex items-center justify-center text-xs font-mono font-bold text-neutral-600 dark:text-zinc-400 shadow-xs">
+                  d₂
+                </div>
+                <span className="text-[9px] font-mono text-neutral-400 dark:text-zinc-500 uppercase">Top-2</span>
               </div>
             </div>
 
-            <div className="text-[11px] font-mono text-zinc-400 flex justify-between pt-2 border-t border-zinc-800">
+            <div className="text-[11px] font-mono text-neutral-500 dark:text-zinc-400 flex justify-between pt-2 border-t border-neutral-200/90 dark:border-zinc-800">
               <span>Reciprocal Rank Fusion</span>
-              <span className="text-accent">Cos 0.941</span>
+              <span className="text-accent font-bold">Cos Sim: 0.941</span>
             </div>
           </div>
         );
@@ -122,25 +151,32 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
       case "matrix":
       default:
         return (
-          <div className="w-full h-44 bg-[#09090b] rounded-2xl border border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-accent/40 transition-colors">
-            <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-              <span className="flex items-center gap-1.5 text-white font-semibold">
+          <div className="w-full h-48 rounded-2xl bg-gradient-to-b from-neutral-50 to-neutral-100/80 dark:from-[#09090b] dark:to-[#121214] border border-neutral-200/90 dark:border-zinc-800 p-4 flex flex-col justify-between relative overflow-hidden group-hover:border-accent/40 transition-all duration-300 shadow-inner">
+            <div className="flex items-center justify-between text-xs font-mono text-neutral-600 dark:text-zinc-400">
+              <span className="flex items-center gap-1.5 text-neutral-900 dark:text-white font-bold">
                 <Workflow className="w-3.5 h-3.5 text-accent" /> n8n Orchestrator
               </span>
-              <span className="text-accent font-mono">24/7 Webhooks</span>
+              <span className="px-2 py-0.5 rounded-full bg-accent/10 text-accent font-semibold font-mono text-[11px] border border-accent/20">
+                24/7 Webhooks
+              </span>
             </div>
 
             {/* Playwright Headless Flow */}
             <div className="flex flex-col items-center justify-center py-2 text-center">
-              <div className="font-mono text-sm text-accent font-bold">
-                10,000+ Profiles Scraped
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white dark:bg-zinc-900 border border-neutral-200/90 dark:border-zinc-800 shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                <span className="font-mono text-xs sm:text-sm font-bold text-accent">10,000+ Profiles Scraped</span>
               </div>
-              <span className="text-[10px] text-zinc-400 font-mono mt-0.5">Media Route Abort Stream</span>
+              <div className="flex items-center gap-2 text-[10px] text-neutral-500 dark:text-zinc-400 font-mono mt-2">
+                <span className="px-2 py-0.5 rounded bg-neutral-200/70 dark:bg-zinc-800 text-neutral-700 dark:text-zinc-300">Playwright Headless</span>
+                <span>•</span>
+                <span>Media Route Abort Stream</span>
+              </div>
             </div>
 
-            <div className="text-[11px] font-mono text-zinc-400 flex justify-between pt-2 border-t border-zinc-800">
+            <div className="text-[11px] font-mono text-neutral-500 dark:text-zinc-400 flex justify-between pt-2 border-t border-neutral-200/90 dark:border-zinc-800">
               <span>Zoho API Webhook</span>
-              <span className="text-zinc-300">Zero Loss</span>
+              <span className="text-accent font-bold">0% Data Loss</span>
             </div>
           </div>
         );
