@@ -93,8 +93,17 @@ export interface QueryResult {
 }
 
 // Local deterministic & semantic response generator (always available offline/without API key)
-export function getLocalAiResponse(query: string): QueryResult {
+export function getLocalAiResponse(query: string, lang: "en" | "fr" = "en"): QueryResult {
   const q = query.toLowerCase().trim();
+  const isFr =
+    lang === "fr" ||
+    q.includes("qui es") ||
+    q.includes("bonjour") ||
+    q.includes("salut") ||
+    q.includes("stage") ||
+    q.includes("projet") ||
+    q.includes("disponib") ||
+    q.includes("ton nom");
 
   // 0. Identity & Name (Maro)
   if (
@@ -109,6 +118,46 @@ export function getLocalAiResponse(query: string): QueryResult {
     q.includes("ton nom") ||
     q.includes("c'est quoi ton nom")
   ) {
+    if (isFr) {
+      return {
+        text: `Je m'appelle **Maro** ! L'assistant IA personnel et copilote d'ingénierie d'Omar Torbi.
+
+J'ai été conçu pour aider les recruteurs, directeurs techniques et ingénieurs à découvrir le profil d'Omar :
+• **Ingénierie Backend** : Microservices Spring Boot 3 modulaires, performance JPA/Hibernate, authentification JWT sans état.
+• **DevOps & Cloud** : Doublement certifié Oracle Cloud Infrastructure (OCI DevOps & Architect), conteneurisation Docker, systèmes Linux.
+• **Projets Phares** : Studio CAO 3D Zahiri Metal, plateforme de recrutement Elevate, Sofia Bibliothèque IA RAG, et Creator Outreach Matrix.
+• **Disponibilité** : Disponible pour un Stage de Fin d'Études (PFE) dès Février 2027 et pour des postes CDI Software / DevOps.
+
+N'hésitez pas à me questionner sur l'architecture, les projets ou les compétences d'Omar !`,
+        suggestions: [
+          "Es-tu disponible pour un stage PFE ?",
+          "Parle-moi des projets phares",
+          "Quelles certifications OCI as-tu ?",
+          "Télécharger le CV",
+        ],
+        actions: [
+          {
+            label: "Explorer les Projets",
+            type: "link",
+            payload: "#projects",
+            icon: "project",
+          },
+          {
+            label: "Télécharger le CV (FR)",
+            type: "download",
+            payload: PERSONAL_INFO.resumeUrlFr,
+            icon: "download",
+          },
+          {
+            label: "Contacter Omar directement",
+            type: "link",
+            payload: "#contact",
+            icon: "chat",
+          },
+        ],
+      };
+    }
+
     return {
       text: `I'm **Maro**! Omar Torbi's personal AI assistant and engineering copilot.
 
@@ -154,6 +203,39 @@ Feel free to ask me anything about Omar's architecture, projects, code, or backg
       q
     )
   ) {
+    if (isFr) {
+      return {
+        text: `Bonjour ! Je suis **Maro**, l'assistant IA et copilote technique d'Omar Torbi.
+
+Je peux répondre à toutes vos questions sur :
+• **L'expertise Backend & DevOps** (Spring Boot 3, Docker, Linux, OCI)
+• **La double certification Oracle Cloud** (DevOps & Architect Professional)
+• **Les projets techniques** (CAO 3D Zahiri, Elevate RBAC, Sofia IA RAG, Outreach Matrix)
+• **La disponibilité** pour le stage PFE (Fév 2027) & opportunités en CDI.
+
+Comment puis-je vous aider aujourd'hui ?`,
+        suggestions: [
+          "Es-tu disponible pour un stage PFE ?",
+          "Parle-moi des projets phares",
+          "Quelles certifications OCI as-tu ?",
+          "Télécharger le CV",
+        ],
+        actions: [
+          {
+            label: "Explorer les Projets",
+            type: "link",
+            payload: "#projects",
+            icon: "project",
+          },
+          {
+            label: "Télécharger le CV (FR)",
+            type: "download",
+            payload: PERSONAL_INFO.resumeUrlFr,
+            icon: "download",
+          },
+        ],
+      };
+    }
     return {
       text: `Hello! I'm **Maro**, Omar Torbi's personal AI assistant and engineering copilot.
 

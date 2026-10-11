@@ -6,6 +6,7 @@ import { HeroTerminalCard } from "./HeroTerminalCard";
 import { PERSONAL_INFO, FOUNDATION_PILLARS } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
 import { useToast } from "../common/Toast";
+import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
 
 interface HeroSectionProps {
@@ -13,6 +14,7 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) => {
+  const { language, t } = useLanguage();
   const [copied, setCopied] = useState(false);
   const { showToast } = useToast();
   const pillarIcons = [Server, Cloud, Database];
@@ -21,7 +23,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
     navigator.clipboard.writeText(PERSONAL_INFO.npmCommand);
     setCopied(true);
     sound.playSuccess();
-    showToast(`Copied "${PERSONAL_INFO.npmCommand}" to clipboard!`);
+    showToast(
+      language === "fr"
+        ? `Copié "${PERSONAL_INFO.npmCommand}" dans le presse-papier !`
+        : `Copied "${PERSONAL_INFO.npmCommand}" to clipboard!`
+    );
     setTimeout(() => setCopied(false), 2200);
   };
 
@@ -40,7 +46,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-zinc-200/80 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-neutral-800 dark:text-neutral-200 text-xs font-mono font-semibold mb-6 shadow-2xs"
         >
           <span className="w-2 h-2 rounded-full bg-black dark:bg-white animate-pulse" />
-          <span>01 // PROFILE &amp; PHILOSOPHY</span>
+          <span>{t.hero.tag}</span>
         </motion.div>
 
         {/* Center Official Brand Logo */}
@@ -70,8 +76,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-black tracking-tight text-neutral-950 dark:text-white uppercase max-w-5xl leading-[1.04] mb-5 transition-colors"
         >
-          SOFTWARE AND DEVOPS <br className="hidden sm:inline" />
-          ENGINEER
+          {language === "fr" ? (
+            <>
+              INGÉNIEUR LOGICIEL <br className="hidden sm:inline" />
+              &amp; DEVOPS
+            </>
+          ) : (
+            <>
+              SOFTWARE AND DEVOPS <br className="hidden sm:inline" />
+              ENGINEER
+            </>
+          )}
         </motion.h1>
 
         {/* Crisp Subheader */}
@@ -81,10 +96,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           transition={{ duration: 0.5, delay: 0.3 }}
           className="font-mono text-xs sm:text-sm tracking-wider uppercase text-neutral-700 dark:text-neutral-300 max-w-3xl mb-8 leading-relaxed font-semibold transition-colors"
         >
-          FULL-STACK ARCHITECTURE • OCI CLOUD &amp; DEVOPS • 3D WEB ENGINEERING <br className="hidden sm:inline" />
-          <span className="text-neutral-500 dark:text-neutral-400 text-[11px] font-normal">
-            STATE ENGINEERING DEGREE (DDSI) — EMSI RABAT • MOROCCO
-          </span>
+          {language === "fr" ? (
+            <>
+              ARCHITECTURE SYSTÈMES • CLOUD OCI &amp; DEVOPS • INGÉNIERIE 3D WEB <br className="hidden sm:inline" />
+              <span className="text-neutral-500 dark:text-neutral-400 text-[11px] font-normal">
+                DIPLÔME D'INGÉNIEUR D'ÉTAT (DDSI) — EMSI RABAT • MAROC
+              </span>
+            </>
+          ) : (
+            <>
+              FULL-STACK ARCHITECTURE • OCI CLOUD &amp; DEVOPS • 3D WEB ENGINEERING <br className="hidden sm:inline" />
+              <span className="text-neutral-500 dark:text-neutral-400 text-[11px] font-normal">
+                STATE ENGINEERING DEGREE (DDSI) — EMSI RABAT • MOROCCO
+              </span>
+            </>
+          )}
         </motion.p>
 
         {/* 3-Button Action Tray */}
@@ -100,9 +126,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => sound.playClick()}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-950 hover:bg-black text-white dark:bg-white dark:text-black dark:hover:bg-neutral-200 text-xs sm:text-sm font-sans font-bold transition-all cursor-pointer shadow-md"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-950 hover:bg-black text-white dark:bg-white dark:text-black dark:hover:bg-neutral-200 text-xs sm:text-sm font-sans font-bold transition-all cursor-pointer shadow-md uppercase"
           >
-            <span>EXPLORE SYSTEMS</span>
+            <span>{t.hero.projectsCta}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </motion.a>
 
@@ -112,9 +138,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => sound.playClick()}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-zinc-100 text-neutral-950 border border-zinc-300 dark:bg-[#0e0f12] dark:hover:bg-zinc-900 dark:text-white dark:border-zinc-800 text-xs sm:text-sm font-sans font-bold transition-all cursor-pointer shadow-xs"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-zinc-100 text-neutral-950 border border-zinc-300 dark:bg-[#0e0f12] dark:hover:bg-zinc-900 dark:text-white dark:border-zinc-800 text-xs sm:text-sm font-sans font-bold transition-all cursor-pointer shadow-xs uppercase"
           >
-            <span>REACH OUT</span>
+            <span>{t.hero.contactCta}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </motion.a>
 
@@ -157,15 +183,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
         >
           <div className="flex items-center gap-2 font-mono text-xs font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest mb-3">
             <Sparkles className="w-3.5 h-3.5 text-black dark:text-white" />
-            <span>ABOUT OMAR TORBI</span>
+            <span>{language === "fr" ? "À PROPOS D'OMAR TORBI" : "ABOUT OMAR TORBI"}</span>
           </div>
 
           <h2 className="text-xl sm:text-2xl font-sans font-black text-neutral-950 dark:text-white mb-4 leading-snug transition-colors">
-            Final-year Computer Science &amp; Networks student at EMSI Rabat. Triple-certified in Java SE 17 Developer, OCI DevOps Professional &amp; OCI Architect Professional.
+            {language === "fr"
+              ? "Élève-Ingénieur en dernière année à l'EMSI Rabat (DDSI). Triple certification Java SE 17 Developer, OCI DevOps Professional & OCI Architect Professional."
+              : "Final-year Computer Science & Networks student at EMSI Rabat. Triple-certified in Java SE 17 Developer, OCI DevOps Professional & OCI Architect Professional."}
           </h2>
 
           <p className="font-sans text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed mb-5 transition-colors">
-            Specializing in production-grade backend systems with <strong>Spring Boot 3 &amp; Java 17</strong>, containerized cloud infrastructure with <strong>Docker &amp; Linux</strong>, secure REST APIs, and automated workflow pipelines. Driven by modular architecture, clean code, and zero-defect delivery.
+            {language === "fr" ? (
+              <>
+                Spécialisé dans les architectures backend de production avec <strong>Spring Boot 3 &amp; Java 17</strong>, les infrastructures cloud conteneurisées avec <strong>Docker &amp; Linux</strong>, les APIs REST sécurisées et les workflows automatisés. Orienté modularité, clean code et robustesse opérationnelle.
+              </>
+            ) : (
+              <>
+                Specializing in production-grade backend systems with <strong>Spring Boot 3 &amp; Java 17</strong>, containerized cloud infrastructure with <strong>Docker &amp; Linux</strong>, secure REST APIs, and automated workflow pipelines. Driven by modular architecture, clean code, and zero-defect delivery.
+              </>
+            )}
           </p>
 
           <div className="flex flex-wrap items-center gap-2 pt-2">

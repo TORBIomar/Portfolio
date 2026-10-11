@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ChromeBot3D } from "./ChromeBot3D";
 import { AiChatModal } from "./AiChatModal";
 import { sound } from "@/utils/sound";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface FloatingChatWidgetProps {
   onSelectProject?: (projectId: string) => void;
@@ -14,6 +15,7 @@ interface FloatingChatWidgetProps {
 export const FloatingChatWidget: React.FC<FloatingChatWidgetProps> = ({
   onSelectProject,
 }) => {
+  const { language } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [isSleeping, setIsSleeping] = useState(false);
 
@@ -141,7 +143,11 @@ export const FloatingChatWidget: React.FC<FloatingChatWidgetProps> = ({
           onClick={handleToggleChat}
           onMouseEnter={() => sound.playHover()}
           className={`chatbot-canvas-wrapper ${isOpen ? "active" : ""} relative flex items-center justify-center cursor-pointer`}
-          title="Chat with Maro — Omar's AI Assistant"
+          title={
+            language === "fr"
+              ? "Discuter avec Maro — Assistant IA d'Omar"
+              : "Chat with Maro — Omar's AI Assistant"
+          }
         >
           {/* Subtle ambient luminous aura under the 3D model */}
           <span className="absolute -inset-2 rounded-full bg-gradient-to-tr from-sky-400/15 via-zinc-300/10 to-transparent dark:from-cyan-500/25 dark:via-blue-600/15 dark:to-cyan-400/15 blur-2xl opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none" />

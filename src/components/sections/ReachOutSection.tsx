@@ -19,10 +19,12 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { LinkedinIcon, GithubIcon } from "../common/SocialIcons";
+import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 
 export const ReachOutSection: React.FC = () => {
+  const { language, t } = useLanguage();
   const { showToast } = useToast();
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
@@ -161,14 +163,14 @@ export const ReachOutSection: React.FC = () => {
         >
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-200/80 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold mb-3">
             <MessageSquare className="w-3.5 h-3.5 text-black dark:text-white" />
-            <span>06 // REACH OUT &amp; COLLABORATION</span>
+            <span>{t.contact.tag}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans font-black tracking-tight text-neutral-950 dark:text-white uppercase mb-3 transition-colors">
-            Let's Work Together
+            {t.contact.title}
           </h2>
           <p className="font-sans text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed transition-colors">
-            Open for final-year engineering internships (PFE Feb 2027), full-stack software architecture roles, and production systems development.
+            {t.contact.subtitle}
           </p>
         </motion.div>
 
@@ -365,7 +367,7 @@ export const ReachOutSection: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-zinc-700 dark:text-zinc-300 font-medium mb-1">
-                        Your Name *
+                        {language === "fr" ? "Votre Nom *" : "Your Name *"}
                       </label>
                       <input
                         type="text"
@@ -376,14 +378,14 @@ export const ReachOutSection: React.FC = () => {
                           sound.playKey();
                           setName(e.target.value);
                         }}
-                        placeholder="e.g. Sarah Connor"
+                        placeholder={t.contact.namePlaceholder}
                         className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white disabled:opacity-60 transition-colors"
                       />
                     </div>
 
                     <div>
                       <label className="block text-zinc-700 dark:text-zinc-300 font-medium mb-1">
-                        Your Email *
+                        {language === "fr" ? "Votre Email *" : "Your Email *"}
                       </label>
                       <input
                         type="email"
@@ -394,7 +396,7 @@ export const ReachOutSection: React.FC = () => {
                           sound.playKey();
                           setEmail(e.target.value);
                         }}
-                        placeholder="s.connor@enterprise.io"
+                        placeholder={t.contact.emailPlaceholder}
                         className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white disabled:opacity-60 transition-colors"
                       />
                     </div>
@@ -402,7 +404,7 @@ export const ReachOutSection: React.FC = () => {
 
                   <div>
                     <label className="block text-zinc-700 dark:text-zinc-300 font-medium mb-1">
-                      Subject
+                      {language === "fr" ? "Objet" : "Subject"}
                     </label>
                     <input
                       type="text"
@@ -412,14 +414,18 @@ export const ReachOutSection: React.FC = () => {
                         sound.playKey();
                         setSubject(e.target.value);
                       }}
-                      placeholder="e.g. Software Engineering Opportunity / PFE"
+                      placeholder={
+                        language === "fr"
+                          ? "ex: Opportunité Ingénierie Logicielle / PFE"
+                          : "e.g. Software Engineering Opportunity / PFE"
+                      }
                       className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white disabled:opacity-60 transition-colors"
                     />
                   </div>
 
                   <div>
                     <label className="block text-zinc-700 dark:text-zinc-300 font-medium mb-1">
-                      Message *
+                      {language === "fr" ? "Message *" : "Message *"}
                     </label>
                     <textarea
                       required
@@ -430,7 +436,7 @@ export const ReachOutSection: React.FC = () => {
                         sound.playKey();
                         setMessage(e.target.value);
                       }}
-                      placeholder="Detail your requirements, project architecture, or recruitment timeline..."
+                      placeholder={t.contact.messagePlaceholder}
                       className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-black dark:focus:border-white disabled:opacity-60 transition-colors resize-none"
                     />
                   </div>
@@ -438,16 +444,16 @@ export const ReachOutSection: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 disabled:opacity-60 disabled:cursor-not-allowed text-white dark:text-black font-sans font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-md"
+                    className="w-full py-3.5 rounded-full bg-black dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 disabled:opacity-60 disabled:cursor-not-allowed text-white dark:text-black font-sans font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-md uppercase"
                   >
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                        <span>DISPATCHING INQUIRY...</span>
+                        <span>{language === "fr" ? "ENVOI EN COURS..." : "DISPATCHING INQUIRY..."}</span>
                       </>
                     ) : (
                       <>
-                        <span>SEND INQUIRY</span>
+                        <span>{t.contact.sendMessage}</span>
                         <Send className="w-3.5 h-3.5" />
                       </>
                     )}

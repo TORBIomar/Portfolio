@@ -9,9 +9,11 @@ import {
   Sun,
   Moon,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
 import { useTheme } from "@/context/ThemeContext";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface NavbarProps {
   onOpenCommandPalette?: () => void;
@@ -22,13 +24,14 @@ export const Navbar: React.FC<NavbarProps> = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dossierOpen, setDossierOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { language, toggleLanguage, t } = useLanguage();
 
   const navLinks = [
-    { label: "About", href: "#about" },
-    { label: "Experiences", href: "#experiences" },
-    { label: "Projects", href: "#projects" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Reach Out", href: "#contact" },
+    { label: t.nav.about, href: "#about" },
+    { label: t.nav.experiences, href: "#experiences" },
+    { label: t.nav.projects, href: "#projects" },
+    { label: t.nav.faq, href: "#faq" },
+    { label: t.nav.contact, href: "#contact" },
   ];
 
   return (
@@ -74,7 +77,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
           ))}
         </nav>
 
-        {/* Right Actions: Only Theme Toggle, Resume, and Mobile Menu */}
+        {/* Right Actions: Theme Toggle, Language Switcher, Resume, and Mobile Menu */}
         <div className="flex items-center gap-2 shrink-0 z-10">
           {/* Theme Toggle Button (Dark / Light) */}
           <button
@@ -90,6 +93,50 @@ export const Navbar: React.FC<NavbarProps> = () => {
             )}
           </button>
 
+          {/* Smooth Language Switcher (EN / FR) */}
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="relative flex items-center h-8 px-1 rounded-full bg-zinc-100 dark:bg-zinc-800/90 border border-zinc-200/90 dark:border-zinc-700/80 text-[11px] font-mono font-bold cursor-pointer select-none transition-colors hover:border-zinc-300 dark:hover:border-zinc-600 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-cyan-500"
+            title={language === "en" ? "Passer en Français (FR)" : "Switch to English (EN)"}
+            aria-label={`Language: ${language.toUpperCase()}. Switch to ${language === "en" ? "French" : "English"}`}
+          >
+            <div className="relative flex items-center h-6">
+              {/* Smooth spring sliding indicator pill */}
+              <motion.div
+                className="absolute top-0 bottom-0 left-0 rounded-full bg-white dark:bg-zinc-950 shadow-xs border border-zinc-200/80 dark:border-white/10"
+                initial={false}
+                animate={{
+                  x: language === "en" ? 0 : 26,
+                  width: 26,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 480,
+                  damping: 32,
+                }}
+              />
+              <span
+                className={`relative z-10 w-[26px] h-6 flex items-center justify-center transition-colors duration-200 ${
+                  language === "en"
+                    ? "text-zinc-950 dark:text-white font-extrabold"
+                    : "text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400"
+                }`}
+              >
+                EN
+              </span>
+              <span
+                className={`relative z-10 w-[26px] h-6 flex items-center justify-center transition-colors duration-200 ${
+                  language === "fr"
+                    ? "text-zinc-950 dark:text-white font-extrabold"
+                    : "text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400"
+                }`}
+              >
+                FR
+              </span>
+            </div>
+          </button>
+
           {/* Resume / Dossier Dropdown */}
           <div className="relative">
             <button
@@ -101,7 +148,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
               aria-label="View Resume / CV"
             >
               <FileText className="w-3.5 h-3.5 text-zinc-500 dark:text-zinc-400" />
-              <span>Resume</span>
+              <span>{t.nav.resume}</span>
               <span className="text-[10px] text-zinc-400 font-mono">▾</span>
             </button>
 
@@ -170,23 +217,78 @@ export const Navbar: React.FC<NavbarProps> = () => {
             ))}
           </div>
 
-          <div className="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-center gap-2">
-            <a
-              href={PERSONAL_INFO.resumeUrlEn}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-300"
-            >
-              Resume (EN)
-            </a>
-            <a
-              href={PERSONAL_INFO.resumeUrlFr}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-300"
-            >
-              CV (FR)
-            </a>
+          <div className="pt-3 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between gap-2">
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="h-8 px-2.5 rounded-full flex items-center gap-1.5 text-xs font-mono text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 cursor-pointer"
+              >
+                {theme === "dark" ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+                <span>{theme === "dark" ? "Light" : "Dark"}</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={toggleLanguage}
+                className="relative flex items-center h-8 px-1 rounded-full bg-zinc-100 dark:bg-zinc-800/90 border border-zinc-200/90 dark:border-zinc-700/80 text-[11px] font-mono font-bold cursor-pointer select-none"
+                title={language === "en" ? "Passer en Français (FR)" : "Switch to English (EN)"}
+                aria-label={`Language: ${language.toUpperCase()}. Switch to ${language === "en" ? "French" : "English"}`}
+              >
+                <div className="relative flex items-center h-6">
+                  <motion.div
+                    className="absolute top-0 bottom-0 left-0 rounded-full bg-white dark:bg-zinc-950 shadow-xs border border-zinc-200/80 dark:border-white/10"
+                    initial={false}
+                    animate={{
+                      x: language === "en" ? 0 : 26,
+                      width: 26,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 480,
+                      damping: 32,
+                    }}
+                  />
+                  <span
+                    className={`relative z-10 w-[26px] h-6 flex items-center justify-center transition-colors duration-200 ${
+                      language === "en"
+                        ? "text-zinc-950 dark:text-white font-extrabold"
+                        : "text-zinc-400 dark:text-zinc-500"
+                    }`}
+                  >
+                    EN
+                  </span>
+                  <span
+                    className={`relative z-10 w-[26px] h-6 flex items-center justify-center transition-colors duration-200 ${
+                      language === "fr"
+                        ? "text-zinc-950 dark:text-white font-extrabold"
+                        : "text-zinc-400 dark:text-zinc-500"
+                    }`}
+                  >
+                    FR
+                  </span>
+                </div>
+              </button>
+            </div>
+
+            <div className="flex items-center gap-1.5">
+              <a
+                href={PERSONAL_INFO.resumeUrlEn}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2.5 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-300"
+              >
+                Resume
+              </a>
+              <a
+                href={PERSONAL_INFO.resumeUrlFr}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2.5 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-300"
+              >
+                CV (FR)
+              </a>
+            </div>
           </div>
         </div>
       )}

@@ -7,9 +7,11 @@ import {
 import { PERSONAL_INFO } from "@/data/portfolioData";
 
 export async function POST(request: Request) {
+  let activeLang: "en" | "fr" = "en";
   try {
     const body = await request.json();
-    const { message, history } = body;
+    const { message, history, language } = body;
+    if (language === "fr") activeLang = "fr";
 
     if (!message || typeof message !== "string" || !message.trim()) {
       return NextResponse.json(
@@ -48,6 +50,11 @@ export async function POST(request: Request) {
           parts: [{ text: trimmedMessage }],
         });
 
+        const langPrompt =
+          activeLang === "fr"
+            ? "\n\nCRITICAL LANGUAGE INSTRUCTION: The user portfolio interface is set to FRENCH. Respond completely in fluent, professional FRENCH."
+            : "\n\nCRITICAL LANGUAGE INSTRUCTION: The user portfolio interface is set to ENGLISH. Respond in ENGLISH.";
+
         const geminiRes = await fetch(
           `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${geminiKey}`,
           {
@@ -57,7 +64,7 @@ export async function POST(request: Request) {
             },
             body: JSON.stringify({
               systemInstruction: {
-                parts: [{ text: SYSTEM_PORTFOLIO_PROMPT }],
+                parts: [{ text: `${SYSTEM_PORTFOLIO_PROMPT}${langPrompt}` }],
               },
               contents: contents,
               generationConfig: {
@@ -127,7 +134,7 @@ export async function POST(request: Request) {
     }
 
     // High-fidelity deterministic local fallback
-    const localResult = getLocalAiResponse(trimmedMessage);
+    const localResult = getLocalAiResponse(trimmedMessage, activeLang);
     return NextResponse.json({
       success: true,
       answer: localResult.text,
@@ -137,7 +144,7 @@ export async function POST(request: Request) {
     });
   } catch (err: unknown) {
     console.error("Chat API error:", err);
-    const fallback = getLocalAiResponse("help");
+    const fallback = getLocalAiResponse("help", activeLang);
     return NextResponse.json({
       success: true,
       answer: fallback.text,

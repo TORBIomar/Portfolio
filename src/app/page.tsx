@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { ToastProvider } from "@/components/common/Toast";
 import { Navbar } from "@/components/layout/Navbar";
 import { HeroSection } from "@/components/hero/HeroSection";
@@ -28,7 +29,8 @@ export default function Home() {
 
   return (
     <ThemeProvider>
-      <ToastProvider>
+      <LanguageProvider>
+        <ToastProvider>
         <main className="min-h-screen bg-[#fcfcfc] dark:bg-[#000000] text-[#1a1a1a] dark:text-[#fafafa] flex flex-col font-sans transition-colors duration-300">
           {/* Centered Floating Navigation Bar with Logo & Theme Toggles */}
           <Navbar
@@ -70,7 +72,8 @@ export default function Home() {
             onSelectProject={(id) => handleOpenProjectById(id)}
           />
         </main>
-      </ToastProvider>
+        </ToastProvider>
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

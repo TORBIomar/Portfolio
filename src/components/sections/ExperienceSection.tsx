@@ -3,10 +3,12 @@
 import React, { useState } from "react";
 import { EXPERIENCES_DATA } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
+import { useLanguage } from "@/context/LanguageContext";
 import { Briefcase, Calendar, MapPin, CheckCircle2, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const ExperienceSection: React.FC = () => {
+  const { t } = useLanguage();
   const [activeExpId, setActiveExpId] = useState<string>(EXPERIENCES_DATA[0].id);
 
   const activeExp = EXPERIENCES_DATA.find((e) => e.id === activeExpId) || EXPERIENCES_DATA[0];
@@ -25,14 +27,14 @@ export const ExperienceSection: React.FC = () => {
         >
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-200/80 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold mb-3">
             <Briefcase className="w-3.5 h-3.5 text-black dark:text-white" />
-            <span>02 // EXPERIENCE &amp; ACADEMICS</span>
+            <span>{t.experiences.tag}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans font-black tracking-tight text-neutral-950 dark:text-white uppercase mb-3 transition-colors">
-            Industry Experience &amp; Academic Track
+            {t.experiences.title}
           </h2>
           <p className="font-sans text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed transition-colors">
-            Delivering production systems across industrial CAD manufacturing, public administration logistics, and computer science engineering at EMSI Rabat.
+            {t.experiences.subtitle}
           </p>
         </motion.div>
 

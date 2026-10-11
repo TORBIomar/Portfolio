@@ -11,6 +11,7 @@ import {
 } from "@/data/aiKnowledge";
 import { sound } from "@/utils/sound";
 import { useToast } from "../common/Toast";
+import { useLanguage } from "@/context/LanguageContext";
 
 let msgSequence = 0;
 function createMsgId(prefix: string): string {
@@ -23,7 +24,7 @@ function getLocalTimeString(): string {
   return `${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
 }
 
-const STARTER_PROMPTS = [
+const STARTER_PROMPTS_EN = [
   {
     title: "Who is Maro?",
     subtitle: "Architecture, background, and capabilities",
@@ -39,6 +40,25 @@ const STARTER_PROMPTS = [
   {
     title: "Internship Availability",
     subtitle: "2027 End-of-Studies PFE and engineering roles",
+  },
+];
+
+const STARTER_PROMPTS_FR = [
+  {
+    title: "Qui est Maro ?",
+    subtitle: "Architecture, compétences et rôle",
+  },
+  {
+    title: "Stack Backend & DevOps",
+    subtitle: "Spring Boot 3, Docker, Linux et OCI",
+  },
+  {
+    title: "Double Certification OCI",
+    subtitle: "Titres DevOps & Architect Professional",
+  },
+  {
+    title: "Disponibilité de Stage",
+    subtitle: "Stage PFE 2027 et opportunités en ingénierie",
   },
 ];
 
@@ -97,6 +117,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
   onClose,
   onSelectProject,
 }) => {
+  const { language, t } = useLanguage();
   const { showToast } = useToast();
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -107,10 +128,27 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
     {
       id: "welcome",
       sender: "ai",
-      text: "Hello! I'm **Maro**, Omar's personal AI assistant and engineering copilot.\n\nAsk me anything about Omar's backend engineering (Spring Boot 3, REST APIs), DevOps & OCI Cloud infrastructure, 3D Web CAD (Three.js/Wasm), or his availability for internships and engineering roles.",
+      text: t.chat.welcomeMsg,
       timestamp: "Just now",
     },
   ]);
+
+  // Synchronize initial welcome message if user hasn't started a conversation yet
+  useEffect(() => {
+    setMessages((prev) => {
+      if (prev.length === 1 && prev[0].id === "welcome") {
+        return [
+          {
+            id: "welcome",
+            sender: "ai",
+            text: t.chat.welcomeMsg,
+            timestamp: "Just now",
+          },
+        ];
+      }
+      return prev;
+    });
+  }, [language, t.chat.welcomeMsg]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -147,11 +185,11 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
       {
         id: createMsgId("ai-welcome"),
         sender: "ai",
-        text: "Conversation reset. What would you like to explore about Omar's engineering work?",
+        text: t.chat.resetMsg,
         timestamp: getLocalTimeString(),
       },
     ]);
-    showToast("Conversation cleared");
+    showToast(language === "fr" ? "Conversation réinitialisée" : "Conversation cleared");
   };
 
   const streamAiResponse = async (
@@ -251,6 +289,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
           body: JSON.stringify({
             message: textToSend,
             history: messages.slice(-4),
+            language,
           }),
         });
 
@@ -269,7 +308,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
 
       if (!answered) {
         await new Promise((r) => setTimeout(r, 250));
-        const local = getLocalAiResponse(textToSend);
+        const local = getLocalAiResponse(textToSend, language);
         replyText = local.text;
         replyActions = local.actions;
         replySuggestions = local.suggestions;
@@ -279,7 +318,11 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
       await streamAiResponse(replyText, replyActions, replySuggestions);
     } catch {
       setIsTyping(false);
-      showToast("Unable to process message right now.");
+      showToast(
+        language === "fr"
+          ? "Impossible de traiter la demande pour le moment."
+          : "Unable to process message right now."
+      );
     }
   };
 
@@ -512,7 +555,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                     Maro
                   </h2>
                   <span className="text-[11px] font-mono font-medium text-zinc-500 dark:text-zinc-400 mt-1 leading-none">
-                    Omar Torbi • Technical Copilot
+                    {t.chat.subtitle}
                   </span>
                 </div>
               </div>
@@ -526,8 +569,8 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                 <button
                   type="button"
                   onClick={handleClearChat}
-                  aria-label="Reset conversation"
-                  title="Reset conversation"
+                  aria-label={t.chat.reset}
+                  title={t.chat.reset}
                   className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-cyan-500 cursor-pointer"
                 >
                   <RotateCcw className="w-4 h-4" />
@@ -539,8 +582,8 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                     sound.playClick();
                     onClose();
                   }}
-                  aria-label="Close assistant"
-                  title="Close assistant (Esc)"
+                  aria-label={t.chat.close}
+                  title={t.chat.close}
                   className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-cyan-500 cursor-pointer"
                 >
                   <X className="w-4 h-4" />
@@ -624,24 +667,26 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                   className="pt-2"
                 >
                   <p className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 mb-2 uppercase tracking-wider font-semibold">
-                    Inquiry Topics
+                    {t.chat.inquiryTopics}
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {STARTER_PROMPTS.map((prompt, pIdx) => (
-                      <button
-                        key={pIdx}
-                        type="button"
-                        onClick={() => handleSendMessage(prompt.title)}
-                        className="text-left p-3 rounded-xl bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-900/80 dark:hover:bg-zinc-800/90 border border-zinc-200/90 dark:border-zinc-800 transition-colors group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-cyan-500"
-                      >
-                        <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 transition-colors block leading-tight">
-                          {prompt.title}
-                        </span>
-                        <span className="text-[11px] text-zinc-500 dark:text-zinc-400 block mt-1 leading-tight font-medium">
-                          {prompt.subtitle}
-                        </span>
-                      </button>
-                    ))}
+                    {(language === "fr" ? STARTER_PROMPTS_FR : STARTER_PROMPTS_EN).map(
+                      (prompt, pIdx) => (
+                        <button
+                          key={pIdx}
+                          type="button"
+                          onClick={() => handleSendMessage(prompt.title)}
+                          className="text-left p-3 rounded-xl bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-900/80 dark:hover:bg-zinc-800/90 border border-zinc-200/90 dark:border-zinc-800 transition-colors group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-cyan-500"
+                        >
+                          <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 transition-colors block leading-tight">
+                            {prompt.title}
+                          </span>
+                          <span className="text-[11px] text-zinc-500 dark:text-zinc-400 block mt-1 leading-tight font-medium">
+                            {prompt.subtitle}
+                          </span>
+                        </button>
+                      )
+                    )}
                   </div>
                 </motion.div>
               )}
@@ -654,7 +699,11 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                   className="flex items-center gap-2 px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-300 w-fit"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse" />
-                  <span>Maro is synthesizing response...</span>
+                  <span>
+                    {language === "fr"
+                      ? "Maro synthétise sa réponse..."
+                      : "Maro is synthesizing response..."}
+                  </span>
                 </motion.div>
               )}
 
@@ -678,7 +727,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                   onKeyDown={() => {
                     if (!sound.isMuted()) sound.playKey();
                   }}
-                  placeholder="Ask about Omar's backend, OCI cloud, or projects..."
+                  placeholder={t.chat.placeholder}
                   className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium text-zinc-950 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-hidden focus:border-cyan-500 dark:focus:border-cyan-400 focus:ring-1 focus:ring-cyan-500/20 transition-all"
                 />
               </div>
@@ -686,11 +735,11 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
               <button
                 type="submit"
                 disabled={!input.trim() || isTyping || isReplying}
-                aria-label="Send message"
-                title="Send message (Enter)"
+                aria-label={t.chat.send}
+                title={`${t.chat.send} (Enter)`}
                 className="inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 font-semibold text-xs disabled:opacity-30 disabled:cursor-not-allowed hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all cursor-pointer shadow-xs shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-cyan-500"
               >
-                <span className="hidden sm:inline">Send</span>
+                <span className="hidden sm:inline">{t.chat.send}</span>
                 <Send className="w-3.5 h-3.5" />
               </button>
             </form>

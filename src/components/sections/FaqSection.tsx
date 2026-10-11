@@ -3,10 +3,12 @@
 import React, { useState } from "react";
 import { FAQ_ITEMS } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
+import { useLanguage } from "@/context/LanguageContext";
 import { ChevronDown, HelpCircle, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const FaqSection: React.FC = () => {
+  const { t } = useLanguage();
   const [openId, setOpenId] = useState<string | null>(FAQ_ITEMS[0].id);
 
   const toggleItem = (id: string) => {
@@ -28,14 +30,14 @@ export const FaqSection: React.FC = () => {
         >
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-200/80 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold mb-4">
             <HelpCircle className="w-3.5 h-3.5 text-black dark:text-white" />
-            <span>04 // SYSTEM SPECS &amp; FAQ</span>
+            <span>{t.faq.tag}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans font-black tracking-tight text-neutral-950 dark:text-white uppercase mb-4 transition-colors">
-            Frequently Asked Questions
+            {t.faq.title}
           </h2>
           <p className="font-sans text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed transition-colors">
-            Direct technical answers regarding my professional availability, backend engineering standards, and systems architecture.
+            {t.faq.subtitle}
           </p>
         </motion.div>
 

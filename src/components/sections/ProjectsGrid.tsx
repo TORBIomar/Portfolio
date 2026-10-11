@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { PROJECTS_DATA, Project } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
+import { useLanguage } from "@/context/LanguageContext";
 import {
   ExternalLink,
   ArrowRight,
@@ -21,6 +22,7 @@ interface ProjectsGridProps {
 }
 
 export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) => {
+  const { language, t } = useLanguage();
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const renderThumbnailMockup = (project: Project) => {
@@ -159,14 +161,14 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
         >
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-200/80 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 text-xs font-mono font-semibold mb-3">
             <Cpu className="w-3.5 h-3.5 text-black dark:text-white" />
-            <span>03 // FLAGSHIP SYSTEMS</span>
+            <span>{t.projects.tag}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-sans font-black tracking-tight text-neutral-950 dark:text-white uppercase mb-3 transition-colors">
-            Featured Engineered Systems
+            {t.projects.title}
           </h2>
           <p className="font-sans text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed transition-colors">
-            The 4 primary platforms representing my engineering standards across full-stack backend architecture, containerized automation, and 3D graphics.
+            {t.projects.subtitle}
           </p>
         </motion.div>
 
@@ -239,7 +241,7 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
                 {/* Card Action Row */}
                 <div className="flex items-center justify-between pt-2 border-t border-zinc-100 dark:border-zinc-800/80">
                   <div className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-neutral-950 dark:text-white group-hover:translate-x-1 transition-transform">
-                    <span>Inspect Architecture</span>
+                    <span>{language === "fr" ? "Explorer l'Architecture" : "Inspect Architecture"}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
 
