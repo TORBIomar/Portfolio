@@ -161,8 +161,9 @@ export const ReachOutSection: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mb-14 sm:mb-18"
         >
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#064e3b]/15 dark:bg-[#064e3b]/35 border border-green-600/30 text-green-900 dark:text-green-400 text-xs font-mono font-semibold mb-3">
-            <MessageSquare className="w-3.5 h-3.5 text-green-600 dark:text-green-500" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 text-xs font-mono font-medium mb-3 shadow-2xs">
+            <span className="text-accent font-bold">05.</span>
+            <MessageSquare className="w-3.5 h-3.5 text-accent" />
             <span>{t.contact.tag}</span>
           </div>
 
@@ -183,11 +184,11 @@ export const ReachOutSection: React.FC = () => {
             {/* Email Card (Copies to clipboard and triggers inquiry form without opening mail app) */}
             <div
               onClick={handleCopyEmail}
-              className="p-5 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between shadow-2xs hover:border-green-600/40 dark:hover:border-green-500/40 transition-colors cursor-pointer group"
+              className="p-5 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between shadow-2xs hover:border-accent/40 transition-colors cursor-pointer group"
               title="Click to copy email address"
             >
               <div className="flex items-center gap-3.5 overflow-hidden">
-                <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-900 group-hover:bg-[#064e3b]/15 dark:group-hover:bg-[#064e3b]/35 flex items-center justify-center text-black dark:text-white group-hover:text-green-700 dark:group-hover:text-green-400 shrink-0 transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-900 group-hover:bg-accent/10 flex items-center justify-center text-black dark:text-white group-hover:text-accent shrink-0 transition-colors">
                   <Mail className="w-4 h-4" />
                 </div>
                 <div className="truncate">
@@ -195,7 +196,7 @@ export const ReachOutSection: React.FC = () => {
                     <span>Direct Email</span>
                     <span className="text-[9px] text-zinc-400 font-sans">(Click to copy)</span>
                   </div>
-                  <div className="font-mono text-xs sm:text-sm font-bold text-black dark:text-white group-hover:text-green-700 dark:group-hover:text-green-400 group-hover:underline truncate block transition-colors">
+                  <div className="font-mono text-xs sm:text-sm font-bold text-black dark:text-white group-hover:text-accent group-hover:underline truncate block transition-colors">
                     {PERSONAL_INFO.email}
                   </div>
                 </div>
@@ -204,12 +205,12 @@ export const ReachOutSection: React.FC = () => {
                 className="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-black dark:hover:text-white cursor-pointer shrink-0 ml-2 transition-colors"
                 title="Copy email address"
               >
-                {copiedEmail ? <Check className="w-4 h-4 text-green-600 dark:text-green-500" /> : <Copy className="w-4 h-4" />}
+                {copiedEmail ? <Check className="w-4 h-4 text-accent" /> : <Copy className="w-4 h-4" />}
               </div>
             </div>
 
             {/* Phone & WhatsApp Card */}
-            <div className="p-5 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between shadow-2xs hover:border-green-600/40 dark:hover:border-green-500/40 transition-colors">
+            <div className="p-5 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between shadow-2xs hover:border-accent/40 transition-colors">
               <div className="flex items-center gap-3.5 overflow-hidden">
                 <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center text-black dark:text-white shrink-0">
                   <Phone className="w-4 h-4" />
@@ -222,7 +223,7 @@ export const ReachOutSection: React.FC = () => {
                     href={PERSONAL_INFO.whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-mono text-xs sm:text-sm font-bold text-black dark:text-white hover:text-green-700 dark:hover:text-green-400 hover:underline truncate block transition-colors"
+                    className="font-mono text-xs sm:text-sm font-bold text-black dark:text-white hover:text-accent hover:underline truncate block transition-colors"
                   >
                     {PERSONAL_INFO.phone}
                   </a>
@@ -233,7 +234,7 @@ export const ReachOutSection: React.FC = () => {
                 className="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-black dark:hover:text-white cursor-pointer shrink-0 ml-2 transition-colors"
                 title="Copy phone number"
               >
-                {copiedPhone ? <Check className="w-4 h-4 text-green-600 dark:text-green-500" /> : <Copy className="w-4 h-4" />}
+                {copiedPhone ? <Check className="w-4 h-4 text-accent" /> : <Copy className="w-4 h-4" />}
               </button>
             </div>
 
@@ -244,7 +245,7 @@ export const ReachOutSection: React.FC = () => {
                 <span>Rabat / Béni Mellal, Morocco</span>
               </div>
               <div className="flex items-center gap-2 font-mono text-xs text-black dark:text-white font-medium">
-                <span className="w-2 h-2 rounded-full bg-green-500 inline-block animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
+                <span className="w-2 h-2 rounded-full bg-accent inline-block animate-pulse shadow-[0_0_8px_var(--accent-glow)]" />
                 <span>Available for immediate interviews &amp; 2027 PFE</span>
               </div>
             </div>
@@ -334,7 +335,7 @@ export const ReachOutSection: React.FC = () => {
 
               {submitted ? (
                 <div className="py-10 text-center space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-[#064e3b]/15 dark:bg-[#064e3b]/40 border border-green-600/40 text-green-700 dark:text-green-400 flex items-center justify-center mx-auto shadow-md">
+                  <div className="w-14 h-14 rounded-full bg-accent/15 border border-accent/40 text-accent flex items-center justify-center mx-auto shadow-md">
                     <Check className="w-7 h-7 stroke-[2.5]" />
                   </div>
                   <div>
@@ -342,14 +343,14 @@ export const ReachOutSection: React.FC = () => {
                       Inquiry Dispatched Successfully
                     </h4>
                     <p className="text-xs font-sans text-zinc-600 dark:text-zinc-400 max-w-md mx-auto mt-2 leading-relaxed">
-                      Thank you, <span className="font-semibold text-green-700 dark:text-green-400">{sentName || "there"}</span>! Your inquiry has been routed straight to Omar Torbi&apos;s verified inbox (<span className="font-mono text-zinc-900 dark:text-zinc-200">{PERSONAL_INFO.email}</span>). A prompt response will follow.
+                      Thank you, <span className="font-semibold text-accent">{sentName || "there"}</span>! Your inquiry has been routed straight to Omar Torbi&apos;s verified inbox (<span className="font-mono text-zinc-900 dark:text-zinc-200">{PERSONAL_INFO.email}</span>). A prompt response will follow.
                     </p>
                   </div>
                   <div className="pt-2">
                     <button
                       type="button"
                       onClick={() => setSubmitted(false)}
-                      className="px-5 py-2.5 rounded-full text-xs font-sans font-medium border border-green-600/30 hover:bg-green-600/10 text-green-800 dark:text-green-400 transition-colors cursor-pointer"
+                      className="px-5 py-2.5 rounded-full text-xs font-sans font-medium border border-accent/30 hover:bg-accent/10 text-accent transition-colors cursor-pointer"
                     >
                       Send Another Inquiry
                     </button>
@@ -379,7 +380,7 @@ export const ReachOutSection: React.FC = () => {
                           setName(e.target.value);
                         }}
                         placeholder={t.contact.namePlaceholder}
-                        className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/30 disabled:opacity-60 transition-colors"
+                        className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 disabled:opacity-60 transition-colors"
                       />
                     </div>
 
@@ -397,7 +398,7 @@ export const ReachOutSection: React.FC = () => {
                           setEmail(e.target.value);
                         }}
                         placeholder={t.contact.emailPlaceholder}
-                        className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/30 disabled:opacity-60 transition-colors"
+                        className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 disabled:opacity-60 transition-colors"
                       />
                     </div>
                   </div>
@@ -419,7 +420,7 @@ export const ReachOutSection: React.FC = () => {
                           ? "ex: Opportunité Ingénierie Logicielle / PFE"
                           : "e.g. Software Engineering Opportunity / PFE"
                       }
-                      className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/30 disabled:opacity-60 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 disabled:opacity-60 transition-colors"
                     />
                   </div>
 
@@ -437,14 +438,14 @@ export const ReachOutSection: React.FC = () => {
                         setMessage(e.target.value);
                       }}
                       placeholder={t.contact.messagePlaceholder}
-                      className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600/30 disabled:opacity-60 transition-colors resize-none"
+                      className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-[#121214] text-black dark:text-white text-xs outline-none focus:border-accent focus:ring-1 focus:ring-accent/30 disabled:opacity-60 transition-colors resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 rounded-full bg-black dark:bg-white hover:bg-green-600 dark:hover:bg-green-600 hover:text-white dark:hover:text-white disabled:opacity-60 disabled:cursor-not-allowed text-white dark:text-black font-sans font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md uppercase"
+                    className="w-full py-3.5 rounded-full bg-black dark:bg-white hover:bg-accent hover:text-white dark:hover:text-neutral-950 disabled:opacity-60 disabled:cursor-not-allowed text-white dark:text-black font-sans font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md uppercase"
                   >
                     {isSubmitting ? (
                       <>

@@ -150,7 +150,7 @@ export const FloatingChatWidget: React.FC<FloatingChatWidgetProps> = ({
           }
         >
           {/* Subtle ambient luminous aura under the 3D model */}
-          <span className="absolute -inset-2 rounded-full bg-gradient-to-tr from-green-600/20 via-[#064e3b]/20 to-transparent dark:from-green-500/25 dark:via-[#064e3b]/40 dark:to-green-600/15 blur-2xl opacity-70 group-hover:opacity-100 transition-opacity pointer-events-none" />
+          <span className="absolute -inset-2 rounded-full bg-[radial-gradient(ellipse_at_center,var(--accent-glow),transparent_70%)] blur-2xl opacity-70 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
           {/* Clean, enlarged 3D Liquid Metal Character Head */}
           <div className="relative w-[150px] h-[150px] sm:w-[185px] sm:h-[185px] flex items-center justify-center">

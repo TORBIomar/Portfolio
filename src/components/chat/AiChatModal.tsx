@@ -89,17 +89,17 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, language = "code" }) => {
         <button
           type="button"
           onClick={handleCopy}
-          className="inline-flex items-center px-2 py-0.5 rounded-md hover:bg-zinc-800 text-zinc-300 hover:text-white transition-colors cursor-pointer text-[10.5px] font-mono font-medium focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-green-600"
+          className="inline-flex items-center px-2 py-0.5 rounded-md hover:bg-zinc-800 text-zinc-300 hover:text-white transition-colors cursor-pointer text-[10.5px] font-mono font-medium focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-accent"
           title="Copy code to clipboard"
         >
           {copied ? (
-            <span className="text-green-400 font-bold">Copied</span>
+            <span className="text-accent font-bold">Copied</span>
           ) : (
             <span className="font-semibold">Copy</span>
           )}
         </button>
       </div>
-      <pre className="p-3.5 overflow-x-auto text-xs font-mono font-medium leading-relaxed text-zinc-200 selection:bg-[#064e3b] selection:text-green-200">
+      <pre className="p-3.5 overflow-x-auto text-xs font-mono font-medium leading-relaxed text-zinc-200 selection:bg-accent/20 selection:text-accent">
         <code>{code}</code>
       </pre>
     </div>
@@ -410,7 +410,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                           href={linkMatch[2]}
                           target="_blank"
                           rel="noreferrer"
-                          className="font-bold underline underline-offset-3 text-green-700 dark:text-green-400 hover:opacity-80 transition-opacity"
+                          className="font-bold underline underline-offset-3 text-accent hover:opacity-80 transition-opacity"
                         >
                           {linkMatch[1]}
                         </a>
@@ -438,7 +438,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                       parts.push(
                         <code
                           key={`c-${lIdx}-${pKey++}`}
-                          className="px-1.5 py-0.5 rounded-md bg-zinc-200/90 dark:bg-zinc-800 text-zinc-950 dark:text-green-400 font-mono font-semibold text-[11.5px] border border-zinc-300/70 dark:border-white/10"
+                          className="px-1.5 py-0.5 rounded-md bg-zinc-200/90 dark:bg-zinc-800 text-zinc-950 dark:text-accent font-mono font-semibold text-[11.5px] border border-zinc-300/70 dark:border-white/10"
                         >
                           {codeMatch[1]}
                         </code>
@@ -479,7 +479,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                       key={lIdx}
                       className="flex items-start gap-2.5 my-1 text-[13.5px] font-medium leading-relaxed"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-600 dark:bg-green-500 mt-2 shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
                       <div className="flex-1 text-zinc-900 dark:text-zinc-100">
                         {parseInline(cleanLine)}
                       </div>
@@ -505,7 +505,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
         })}
 
         {isStreamingActive && (
-          <span className="inline-block w-1.5 h-3.5 ml-1 rounded-sm bg-green-500 animate-pulse align-middle" />
+          <span className="inline-block w-1.5 h-3.5 ml-1 rounded-sm bg-accent animate-pulse align-middle" />
         )}
       </div>
     );
@@ -571,7 +571,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                   onClick={handleClearChat}
                   aria-label={t.chat.reset}
                   title={t.chat.reset}
-                  className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:white hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-green-600 cursor-pointer"
+                  className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:white hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
                 >
                   <RotateCcw className="w-4 h-4" />
                 </button>
@@ -584,7 +584,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                   }}
                   aria-label={t.chat.close}
                   title={t.chat.close}
-                  className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-green-600 cursor-pointer"
+                  className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-200/60 dark:hover:bg-zinc-800 transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -639,7 +639,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                               key={actIdx}
                               type="button"
                               onClick={() => handleActionClick(act)}
-                              className="inline-flex items-center px-3 py-1.5 rounded-lg bg-white hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-750 text-zinc-900 dark:text-zinc-100 text-xs font-semibold tracking-tight transition-all cursor-pointer border border-zinc-200 dark:border-zinc-700 shadow-2xs hover:border-green-600/40 dark:hover:border-green-500/40 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-green-600"
+                              className="inline-flex items-center px-3 py-1.5 rounded-lg bg-white hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-750 text-zinc-900 dark:text-zinc-100 text-xs font-semibold tracking-tight transition-all cursor-pointer border border-zinc-200 dark:border-zinc-700 shadow-2xs hover:border-accent/40 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
                             >
                               <span>{act.label}</span>
                             </button>
@@ -676,9 +676,9 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                           key={pIdx}
                           type="button"
                           onClick={() => handleSendMessage(prompt.title)}
-                          className="text-left p-3 rounded-xl bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-900/80 dark:hover:bg-zinc-800/90 border border-zinc-200/90 dark:border-zinc-800 transition-colors group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-green-600 hover:border-green-600/40 dark:hover:border-green-500/40"
+                          className="text-left p-3 rounded-xl bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-900/80 dark:hover:bg-zinc-800/90 border border-zinc-200/90 dark:border-zinc-800 transition-colors group cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent hover:border-accent/40"
                         >
-                          <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-green-700 dark:group-hover:text-green-400 transition-colors block leading-tight">
+                          <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-accent transition-colors block leading-tight">
                             {prompt.title}
                           </span>
                           <span className="text-[11px] text-zinc-500 dark:text-zinc-400 block mt-1 leading-tight font-medium">
@@ -698,7 +698,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                   animate={{ opacity: 1, y: 0 }}
                   className="flex items-center gap-2 px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-300 w-fit"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-600 dark:bg-green-500 animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
                   <span>
                     {language === "fr"
                       ? "Maro synthétise sa réponse..."
@@ -728,7 +728,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                     if (!sound.isMuted()) sound.playKey();
                   }}
                   placeholder={t.chat.placeholder}
-                  className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium text-zinc-950 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-hidden focus:border-green-600 dark:focus:border-green-500 focus:ring-1 focus:ring-green-600/20 transition-all"
+                  className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium text-zinc-950 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-hidden focus:border-accent focus:ring-1 focus:ring-accent/20 transition-all"
                 />
               </div>
 
@@ -737,7 +737,7 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                 disabled={!input.trim() || isTyping || isReplying}
                 aria-label={t.chat.send}
                 title={`${t.chat.send} (Enter)`}
-                className="inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 hover:bg-green-600 dark:hover:bg-green-600 hover:text-white dark:hover:text-white font-semibold text-xs disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer shadow-xs shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-green-600"
+                className="inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-xl bg-zinc-950 text-white dark:bg-white dark:text-zinc-950 hover:bg-accent hover:text-white dark:hover:text-neutral-950 font-semibold text-xs disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer shadow-xs shrink-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <span className="hidden sm:inline">{t.chat.send}</span>
                 <Send className="w-3.5 h-3.5" />

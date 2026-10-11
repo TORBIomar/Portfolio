@@ -61,22 +61,23 @@ export const Navbar: React.FC<NavbarProps> = () => {
             />
           </div>
           <span className="relative flex h-1.5 w-1.5" title="Omar Torbi • Online">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75" />
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-600" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
           </span>
         </a>
 
         {/* Center Minimal Navigation - Mathematically centered in the navbar */}
         <nav className="hidden md:flex items-center justify-center gap-5 lg:gap-7 text-[13px] font-sans text-zinc-600 dark:text-zinc-400 font-medium md:absolute md:left-1/2 md:-translate-x-1/2 z-10 pointer-events-auto">
-          {navLinks.map((link) => (
+          {navLinks.map((link, idx) => (
             <a
               key={link.label}
               href={link.href}
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
-              className="hover:text-green-600 dark:hover:text-green-500 transition-colors cursor-pointer whitespace-nowrap"
+              className="group hover:text-accent transition-colors cursor-pointer whitespace-nowrap"
             >
-              {link.label}
+              <span className="text-accent/40 group-hover:text-accent font-mono text-[11px] font-bold mr-1.5 transition-colors">0{idx + 1}.</span>
+              <span>{link.label}</span>
             </a>
           ))}
         </nav>
@@ -192,7 +193,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
                   sound.playClick();
                   setMobileMenuOpen(false);
                 }}
-                className="py-1.5 text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white font-medium transition-colors"
+                className="py-1.5 text-zinc-700 dark:text-zinc-300 hover:text-accent font-medium transition-colors"
               >
                 {link.label}
               </a>

@@ -28,8 +28,9 @@ export const FaqSection: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="text-center max-w-2xl mx-auto mb-14"
         >
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#064e3b]/15 dark:bg-[#064e3b]/35 border border-green-600/30 text-green-900 dark:text-green-400 text-xs font-mono font-semibold mb-4">
-            <HelpCircle className="w-3.5 h-3.5 text-green-600 dark:text-green-500" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 text-xs font-mono font-medium mb-4 shadow-2xs">
+            <span className="text-accent font-bold">04.</span>
+            <HelpCircle className="w-3.5 h-3.5 text-accent" />
             <span>{t.faq.tag}</span>
           </div>
 
@@ -54,7 +55,7 @@ export const FaqSection: React.FC = () => {
                 transition={{ duration: 0.35, delay: idx * 0.08 }}
                 className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
                   isOpen
-                    ? "bg-white dark:bg-[#0e0f12] border-green-600/40 dark:border-green-500/40 shadow-sm ring-1 ring-green-600/20"
+                    ? "bg-white dark:bg-[#0e0f12] border-accent/40 shadow-sm ring-1 ring-accent/20"
                     : "bg-white/80 dark:bg-[#09090b] border-zinc-200 dark:border-white/10 hover:border-zinc-400 dark:hover:border-zinc-700"
                 }`}
               >
@@ -66,7 +67,7 @@ export const FaqSection: React.FC = () => {
                 >
                   <div className="flex items-center gap-3.5 sm:gap-4 flex-1">
                     <span className={`font-mono text-xs sm:text-sm font-bold shrink-0 transition-colors ${
-                      isOpen ? "text-green-700 dark:text-green-400" : "text-neutral-400 dark:text-neutral-500"
+                      isOpen ? "text-accent" : "text-neutral-400 dark:text-neutral-500"
                     }`}>
                       0{idx + 1}.
                     </span>
@@ -74,7 +75,7 @@ export const FaqSection: React.FC = () => {
                       <div className="flex items-center gap-2">
                         <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold tracking-wider border transition-colors ${
                           isOpen
-                            ? "bg-[#064e3b]/15 dark:bg-[#064e3b]/40 text-green-800 dark:text-green-400 border-green-600/30"
+                            ? "bg-accent/10 text-accent border-accent/30"
                             : "bg-zinc-100 dark:bg-zinc-800 text-neutral-700 dark:text-zinc-300 border-transparent dark:border-zinc-700"
                         }`}>
                           {item.tag}
@@ -91,7 +92,7 @@ export const FaqSection: React.FC = () => {
                     transition={{ duration: 0.25, ease: "easeInOut" }}
                     className={`p-1.5 rounded-full border shrink-0 transition-colors ${
                       isOpen
-                        ? "bg-green-600 dark:bg-green-600 text-white dark:text-white border-green-600 dark:border-green-600"
+                        ? "bg-accent text-white dark:text-neutral-950 border-accent"
                         : "bg-zinc-100 dark:bg-zinc-800 text-neutral-500 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700"
                     }`}
                   >
@@ -133,10 +134,10 @@ export const FaqSection: React.FC = () => {
             <a
               href="#contact"
               onClick={() => sound.playClick()}
-              className="font-bold text-neutral-950 dark:text-white hover:text-green-700 dark:hover:text-green-400 hover:underline flex items-center gap-1 transition-colors"
+              className="font-bold text-neutral-950 dark:text-white hover:text-accent hover:underline flex items-center gap-1 transition-colors"
             >
               <span>Reach out directly</span>
-              <ArrowRight className="w-3 h-3 text-green-600 dark:text-green-500" />
+              <ArrowRight className="w-3 h-3 text-accent" />
             </a>
           </div>
         </motion.div>

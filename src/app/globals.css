@@ -6,6 +6,7 @@
   --font-serif: var(--font-serif), "Playfair Display", Georgia, serif;
   --font-sans: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --color-accent: var(--accent);
 }
 
 :root {
@@ -13,9 +14,8 @@
   --foreground: #1a1a1a;
   --card-bg: #ffffff;
   --card-border: #e4e4e7;
-  --accent-warm-green: #15803d;
-  --accent-spruce: #064e3b;
-  --accent-glow: rgba(22, 163, 74, 0.15);
+  --accent: #000068;
+  --accent-glow: rgba(0, 0, 104, 0.15);
 }
 
 .dark {
@@ -23,9 +23,18 @@
   --foreground: #fafafa;
   --card-bg: #09090b;
   --card-border: rgba(255, 255, 255, 0.08);
-  --accent-warm-green: #22c55e;
-  --accent-spruce: #052e16;
-  --accent-glow: rgba(34, 197, 94, 0.18);
+  --accent: #90caf9;
+  --accent-glow: rgba(144, 202, 249, 0.22);
+}
+
+::selection {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+.dark ::selection {
+  background-color: var(--accent);
+  color: #000000;
 }
 
 body {

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { EXPERIENCES_DATA } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
 import { useLanguage } from "@/context/LanguageContext";
-import { Briefcase, Calendar, MapPin, CheckCircle2, ChevronRight } from "lucide-react";
+import { Briefcase, Calendar, MapPin, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const ExperienceSection: React.FC = () => {
@@ -25,8 +25,9 @@ export const ExperienceSection: React.FC = () => {
           transition={{ duration: 0.5 }}
           className="max-w-3xl mb-14 sm:mb-18"
         >
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#064e3b]/15 dark:bg-[#064e3b]/35 border border-green-600/30 dark:border-green-500/30 text-green-900 dark:text-green-400 text-xs font-mono font-semibold mb-3 shadow-2xs">
-            <Briefcase className="w-3.5 h-3.5 text-green-600 dark:text-green-500" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200 text-xs font-mono font-medium mb-3 shadow-2xs">
+            <span className="text-accent font-bold">02.</span>
+            <Briefcase className="w-3.5 h-3.5 text-accent" />
             <span>{t.experiences.tag}</span>
           </div>
 
@@ -60,15 +61,15 @@ export const ExperienceSection: React.FC = () => {
                   }}
                   className={`w-full p-5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex items-center justify-between ${
                     isActive
-                      ? "bg-neutral-950 dark:bg-[#09090b] text-white border-green-600/80 shadow-md ring-1 ring-green-600/30"
-                      : "bg-white dark:bg-[#09090b] text-neutral-800 dark:text-neutral-200 border-zinc-200 dark:border-white/10 hover:border-green-600/30 hover:bg-zinc-50 dark:hover:bg-zinc-900"
+                      ? "bg-neutral-950 dark:bg-[#09090b] text-white border-accent shadow-md ring-1 ring-accent/30"
+                      : "bg-white dark:bg-[#09090b] text-neutral-800 dark:text-neutral-200 border-zinc-200 dark:border-white/10 hover:border-accent/40 hover:bg-zinc-50 dark:hover:bg-zinc-900"
                   }`}
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
                       <span className={`font-mono text-xs font-bold tracking-wider uppercase ${
                         isActive 
-                          ? "text-green-500" 
+                          ? "text-accent" 
                           : "text-neutral-500 dark:text-neutral-400"
                       }`}>
                         {exp.company}
@@ -92,7 +93,7 @@ export const ExperienceSection: React.FC = () => {
 
                   <ChevronRight className={`w-4 h-4 shrink-0 transition-transform ${
                     isActive 
-                      ? "text-green-500 translate-x-1" 
+                      ? "text-accent translate-x-1" 
                       : "text-neutral-400 dark:text-neutral-500"
                   }`} />
                 </motion.button>
@@ -139,12 +140,12 @@ export const ExperienceSection: React.FC = () => {
                   {activeExp.metrics.map((m, mIdx) => (
                     <div
                       key={mIdx}
-                      className="p-3.5 rounded-xl bg-[#f9f9fa] dark:bg-[#121214] border border-zinc-200 dark:border-zinc-800 hover:border-green-600/30 text-center transition-colors"
+                      className="p-3.5 rounded-xl bg-[#f9f9fa] dark:bg-[#121214] border border-zinc-200 dark:border-zinc-800 hover:border-accent/30 text-center transition-colors"
                     >
                       <div className="text-[10px] font-mono text-neutral-500 dark:text-neutral-400 uppercase">
                         {m.label}
                       </div>
-                      <div className="font-mono text-xs sm:text-sm font-bold text-green-700 dark:text-green-400 mt-1">
+                      <div className="font-mono text-xs sm:text-sm font-bold text-accent mt-1">
                         {m.value}
                       </div>
                     </div>
@@ -164,7 +165,7 @@ export const ExperienceSection: React.FC = () => {
                       transition={{ duration: 0.25, delay: hIdx * 0.05 }}
                       className="flex items-start gap-3 font-sans text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed"
                     >
-                      <CheckCircle2 className="w-4 h-4 text-green-600 dark:text-green-500 shrink-0 mt-0.5" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
                       <span>{h}</span>
                     </motion.div>
                   ))}
@@ -178,7 +179,7 @@ export const ExperienceSection: React.FC = () => {
                   {activeExp.tech.map((t, tIdx) => (
                     <span
                       key={tIdx}
-                      className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-green-600/40 hover:bg-green-600/5 dark:hover:bg-[#064e3b]/30 text-neutral-800 dark:text-zinc-200 text-xs font-mono font-medium transition-colors"
+                      className="px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-accent/40 hover:text-accent text-neutral-800 dark:text-zinc-200 text-xs font-mono font-medium transition-colors"
                     >
                       {t}
                     </span>
