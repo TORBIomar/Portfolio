@@ -82,12 +82,19 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  manifest: "/manifest.webmanifest",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/icon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/icon-144x144.png", sizes: "144x144", type: "image/png" },
+      { url: "/icon-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512x512.png", sizes: "512x512", type: "image/png" },
     ],
-    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
     shortcut: "/favicon.ico",
   },
 };
@@ -102,6 +109,7 @@ const jsonLd = {
       givenName: "Omar",
       familyName: "Torbi",
       url: "https://www.omartorbi.engineer",
+      image: "https://www.omartorbi.engineer/icon-512x512.png",
       jobTitle: "Software & DevOps Engineer",
       description:
         "Software & DevOps Engineer specializing in Spring Boot, Docker, Linux, OCI Cloud Architecture, Distributed Systems, and Web 3D CAD.",
@@ -128,13 +136,29 @@ const jsonLd = {
       ],
     },
     {
+      "@type": "Organization",
+      "@id": "https://www.omartorbi.engineer/#organization",
+      name: "Omar Torbi",
+      url: "https://www.omartorbi.engineer",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.omartorbi.engineer/icon-512x512.png",
+        width: 512,
+        height: 512,
+      },
+      sameAs: [
+        "https://github.com/TORBIomar",
+        "https://linkedin.com/in/omar-torbi",
+      ],
+    },
+    {
       "@type": "WebSite",
       "@id": "https://www.omartorbi.engineer/#website",
       url: "https://www.omartorbi.engineer",
       name: "Omar Torbi — Official Portfolio",
       description: "Official engineering portfolio of Omar Torbi.",
       publisher: {
-        "@id": "https://www.omartorbi.engineer/#person",
+        "@id": "https://www.omartorbi.engineer/#organization",
       },
     },
   ],
@@ -152,6 +176,13 @@ export default function RootLayout({
       data-theme="dark"
     >
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="48x48" href="/icon-48x48.png" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/icon-96x96.png" />
+        <link rel="icon" type="image/png" sizes="144x144" href="/icon-144x144.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.webmanifest" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
