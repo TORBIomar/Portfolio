@@ -104,9 +104,7 @@ export default function Home() {
           />
 
           {/* SECTION 1: ABOUT (Hero with card.svg Showcase, Narrative & Architecture Pillars) */}
-          <HeroSection
-            onOpenCommandPalette={() => setCommandPaletteOpen(true)}
-          />
+          <HeroSection />
 
           {/* SECTION 2: EXPERIENCES (Zahiri Metal, ONSSA, EMSI Degree Switcher) */}
           <ExperienceSection />

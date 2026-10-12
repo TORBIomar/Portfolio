@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowRight, Search, Server, Cloud, Database } from "lucide-react";
+import { ArrowRight, Server, Cloud, Database } from "lucide-react";
 import { HeroTerminalCard } from "./HeroTerminalCard";
 import { FOUNDATION_PILLARS, FOUNDATION_PILLARS_FR } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
@@ -10,22 +10,12 @@ import { motion } from "framer-motion";
 
 interface HeroSectionProps {
   onOpenContactModal?: () => void;
-  onOpenCommandPalette?: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal, onOpenCommandPalette }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) => {
   const { language, t } = useLanguage();
   const pillarIcons = [Server, Cloud, Database];
   const activePillars = language === "fr" ? FOUNDATION_PILLARS_FR : FOUNDATION_PILLARS;
-
-  const handleOpenPalette = () => {
-    sound.playClick();
-    if (onOpenCommandPalette) {
-      onOpenCommandPalette();
-    } else if (typeof window !== "undefined") {
-      window.dispatchEvent(new CustomEvent("open-command-palette"));
-    }
-  };
 
   return (
     <section id="about" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden border-b border-zinc-200/90 dark:border-white/10 bg-[#fcfcfc] dark:bg-[#000000] scroll-mt-20">
@@ -136,24 +126,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal, on
             <span>{t.hero.contactCta}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </motion.a>
-
-          {/* Interactive Command Palette Trigger Chip */}
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={handleOpenPalette}
-            data-cursor-label="Palette"
-            className="cursor-target inline-flex items-center gap-2 px-4 py-3 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 dark:bg-[#0e0f12] dark:hover:bg-zinc-900 dark:border-zinc-800 text-neutral-900 dark:text-zinc-200 text-xs font-mono font-medium cursor-pointer shadow-2xs transition-colors"
-            title={language === "fr" ? "Ouvrir la palette de commandes (⌘K)" : "Open command palette (⌘K)"}
-          >
-            <Search className="w-3.5 h-3.5 text-accent" />
-            <span className="font-semibold">
-              {language === "fr" ? "Palette de commandes" : "Command Palette"}
-            </span>
-            <kbd className="ml-0.5 px-1.5 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-[10px] font-mono text-neutral-600 dark:text-neutral-400 border border-zinc-300 dark:border-zinc-700 font-semibold">
-              ⌘K
-            </kbd>
-          </motion.button>
         </div>
 
         {/* HERO SHOWCASE: Main About Me ($ whoami terminal card) */}
