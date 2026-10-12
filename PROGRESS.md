@@ -108,8 +108,9 @@ This session accomplished a comprehensive modernization and performance optimiza
 | `9b039b1` | `feat(chat): upgrade 3D bot with multi-stage sleep physics, book fetching, fireflies, mouth articulation, and terracotta styling` | 3D bot lifelike physics & terracotta branding |
 
 **Vercel Production Deployment**:  
-* Status: **Ready & Live**  
+* Status: **Ready & Live** (Built & deployed in 33s)  
 * Canonical URL: [https://www.omartorbi.engineer](https://www.omartorbi.engineer)  
+* Deployment URL: [https://torbiomar-iz9cshhvl-omarinho18.vercel.app](https://torbiomar-iz9cshhvl-omarinho18.vercel.app)  
 * CLI Test: `curl -sL https://www.omartorbi.engineer/cli`  
 
 ---
