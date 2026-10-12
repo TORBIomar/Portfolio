@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, Copy, Check, Server, Cloud, Database, Sparkles } from "lucide-react";
+import { ArrowRight, Copy, Check, Server, Cloud, Database } from "lucide-react";
 import { HeroTerminalCard } from "./HeroTerminalCard";
 import { PERSONAL_INFO, FOUNDATION_PILLARS } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
@@ -161,57 +161,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           </motion.button>
         </div>
 
-        {/* HERO SHOWCASE: terminal-card.svg in unified monochrome */}
-        <div className="w-full mb-16">
+        {/* HERO SHOWCASE: Main About Me ($ whoami terminal card) */}
+        <div className="w-full mb-16 sm:mb-20">
           <HeroTerminalCard />
         </div>
-
-        {/* About Engineering Narrative Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-4xl bg-white dark:bg-[#09090b] border border-zinc-200 dark:border-white/10 hover:border-accent/30 rounded-3xl p-7 sm:p-10 text-left shadow-xs mb-14 transition-all"
-        >
-          <div className="flex items-center gap-2 font-mono text-xs font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-widest mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-accent" />
-            <span>{language === "fr" ? "À PROPOS D'OMAR TORBI" : "ABOUT OMAR TORBI"}</span>
-          </div>
-
-          <h2 className="text-xl sm:text-2xl font-sans font-black text-neutral-950 dark:text-white mb-4 leading-snug transition-colors">
-            {language === "fr"
-              ? "Élève-Ingénieur en dernière année à l'EMSI Rabat (DDSI). Triple certification Java SE 17 Developer, OCI DevOps Professional & OCI Architect Professional."
-              : "Final-year Computer Science & Networks student at EMSI Rabat. Triple-certified in Java SE 17 Developer, OCI DevOps Professional & OCI Architect Professional."}
-          </h2>
-
-          <p className="font-sans text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed mb-5 transition-colors">
-            {language === "fr" ? (
-              <>
-                Spécialisé dans les architectures backend de production avec <strong className="text-accent font-bold">Spring Boot 3 &amp; Java 17</strong>, les infrastructures cloud conteneurisées avec <strong className="text-accent font-bold">Docker &amp; Linux</strong>, les APIs REST sécurisées et les workflows automatisés. Orienté modularité, clean code et robustesse opérationnelle.
-              </>
-            ) : (
-              <>
-                Specializing in production-grade backend systems with <strong className="text-accent font-bold">Spring Boot 3 &amp; Java 17</strong>, containerized cloud infrastructure with <strong className="text-accent font-bold">Docker &amp; Linux</strong>, secure REST APIs, and automated workflow pipelines. Driven by modular architecture, clean code, and <strong className="text-accent font-bold">zero-defect delivery</strong>.
-              </>
-            )}
-          </p>
-
-          <div className="flex flex-wrap items-center gap-2 pt-2">
-            <span className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-accent/40 text-xs font-mono font-medium text-neutral-800 dark:text-zinc-300 hover:text-accent transition-colors">
-              # Java SE 17 Professional (1Z0-829)
-            </span>
-            <span className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-accent/40 text-xs font-mono font-medium text-neutral-800 dark:text-zinc-300 hover:text-accent transition-colors">
-              # OCI DevOps Professional (1Z0-1109-26)
-            </span>
-            <span className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-accent/40 text-xs font-mono font-medium text-neutral-800 dark:text-zinc-300 hover:text-accent transition-colors">
-              # OCI Architect Professional (1Z0-997-26)
-            </span>
-            <span className="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-accent/40 text-xs font-mono font-medium text-neutral-800 dark:text-zinc-300 hover:text-accent transition-colors">
-              # EMSI State Engineering Degree (DDSI)
-            </span>
-          </div>
-        </motion.div>
 
         {/* 3 Architectural Pillars (Control, Governance, Value) */}
         <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 text-left">

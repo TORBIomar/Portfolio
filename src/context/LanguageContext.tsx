@@ -87,7 +87,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       resumeFr: "CV (Français PDF)",
     },
     hero: {
-      tag: "PROFILE & PHILOSOPHY",
+      tag: "ABOUT ME & PHILOSOPHY",
       title: "Software & DevOps Engineer",
       tagline:
         "Final-year Computer Science & Networks (DDSI) student at EMSI Rabat. Certified OCI DevOps Professional & OCI Architect Professional. Building robust backend services with Spring Boot and containerized cloud systems with Docker, Linux, and OCI.",
@@ -162,7 +162,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
       resumeFr: "CV (Français PDF)",
     },
     hero: {
-      tag: "PROFIL & PHILOSOPHIE",
+      tag: "À PROPOS & PHILOSOPHIE",
       title: "Ingénieur Logiciel & DevOps",
       tagline:
         "Élève-Ingénieur en dernière année à l'EMSI Rabat (DDSI). Doublement certifié Oracle Cloud (OCI DevOps & Architect Professional). Conception d'architectures backend modulaires avec Spring Boot et d'infrastructures cloud conteneurisées avec Docker, Linux et OCI.",

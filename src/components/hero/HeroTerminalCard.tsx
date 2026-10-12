@@ -46,11 +46,11 @@ export const HeroTerminalCard: React.FC = () => {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
               </span>
               <span className="text-[#5C1A0D] dark:text-[#FFB0A1] font-semibold text-[11px] sm:text-xs">
-                terminal-card.svg
+                omar@torbi: ~$ whoami
               </span>
               <span className="text-[#8C4435]/60 dark:text-[#FFB0A1]/50 hidden sm:inline">|</span>
               <span className="text-[#8C4435] dark:text-[#FFD8D0] hidden sm:inline text-[11px]">
-                profile spec v2.4
+                engineer profile v2.5
               </span>
             </div>
 
@@ -104,7 +104,7 @@ export const HeroTerminalCard: React.FC = () => {
                 src="/card-light.svg"
                 alt="Omar Torbi — Terminal Profile Card ($ whoami)"
                 width={760}
-                height={300}
+                height={330}
                 fetchPriority="high"
                 decoding="async"
                 className="w-full h-auto max-w-[760px] rounded-lg shadow-sm select-none block dark:hidden"
@@ -115,7 +115,7 @@ export const HeroTerminalCard: React.FC = () => {
                 src="/card.svg"
                 alt="Omar Torbi — Terminal Profile Card ($ whoami)"
                 width={760}
-                height={300}
+                height={330}
                 fetchPriority="high"
                 decoding="async"
                 className="w-full h-auto max-w-[760px] rounded-lg shadow-xl select-none hidden dark:block"
@@ -128,12 +128,13 @@ export const HeroTerminalCard: React.FC = () => {
           <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 bg-[#A42F17]/[0.06] dark:bg-[#FFB0A1]/[0.08] backdrop-blur-md border-t border-[#A42F17]/15 dark:border-[#FFB0A1]/20 text-[11px] font-mono text-[#6B2011] dark:text-[#FFD8D0] transition-colors">
             <div className="flex items-center gap-2">
               <span className="text-accent font-bold">●</span>
-              <span className="font-semibold text-[#3D160E] dark:text-[#FAF7F5]">Available for high-impact engineering roles</span>
+              <span className="font-semibold text-[#3D160E] dark:text-[#FAF7F5]">Available for PFE Internship (Feb 2027) &amp; Full-Time</span>
             </div>
 
-            <div className="flex items-center gap-4 text-[#6B2011] dark:text-[#FFD8D0]">
-              <span className="hidden md:inline">EMSI Rabat — Computer Engineering</span>
-              <span className="font-semibold text-[#3D160E] dark:text-[#FFB0A1]">Rabat / Béni Mellal, MA</span>
+            <div className="flex items-center gap-1.5 sm:gap-2 text-[#6B2011] dark:text-[#FFD8D0] text-[10.5px]">
+              <span className="px-2 py-0.5 rounded bg-[#A42F17]/10 dark:bg-[#FFB0A1]/10 text-accent font-semibold border border-accent/20">Java SE 17 Pro</span>
+              <span className="px-2 py-0.5 rounded bg-[#A42F17]/10 dark:bg-[#FFB0A1]/10 text-accent font-semibold border border-accent/20">OCI DevOps Pro</span>
+              <span className="px-2 py-0.5 rounded bg-[#A42F17]/10 dark:bg-[#FFB0A1]/10 text-accent font-semibold border border-accent/20">OCI Architect Pro</span>
             </div>
           </div>
 
