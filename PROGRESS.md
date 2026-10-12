@@ -108,6 +108,13 @@ This session accomplished a comprehensive modernization and performance optimiza
   * Replaced `"Technical Copilot"` with simple and clean `"AI Assistant"` (`"Assistant IA"` in French).
   * Simplified AI message sender tags to a clean `"Maro"` header without vendor tags.
 
+### I. Search Engine Optimization (SEO) & Google Name Ranking
+* **Name-First Title Tag**: Configured `<title>` default to `"Omar Torbi — Software & DevOps Engineer | Portfolio"` with template `"%s | Omar Torbi"`.
+* **Clean Semantic `<h1>` Structure**: Unified the hero intro badge and title into a single semantic `<h1>` element so Googlebot and Bingbot directly associate `"Omar Torbi"` with the primary heading of the site.
+* **Schema.org JSON-LD Graph**: Injected structured data declaring `Person` (`Omar Torbi`, alumni of EMSI Rabat, certifications, skills, sameAs links to GitHub, LinkedIn, and personal website) and `WebSite` entity.
+* **Search Crawlers & Robots**: Created `src/app/robots.ts` and `src/app/sitemap.ts` (`priority: 1.0`, `weekly`), pointing search bots directly to the live sitemap XML.
+* **Open Graph & Twitter Cards**: Updated full metadata with canonical URL `https://www.omartorbi.engineer`, localized metadata descriptions, and high-resolution Open Graph vectors.
+
 ---
 
 ## 3. Git & Deployment Log
@@ -120,11 +127,12 @@ This session accomplished a comprehensive modernization and performance optimiza
 | `81cbc66` | `docs: add comprehensive progress and milestone report` | Documentation & progress report |
 | `9b039b1` | `feat(chat): upgrade 3D bot with multi-stage sleep physics, book fetching, fireflies, mouth articulation, and terracotta styling` | 3D bot lifelike physics & terracotta branding |
 | `2f120fc` | `feat(chat): add 3D laptop coding idle animation with glasses and simplify modal header` | 3D laptop coding idle mode & simple chat UI |
+| `ed8eee9` | `refactor(chat): simplify greeting and model indicator` | Simplified Maro greeting and model tag |
+| `da572de` | `feat(seo): prioritize Omar Torbi in title, h1 heading, schema.org JSON-LD, and sitemap` | Name-first SEO, semantic h1, JSON-LD, sitemap, robots |
 
 **Vercel Production Deployment**:  
-* Status: **Ready & Live** (Built & deployed in 49s)  
+* Status: **Ready & Live**  
 * Canonical URL: [https://www.omartorbi.engineer](https://www.omartorbi.engineer)  
-* Deployment URL: [https://torbiomar-m7wxebe77-omarinho18.vercel.app](https://torbiomar-m7wxebe77-omarinho18.vercel.app)  
 * CLI Test: `curl -sL https://www.omartorbi.engineer/cli`  
 
 ---
@@ -134,5 +142,11 @@ This session accomplished a comprehensive modernization and performance optimiza
 1. **3D Chat Bot (Maro) Materials & Theming**: **Resolved & Completed**  
    * Retained Liquid Chrome (light) / Obsidian Titanium (dark) PBR metalness.  
    * Tuned cybernetic eyes, orbital halo ring, and neural thinking light to warm terracotta (`#FFB0A1` / `#A42F17`).  
-   * Added expressive mouth mesh, reading glasses, 3D hardcover book, screen firefly flight swarm, and extruded tumbling Zzz physics.
+   * Added expressive mouth mesh, reading glasses, 3D hardcover book, screen firefly flight swarm, extruded tumbling Zzz physics, and 3D laptop coding idle mode.
+
+2. **Google Search Entity Ranking**: **Resolved & Deployed**  
+   * Prioritized "Omar Torbi" at the absolute start of title, meta tags, and semantic `<h1>`.
+   * Schema.org Person JSON-LD links GitHub and LinkedIn identities directly to `omartorbi.engineer`.
+   * Auto-generated dynamic sitemap and robots.txt deployed.
+
 
