@@ -73,6 +73,7 @@ export interface Translations {
     resetMsg: string;
     welcomeBackRunner: string;
     welcomeBackReader: string;
+    welcomeBackCoder: string;
     tapToChat: string;
   };
 }
@@ -141,7 +142,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     },
     chat: {
       title: "Maro",
-      subtitle: "Omar Torbi • Technical Copilot",
+      subtitle: "AI Assistant",
       placeholder: "Ask about Omar's backend, OCI cloud, or projects...",
       send: "Send",
       reset: "Reset conversation",
@@ -153,6 +154,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
         "Conversation reset. What would you like to explore about Omar's engineering work?",
       welcomeBackRunner: "Welcome back! ⚡",
       welcomeBackReader: "Welcome back! 📚",
+      welcomeBackCoder: "Welcome back! 💻",
       tapToChat: "Chat with Maro",
     },
   },
@@ -219,7 +221,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
     },
     chat: {
       title: "Maro",
-      subtitle: "Omar Torbi • Copilote Technique",
+      subtitle: "Assistant IA",
       placeholder: "Posez vos questions sur le backend, le cloud OCI ou les projets...",
       send: "Envoyer",
       reset: "Réinitialiser la conversation",
@@ -231,6 +233,7 @@ export const TRANSLATIONS: Record<Language, Translations> = {
         "Conversation réinitialisée. Que souhaitez-vous découvrir sur le parcours d'Omar ?",
       welcomeBackRunner: "Bon retour ! ⚡",
       welcomeBackReader: "Bon retour ! 📚",
+      welcomeBackCoder: "Bon retour ! 💻",
       tapToChat: "Discuter avec Maro",
     },
   },

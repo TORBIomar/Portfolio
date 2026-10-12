@@ -97,6 +97,19 @@ This session accomplished a comprehensive modernization and performance optimiza
 
 ---
 
+### H. 3D Laptop Coding Idle Animation & Simplified Clean Chat Modal
+* **3D PC / Laptop & Coding Idle Physics**:
+  * On idle (3.8s inactivity), Maro smoothly scales up an authentic 3D PC/laptop, pops open the hinged lid (`1.85 rad`), puts on glasses, and starts coding.
+  * Detailed keyboard unit with key strips, spacebar, trackpad, IDE screen glass, window control dots, and syntax-highlighted code lines (terracotta, cyan, green, and white).
+  * Real-time coding screen point light casts ambient reflections across Maro's face & glasses while he bobs his head to the typing groove.
+  * On user interaction (mouse/touch/scroll), the lid snaps shut, glasses scale down, and Maro looks up popping `"Welcome back! 💻"` / `"Bon retour ! 💻"`.
+* **Streamlined Clean Chat Modal**:
+  * Removed the `"Gemini Live"` badge from the modal header.
+  * Replaced `"Technical Copilot"` with simple and clean `"AI Assistant"` (`"Assistant IA"` in French).
+  * Simplified AI message sender tags to a clean `"Maro"` header without vendor tags.
+
+---
+
 ## 3. Git & Deployment Log
 
 | Commit | Message | Summary |

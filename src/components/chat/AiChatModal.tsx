@@ -577,16 +577,10 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                   showStatus={false}
                 />
                 <div className="flex flex-col text-left">
-                  <div className="flex items-center gap-2">
-                    <h2 className="text-sm font-bold text-zinc-950 dark:text-zinc-50 tracking-tight leading-none">
-                      Maro
-                    </h2>
-                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-2xs">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      Gemini Live
-                    </span>
-                  </div>
-                  <span className="text-[11px] font-mono font-medium text-zinc-500 dark:text-zinc-400 mt-1 leading-none">
+                  <h2 className="text-sm font-bold text-zinc-950 dark:text-zinc-50 tracking-tight leading-none">
+                    Maro
+                  </h2>
+                  <span className="text-[11px] font-medium text-zinc-500 dark:text-zinc-400 mt-1 leading-none">
                     {t.chat.subtitle}
                   </span>
                 </div>
@@ -646,18 +640,9 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
                     >
                       {/* Maro Sender Title */}
                       {isAi && (
-                        <div className="flex items-center gap-2 mb-2 text-xs font-bold text-zinc-900 dark:text-white select-none tracking-tight">
+                        <div className="flex items-center justify-between mb-2 text-xs font-bold text-zinc-900 dark:text-white select-none tracking-tight">
                           <span>Maro</span>
-                          {msg.source === "gemini" ? (
-                            <span className="inline-flex items-center gap-1 text-[9.5px] font-mono font-medium px-1.5 py-0.5 rounded-md bg-accent/10 text-accent border border-accent/25">
-                              <span className="text-[10px] leading-none">✦</span> Gemini AI
-                            </span>
-                          ) : msg.source === "local" || msg.source === "fallback" ? (
-                            <span className="inline-flex items-center gap-1 text-[9px] font-mono font-medium px-1.5 py-0.5 rounded-md bg-zinc-200/80 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-300/60 dark:border-zinc-700">
-                              Offline Mode
-                            </span>
-                          ) : null}
-                          <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-mono font-normal ml-auto">
+                          <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-mono font-normal">
                             {msg.timestamp}
                           </span>
                         </div>

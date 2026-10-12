@@ -137,7 +137,6 @@ export const FloatingChatWidget: React.FC<FloatingChatWidgetProps> = ({
   const [fireflyTrackingPos, setFireflyTrackingPos] = useState({ x: 0, y: 0 });
 
   const [wakeStartTime, setWakeStartTime] = useState(0);
-  const [fetchStartTime, setFetchStartTime] = useState(0);
   const [closingStartTime, setClosingStartTime] = useState(0);
 
   const [showAgentBubble, setShowAgentBubble] = useState(true);
@@ -148,7 +147,7 @@ export const FloatingChatWidget: React.FC<FloatingChatWidgetProps> = ({
   const mousePosRef = useRef({ x: 0, y: 0 });
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const wakeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const bookTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const laptopTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const welcomeBubbleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isOpenRef = useRef(isOpen);
   const sleepStageRef = useRef<SleepStage>(sleepStage);
@@ -200,7 +199,7 @@ export const FloatingChatWidget: React.FC<FloatingChatWidgetProps> = ({
   const wakeUp = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     if (wakeTimeoutRef.current) clearTimeout(wakeTimeoutRef.current);
-    if (bookTimeoutRef.current) clearTimeout(bookTimeoutRef.current);
+    if (laptopTimeoutRef.current) clearTimeout(laptopTimeoutRef.current);
     setFireflyProgress(0);
     setSleepStage("awake");
   };
@@ -214,9 +213,9 @@ export const FloatingChatWidget: React.FC<FloatingChatWidgetProps> = ({
     }, 3600);
   };
 
-  const resetTimeout = (delay = 4500) => {
+  const resetTimeout = (delay = 3800) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    if (bookTimeoutRef.current) clearTimeout(bookTimeoutRef.current);
+    if (laptopTimeoutRef.current) clearTimeout(laptopTimeoutRef.current);
 
     if (isOpenRef.current) {
       wakeUp();
@@ -226,60 +225,41 @@ export const FloatingChatWidget: React.FC<FloatingChatWidgetProps> = ({
     timeoutRef.current = setTimeout(() => {
       if (isOpenRef.current) return;
 
-      const isLightMode = theme === "light";
+      // On idle: Pop open 3D PC/Laptop, put on glasses, and start coding!
+      setSleepStage("opening_laptop");
+      setShowAgentBubble(false);
 
-      if (isLightMode) {
-        // LIGHT MODE: Head runs off screen to fetch hardcover book and reading glasses
-        const now = performance.now();
-        setFetchStartTime(now);
-        setSleepStage("fetching_book");
-        setShowAgentBubble(false);
-
-        bookTimeoutRef.current = setTimeout(() => {
-          if (sleepStageRef.current === "fetching_book") {
-            setSleepStage("reading");
-          }
-        }, 1800);
-      } else {
-        // DARK MODE: 5 Fireflies launch across screen into sleeping mode
-        setSleepStage("fireflies");
-        setShowAgentBubble(false);
-      }
+      laptopTimeoutRef.current = setTimeout(() => {
+        if (sleepStageRef.current === "opening_laptop") {
+          setSleepStage("coding");
+        }
+      }, 700);
     }, delay);
   };
 
   // Activity tracking (Desktop & Mobile)
   useEffect(() => {
     const handleUserActivity = () => {
-      // 1. If user returned while STILL fetching the book
-      if (sleepStageRef.current === "fetching_book") {
-        if (bookTimeoutRef.current) clearTimeout(bookTimeoutRef.current);
-        setSleepStage("running_back");
-        setShowAgentBubble(false);
-        triggerWelcomeBack(t.chat.welcomeBackRunner);
-        if (wakeTimeoutRef.current) clearTimeout(wakeTimeoutRef.current);
-        wakeTimeoutRef.current = setTimeout(() => {
-          setSleepStage("awake");
-        }, 750);
-      }
-      // 2. If user returned while reading book with glasses
-      else if (sleepStageRef.current === "reading") {
+      // 1. If currently coding or opening laptop: snap laptop shut, look up at user
+      if (sleepStageRef.current === "coding" || sleepStageRef.current === "opening_laptop") {
+        if (laptopTimeoutRef.current) clearTimeout(laptopTimeoutRef.current);
         const now = performance.now();
         setClosingStartTime(now);
-        setSleepStage("closing_book");
+        setSleepStage("closing_laptop");
         setShowAgentBubble(false);
-        triggerWelcomeBack(t.chat.welcomeBackReader);
+        triggerWelcomeBack(t.chat.welcomeBackCoder);
         if (wakeTimeoutRef.current) clearTimeout(wakeTimeoutRef.current);
         wakeTimeoutRef.current = setTimeout(() => {
           setSleepStage("awake");
-        }, 1100);
+        }, 800);
       }
-      // 3. Sleeping mode wake-up in dark mode
+      // 2. Sleeping mode wake-up
       else if (sleepStageRef.current === "sleeping") {
         const now = performance.now();
         setWakeStartTime(now);
         setSleepStage("waking");
         setShowAgentBubble(false);
+        triggerWelcomeBack(t.chat.welcomeBackCoder);
         if (wakeTimeoutRef.current) clearTimeout(wakeTimeoutRef.current);
         wakeTimeoutRef.current = setTimeout(() => {
           setSleepStage("awake");
@@ -362,10 +342,10 @@ export const FloatingChatWidget: React.FC<FloatingChatWidgetProps> = ({
       window.removeEventListener("touchmove", handleUserActivity);
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       if (wakeTimeoutRef.current) clearTimeout(wakeTimeoutRef.current);
-      if (bookTimeoutRef.current) clearTimeout(bookTimeoutRef.current);
+      if (laptopTimeoutRef.current) clearTimeout(laptopTimeoutRef.current);
       if (welcomeBubbleTimeoutRef.current) clearTimeout(welcomeBubbleTimeoutRef.current);
     };
-  }, [t.chat.welcomeBackRunner, t.chat.welcomeBackReader, showWelcomeBubble]);
+  }, [t.chat.welcomeBackCoder, showWelcomeBubble]);
 
   // Handle tracking fireflies as they fly across screen
   const handleFireflyProgress = (p: number, swarmScreenX: number, swarmScreenY: number) => {
@@ -462,7 +442,6 @@ export const FloatingChatWidget: React.FC<FloatingChatWidgetProps> = ({
               fireflyProgress={fireflyProgress}
               fireflyTrackingPos={fireflyTrackingPos}
               wakeStartTime={wakeStartTime}
-              fetchStartTime={fetchStartTime}
               closingStartTime={closingStartTime}
               isMobile={isMobile}
               interactive={true}

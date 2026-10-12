@@ -9,13 +9,12 @@ export type ChromeBotState = "idle" | "thinking" | "replying";
 
 export type SleepStage =
   | "awake"
+  | "opening_laptop"
+  | "coding"
+  | "closing_laptop"
   | "fireflies"
   | "sleeping"
-  | "waking"
-  | "fetching_book"
-  | "reading"
-  | "closing_book"
-  | "running_back";
+  | "waking";
 
 export interface ChromeBot3DProps {
   state?: ChromeBotState;
@@ -28,7 +27,6 @@ export interface ChromeBot3DProps {
   fireflyProgress?: number;
   fireflyTrackingPos?: { x: number; y: number };
   wakeStartTime?: number;
-  fetchStartTime?: number;
   closingStartTime?: number;
   mousePosRef?: React.MutableRefObject<{ x: number; y: number }>;
   externalMousePos?: { x: number; y: number };
@@ -73,7 +71,6 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
   fireflyProgress = 0,
   fireflyTrackingPos = { x: 0, y: 0 },
   wakeStartTime = 0,
-  fetchStartTime = 0,
   closingStartTime = 0,
   mousePosRef,
   externalMousePos,
@@ -88,7 +85,6 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
   const fireflyProgressRef = useRef(fireflyProgress);
   const fireflyTrackingRef = useRef(fireflyTrackingPos);
   const wakeStartTimeRef = useRef(wakeStartTime);
-  const fetchStartTimeRef = useRef(fetchStartTime);
   const closingStartTimeRef = useRef(closingStartTime);
   const isMobileRef = useRef(isMobile);
 
@@ -143,10 +139,6 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
   }, [wakeStartTime]);
 
   useEffect(() => {
-    fetchStartTimeRef.current = fetchStartTime;
-  }, [fetchStartTime]);
-
-  useEffect(() => {
     closingStartTimeRef.current = closingStartTime;
   }, [closingStartTime]);
 
@@ -159,7 +151,6 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
   }, [externalMousePos]);
 
   const handleContainerClick = () => {
-    // Trigger dynamic 3D springy bop and joyous acrobatic spin
     clickBopRef.current = 1.0;
     spinVelocityRef.current = Math.PI * 3.5;
     isWinkingRef.current = true;
@@ -197,12 +188,9 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
     const envRenderTarget = pmremGenerator.fromScene(roomEnv);
     scene.environment = envRenderTarget.texture;
 
-    // 3. Materials configured for Theme-Aware Liquid Metal & Warm Terracotta Branding
+    // 3. Materials configured for Theme-Aware Liquid Metal & Terracotta Branding
     const isDarkInitial = themeRef.current === "dark";
 
-    // Head / Hair / Ears Material
-    // Dark mode: Midnight Obsidian Titanium with metallic luster
-    // Light mode: High-definition Liquid Satin Chrome
     const chromeMaterial = new THREE.MeshPhysicalMaterial({
       color: new THREE.Color(isDarkInitial ? 0x15171f : 0x828e9c),
       metalness: isDarkInitial ? 0.95 : 0.92,
@@ -213,7 +201,6 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
       reflectivity: 1.0,
     });
 
-    // Cybernetic Eyes & Mouth Material: Luminous Terracotta Glow (Dark) / Polished Onyx Glass (Light)
     const eyeMaterial = new THREE.MeshStandardMaterial({
       color: new THREE.Color(isDarkInitial ? 0xffb0a1 : 0x0c0f17),
       roughness: isDarkInitial ? 0.1 : 0.14,
@@ -222,7 +209,6 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
       emissiveIntensity: isDarkInitial ? 1.2 : 0.2,
     });
 
-    // Cybernetic Orbital Halo Material
     const haloMaterial = new THREE.MeshStandardMaterial({
       color: new THREE.Color(isDarkInitial ? 0xffb0a1 : 0xa42f17),
       roughness: isDarkInitial ? 0.12 : 0.18,
@@ -231,63 +217,75 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
       emissiveIntensity: isDarkInitial ? 1.5 : 0.35,
     });
 
-    // Book Materials
-    const bookCoverMaterial = new THREE.MeshStandardMaterial({
-      color: 0x1e293b,
-      roughness: 0.35,
-      metalness: 0.15,
+    // 4. Laptop / PC Materials
+    const laptopChassisMaterial = new THREE.MeshStandardMaterial({
+      color: 0x18181b,
+      metalness: 0.92,
+      roughness: 0.22,
     });
-    const goldAccentMaterial = new THREE.MeshStandardMaterial({
-      color: 0xd97706,
-      metalness: 0.8,
-      roughness: 0.25,
+    const laptopKeyboardBedMaterial = new THREE.MeshStandardMaterial({
+      color: 0x0f0f12,
+      roughness: 0.65,
     });
-    const goldBrightMaterial = new THREE.MeshStandardMaterial({
-      color: 0xfbbf24,
+    const laptopKeycapMaterial = new THREE.MeshStandardMaterial({
+      color: 0x27272a,
+      roughness: 0.45,
+      metalness: 0.3,
+    });
+    const laptopTrackpadMaterial = new THREE.MeshStandardMaterial({
+      color: 0x222226,
+      roughness: 0.3,
+      metalness: 0.2,
+    });
+    const laptopScreenGlassMaterial = new THREE.MeshStandardMaterial({
+      color: 0x0a0a0f,
+      roughness: 0.1,
       metalness: 0.9,
-      roughness: 0.2,
     });
-    const bookPlateMaterial = new THREE.MeshStandardMaterial({
-      color: 0x0f172a,
-      roughness: 0.4,
+    const codeKeywordMaterial = new THREE.MeshStandardMaterial({
+      color: 0xffb0a1,
+      emissive: 0xffb0a1,
+      emissiveIntensity: 1.6,
     });
-    const paperMaterial = new THREE.MeshStandardMaterial({
-      color: 0xf8fafc,
-      roughness: 0.9,
+    const codeFunctionMaterial = new THREE.MeshStandardMaterial({
+      color: 0x38bdf8,
+      emissive: 0x38bdf8,
+      emissiveIntensity: 1.5,
     });
-    const textLinesMaterial = new THREE.MeshStandardMaterial({
-      color: 0x64748b,
-      roughness: 0.8,
+    const codeVariableMaterial = new THREE.MeshStandardMaterial({
+      color: 0x4ade80,
+      emissive: 0x4ade80,
+      emissiveIntensity: 1.3,
     });
-    const ribbonMaterial = new THREE.MeshStandardMaterial({
-      color: 0xdc2626,
-      roughness: 0.4,
+    const codeWhiteMaterial = new THREE.MeshStandardMaterial({
+      color: 0xf4f4f5,
+      emissive: 0xf4f4f5,
+      emissiveIntensity: 1.1,
     });
-    const spineRibMaterial = new THREE.MeshStandardMaterial({
-      color: 0xf59e0b,
-      metalness: 0.85,
-      roughness: 0.2,
+    const codeCaretMaterial = new THREE.MeshStandardMaterial({
+      color: 0xffb0a1,
+      emissive: 0xffb0a1,
+      emissiveIntensity: 2.0,
     });
 
-    // 4. Root Face Group
+    // 5. Root Face Group
     const faceGroup = new THREE.Group();
     scene.add(faceGroup);
 
-    // 5. Geometries & Meshes (Character Geometry)
-    // Head: Sphere [1, 48, 48] scaled [1, 1.05, 1]
+    // Head
     const headGeometry = new THREE.SphereGeometry(1, 48, 48);
     const headMesh = new THREE.Mesh(headGeometry, chromeMaterial);
     headMesh.scale.set(1, 1.05, 1);
     faceGroup.add(headMesh);
 
-    // Cybernetic Orbital Halo Ring
+    // Halo Ring
     const haloGeo = new THREE.TorusGeometry(0.88, 0.022, 16, 64);
     const haloMesh = new THREE.Mesh(haloGeo, haloMaterial);
     haloMesh.rotation.x = Math.PI / 2.3;
     haloMesh.position.set(0, 0.95, 0);
     faceGroup.add(haloMesh);
 
-    // Hair Geometries
+    // Hair Meshes
     const hairTLGeo = new THREE.SphereGeometry(0.35, 32, 32);
     const hairTLMesh = new THREE.Mesh(hairTLGeo, chromeMaterial);
     hairTLMesh.scale.set(1, 1.8, 1);
@@ -402,146 +400,112 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
 
     faceGroup.add(glassesGroup);
 
-    // 7. 3D Hardcover Book Component
-    const bookGroup = new THREE.Group();
-    bookGroup.position.set(0, -0.78, 1.05);
-    bookGroup.rotation.x = -0.18;
-    bookGroup.scale.set(0, 0, 0);
+    // 7. 3D PC / Laptop Component
+    const laptopGroup = new THREE.Group();
+    laptopGroup.position.set(0, -0.74, 1.02);
+    laptopGroup.rotation.x = -0.16;
+    laptopGroup.scale.set(0, 0, 0);
 
-    const coverBoxGeo = new THREE.BoxGeometry(0.57, 0.77, 0.02);
-    const plateBoxGeo = new THREE.BoxGeometry(0.34, 0.22, 0.005);
-    const innerPlateGeo = new THREE.BoxGeometry(0.3, 0.18, 0.006);
-    const diamondGeo = new THREE.BoxGeometry(0.07, 0.07, 0.007);
-    const cornerGeo = new THREE.BoxGeometry(0.08, 0.08, 0.004);
-    const paperBoxGeo = new THREE.BoxGeometry(0.55, 0.75, 0.035);
-    const textLineGeo = new THREE.BoxGeometry(0.38, 0.022, 0.005);
-    const shortTextGeo = new THREE.BoxGeometry(0.26, 0.022, 0.005);
-    const rShortTextGeo = new THREE.BoxGeometry(0.22, 0.022, 0.005);
+    // A. Base / Keyboard unit
+    const laptopBaseGeo = new THREE.BoxGeometry(0.74, 0.024, 0.52);
+    const laptopBaseMesh = new THREE.Mesh(laptopBaseGeo, laptopChassisMaterial);
+    laptopGroup.add(laptopBaseMesh);
 
-    // Left Page Group
-    const leftPageGroup = new THREE.Group();
-    leftPageGroup.position.set(-0.015, 0, 0);
-    leftPageGroup.rotation.y = -0.32;
+    const keybedGeo = new THREE.BoxGeometry(0.66, 0.005, 0.28);
+    const keybedMesh = new THREE.Mesh(keybedGeo, laptopKeyboardBedMaterial);
+    keybedMesh.position.set(0, 0.013, -0.07);
+    laptopGroup.add(keybedMesh);
 
-    const leftCover = new THREE.Mesh(coverBoxGeo, bookCoverMaterial);
-    leftCover.position.set(-0.285, 0, 0.01);
-    leftPageGroup.add(leftCover);
+    const trackpadGeo = new THREE.BoxGeometry(0.24, 0.003, 0.16);
+    const trackpadMesh = new THREE.Mesh(trackpadGeo, laptopTrackpadMaterial);
+    trackpadMesh.position.set(0, 0.013, 0.15);
+    laptopGroup.add(trackpadMesh);
 
-    const leftGoldPlate = new THREE.Mesh(plateBoxGeo, goldAccentMaterial);
-    leftGoldPlate.position.set(-0.285, 0.08, 0.022);
-    leftPageGroup.add(leftGoldPlate);
-
-    const leftInnerPlate = new THREE.Mesh(innerPlateGeo, bookPlateMaterial);
-    leftInnerPlate.position.set(-0.285, 0.08, 0.023);
-    leftPageGroup.add(leftInnerPlate);
-
-    const leftDiamond = new THREE.Mesh(diamondGeo, goldBrightMaterial);
-    leftDiamond.position.set(-0.285, 0.08, 0.024);
-    leftDiamond.rotation.z = Math.PI / 4;
-    leftPageGroup.add(leftDiamond);
-
-    const leftCorner1 = new THREE.Mesh(cornerGeo, goldAccentMaterial);
-    leftCorner1.position.set(-0.5, 0.32, 0.021);
-    leftPageGroup.add(leftCorner1);
-
-    const leftCorner2 = new THREE.Mesh(cornerGeo, goldAccentMaterial);
-    leftCorner2.position.set(-0.5, -0.32, 0.021);
-    leftPageGroup.add(leftCorner2);
-
-    const leftPaper = new THREE.Mesh(paperBoxGeo, paperMaterial);
-    leftPaper.position.set(-0.275, 0, -0.018);
-    leftPageGroup.add(leftPaper);
-
-    const l1 = new THREE.Mesh(textLineGeo, textLinesMaterial);
-    l1.position.set(-0.275, 0.22, -0.037);
-    leftPageGroup.add(l1);
-
-    const l2 = new THREE.Mesh(textLineGeo, textLinesMaterial);
-    l2.position.set(-0.275, 0.1, -0.037);
-    leftPageGroup.add(l2);
-
-    const l3 = new THREE.Mesh(textLineGeo, textLinesMaterial);
-    l3.position.set(-0.275, -0.02, -0.037);
-    leftPageGroup.add(l3);
-
-    const l4 = new THREE.Mesh(shortTextGeo, textLinesMaterial);
-    l4.position.set(-0.335, -0.14, -0.037);
-    leftPageGroup.add(l4);
-
-    bookGroup.add(leftPageGroup);
-
-    // Right Page Group
-    const rightPageGroup = new THREE.Group();
-    rightPageGroup.position.set(0.015, 0, 0);
-    rightPageGroup.rotation.y = 0.32;
-
-    const rightCover = new THREE.Mesh(coverBoxGeo, bookCoverMaterial);
-    rightCover.position.set(0.285, 0, 0.01);
-    rightPageGroup.add(rightCover);
-
-    const rightGoldPlate = new THREE.Mesh(plateBoxGeo, goldAccentMaterial);
-    rightGoldPlate.position.set(0.285, 0.08, 0.022);
-    rightPageGroup.add(rightGoldPlate);
-
-    const rightInnerPlate = new THREE.Mesh(innerPlateGeo, bookPlateMaterial);
-    rightInnerPlate.position.set(0.285, 0.08, 0.023);
-    rightPageGroup.add(rightInnerPlate);
-
-    const rightDiamond = new THREE.Mesh(diamondGeo, goldBrightMaterial);
-    rightDiamond.position.set(0.285, 0.08, 0.024);
-    rightDiamond.rotation.z = Math.PI / 4;
-    rightPageGroup.add(rightDiamond);
-
-    const rightCorner1 = new THREE.Mesh(cornerGeo, goldAccentMaterial);
-    rightCorner1.position.set(0.5, 0.32, 0.021);
-    rightPageGroup.add(rightCorner1);
-
-    const rightCorner2 = new THREE.Mesh(cornerGeo, goldAccentMaterial);
-    rightCorner2.position.set(0.5, -0.32, 0.021);
-    rightPageGroup.add(rightCorner2);
-
-    const rightPaper = new THREE.Mesh(paperBoxGeo, paperMaterial);
-    rightPaper.position.set(0.275, 0, -0.018);
-    rightPageGroup.add(rightPaper);
-
-    const r1 = new THREE.Mesh(textLineGeo, textLinesMaterial);
-    r1.position.set(0.275, 0.22, -0.037);
-    rightPageGroup.add(r1);
-
-    const r2 = new THREE.Mesh(textLineGeo, textLinesMaterial);
-    r2.position.set(0.275, 0.1, -0.037);
-    rightPageGroup.add(r2);
-
-    const r3 = new THREE.Mesh(textLineGeo, textLinesMaterial);
-    r3.position.set(0.275, -0.02, -0.037);
-    rightPageGroup.add(r3);
-
-    const r4 = new THREE.Mesh(rShortTextGeo, textLinesMaterial);
-    r4.position.set(0.195, -0.14, -0.037);
-    rightPageGroup.add(r4);
-
-    bookGroup.add(rightPageGroup);
-
-    // Spine
-    const spineGeo = new THREE.CylinderGeometry(0.038, 0.038, 0.77, 24);
-    const spine = new THREE.Mesh(spineGeo, bookPlateMaterial);
-    spine.position.set(0, 0, 0.012);
-    bookGroup.add(spine);
-
-    const ribGeo = new THREE.CylinderGeometry(0.041, 0.041, 0.02, 24);
-    [0.26, 0.09, -0.09, -0.26].forEach((yPos) => {
-      const rib = new THREE.Mesh(ribGeo, spineRibMaterial);
-      rib.position.set(0, yPos, 0.012);
-      bookGroup.add(rib);
+    // Keyboard Key Strips
+    [-0.17, -0.11, -0.05].forEach((zOffset) => {
+      const keyRowGeo = new THREE.BoxGeometry(0.64, 0.006, 0.045);
+      const keyRowMesh = new THREE.Mesh(keyRowGeo, laptopKeycapMaterial);
+      keyRowMesh.position.set(0, 0.016, zOffset);
+      laptopGroup.add(keyRowMesh);
     });
 
-    const ribbonGeo = new THREE.BoxGeometry(0.035, 0.45, 0.01);
-    const ribbon = new THREE.Mesh(ribbonGeo, ribbonMaterial);
-    ribbon.position.set(0.01, -0.25, -0.018);
-    ribbon.rotation.set(-0.15, 0, 0.05);
-    bookGroup.add(ribbon);
+    // Spacebar
+    const spacebarGeo = new THREE.BoxGeometry(0.28, 0.007, 0.04);
+    const spacebarMesh = new THREE.Mesh(spacebarGeo, laptopKeycapMaterial);
+    spacebarMesh.position.set(0, 0.016, 0.015);
+    laptopGroup.add(spacebarMesh);
 
-    faceGroup.add(bookGroup);
+    // B. Hinged Screen Lid
+    const laptopLidGroup = new THREE.Group();
+    laptopLidGroup.position.set(0, 0.012, -0.25);
+    laptopGroup.add(laptopLidGroup);
+
+    const screenBackGeo = new THREE.BoxGeometry(0.74, 0.48, 0.018);
+    const screenBackMesh = new THREE.Mesh(screenBackGeo, laptopChassisMaterial);
+    screenBackMesh.position.set(0, 0.24, -0.009);
+    laptopLidGroup.add(screenBackMesh);
+
+    // Back Emblem Logo
+    const logoGeo = new THREE.BoxGeometry(0.08, 0.08, 0.004);
+    const logoMesh = new THREE.Mesh(logoGeo, codeKeywordMaterial);
+    logoMesh.position.set(0, 0.24, -0.019);
+    logoMesh.rotation.z = Math.PI / 4;
+    laptopLidGroup.add(logoMesh);
+
+    // Screen Display Glass
+    const screenGlassGeo = new THREE.BoxGeometry(0.68, 0.42, 0.004);
+    const screenGlassMesh = new THREE.Mesh(screenGlassGeo, laptopScreenGlassMaterial);
+    screenGlassMesh.position.set(0, 0.24, 0.003);
+    laptopLidGroup.add(screenGlassMesh);
+
+    // Window Tab Bar
+    const tabBarGeo = new THREE.BoxGeometry(0.64, 0.026, 0.002);
+    const tabBarMesh = new THREE.Mesh(tabBarGeo, laptopKeyboardBedMaterial);
+    tabBarMesh.position.set(0, 0.41, 0.006);
+    laptopLidGroup.add(tabBarMesh);
+
+    // Window Control Dots (Red, Yellow, Green)
+    const dotGeo = new THREE.SphereGeometry(0.007, 12, 12);
+    const dotRed = new THREE.Mesh(dotGeo, new THREE.MeshBasicMaterial({ color: 0xef4444 }));
+    dotRed.position.set(-0.28, 0.41, 0.008);
+    laptopLidGroup.add(dotRed);
+
+    const dotYellow = new THREE.Mesh(dotGeo, new THREE.MeshBasicMaterial({ color: 0xeab308 }));
+    dotYellow.position.set(-0.26, 0.41, 0.008);
+    laptopLidGroup.add(dotYellow);
+
+    const dotGreen = new THREE.Mesh(dotGeo, new THREE.MeshBasicMaterial({ color: 0x22c55e }));
+    dotGreen.position.set(-0.24, 0.41, 0.008);
+    laptopLidGroup.add(dotGreen);
+
+    // Glowing Code Lines on Screen
+    const codeLines = [
+      { geo: new THREE.BoxGeometry(0.24, 0.014, 0.002), mat: codeKeywordMaterial, x: -0.17, y: 0.36 },
+      { geo: new THREE.BoxGeometry(0.38, 0.014, 0.002), mat: codeFunctionMaterial, x: -0.1, y: 0.32 },
+      { geo: new THREE.BoxGeometry(0.48, 0.014, 0.002), mat: codeVariableMaterial, x: -0.05, y: 0.28 },
+      { geo: new THREE.BoxGeometry(0.32, 0.014, 0.002), mat: codeKeywordMaterial, x: -0.13, y: 0.24 },
+      { geo: new THREE.BoxGeometry(0.42, 0.014, 0.002), mat: codeWhiteMaterial, x: -0.08, y: 0.2 },
+      { geo: new THREE.BoxGeometry(0.22, 0.014, 0.002), mat: codeFunctionMaterial, x: -0.18, y: 0.16 },
+    ];
+
+    codeLines.forEach(({ geo, mat, x, y }) => {
+      const lineMesh = new THREE.Mesh(geo, mat);
+      lineMesh.position.set(x, y, 0.006);
+      laptopLidGroup.add(lineMesh);
+    });
+
+    // Blinking Typing Caret
+    const caretGeo = new THREE.BoxGeometry(0.012, 0.018, 0.003);
+    const caretMesh = new THREE.Mesh(caretGeo, codeCaretMaterial);
+    caretMesh.position.set(-0.05, 0.16, 0.007);
+    laptopLidGroup.add(caretMesh);
+
+    faceGroup.add(laptopGroup);
+
+    // Real-time Screen Glow Light on Maro's face
+    const laptopScreenLight = new THREE.PointLight(0xffb0a1, 0, 3.2);
+    laptopScreenLight.position.set(0, -0.4, 1.25);
+    scene.add(laptopScreenLight);
 
     // 8. 3D Floating Chrome "Zzz" Meshes
     const zGeom = createZGeometry();
@@ -587,16 +551,14 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
     gleamLight.position.set(0, 0, 4);
     scene.add(gleamLight);
 
-    // Green-gold firefly reflection point light
     const fireflyLight = new THREE.PointLight(0xa3e635, 0, 4);
     scene.add(fireflyLight);
 
-    // Thinking neural light effect
     const thinkingLight = new THREE.PointLight(0xffb0a1, 0, 3.5);
     thinkingLight.position.set(0.3, 0.9, 0.9);
     scene.add(thinkingLight);
 
-    // 10. Mouse Event Tracking (Fallback if not driven externally)
+    // 10. Mouse Event Tracking
     const handleMouseMove = (e: MouseEvent) => {
       if (!interactive || externalMouseRef.current || mousePosRef) return;
       const rect = container.getBoundingClientRect();
@@ -612,7 +574,7 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
       window.addEventListener("mousemove", handleMouseMove);
     }
 
-    // 11. Expressive Blinking & Organic Double-Blinks
+    // 11. Expressive Blinking
     let isBlinking = false;
     let blinkTimeout: ReturnType<typeof setTimeout> | null = null;
     let nextBlinkTimer: ReturnType<typeof setTimeout> | null = null;
@@ -638,12 +600,13 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
 
     nextBlinkTimer = setTimeout(triggerBlink, 2200);
 
-    // 12. Animation Loop with Visibility and Intersection Throttling
+    // 12. Animation Loop
     let animId: number | null = null;
     let isIntersecting = true;
     let isDocumentVisible = !document.hidden;
     const startTime = performance.now() * 0.001;
     let lastTheme = themeRef.current;
+    let currentLidAngle = 0;
 
     const stopAnimation = () => {
       if (animId !== null) {
@@ -692,7 +655,7 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
       const currentTheme = themeRef.current;
       const isDark = currentTheme === "dark";
 
-      // Theme toggle material synchronization
+      // Theme toggle sync
       if (currentTheme !== lastTheme) {
         lastTheme = currentTheme;
         if (isDark) {
@@ -705,8 +668,6 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
           eyeMaterial.color.setHex(0xffb0a1);
           eyeMaterial.emissive.setHex(0xffb0a1);
           eyeMaterial.emissiveIntensity = 1.2;
-          eyeMaterial.metalness = 0.4;
-          eyeMaterial.roughness = 0.1;
 
           haloMaterial.color.setHex(0xffb0a1);
           haloMaterial.emissive.setHex(0xffb0a1);
@@ -719,7 +680,7 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
           fillLight.intensity = 1.4;
           rimLight.color.setHex(0xffb0a1);
           rimLight.intensity = 3.5;
-          renderer.toneMappingExposure = 1.25;
+          laptopScreenLight.color.setHex(0xffb0a1);
         } else {
           chromeMaterial.color.setHex(0x828e9c);
           chromeMaterial.metalness = 0.92;
@@ -730,8 +691,6 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
           eyeMaterial.color.setHex(0x0c0f17);
           eyeMaterial.emissive.setHex(0xa42f17);
           eyeMaterial.emissiveIntensity = 0.2;
-          eyeMaterial.metalness = 0.85;
-          eyeMaterial.roughness = 0.14;
 
           haloMaterial.color.setHex(0xa42f17);
           haloMaterial.emissive.setHex(0xa42f17);
@@ -744,7 +703,7 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
           fillLight.intensity = 1.2;
           rimLight.color.setHex(0xa42f17);
           rimLight.intensity = 2.6;
-          renderer.toneMappingExposure = 1.05;
+          laptopScreenLight.color.setHex(0x38bdf8);
         }
       }
 
@@ -760,16 +719,21 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
       const isSleepingStage = currentSleepStage === "sleeping" || (currentSleeping && !currentChatOpen);
       const isFireflies = currentSleepStage === "fireflies";
       const isWaking = currentSleepStage === "waking";
-      const isFetching = currentSleepStage === "fetching_book";
-      const isReading = currentSleepStage === "reading";
-      const isClosing = currentSleepStage === "closing_book";
-      const isRunningBack = currentSleepStage === "running_back";
+      const isOpeningLaptop = currentSleepStage === "opening_laptop";
+      const isCoding = currentSleepStage === "coding";
+      const isClosingLaptop = currentSleepStage === "closing_laptop";
 
-      // Floating animation rhythm & amplitude
+      // Floating / Typing Animation Dynamics
       let floatSpeed = 1.5;
       let floatAmp = 0.12;
 
-      if (isThinking) {
+      if (isCoding) {
+        floatSpeed = 3.0; // gentle typing groove
+        floatAmp = 0.035;
+      } else if (isOpeningLaptop) {
+        floatSpeed = 2.2;
+        floatAmp = 0.05;
+      } else if (isThinking) {
         floatSpeed = 2.0;
         floatAmp = 0.06;
       } else if (isReplying) {
@@ -781,12 +745,6 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
       } else if (isSleepingStage) {
         floatSpeed = 0.8;
         floatAmp = 0.05;
-      } else if (isReading) {
-        floatSpeed = 1.0;
-        floatAmp = 0.04;
-      } else if (isFetching || isRunningBack) {
-        floatSpeed = 4.0;
-        floatAmp = 0.08;
       } else if (isFireflies && p >= 0.45 && p <= 0.7) {
         floatSpeed = 2.0;
         floatAmp = 0.04;
@@ -796,58 +754,45 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
       }
 
       faceGroup.position.y =
-        (currentChatOpen ? -0.04 : -0.08) + Math.sin(t * floatSpeed) * floatAmp;
+        (currentChatOpen ? -0.04 : isCoding ? -0.06 : -0.08) +
+        Math.sin(t * floatSpeed) * floatAmp;
       faceGroup.position.z = 0;
 
-      // Position X movement for fetching book or running back
-      let targetX = 0;
-      if (isFetching) {
-        const elapsed = (performance.now() - fetchStartTimeRef.current) / 1000;
-        targetX = elapsed < 0.9 ? 4.0 : 0;
-      } else if (isRunningBack) {
-        targetX = 0;
-      }
-
-      const xLerpSpeed = isRunningBack ? 0.25 : isFetching ? 0.15 : 0.1;
-      faceGroup.position.x = THREE.MathUtils.lerp(faceGroup.position.x, targetX, xLerpSpeed);
-
-      // Book & Glasses visibility and flap animations
-      let targetBookScale = 0;
+      // 3D PC / Laptop Lid Spring Physics & Glasses
+      let targetLaptopScale = 0;
       let targetGlassesScale = 0;
+      let targetLidAngle = 0;
 
-      if (isReading) {
-        targetBookScale = 1;
+      if (isCoding || isOpeningLaptop) {
+        targetLaptopScale = 1;
         targetGlassesScale = 1;
-        bookGroup.position.y = -0.78 + Math.sin(t * 1.6) * 0.012;
-        leftPageGroup.rotation.y = -0.32;
-        rightPageGroup.rotation.y = 0.32;
-      } else if (isFetching) {
-        bookGroup.position.y = -0.78;
-        const elapsed = (performance.now() - fetchStartTimeRef.current) / 1000;
-        if (elapsed >= 0.9) {
-          targetBookScale = 1;
-          targetGlassesScale = 1;
-          leftPageGroup.rotation.y = -0.32;
-          rightPageGroup.rotation.y = 0.32;
-        }
-      } else if (isClosing) {
-        bookGroup.position.y = -0.78;
-        const closeElapsed = (performance.now() - closingStartTimeRef.current) / 1000;
-        targetBookScale = Math.max(0, 1 - closeElapsed * 3);
-        targetGlassesScale = Math.max(0, 1 - closeElapsed * 3.5);
-
-        const closeAngle = THREE.MathUtils.lerp(0.32, 1.48, Math.min(1, closeElapsed * 3.5));
-        leftPageGroup.rotation.y = -closeAngle;
-        rightPageGroup.rotation.y = closeAngle;
-      } else {
-        bookGroup.position.y = -0.78;
+        targetLidAngle = 1.85; // ~106 degrees open
+      } else if (isClosingLaptop) {
+        targetLaptopScale = 0;
+        targetGlassesScale = 0;
+        targetLidAngle = 0; // snapped shut
       }
 
-      const scaleLerp = 0.18;
-      bookGroup.scale.lerp(new THREE.Vector3(targetBookScale, targetBookScale, targetBookScale), scaleLerp);
-      glassesGroup.scale.lerp(new THREE.Vector3(targetGlassesScale, targetGlassesScale, targetGlassesScale), scaleLerp);
+      laptopGroup.scale.lerp(new THREE.Vector3(targetLaptopScale, targetLaptopScale, targetLaptopScale), 0.18);
+      glassesGroup.scale.lerp(new THREE.Vector3(targetGlassesScale, targetGlassesScale, targetGlassesScale), 0.18);
 
-      // Liquid metal hair ripples
+      currentLidAngle = THREE.MathUtils.lerp(currentLidAngle, targetLidAngle, isClosingLaptop ? 0.25 : 0.12);
+      laptopLidGroup.rotation.x = currentLidAngle;
+
+      // Coding Screen Light Glow & Caret Blink
+      if (isCoding) {
+        caretMesh.visible = Math.sin(t * 7) > 0;
+        const screenPulse = Math.sin(t * 9) * 0.25;
+        laptopScreenLight.intensity = THREE.MathUtils.lerp(laptopScreenLight.intensity, 1.8 + screenPulse, 0.15);
+      } else if (isOpeningLaptop) {
+        caretMesh.visible = true;
+        laptopScreenLight.intensity = THREE.MathUtils.lerp(laptopScreenLight.intensity, 1.2, 0.1);
+      } else {
+        caretMesh.visible = false;
+        laptopScreenLight.intensity = THREE.MathUtils.lerp(laptopScreenLight.intensity, 0, 0.2);
+      }
+
+      // Hair ripples
       const hairWave = Math.sin(t * 2.8) * 0.025;
       hairTLMesh.position.y = 0.8 + hairWave;
       hairTMMesh.position.y = 0.95 + Math.cos(t * 2.5) * 0.028;
@@ -859,11 +804,11 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
       earLeft.rotation.z = 0.3 + Math.sin(t * 2.3) * 0.035;
       earRight.rotation.z = -0.3 - Math.sin(t * 2.3) * 0.035;
 
-      // Organic breathing body expansion
+      // Body breathing
       const breath = isSleepingStage ? Math.sin(t * 1.2) * 0.018 : Math.sin(t * 1.8) * 0.014;
       headMesh.scale.set(1 + breath, 1.05 + breath * 1.2, 1 + breath);
 
-      // Cybernetic Orbital Halo dynamic physics
+      // Orbital Halo
       if (isThinking) {
         haloMesh.rotation.z += 0.07;
         const haloPulse = (Math.sin(t * 12) + 1) * 0.5;
@@ -876,6 +821,10 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
         haloMesh.scale.set(haloScale, haloScale, haloScale);
         haloMaterial.emissiveIntensity = isDark ? 1.8 + 0.8 * voicePulse : 0.4 + 0.4 * voicePulse;
         haloMesh.position.y = 0.95 + Math.sin(t * 3) * 0.03;
+      } else if (isCoding) {
+        haloMesh.rotation.z += 0.035;
+        haloMaterial.emissiveIntensity = isDark ? 1.4 : 0.35;
+        haloMesh.position.y = 0.95 + Math.sin(t * 2.8) * 0.02;
       } else if (isSleepingStage) {
         haloMesh.rotation.z += 0.003;
         haloMaterial.emissiveIntensity = isDark ? 0.2 : 0.06;
@@ -896,7 +845,7 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
         faceGroup.scale.set(1, 1, 1);
       }
 
-      // Acrobatic celebratory spin
+      // Spin physics
       if (Math.abs(spinVelocityRef.current) > 0.08) {
         spinProgressRef.current += spinVelocityRef.current * 0.016;
         spinVelocityRef.current *= 0.9;
@@ -929,7 +878,20 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
         : rawMouseY;
       let targetZ = Math.sin(t * 1) * 0.04;
 
-      if (isThinking) {
+      if (isCoding) {
+        // Looking down at laptop screen and scanning code lines
+        targetYaw = Math.sin(t * 2.2) * 0.13;
+        targetPitch = 0.46 + Math.sin(t * 3.5) * 0.02;
+        targetZ = Math.sin(t * 2.2) * 0.02;
+      } else if (isOpeningLaptop) {
+        targetYaw = 0;
+        targetPitch = 0.35;
+        targetZ = 0;
+      } else if (isClosingLaptop) {
+        targetYaw = rawMouseX;
+        targetPitch = rawMouseY;
+        targetZ = 0;
+      } else if (isThinking) {
         targetYaw = -0.22 + Math.sin(t * 1.4) * 0.08;
         targetPitch = -0.18 + Math.cos(t * 1.6) * 0.04;
         targetZ = -0.1 + Math.sin(t * 1.2) * 0.03;
@@ -949,29 +911,6 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
           targetPitch = THREE.MathUtils.clamp(chatBasePitch + rawMouseY * 0.25, -0.45, 0.05);
           targetZ = rawMouseX * 0.05;
         }
-      } else if (isFetching) {
-        const elapsed = (performance.now() - fetchStartTimeRef.current) / 1000;
-        if (elapsed < 0.9) {
-          targetYaw = 0.75;
-          targetPitch = 0.05;
-          targetZ = -0.12;
-        } else {
-          targetYaw = -0.4;
-          targetPitch = 0.1;
-          targetZ = 0.05;
-        }
-      } else if (isRunningBack) {
-        targetYaw = -0.55;
-        targetPitch = 0;
-        targetZ = 0.08;
-      } else if (isReading) {
-        targetYaw = Math.sin(t * 1.8) * 0.12;
-        targetPitch = 0.52;
-        targetZ = 0;
-      } else if (isClosing) {
-        targetYaw = rawMouseX;
-        targetPitch = rawMouseY;
-        targetZ = 0;
       } else if (isWaking) {
         const wakeElapsed = Math.min(1, (performance.now() - wakeStartTimeRef.current) / 1150);
         const decay = Math.max(0, 1 - wakeElapsed);
@@ -1001,8 +940,8 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
         ? 0.12
         : isWaking
         ? 0.16
-        : isReading
-        ? 0.08
+        : isCoding
+        ? 0.1
         : isFireflies
         ? 0.07
         : 0.1;
@@ -1016,10 +955,14 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
       );
       faceGroup.rotation.z = THREE.MathUtils.lerp(faceGroup.rotation.z, targetZ, 0.1);
 
-      // Eyes Scale & Expressions
+      // Eye Scales & Expressions
       let targetEyeScaleY = 2.5;
 
-      if (isThinking) {
+      if (isCoding) {
+        targetEyeScaleY = 1.6; // focused on screen behind glasses
+      } else if (isOpeningLaptop) {
+        targetEyeScaleY = 2.2;
+      } else if (isThinking) {
         targetEyeScaleY = 1.7;
       } else if (isReplying) {
         targetEyeScaleY = 2.5;
@@ -1027,10 +970,8 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
         targetEyeScaleY = 2.4;
       } else if (isSleepingStage) {
         targetEyeScaleY = 0.08;
-      } else if (isReading) {
-        targetEyeScaleY = 1.6;
-      } else if (isClosing || isRunningBack) {
-        targetEyeScaleY = 2.8;
+      } else if (isClosingLaptop) {
+        targetEyeScaleY = 2.8; // happy surprised look up
       } else if (isWaking) {
         const wakeElapsed = Math.min(1, (performance.now() - wakeStartTimeRef.current) / 1150);
         if (wakeElapsed < 0.22) {
@@ -1084,12 +1025,16 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
       leftEyeMesh.position.y = THREE.MathUtils.lerp(leftEyeMesh.position.y, targetEyePosY, 0.15);
       rightEyeMesh.position.y = THREE.MathUtils.lerp(rightEyeMesh.position.y, targetEyePosY, 0.15);
 
-      // Expressive Mouth Articulation
+      // Mouth Articulation
       let targetMouthY = 0.12;
       let targetMouthX = 0.6;
       let targetMouthZ = 0.2;
 
-      if (isThinking) {
+      if (isCoding) {
+        targetMouthY = 0.08; // pursed in programming concentration
+        targetMouthX = 0.44;
+        targetMouthZ = 0.16;
+      } else if (isThinking) {
         targetMouthY = 0.09;
         targetMouthX = 0.42;
         targetMouthZ = 0.16;
@@ -1107,7 +1052,6 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
         targetMouthY = 0.12 + stretch;
         targetMouthX = 0.6 + stretch * 0.2;
       } else if (isFireflies && p >= 0.45 && p < 0.7) {
-        // Cute big yawn 'O' stretch
         targetMouthY = 2.2;
         targetMouthX = 1.15;
         targetMouthZ = 0.9;
@@ -1152,7 +1096,7 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
         thinkingLight.intensity = THREE.MathUtils.lerp(thinkingLight.intensity, 0, 0.15);
       }
 
-      // Firefly Reflection Light Effect (progress 0.65 to 0.98)
+      // Firefly Reflection Light Effect
       if (isFireflies && p >= 0.65 && p <= 0.98) {
         const subP = (p - 0.65) / 0.33;
         const lx = -1.8 + subP * 3.6;
@@ -1238,31 +1182,32 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
       bridgeGeo.dispose();
       armGeo.dispose();
 
-      coverBoxGeo.dispose();
-      plateBoxGeo.dispose();
-      innerPlateGeo.dispose();
-      diamondGeo.dispose();
-      cornerGeo.dispose();
-      paperBoxGeo.dispose();
-      textLineGeo.dispose();
-      shortTextGeo.dispose();
-      rShortTextGeo.dispose();
-      spineGeo.dispose();
-      ribGeo.dispose();
-      ribbonGeo.dispose();
+      laptopBaseGeo.dispose();
+      keybedGeo.dispose();
+      trackpadGeo.dispose();
+      spacebarGeo.dispose();
+      screenBackGeo.dispose();
+      logoGeo.dispose();
+      screenGlassGeo.dispose();
+      tabBarGeo.dispose();
+      dotGeo.dispose();
+      caretGeo.dispose();
+      codeLines.forEach((cl) => cl.geo.dispose());
       zGeom.dispose();
 
       chromeMaterial.dispose();
       eyeMaterial.dispose();
       haloMaterial.dispose();
-      bookCoverMaterial.dispose();
-      goldAccentMaterial.dispose();
-      goldBrightMaterial.dispose();
-      bookPlateMaterial.dispose();
-      paperMaterial.dispose();
-      textLinesMaterial.dispose();
-      ribbonMaterial.dispose();
-      spineRibMaterial.dispose();
+      laptopChassisMaterial.dispose();
+      laptopKeyboardBedMaterial.dispose();
+      laptopKeycapMaterial.dispose();
+      laptopTrackpadMaterial.dispose();
+      laptopScreenGlassMaterial.dispose();
+      codeKeywordMaterial.dispose();
+      codeFunctionMaterial.dispose();
+      codeVariableMaterial.dispose();
+      codeWhiteMaterial.dispose();
+      codeCaretMaterial.dispose();
     };
   }, [size, interactive, externalMousePos]);
 
