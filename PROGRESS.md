@@ -105,6 +105,7 @@ This session accomplished a comprehensive modernization and performance optimiza
 | `90f9997` | `feat: localize terminal whoami card (FR/EN), add curl /cli endpoint, and wire Command Palette trigger` | Bilingual SVGs, `/cli` API route |
 | `9448fbc` | `refactor: remove command palette button from hero action tray` | Clean 2-button action layout |
 | `81cbc66` | `docs: add comprehensive progress and milestone report` | Documentation & progress report |
+| `9b039b1` | `feat(chat): upgrade 3D bot with multi-stage sleep physics, book fetching, fireflies, mouth articulation, and terracotta styling` | 3D bot lifelike physics & terracotta branding |
 
 **Vercel Production Deployment**:  
 * Status: **Ready & Live**  
