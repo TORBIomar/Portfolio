@@ -17,9 +17,71 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Omar Torbi — Software & DevOps Engineer",
+  metadataBase: new URL("https://www.omartorbi.engineer"),
+  title: {
+    default: "Omar Torbi — Software & DevOps Engineer | Portfolio",
+    template: "%s | Omar Torbi",
+  },
   description:
-    "Portfolio of Omar Torbi. Final-year Computer Science & Networks engineer at EMSI Rabat. OCI Certified DevOps & Architect Professional.",
+    "Official portfolio of Omar Torbi. Software & DevOps Engineer specializing in Spring Boot, Docker, Linux, OCI Cloud Architecture, Distributed Systems, and Web 3D CAD.",
+  keywords: [
+    "Omar Torbi",
+    "Omar Torbi Portfolio",
+    "Omar Torbi Software Engineer",
+    "Omar Torbi DevOps Engineer",
+    "Omar Torbi EMSI",
+    "Omar Torbi OCI",
+    "Software Engineer",
+    "DevOps Engineer",
+    "Spring Boot",
+    "Docker",
+    "Linux",
+    "Oracle Cloud Infrastructure",
+    "Cloud Systems Architecture",
+    "EMSI Rabat",
+  ],
+  authors: [{ name: "Omar Torbi", url: "https://www.omartorbi.engineer" }],
+  creator: "Omar Torbi",
+  publisher: "Omar Torbi",
+  alternates: {
+    canonical: "https://www.omartorbi.engineer",
+  },
+  openGraph: {
+    title: "Omar Torbi — Software & DevOps Engineer",
+    description:
+      "Official portfolio of Omar Torbi. Software & DevOps Engineer specializing in Spring Boot, Docker, Linux, OCI Cloud Systems, and Web 3D CAD.",
+    url: "https://www.omartorbi.engineer",
+    siteName: "Omar Torbi — Portfolio",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/card.svg",
+        width: 1200,
+        height: 630,
+        alt: "Omar Torbi — Software & DevOps Engineer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Omar Torbi — Software & DevOps Engineer",
+    description:
+      "Official portfolio of Omar Torbi. Software & DevOps Engineer specializing in Spring Boot, Docker, Linux, and OCI Cloud.",
+    images: ["/card.svg"],
+    creator: "@omartorbi",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -28,6 +90,54 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
     shortcut: "/favicon.ico",
   },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://www.omartorbi.engineer/#person",
+      name: "Omar Torbi",
+      givenName: "Omar",
+      familyName: "Torbi",
+      url: "https://www.omartorbi.engineer",
+      jobTitle: "Software & DevOps Engineer",
+      description:
+        "Software & DevOps Engineer specializing in Spring Boot, Docker, Linux, OCI Cloud Architecture, Distributed Systems, and Web 3D CAD.",
+      alumniOf: {
+        "@type": "EducationalOrganization",
+        name: "EMSI Rabat",
+      },
+      knowsAbout: [
+        "Java",
+        "Spring Boot",
+        "DevOps",
+        "Docker",
+        "Linux",
+        "Oracle Cloud Infrastructure",
+        "OCI Certified DevOps Professional",
+        "OCI Certified Architect Professional",
+        "Distributed Systems",
+        "Three.js",
+      ],
+      sameAs: [
+        "https://github.com/TORBIomar",
+        "https://linkedin.com/in/omar-torbi",
+        "https://www.omartorbi.engineer",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.omartorbi.engineer/#website",
+      url: "https://www.omartorbi.engineer",
+      name: "Omar Torbi — Official Portfolio",
+      description: "Official engineering portfolio of Omar Torbi.",
+      publisher: {
+        "@id": "https://www.omartorbi.engineer/#person",
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -41,6 +151,12 @@ export default function RootLayout({
       className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
       data-theme="dark"
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-[#fcfcfc] dark:bg-[#000000] text-[#1a1a1a] dark:text-[#fafafa]">
         {children}
       </body>

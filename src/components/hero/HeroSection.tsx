@@ -56,28 +56,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
           />
         </div>
 
-        {/* Signature Name Highlight Badge (Salah Khadir style) */}
-        <p className="text-neutral-600 dark:text-neutral-300 text-sm sm:text-base md:text-lg font-sans tracking-wide mb-3 flex flex-wrap items-center justify-center gap-x-1.5">
-          <span>{language === "fr" ? "Bonjour, je m'appelle" : "Hi, my name is"}</span>
-          <span className="relative inline-block px-2.5 py-0.5 bg-accent text-white dark:text-neutral-950 font-bold before:absolute before:-inset-1 before:bg-accent before:-skew-y-3 before:-z-10 mx-1.5 shadow-xs">
-            Omar Torbi
+        {/* Monumental, Ultra-Clear Headline with Name (Critical SEO & LCP element - rendered instantly) */}
+        <h1 className="flex flex-col items-center justify-center mb-5">
+          <span className="text-neutral-600 dark:text-neutral-300 text-sm sm:text-base md:text-lg font-sans tracking-wide mb-3 flex flex-wrap items-center justify-center gap-x-1.5 normal-case font-normal">
+            <span>{language === "fr" ? "Bonjour, je m'appelle" : "Hi, my name is"}</span>
+            <span className="relative inline-block px-2.5 py-0.5 bg-accent text-white dark:text-neutral-950 font-bold before:absolute before:-inset-1 before:bg-accent before:-skew-y-3 before:-z-10 mx-1.5 shadow-xs">
+              Omar Torbi
+            </span>
+            <span>{language === "fr" ? "et je suis un" : "and I'm a"}</span>
           </span>
-          <span>{language === "fr" ? "et je suis un" : "and I'm a"}</span>
-        </p>
-
-        {/* Monumental, Ultra-Clear Headline (Critical LCP element - rendered instantly) */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-black tracking-tight text-neutral-950 dark:text-white uppercase max-w-5xl leading-[1.04] mb-5">
-          {language === "fr" ? (
-            <>
-              INGÉNIEUR LOGICIEL <br className="hidden sm:inline" />
-              &amp; DEVOPS
-            </>
-          ) : (
-            <>
-              SOFTWARE AND DEVOPS <br className="hidden sm:inline" />
-              ENGINEER
-            </>
-          )}
+          <span className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-black tracking-tight text-neutral-950 dark:text-white uppercase max-w-5xl leading-[1.04]">
+            {language === "fr" ? (
+              <>
+                INGÉNIEUR LOGICIEL <br className="hidden sm:inline" />
+                &amp; DEVOPS
+              </>
+            ) : (
+              <>
+                SOFTWARE AND DEVOPS <br className="hidden sm:inline" />
+                ENGINEER
+              </>
+            )}
+          </span>
         </h1>
 
         {/* Crisp Subheader */}
