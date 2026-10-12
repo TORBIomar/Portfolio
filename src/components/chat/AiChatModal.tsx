@@ -110,12 +110,14 @@ interface AiChatModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSelectProject?: (projectId: string) => void;
+  onBotStateChange?: (state: "idle" | "thinking" | "replying") => void;
 }
 
 export const AiChatModal: React.FC<AiChatModalProps> = ({
   isOpen,
   onClose,
   onSelectProject,
+  onBotStateChange,
 }) => {
   const { language, t } = useLanguage();
   const { showToast } = useToast();
@@ -123,6 +125,19 @@ export const AiChatModal: React.FC<AiChatModalProps> = ({
   const [isTyping, setIsTyping] = useState(false);
   const [isReplying, setIsReplying] = useState(false);
   const [streamingMsgId, setStreamingMsgId] = useState<string | null>(null);
+
+  // Propagate bot cognitive state to floating 3D avatar
+  useEffect(() => {
+    if (onBotStateChange) {
+      if (isReplying) {
+        onBotStateChange("replying");
+      } else if (isTyping) {
+        onBotStateChange("thinking");
+      } else {
+        onBotStateChange("idle");
+      }
+    }
+  }, [isTyping, isReplying, onBotStateChange]);
 
   const [messages, setMessages] = useState<ChatMessage[]>([
     {

@@ -211,3 +211,119 @@ body {
     opacity: 1;
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/* Fireflies Flight Overlay & Organic Glowing Aura                            */
+/* -------------------------------------------------------------------------- */
+
+.firefly-screen-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+.screen-firefly {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  will-change: transform, left, top;
+}
+
+.firefly-aura {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(163, 230, 53, 0.5) 0%, rgba(132, 204, 22, 0.18) 50%, transparent 70%);
+  filter: blur(4px);
+  animation: firefly-pulse 1.8s ease-in-out infinite alternate;
+}
+
+.firefly-core {
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: #bef264;
+  box-shadow: 0 0 12px #a3e635, 0 0 24px #65a30d;
+}
+
+.firefly-wing {
+  position: absolute;
+  width: 9px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  top: 1px;
+}
+
+.wing-left {
+  left: -4px;
+  transform-origin: right center;
+  animation: wing-flutter-left 0.12s ease-in-out infinite alternate;
+}
+
+.wing-right {
+  right: -4px;
+  transform-origin: left center;
+  animation: wing-flutter-right 0.12s ease-in-out infinite alternate;
+}
+
+@keyframes wing-flutter-left {
+  0% { transform: rotate(-35deg) scaleY(0.7); }
+  100% { transform: rotate(45deg) scaleY(1.2); }
+}
+
+@keyframes wing-flutter-right {
+  0% { transform: rotate(35deg) scaleY(0.7); }
+  100% { transform: rotate(-45deg) scaleY(1.2); }
+}
+
+@keyframes firefly-pulse {
+  0% { transform: scale(0.85); opacity: 0.6; }
+  100% { transform: scale(1.3); opacity: 1; }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Chatbot Welcome Speech Bubble                                              */
+/* -------------------------------------------------------------------------- */
+
+.chatbot-welcome-bubble {
+  position: absolute;
+  bottom: calc(100% - 10px);
+  right: 18px;
+  padding: 8px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #09090b;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 50;
+  animation: welcome-bubble-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dark .chatbot-welcome-bubble {
+  background: rgba(18, 18, 24, 0.94);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 16px rgba(255, 176, 161, 0.15);
+  color: #f4f4f5;
+}
+
+@keyframes welcome-bubble-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+

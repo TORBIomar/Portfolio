@@ -71,6 +71,9 @@ export interface Translations {
     inquiryTopics: string;
     welcomeMsg: string;
     resetMsg: string;
+    welcomeBackRunner: string;
+    welcomeBackReader: string;
+    tapToChat: string;
   };
 }
 
@@ -148,6 +151,9 @@ export const TRANSLATIONS: Record<Language, Translations> = {
         "Hello! I'm **Maro**, Omar's personal AI assistant and engineering copilot.\n\nAsk me anything about Omar's backend engineering (Spring Boot 3, REST APIs), DevOps & OCI Cloud infrastructure, 3D Web CAD (Three.js/Wasm), or his availability for internships and engineering roles.",
       resetMsg:
         "Conversation reset. What would you like to explore about Omar's engineering work?",
+      welcomeBackRunner: "Welcome back! ⚡",
+      welcomeBackReader: "Welcome back! 📚",
+      tapToChat: "Chat with Maro",
     },
   },
   fr: {
@@ -223,6 +229,9 @@ export const TRANSLATIONS: Record<Language, Translations> = {
         "Bonjour ! Je suis **Maro**, l'assistant IA et copilote technique d'Omar Torbi.\n\nPosez-moi vos questions sur l'architecture backend d'Omar (Spring Boot 3, APIs REST), son infrastructure Cloud OCI & DevOps, sa CAO 3D Web (Three.js/Wasm), ou sa disponibilité pour les stages PFE et postes d'ingénieur.",
       resetMsg:
         "Conversation réinitialisée. Que souhaitez-vous découvrir sur le parcours d'Omar ?",
+      welcomeBackRunner: "Bon retour ! ⚡",
+      welcomeBackReader: "Bon retour ! 📚",
+      tapToChat: "Discuter avec Maro",
     },
   },
 };

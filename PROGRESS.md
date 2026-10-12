@@ -86,6 +86,17 @@ This session accomplished a comprehensive modernization and performance optimiza
 
 ---
 
+### G. 3D AI Assistant (Maro) Lifelike Animations, Sleep Physics & Brand Theming Upgrade
+* **Multi-Stage Sleep State Machine (`sleepStage`)**:
+  * **Dark Mode Fireflies & Zzz Physics**: 5 organic glowing fireflies (`ScreenFireflies`) take flight across the screen from left to right with individual flight flutter. As they approach Maro, a real-time green-gold point light reflects across his metallic chrome head. Maro tracks the swarm centroid, opens his mouth in an expressive sleepy yawn stretch, and enters deep sleep with 3D extruded, beveled chrome "Zzz" meshes tumbling into zero gravity.
+  * **Light Mode Book Fetching & Reading**: On inactivity, Maro sprints off-screen to fetch glasses and an authentic 3D hardcover book with gold crests, corner brackets, spine ribs, and crimson bookmark ribbon (`fetching_book` -> `reading`), peacefully scanning pages back and forth.
+  * **Lifelike Wakeup & Speech Bubbles**: Flaps book shut on wake-up (`closing_book`), dashes back into frame (`running_back`), and presents a responsive speech bubble (`"Welcome back! 📚"` / `"Bon retour ! 📚"`).
+* **Mouth Mesh & Syllable Articulation**: Added 3D expressive mouth mesh dynamically articulating speech syllables during Gemini streaming responses, pursing thoughtfully when reasoning, and smiling when listening.
+* **Terracotta Brand Alignment**: Converted the eyes, orbital halo ring, and cognitive neural lighting to the signature warm terracotta palette (`#FFB0A1` in dark mode / `#A42F17` in light mode).
+* **Bi-directional State Communication**: Connected `AiChatModal` to `FloatingChatWidget` so the 3D avatar mirrors thinking and replying states in real time.
+
+---
+
 ## 3. Git & Deployment Log
 
 | Commit | Message | Summary |
@@ -93,6 +104,7 @@ This session accomplished a comprehensive modernization and performance optimiza
 | `373e749` | `feat: integrate whoami svg card, update cursor terracotta color, fix project card dark styles` | Base SVG card & cursor styles |
 | `90f9997` | `feat: localize terminal whoami card (FR/EN), add curl /cli endpoint, and wire Command Palette trigger` | Bilingual SVGs, `/cli` API route |
 | `9448fbc` | `refactor: remove command palette button from hero action tray` | Clean 2-button action layout |
+| `81cbc66` | `docs: add comprehensive progress and milestone report` | Documentation & progress report |
 
 **Vercel Production Deployment**:  
 * Status: **Ready & Live**  
@@ -101,7 +113,10 @@ This session accomplished a comprehensive modernization and performance optimiza
 
 ---
 
-## 4. Pending Architectural Decisions
+## 4. Architectural Decisions & Status
 
-1. **3D Chat Bot (Maro) Materials**:
-   * **Recommendation**: Retain the **Liquid Chrome / Obsidian Titanium** body for PBR reflections, while tuning the **electric cyan eyes and halo** (`#00f2fe`) to **warm terracotta** (`#FFB0A1` / `#A42F17`) to harmonize with the brand palette.
+1. **3D Chat Bot (Maro) Materials & Theming**: **Resolved & Completed**  
+   * Retained Liquid Chrome (light) / Obsidian Titanium (dark) PBR metalness.  
+   * Tuned cybernetic eyes, orbital halo ring, and neural thinking light to warm terracotta (`#FFB0A1` / `#A42F17`).  
+   * Added expressive mouth mesh, reading glasses, 3D hardcover book, screen firefly flight swarm, and extruded tumbling Zzz physics.
+
