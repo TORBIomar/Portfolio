@@ -21,7 +21,6 @@ import {
 import { LinkedinIcon, GithubIcon } from "../common/SocialIcons";
 import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
-import confetti from "canvas-confetti";
 
 export const ReachOutSection: React.FC = () => {
   const { language, t } = useLanguage();
@@ -117,6 +116,7 @@ export const ReachOutSection: React.FC = () => {
       if (isSuccess) {
         sound.playSuccess();
         try {
+          const confetti = (await import("canvas-confetti")).default;
           confetti({
             particleCount: 65,
             spread: 70,
@@ -149,7 +149,7 @@ export const ReachOutSection: React.FC = () => {
   return (
     <section
       id="contact"
-      className="py-24 sm:py-32 border-b border-zinc-200/90 dark:border-white/10 bg-[#fcfcfc] dark:bg-[#000000] scroll-mt-20 transition-colors duration-300"
+      className="py-24 sm:py-32 border-b border-zinc-200/90 dark:border-white/10 bg-[#fcfcfc] dark:bg-[#000000] scroll-mt-20"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -184,7 +184,8 @@ export const ReachOutSection: React.FC = () => {
             {/* Email Card (Copies to clipboard and triggers inquiry form without opening mail app) */}
             <div
               onClick={handleCopyEmail}
-              className="p-5 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between shadow-2xs hover:border-accent/40 transition-colors cursor-pointer group"
+              className="cursor-target p-5 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between shadow-2xs hover:border-accent/40 transition-colors cursor-pointer group"
+              data-cursor-label="Copy Email"
               title="Click to copy email address"
             >
               <div className="flex items-center gap-3.5 overflow-hidden">
@@ -192,9 +193,9 @@ export const ReachOutSection: React.FC = () => {
                   <Mail className="w-4 h-4" />
                 </div>
                 <div className="truncate">
-                  <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
+                  <div className="text-[10px] font-mono text-zinc-600 dark:text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
                     <span>Direct Email</span>
-                    <span className="text-[9px] text-zinc-400 font-sans">(Click to copy)</span>
+                    <span className="text-[9px] text-zinc-600 dark:text-zinc-400 font-sans">(Click to copy)</span>
                   </div>
                   <div className="font-mono text-xs sm:text-sm font-bold text-black dark:text-white group-hover:text-accent group-hover:underline truncate block transition-colors">
                     {PERSONAL_INFO.email}
@@ -216,14 +217,15 @@ export const ReachOutSection: React.FC = () => {
                   <Phone className="w-4 h-4" />
                 </div>
                 <div className="truncate">
-                  <div className="text-[10px] font-mono text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">
+                  <div className="text-[10px] font-mono text-zinc-600 dark:text-zinc-400 uppercase tracking-wider">
                     Phone &amp; WhatsApp
                   </div>
                   <a
                     href={PERSONAL_INFO.whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-mono text-xs sm:text-sm font-bold text-black dark:text-white hover:text-accent hover:underline truncate block transition-colors"
+                    className="cursor-target font-mono text-xs sm:text-sm font-bold text-black dark:text-white hover:text-accent hover:underline truncate block transition-colors"
+                    data-cursor-label="WhatsApp"
                   >
                     {PERSONAL_INFO.phone}
                   </a>
@@ -231,7 +233,8 @@ export const ReachOutSection: React.FC = () => {
               </div>
               <button
                 onClick={handleCopyPhone}
-                className="p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-black dark:hover:text-white cursor-pointer shrink-0 ml-2 transition-colors"
+                className="cursor-target p-2 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 hover:text-black dark:hover:text-white cursor-pointer shrink-0 ml-2 transition-colors"
+                data-cursor-label="Copy Phone"
                 title="Copy phone number"
               >
                 {copiedPhone ? <Check className="w-4 h-4 text-accent" /> : <Copy className="w-4 h-4" />}
@@ -252,7 +255,7 @@ export const ReachOutSection: React.FC = () => {
 
             {/* Official CVs & Dossiers */}
             <div className="p-5 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 shadow-2xs space-y-3">
-              <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500 block font-bold">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-600 dark:text-zinc-400 block font-bold">
                 Official CV &amp; Dossiers
               </span>
               <div className="grid grid-cols-2 gap-2.5">
@@ -261,7 +264,8 @@ export const ReachOutSection: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => sound.playSuccess()}
-                  className="p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-black dark:hover:border-white bg-zinc-50 dark:bg-zinc-900 text-xs font-mono font-medium text-black dark:text-white flex items-center justify-between transition-colors"
+                  className="cursor-target p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-black dark:hover:border-white bg-zinc-50 dark:bg-zinc-900 text-xs font-mono font-medium text-black dark:text-white flex items-center justify-between transition-colors"
+                  data-cursor-label="PDF (EN)"
                 >
                   <span>Resume (EN)</span>
                   <Download className="w-3 h-3 text-zinc-400" />
@@ -271,7 +275,8 @@ export const ReachOutSection: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => sound.playSuccess()}
-                  className="p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-black dark:hover:border-white bg-zinc-50 dark:bg-zinc-900 text-xs font-mono font-medium text-black dark:text-white flex items-center justify-between transition-colors"
+                  className="cursor-target p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-black dark:hover:border-white bg-zinc-50 dark:bg-zinc-900 text-xs font-mono font-medium text-black dark:text-white flex items-center justify-between transition-colors"
+                  data-cursor-label="PDF (FR)"
                 >
                   <span>CV (FR)</span>
                   <Download className="w-3 h-3 text-zinc-400" />
@@ -297,7 +302,8 @@ export const ReachOutSection: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playClick()}
-                className="p-3.5 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between hover:border-black dark:hover:border-white transition-colors"
+                className="cursor-target p-3.5 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between hover:border-black dark:hover:border-white transition-colors"
+                data-cursor-label="GitHub"
               >
                 <div className="flex items-center gap-2.5">
                   <GithubIcon className="w-4 h-4 text-black dark:text-white" />
@@ -311,7 +317,8 @@ export const ReachOutSection: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => sound.playClick()}
-                className="p-3.5 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between hover:border-black dark:hover:border-white transition-colors"
+                className="cursor-target p-3.5 rounded-2xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 flex items-center justify-between hover:border-black dark:hover:border-white transition-colors"
+                data-cursor-label="LinkedIn"
               >
                 <div className="flex items-center gap-2.5">
                   <LinkedinIcon className="w-4 h-4 text-black dark:text-white" />
@@ -445,7 +452,8 @@ export const ReachOutSection: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 rounded-full bg-black dark:bg-white hover:bg-accent hover:text-white dark:hover:text-neutral-950 disabled:opacity-60 disabled:cursor-not-allowed text-white dark:text-black font-sans font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md uppercase"
+                    className="cursor-target w-full py-3.5 rounded-full bg-black dark:bg-white hover:bg-accent hover:text-white dark:hover:text-neutral-950 disabled:opacity-60 disabled:cursor-not-allowed text-white dark:text-black font-sans font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md uppercase"
+                    data-cursor-label={language === "fr" ? "Envoyer" : "Send"}
                   >
                     {isSubmitting ? (
                       <>

@@ -17,7 +17,7 @@ export const FaqSection: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-24 sm:py-32 border-b border-zinc-200/90 dark:border-white/10 bg-[#f9f9fa] dark:bg-[#000000] scroll-mt-16 transition-colors duration-300">
+    <section id="faq" className="py-24 sm:py-32 border-b border-zinc-200/90 dark:border-white/10 bg-[#f9f9fa] dark:bg-[#000000] scroll-mt-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -62,7 +62,8 @@ export const FaqSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => toggleItem(item.id)}
-                  className="w-full p-5 sm:p-6 flex items-center justify-between gap-4 text-left cursor-pointer select-none"
+                  className="cursor-target w-full p-5 sm:p-6 flex items-center justify-between gap-4 text-left cursor-pointer select-none"
+                  data-cursor-label={isOpen ? "Close" : "Open"}
                   aria-expanded={isOpen}
                 >
                   <div className="flex items-center gap-3.5 sm:gap-4 flex-1">

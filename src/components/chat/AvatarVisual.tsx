@@ -57,19 +57,11 @@ export const AvatarVisual: React.FC<AvatarVisualProps> = ({
       onClick={onClick}
       className={`relative inline-flex items-center justify-center shrink-0 select-none group cursor-pointer ${className}`}
     >
-      {/* Specular ambient halo */}
-      <motion.div
-        animate={
-          isTyping || isSpeaking
-            ? { scale: [1, 1.15, 1], opacity: [0.35, 0.7, 0.35] }
-            : { scale: [1, 1.06, 1], opacity: [0.2, 0.4, 0.2] }
-        }
-        transition={{
-          duration: isTyping || isSpeaking ? 1.4 : 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute inset-0 rounded-2xl bg-[radial-gradient(ellipse_at_center,var(--accent-glow),transparent_70%)] blur-md pointer-events-none"
+      {/* Specular ambient halo (GPU composited) */}
+      <span
+        className={`absolute inset-0 rounded-2xl bg-[radial-gradient(ellipse_at_center,var(--accent-glow),transparent_70%)] blur-md pointer-events-none ${
+          isTyping || isSpeaking ? "opacity-70 animate-pulse" : "opacity-30"
+        }`}
       />
 
       {/* 3D Model Outer Frame Container */}

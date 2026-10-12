@@ -184,7 +184,7 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
   };
 
   return (
-    <section id="projects" className="py-24 sm:py-32 border-b border-zinc-200/90 dark:border-white/10 bg-[#fcfcfc] dark:bg-[#000000] scroll-mt-16 transition-colors duration-300">
+    <section id="projects" className="py-24 sm:py-32 border-b border-zinc-200/90 dark:border-white/10 bg-[#fcfcfc] dark:bg-[#000000] scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -228,7 +228,8 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
                 sound.playClick();
                 onSelectProject(project);
               }}
-              className="rounded-3xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 p-6 sm:p-7 flex flex-col justify-between transition-all duration-200 hover:border-accent/40 hover:shadow-lg dark:hover:shadow-[0_12px_32px_-4px_var(--accent-glow)] group cursor-pointer shadow-xs"
+              className="rounded-3xl bg-white dark:bg-[#09090b] border border-zinc-200/90 dark:border-white/10 p-6 sm:p-7 flex flex-col justify-between transition-all duration-200 hover:border-accent/40 hover:shadow-lg dark:hover:shadow-[0_12px_32px_-4px_var(--accent-glow)] group cursor-pointer shadow-xs cursor-target"
+              data-cursor-label={language === "fr" ? "Explorer" : "Inspect"}
             >
               <div>
                 {/* Visual Thumbnail */}

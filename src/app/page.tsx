@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ToastProvider } from "@/components/common/Toast";
@@ -11,14 +12,61 @@ import { ProjectsGrid } from "@/components/sections/ProjectsGrid";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { ReachOutSection } from "@/components/sections/ReachOutSection";
 import { RichFooter } from "@/components/layout/RichFooter";
-import { ProjectDetailModal } from "@/components/modals/ProjectDetailModal";
-import { CommandPalette } from "@/components/modals/CommandPalette";
-import { FloatingChatWidget } from "@/components/chat/FloatingChatWidget";
 import { PROJECTS_DATA, Project } from "@/data/portfolioData";
+
+const ProjectDetailModal = dynamic(
+  () => import("@/components/modals/ProjectDetailModal").then((m) => m.ProjectDetailModal),
+  { ssr: false }
+);
+
+const CommandPalette = dynamic(
+  () => import("@/components/modals/CommandPalette").then((m) => m.CommandPalette),
+  { ssr: false }
+);
+
+const FloatingChatWidget = dynamic(
+  () => import("@/components/chat/FloatingChatWidget").then((m) => m.FloatingChatWidget),
+  { ssr: false }
+);
+
+const TargetCursor = dynamic(
+  () => import("@/components/common/TargetCursor"),
+  { ssr: false }
+);
 
 export default function Home() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+  const [showChatWidget, setShowChatWidget] = useState(false);
+
+  useEffect(() => {
+    // Defer heavy 3D chat widget until after first user interaction or idle period
+    const mountChat = () => {
+      setShowChatWidget(true);
+      window.removeEventListener("scroll", mountChat);
+      window.removeEventListener("mousemove", mountChat);
+      window.removeEventListener("touchstart", mountChat);
+      window.removeEventListener("keydown", mountChat);
+      window.removeEventListener("open-ai-chat", mountChat);
+    };
+
+    window.addEventListener("scroll", mountChat, { once: true, passive: true });
+    window.addEventListener("mousemove", mountChat, { once: true, passive: true });
+    window.addEventListener("touchstart", mountChat, { once: true, passive: true });
+    window.addEventListener("keydown", mountChat, { once: true, passive: true });
+    window.addEventListener("open-ai-chat", mountChat, { once: true });
+
+    const timer = setTimeout(mountChat, 4500);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", mountChat);
+      window.removeEventListener("mousemove", mountChat);
+      window.removeEventListener("touchstart", mountChat);
+      window.removeEventListener("keydown", mountChat);
+      window.removeEventListener("open-ai-chat", mountChat);
+    };
+  }, []);
 
   const handleOpenProjectById = (projectId: string) => {
     const found = PROJECTS_DATA.find((p) => p.id === projectId);
@@ -31,7 +79,7 @@ export default function Home() {
     <ThemeProvider>
       <LanguageProvider>
         <ToastProvider>
-        <main className="min-h-screen bg-[#fcfcfc] dark:bg-[#000000] text-[#1a1a1a] dark:text-[#fafafa] flex flex-col font-sans transition-colors duration-300">
+        <main className="min-h-screen bg-[#fcfcfc] dark:bg-[#000000] text-[#1a1a1a] dark:text-[#fafafa] flex flex-col font-sans">
           {/* Centered Floating Navigation Bar with Logo & Theme Toggles */}
           <Navbar
             onOpenCommandPalette={() => setCommandPaletteOpen(true)}
@@ -55,21 +103,39 @@ export default function Home() {
           {/* Clean Contrast Footer */}
           <RichFooter />
 
-          {/* Interactive Modals */}
-          <ProjectDetailModal
-            project={activeProject}
-            onClose={() => setActiveProject(null)}
-          />
+          {/* Interactive Modals (Loaded strictly on demand) */}
+          {activeProject && (
+            <ProjectDetailModal
+              project={activeProject}
+              onClose={() => setActiveProject(null)}
+            />
+          )}
 
-          <CommandPalette
-            isOpen={commandPaletteOpen}
-            onClose={() => setCommandPaletteOpen(false)}
-            onSelectProject={(id) => handleOpenProjectById(id)}
-          />
+          {commandPaletteOpen && (
+            <CommandPalette
+              isOpen={commandPaletteOpen}
+              onClose={() => setCommandPaletteOpen(false)}
+              onSelectProject={(id) => handleOpenProjectById(id)}
+            />
+          )}
 
-          {/* Floating Interactive AI Avatar & Chat Widget */}
-          <FloatingChatWidget
-            onSelectProject={(id) => handleOpenProjectById(id)}
+          {/* Floating Interactive AI Avatar & Chat Widget (Deferred mount) */}
+          {showChatWidget && (
+            <FloatingChatWidget
+              onSelectProject={(id) => handleOpenProjectById(id)}
+            />
+          )}
+
+          {/* Futuristic Target Reticle Cursor from React Bits */}
+          <TargetCursor
+            spinDuration={2}
+            hideDefaultCursor
+            parallaxOn
+            size={32}
+            cornerSize={10}
+            thickness={2}
+            padding={8}
+            blendMode="normal"
           />
         </main>
         </ToastProvider>

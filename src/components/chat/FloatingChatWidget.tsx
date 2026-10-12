@@ -1,12 +1,17 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import * as THREE from "three";
 import { motion } from "framer-motion";
 import { ChromeBot3D } from "./ChromeBot3D";
-import { AiChatModal } from "./AiChatModal";
 import { sound } from "@/utils/sound";
 import { useLanguage } from "@/context/LanguageContext";
+
+const AiChatModal = dynamic(
+  () => import("./AiChatModal").then((m) => m.AiChatModal),
+  { ssr: false }
+);
 
 interface FloatingChatWidgetProps {
   onSelectProject?: (projectId: string) => void;
@@ -166,12 +171,14 @@ export const FloatingChatWidget: React.FC<FloatingChatWidgetProps> = ({
         </motion.div>
       </div>
 
-      {/* The AI Chat Dialog Modal */}
-      <AiChatModal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        onSelectProject={onSelectProject}
-      />
+      {/* The AI Chat Dialog Modal (Loaded only when opened) */}
+      {isOpen && (
+        <AiChatModal
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          onSelectProject={onSelectProject}
+        />
+      )}
     </div>
   );
 };

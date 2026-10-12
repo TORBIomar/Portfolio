@@ -29,8 +29,12 @@ export const RichFooter: React.FC = () => {
             <div className="lg:col-span-2 space-y-4">
               <div className="flex items-center gap-3">
                 <img
-                  src="/logo/logo-white.png"
+                  src="/logo/logo-white.webp"
                   alt="Omar Torbi Logo"
+                  width={54}
+                  height={32}
+                  loading="lazy"
+                  decoding="async"
                   className="h-8 w-auto object-contain"
                 />
                 <span className="font-mono text-sm font-bold text-white tracking-tight">
@@ -152,7 +156,8 @@ export const RichFooter: React.FC = () => {
 
             <button
               onClick={scrollToTop}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-accent/50 text-zinc-300 hover:text-accent transition-colors cursor-pointer"
+              className="cursor-target flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-accent/50 text-zinc-300 hover:text-accent transition-colors cursor-pointer"
+              data-cursor-label="Top"
             >
               <span>Back to top</span>
               <ArrowUp className="w-3.5 h-3.5" />
@@ -165,27 +170,27 @@ export const RichFooter: React.FC = () => {
       {/* ========================================================= */}
       {/* BOTTOM TELEMETRY BAR: Copyright & Stack */}
       {/* ========================================================= */}
-      <div className="bg-[#050608] text-zinc-500 py-6 text-xs font-mono border-t border-zinc-900">
+      <div className="bg-[#050608] text-zinc-400 py-6 text-xs font-mono border-t border-zinc-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           
           <div className="flex items-center gap-2">
             <span>© 2026 {PERSONAL_INFO.name}.</span>
-            <span className="text-zinc-700">•</span>
+            <span className="text-zinc-600">•</span>
             <span>All rights reserved.</span>
           </div>
 
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-accent inline-block shadow-[0_0_8px_var(--accent-glow)] animate-pulse" />
-            <span className="text-accent font-semibold">All systems operational</span>
-            <span className="text-zinc-700">•</span>
-            <span className="text-zinc-400">{PERSONAL_INFO.coordinates}</span>
+            <span className="text-[#FFB0A1] font-semibold">All systems operational</span>
+            <span className="text-zinc-600">•</span>
+            <span className="text-zinc-300">{PERSONAL_INFO.coordinates}</span>
           </div>
 
-          <div className="flex items-center gap-2 text-zinc-500">
+          <div className="flex items-center gap-2 text-zinc-400">
             <span>Next.js App Router</span>
-            <span className="text-zinc-700">•</span>
+            <span className="text-zinc-600">•</span>
             <span>Tailwind CSS</span>
-            <span className="text-zinc-700">•</span>
+            <span className="text-zinc-600">•</span>
             <span>Framer Motion</span>
           </div>
 

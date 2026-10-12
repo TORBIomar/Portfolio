@@ -322,12 +322,54 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
 
     nextBlinkTimer = setTimeout(triggerBlink, 2200);
 
-    // 9. Animation Loop
-    let animId: number;
+    // 9. Animation Loop with Visibility and Intersection Throttling
+    let animId: number | null = null;
+    let isIntersecting = true;
+    let isDocumentVisible = !document.hidden;
     const startTime = performance.now() * 0.001;
     let lastTheme = themeRef.current;
 
+    const stopAnimation = () => {
+      if (animId !== null) {
+        cancelAnimationFrame(animId);
+        animId = null;
+      }
+    };
+
+    const startAnimation = () => {
+      if (animId === null && isIntersecting && isDocumentVisible) {
+        animId = requestAnimationFrame(animate);
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      isDocumentVisible = !document.hidden;
+      if (isDocumentVisible) {
+        startAnimation();
+      } else {
+        stopAnimation();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    let observer: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver !== "undefined") {
+      observer = new IntersectionObserver(([entry]) => {
+        isIntersecting = entry.isIntersecting;
+        if (isIntersecting) {
+          startAnimation();
+        } else {
+          stopAnimation();
+        }
+      });
+      observer.observe(container);
+    }
+
     const animate = () => {
+      if (!isIntersecting || !isDocumentVisible) {
+        animId = null;
+        return;
+      }
       animId = requestAnimationFrame(animate);
       const t = performance.now() * 0.001 - startTime;
 
@@ -572,7 +614,9 @@ export const ChromeBot3D: React.FC<ChromeBot3DProps> = ({
 
     // 10. Cleanup
     return () => {
-      cancelAnimationFrame(animId);
+      stopAnimation();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      if (observer) observer.disconnect();
       if (blinkTimeout) clearTimeout(blinkTimeout);
       if (nextBlinkTimer) clearTimeout(nextBlinkTimer);
       if (interactive && !externalMousePos && !mousePosRef) {

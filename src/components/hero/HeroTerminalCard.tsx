@@ -58,7 +58,8 @@ export const HeroTerminalCard: React.FC = () => {
               {/* Copy Command Button */}
               <button
                 onClick={handleCopyCommand}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/90 hover:bg-white dark:bg-white/[0.08] dark:hover:bg-white/[0.16] text-[#5C1A0D] dark:text-[#FAF7F5] border border-[#A42F17]/25 dark:border-[#FFB0A1]/35 hover:border-[#A42F17]/60 dark:hover:border-[#FFB0A1] text-[11px] transition-all cursor-pointer shadow-2xs"
+                data-cursor-label="Copy"
+                className="cursor-target inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/90 hover:bg-white dark:bg-white/[0.08] dark:hover:bg-white/[0.16] text-[#5C1A0D] dark:text-[#FAF7F5] border border-[#A42F17]/25 dark:border-[#FFB0A1]/35 hover:border-[#A42F17]/60 dark:hover:border-[#FFB0A1] text-[11px] transition-all cursor-pointer shadow-2xs"
                 title="Copy terminal runner command"
               >
                 {copied ? (
@@ -81,7 +82,8 @@ export const HeroTerminalCard: React.FC = () => {
                 target="_blank"
                 rel="noreferrer"
                 download={isDark ? "omar-torbi-card.svg" : "omar-torbi-card-transparent.svg"}
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white/90 hover:bg-white dark:bg-white/[0.08] dark:hover:bg-white/[0.16] text-[#5C1A0D] dark:text-[#FAF7F5] border border-[#A42F17]/25 dark:border-[#FFB0A1]/35 hover:border-[#A42F17]/60 dark:hover:border-[#FFB0A1] text-[11px] transition-all shadow-2xs"
+                data-cursor-label="Download"
+                className="cursor-target inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white/90 hover:bg-white dark:bg-white/[0.08] dark:hover:bg-white/[0.16] text-[#5C1A0D] dark:text-[#FAF7F5] border border-[#A42F17]/25 dark:border-[#FFB0A1]/35 hover:border-[#A42F17]/60 dark:hover:border-[#FFB0A1] text-[11px] transition-all shadow-2xs"
                 title="Download raw SVG card"
               >
                 <Download className="w-3 h-3" />
@@ -101,6 +103,10 @@ export const HeroTerminalCard: React.FC = () => {
               <img
                 src="/card-light.svg"
                 alt="Omar Torbi — Terminal Profile Card ($ whoami)"
+                width={760}
+                height={300}
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-auto max-w-[760px] rounded-lg shadow-sm select-none block dark:hidden"
                 loading="eager"
               />
@@ -108,6 +114,10 @@ export const HeroTerminalCard: React.FC = () => {
               <img
                 src="/card.svg"
                 alt="Omar Torbi — Terminal Profile Card ($ whoami)"
+                width={760}
+                height={300}
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-auto max-w-[760px] rounded-lg shadow-xl select-none hidden dark:block"
                 loading="eager"
               />

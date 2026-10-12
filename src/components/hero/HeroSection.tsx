@@ -32,68 +32,55 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
   };
 
   return (
-    <section id="about" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden border-b border-zinc-200/90 dark:border-white/10 bg-[#fcfcfc] dark:bg-[#000000] scroll-mt-20 transition-colors duration-300">
+    <section id="about" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden border-b border-zinc-200/90 dark:border-white/10 bg-[#fcfcfc] dark:bg-[#000000] scroll-mt-20">
       {/* Subtle fine grid background */}
       <div className="absolute inset-0 bg-grid-pattern dark:bg-grid-pattern-dark opacity-35 dark:opacity-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center text-center">
         
         {/* Section 01 Tag */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono font-semibold mb-6 shadow-2xs text-neutral-700 dark:text-neutral-300"
-        >
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono font-semibold mb-6 shadow-2xs text-neutral-700 dark:text-neutral-300">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
           </span>
           <span className="font-mono text-accent font-bold">01.</span>
           <span>{t.hero.tag}</span>
-        </motion.div>
+        </div>
 
         {/* Center Official Brand Logo */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          whileHover={{ scale: 1.05 }}
-          className="mb-4 cursor-pointer flex items-center justify-center"
-        >
+        <div className="mb-4 cursor-pointer flex items-center justify-center">
           <img
-            src="/logo/logo-white.png"
+            src="/logo/logo-white.webp"
             alt="Omar Torbi"
+            width={128}
+            height={64}
+            fetchPriority="high"
+            decoding="async"
             className="h-14 sm:h-16 w-auto object-contain hidden dark:block"
           />
           <img
-            src="/logo/logo-black.png"
+            src="/logo/logo-black.webp"
             alt="Omar Torbi"
+            width={128}
+            height={64}
+            fetchPriority="high"
+            decoding="async"
             className="h-14 sm:h-16 w-auto object-contain block dark:hidden"
           />
-        </motion.div>
+        </div>
 
         {/* Signature Name Highlight Badge (Salah Khadir style) */}
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="text-neutral-600 dark:text-neutral-300 text-sm sm:text-base md:text-lg font-sans tracking-wide mb-3 flex flex-wrap items-center justify-center gap-x-1.5"
-        >
+        <p className="text-neutral-600 dark:text-neutral-300 text-sm sm:text-base md:text-lg font-sans tracking-wide mb-3 flex flex-wrap items-center justify-center gap-x-1.5">
           <span>{language === "fr" ? "Bonjour, je m'appelle" : "Hi, my name is"}</span>
-          <span className="relative inline-block px-2.5 py-0.5 bg-accent text-white dark:text-neutral-950 font-bold before:absolute before:-inset-1 before:bg-accent before:-skew-y-3 before:-z-10 mx-1.5 shadow-xs transition-colors">
+          <span className="relative inline-block px-2.5 py-0.5 bg-accent text-white dark:text-neutral-950 font-bold before:absolute before:-inset-1 before:bg-accent before:-skew-y-3 before:-z-10 mx-1.5 shadow-xs">
             Omar Torbi
           </span>
           <span>{language === "fr" ? "et je suis un" : "and I'm a"}</span>
-        </motion.p>
+        </p>
 
-        {/* Monumental, Ultra-Clear Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-black tracking-tight text-neutral-950 dark:text-white uppercase max-w-5xl leading-[1.04] mb-5 transition-colors"
-        >
+        {/* Monumental, Ultra-Clear Headline (Critical LCP element - rendered instantly) */}
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-sans font-black tracking-tight text-neutral-950 dark:text-white uppercase max-w-5xl leading-[1.04] mb-5">
           {language === "fr" ? (
             <>
               INGÉNIEUR LOGICIEL <br className="hidden sm:inline" />
@@ -105,15 +92,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
               ENGINEER
             </>
           )}
-        </motion.h1>
+        </h1>
 
         {/* Crisp Subheader */}
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="font-mono text-xs sm:text-sm tracking-wider uppercase text-neutral-700 dark:text-neutral-300 max-w-3xl mb-8 leading-relaxed font-semibold transition-colors"
-        >
+        <p className="font-mono text-xs sm:text-sm tracking-wider uppercase text-neutral-700 dark:text-neutral-300 max-w-3xl mb-8 leading-relaxed font-semibold">
           {language === "fr" ? (
             <>
               ARCHITECTURE SYSTÈMES • CLOUD OCI &amp; DEVOPS • INGÉNIERIE 3D WEB <br className="hidden sm:inline" />
@@ -129,22 +111,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
               </span>
             </>
           )}
-        </motion.p>
+        </p>
 
         {/* 3-Button Action Tray */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex flex-wrap items-center justify-center gap-3 mb-14 sm:mb-18"
-        >
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-14 sm:mb-18">
           {/* Main Action Button */}
           <motion.a
             href="#projects"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => sound.playClick()}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-950 hover:bg-neutral-900 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 text-xs sm:text-sm font-sans font-bold transition-all cursor-pointer shadow-md hover:shadow-[0_0_24px_var(--accent-glow)] border border-transparent hover:border-accent/40 uppercase"
+            data-cursor-label="Projects"
+            className="cursor-target inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-950 hover:bg-neutral-900 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 text-xs sm:text-sm font-sans font-bold cursor-pointer shadow-md uppercase"
           >
             <span>{t.hero.projectsCta}</span>
             <ArrowRight className="w-3.5 h-3.5 text-accent" />
@@ -156,7 +134,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => sound.playClick()}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-zinc-100 text-neutral-950 border border-zinc-300 dark:bg-[#0e0f12] dark:hover:bg-zinc-900 dark:text-white dark:border-zinc-800 text-xs sm:text-sm font-sans font-bold transition-all cursor-pointer shadow-xs hover:border-accent/30 uppercase"
+            data-cursor-label="Contact"
+            className="cursor-target inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-zinc-100 text-neutral-950 border border-zinc-300 dark:bg-[#0e0f12] dark:hover:bg-zinc-900 dark:text-white dark:border-zinc-800 text-xs sm:text-sm font-sans font-bold cursor-pointer shadow-xs uppercase"
           >
             <span>{t.hero.contactCta}</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -167,7 +146,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleCopyCli}
-            className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 dark:bg-[#0e0f12] dark:hover:bg-zinc-900 dark:border-zinc-800 text-neutral-900 dark:text-zinc-200 text-xs font-mono font-medium transition-all cursor-pointer shadow-2xs hover:border-accent/40"
+            data-cursor-label="Copy CLI"
+            className="cursor-target inline-flex items-center gap-2 px-4 py-3 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 dark:bg-[#0e0f12] dark:hover:bg-zinc-900 dark:border-zinc-800 text-neutral-900 dark:text-zinc-200 text-xs font-mono font-medium cursor-pointer shadow-2xs"
             title="Click to copy terminal command"
           >
             <span className="text-accent font-bold">&gt;</span>
@@ -179,17 +159,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
               <Copy className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400" />
             )}
           </motion.button>
-        </motion.div>
+        </div>
 
         {/* HERO SHOWCASE: terminal-card.svg in unified monochrome */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="w-full mb-16"
-        >
+        <div className="w-full mb-16">
           <HeroTerminalCard />
-        </motion.div>
+        </div>
 
         {/* About Engineering Narrative Card */}
         <motion.div

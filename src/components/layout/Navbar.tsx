@@ -43,20 +43,27 @@ export const Navbar: React.FC<NavbarProps> = () => {
         <a
           href="#"
           onClick={() => sound.playClick()}
-          className="flex items-center gap-2 group cursor-pointer shrink-0 z-10"
+          data-cursor-label="Omar Torbi"
+          className="cursor-target flex items-center gap-2 group cursor-pointer shrink-0 z-10"
           aria-label="Omar Torbi Portfolio Home"
         >
           <div className="h-7 sm:h-8 flex items-center justify-center">
             {/* Dark mode logo (white) */}
             <img
-              src="/logo/logo-white.png"
+              src="/logo/logo-white.webp"
               alt="Omar Torbi Logo"
+              width={48}
+              height={28}
+              decoding="async"
               className="h-6 sm:h-7 w-auto object-contain hidden dark:block transition-transform duration-300 group-hover:scale-105"
             />
             {/* Light mode logo (black) */}
             <img
-              src="/logo/logo-black.png"
+              src="/logo/logo-black.webp"
               alt="Omar Torbi Logo"
+              width={48}
+              height={28}
+              decoding="async"
               className="h-6 sm:h-7 w-auto object-contain block dark:hidden transition-transform duration-300 group-hover:scale-105"
             />
           </div>
@@ -72,9 +79,10 @@ export const Navbar: React.FC<NavbarProps> = () => {
             <a
               key={link.label}
               href={link.href}
+              data-cursor-label={link.label}
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
-              className="group hover:text-accent transition-colors cursor-pointer whitespace-nowrap"
+              className="cursor-target group hover:text-accent transition-colors cursor-pointer whitespace-nowrap"
             >
               <span className="text-accent/40 group-hover:text-accent font-mono text-[11px] font-bold mr-1.5 transition-colors">0{idx + 1}.</span>
               <span>{link.label}</span>
@@ -87,7 +95,8 @@ export const Navbar: React.FC<NavbarProps> = () => {
           {/* Theme Toggle Button (Dark / Light) */}
           <button
             onClick={toggleTheme}
-            className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700 transition-colors cursor-pointer"
+            data-cursor-label="Theme"
+            className="cursor-target w-8 h-8 rounded-full flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700 transition-colors cursor-pointer"
             title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
             aria-label="Toggle theme mode"
           >
@@ -102,7 +111,8 @@ export const Navbar: React.FC<NavbarProps> = () => {
           <button
             type="button"
             onClick={toggleLanguage}
-            className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700 transition-colors cursor-pointer select-none overflow-hidden"
+            data-cursor-label={language === "en" ? "FR" : "EN"}
+            className="cursor-target w-8 h-8 rounded-full flex items-center justify-center text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-transparent hover:border-zinc-200 dark:hover:border-zinc-700 transition-colors cursor-pointer select-none overflow-hidden"
             title={language === "en" ? "Passer en Français (FR)" : "Switch to English (EN)"}
             aria-label={`Language: ${language.toUpperCase()}. Click to switch to ${language === "en" ? "French" : "English"}`}
           >

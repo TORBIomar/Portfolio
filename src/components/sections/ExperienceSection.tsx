@@ -14,7 +14,7 @@ export const ExperienceSection: React.FC = () => {
   const activeExp = EXPERIENCES_DATA.find((e) => e.id === activeExpId) || EXPERIENCES_DATA[0];
 
   return (
-    <section id="experiences" className="py-24 sm:py-32 border-b border-zinc-200/90 dark:border-white/10 bg-[#fcfcfc] dark:bg-[#000000] scroll-mt-16 transition-colors duration-300">
+    <section id="experiences" className="py-24 sm:py-32 border-b border-zinc-200/90 dark:border-white/10 bg-[#fcfcfc] dark:bg-[#000000] scroll-mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -59,11 +59,12 @@ export const ExperienceSection: React.FC = () => {
                     sound.playClick();
                     setActiveExpId(exp.id);
                   }}
-                  className={`w-full p-5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex items-center justify-between ${
+                  className={`cursor-target w-full p-5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex items-center justify-between ${
                     isActive
-                      ? "bg-neutral-950 dark:bg-[#09090b] text-white border-accent shadow-md ring-1 ring-accent/30"
-                      : "bg-white dark:bg-[#09090b] text-neutral-800 dark:text-neutral-200 border-zinc-200 dark:border-white/10 hover:border-accent/40 hover:bg-zinc-50 dark:hover:bg-zinc-900"
+                      ? "bg-white dark:bg-[#09090b] text-neutral-950 dark:text-white border-accent shadow-md shadow-accent/5 dark:shadow-[0_4px_20px_-2px_var(--accent-glow)] ring-1 ring-accent/30"
+                      : "bg-white/70 dark:bg-[#09090b]/70 text-neutral-800 dark:text-neutral-200 border-zinc-200/90 dark:border-white/10 hover:border-accent/40 hover:bg-white dark:hover:bg-zinc-900"
                   }`}
+                  data-cursor-label={exp.company}
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
@@ -75,16 +76,12 @@ export const ExperienceSection: React.FC = () => {
                         {exp.company}
                       </span>
                     </div>
-                    <div className={`font-sans text-sm font-bold line-clamp-1 ${
-                      isActive 
-                        ? "text-white" 
-                        : "text-neutral-950 dark:text-white"
-                    }`}>
+                    <div className="font-sans text-sm font-bold line-clamp-1 text-neutral-950 dark:text-white">
                       {exp.role}
                     </div>
                     <div className={`font-mono text-[11px] ${
                       isActive 
-                        ? "text-neutral-300 dark:text-neutral-400" 
+                        ? "text-neutral-600 dark:text-neutral-400 font-medium" 
                         : "text-neutral-400 dark:text-neutral-500"
                     }`}>
                       {exp.period}
@@ -154,7 +151,7 @@ export const ExperienceSection: React.FC = () => {
 
                 {/* Achievements List */}
                 <div className="space-y-3 mb-8">
-                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500 block mb-2">
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-neutral-600 dark:text-neutral-400 block mb-2">
                     Key Deliverables & Architectural Focus
                   </span>
                   {activeExp.highlights.map((h, hIdx) => (
@@ -173,7 +170,7 @@ export const ExperienceSection: React.FC = () => {
 
                 {/* Technologies Footer */}
                 <div className="pt-6 border-t border-zinc-100 dark:border-zinc-800 flex flex-wrap items-center gap-2">
-                  <span className="font-mono text-[11px] text-neutral-400 dark:text-neutral-500 mr-2">
+                  <span className="font-mono text-[11px] text-neutral-600 dark:text-neutral-400 mr-2">
                     Core Technologies:
                   </span>
                   {activeExp.tech.map((t, tIdx) => (
