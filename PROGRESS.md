@@ -119,11 +119,12 @@ This session accomplished a comprehensive modernization and performance optimiza
 | `9448fbc` | `refactor: remove command palette button from hero action tray` | Clean 2-button action layout |
 | `81cbc66` | `docs: add comprehensive progress and milestone report` | Documentation & progress report |
 | `9b039b1` | `feat(chat): upgrade 3D bot with multi-stage sleep physics, book fetching, fireflies, mouth articulation, and terracotta styling` | 3D bot lifelike physics & terracotta branding |
+| `2f120fc` | `feat(chat): add 3D laptop coding idle animation with glasses and simplify modal header` | 3D laptop coding idle mode & simple chat UI |
 
 **Vercel Production Deployment**:  
-* Status: **Ready & Live** (Built & deployed in 33s)  
+* Status: **Ready & Live** (Built & deployed in 49s)  
 * Canonical URL: [https://www.omartorbi.engineer](https://www.omartorbi.engineer)  
-* Deployment URL: [https://torbiomar-iz9cshhvl-omarinho18.vercel.app](https://torbiomar-iz9cshhvl-omarinho18.vercel.app)  
+* Deployment URL: [https://torbiomar-m7wxebe77-omarinho18.vercel.app](https://torbiomar-m7wxebe77-omarinho18.vercel.app)  
 * CLI Test: `curl -sL https://www.omartorbi.engineer/cli`  
 
 ---
