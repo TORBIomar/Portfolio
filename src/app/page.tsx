@@ -68,6 +68,24 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleOpenPalette = () => setCommandPaletteOpen(true);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setCommandPaletteOpen((prev) => !prev);
+      }
+    };
+
+    window.addEventListener("open-command-palette", handleOpenPalette);
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("open-command-palette", handleOpenPalette);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   const handleOpenProjectById = (projectId: string) => {
     const found = PROJECTS_DATA.find((p) => p.id === projectId);
     if (found) {
@@ -86,7 +104,9 @@ export default function Home() {
           />
 
           {/* SECTION 1: ABOUT (Hero with card.svg Showcase, Narrative & Architecture Pillars) */}
-          <HeroSection />
+          <HeroSection
+            onOpenCommandPalette={() => setCommandPaletteOpen(true)}
+          />
 
           {/* SECTION 2: EXPERIENCES (Zahiri Metal, ONSSA, EMSI Degree Switcher) */}
           <ExperienceSection />

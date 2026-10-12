@@ -105,6 +105,33 @@ export const FOUNDATION_PILLARS = [
   },
 ];
 
+export const FOUNDATION_PILLARS_FR = [
+  {
+    number: "01",
+    tag: "CONTRÔLE",
+    title: "Architecture Backend Entreprise",
+    headline: "Systèmes Modulaires & Haute Cohésion",
+    description: "Spring Boot 3, APIs RESTful modulaires, contrôle d'accès strict (RBAC), authentification stateless JWT et principes Clean Architecture sans fuite structurelle.",
+    bullets: ["Spring Boot 3 & Java 17/21", "JWT Stateless & RBAC Granulaire", "Clean Architecture & DTOs Découplés"],
+  },
+  {
+    number: "02",
+    tag: "GOUVERNANCE",
+    title: "DevOps Reproductible & Cloud",
+    headline: "Infrastructure Durcie & Certifiée",
+    description: "Double certification Oracle Cloud Infrastructure (OCI DevOps & Architect Professional). Conteneurs Docker Alpine multi-étapes, administration Linux durcie et automatisation n8n.",
+    bullets: ["Dockerfiles Multi-Étapes Alpine", "Daemons Linux & Services Systemd", "Réseau OCI & Compute Cloud"],
+  },
+  {
+    number: "03",
+    tag: "VALEUR",
+    title: "Persistance & 3D Web",
+    headline: "Requêtes Sub-10ms & WebGL 60 FPS",
+    description: "Conception relationnelle ACID avec MySQL, PostgreSQL et Oracle PL/SQL. Studio CAD browser haute performance avec WebAssembly, Three.js et recherche vectorielle Gemini RAG.",
+    bullets: ["PostgreSQL, MySQL 8 & Oracle PL/SQL", "Three.js & OpenCascade.js Wasm", "ChromaDB & Gemini Vector RAG"],
+  },
+];
+
 export const STACK_MODELS = [
   { name: "Spring Boot 3", type: "Backend Framework", badge: "Enterprise" },
   { name: "Docker", type: "Containerization", badge: "Multi-Stage" },

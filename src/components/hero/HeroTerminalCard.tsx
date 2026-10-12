@@ -5,10 +5,12 @@ import { motion } from "framer-motion";
 import { Copy, Check, Download, Terminal } from "lucide-react";
 import { sound } from "@/utils/sound";
 import { useToast } from "@/components/common/Toast";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const HeroTerminalCard: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const { language } = useLanguage();
   const { showToast } = useToast();
 
   useEffect(() => {
@@ -21,13 +23,24 @@ export const HeroTerminalCard: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  const cliRunnerCommand = "curl -fsSL https://omartorbi.engineer/cli | sh";
+
   const handleCopyCommand = () => {
     sound.playSuccess();
-    navigator.clipboard.writeText("npx omar-torbi");
+    navigator.clipboard.writeText(cliRunnerCommand);
     setCopied(true);
-    showToast("Copied 'npx omar-torbi' to clipboard!");
+    showToast(
+      language === "fr"
+        ? `Copié "${cliRunnerCommand}" dans le presse-papier !`
+        : `Copied "${cliRunnerCommand}" to clipboard!`
+    );
     setTimeout(() => setCopied(false), 2200);
   };
+
+  const lightCardSrc = language === "fr" ? "/card-light-fr.svg" : "/card-light.svg";
+  const darkCardSrc = language === "fr" ? "/card-fr.svg" : "/card.svg";
+  const downloadSrc = isDark ? darkCardSrc : lightCardSrc;
+  const downloadName = `omar-torbi-card-${language}${isDark ? "-dark" : "-light"}.svg`;
 
   return (
     <div className="w-full max-w-4xl mx-auto px-2 sm:px-0">
@@ -46,11 +59,11 @@ export const HeroTerminalCard: React.FC = () => {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
               </span>
               <span className="text-[#5C1A0D] dark:text-[#FFB0A1] font-semibold text-[11px] sm:text-xs">
-                omar@torbi: ~$ whoami
+                {language === "fr" ? "omar@torbi: ~$ qui-suis-je" : "omar@torbi: ~$ whoami"}
               </span>
               <span className="text-[#8C4435]/60 dark:text-[#FFB0A1]/50 hidden sm:inline">|</span>
               <span className="text-[#8C4435] dark:text-[#FFD8D0] hidden sm:inline text-[11px]">
-                engineer profile v2.5
+                {language === "fr" ? "profil ingénieur v2.5" : "engineer profile v2.5"}
               </span>
             </div>
 
@@ -60,17 +73,17 @@ export const HeroTerminalCard: React.FC = () => {
                 onClick={handleCopyCommand}
                 data-cursor-label="Copy"
                 className="cursor-target inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/90 hover:bg-white dark:bg-white/[0.08] dark:hover:bg-white/[0.16] text-[#5C1A0D] dark:text-[#FAF7F5] border border-[#A42F17]/25 dark:border-[#FFB0A1]/35 hover:border-[#A42F17]/60 dark:hover:border-[#FFB0A1] text-[11px] transition-all cursor-pointer shadow-2xs"
-                title="Copy terminal runner command"
+                title={language === "fr" ? "Copier la commande terminal" : "Copy terminal runner command"}
               >
                 {copied ? (
                   <>
                     <Check className="w-3 h-3 text-accent font-bold" />
-                    <span className="text-accent font-bold">Copied</span>
+                    <span className="text-accent font-bold">{language === "fr" ? "Copié" : "Copied"}</span>
                   </>
                 ) : (
                   <>
                     <Terminal className="w-3 h-3 text-[#8C4435] dark:text-[#FFB0A1]" />
-                    <span>npx omar-torbi</span>
+                    <span>curl omartorbi.engineer/cli</span>
                     <Copy className="w-3 h-3 text-[#8C4435] dark:text-[#FFB0A1] ml-0.5" />
                   </>
                 )}
@@ -78,13 +91,13 @@ export const HeroTerminalCard: React.FC = () => {
 
               {/* View Raw SVG Link */}
               <a
-                href={isDark ? "/card.svg" : "/card-light.svg"}
+                href={downloadSrc}
                 target="_blank"
                 rel="noreferrer"
-                download={isDark ? "omar-torbi-card.svg" : "omar-torbi-card-transparent.svg"}
+                download={downloadName}
                 data-cursor-label="Download"
                 className="cursor-target inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-white/90 hover:bg-white dark:bg-white/[0.08] dark:hover:bg-white/[0.16] text-[#5C1A0D] dark:text-[#FAF7F5] border border-[#A42F17]/25 dark:border-[#FFB0A1]/35 hover:border-[#A42F17]/60 dark:hover:border-[#FFB0A1] text-[11px] transition-all shadow-2xs"
-                title="Download raw SVG card"
+                title={language === "fr" ? "Télécharger la carte SVG brute" : "Download raw SVG card"}
               >
                 <Download className="w-3 h-3" />
                 <span className="hidden sm:inline">Raw SVG</span>
@@ -101,8 +114,9 @@ export const HeroTerminalCard: React.FC = () => {
             >
               {/* Light Mode: Displays the Transparent Warmer Terracotta Card */}
               <img
-                src="/card-light.svg"
-                alt="Omar Torbi — Terminal Profile Card ($ whoami)"
+                key={`light-${language}`}
+                src={lightCardSrc}
+                alt={language === "fr" ? "Omar Torbi — Carte Profil Terminal ($ whoami)" : "Omar Torbi — Terminal Profile Card ($ whoami)"}
                 width={760}
                 height={330}
                 fetchPriority="high"
@@ -112,8 +126,9 @@ export const HeroTerminalCard: React.FC = () => {
               />
               {/* Dark Mode: Displays the Transparent Lighter Terracotta Card */}
               <img
-                src="/card.svg"
-                alt="Omar Torbi — Terminal Profile Card ($ whoami)"
+                key={`dark-${language}`}
+                src={darkCardSrc}
+                alt={language === "fr" ? "Omar Torbi — Carte Profil Terminal ($ whoami)" : "Omar Torbi — Terminal Profile Card ($ whoami)"}
                 width={760}
                 height={330}
                 fetchPriority="high"
@@ -128,7 +143,11 @@ export const HeroTerminalCard: React.FC = () => {
           <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 bg-[#A42F17]/[0.06] dark:bg-[#FFB0A1]/[0.08] backdrop-blur-md border-t border-[#A42F17]/15 dark:border-[#FFB0A1]/20 text-[11px] font-mono text-[#6B2011] dark:text-[#FFD8D0] transition-colors">
             <div className="flex items-center gap-2">
               <span className="text-accent font-bold">●</span>
-              <span className="font-semibold text-[#3D160E] dark:text-[#FAF7F5]">Available for PFE Internship (Feb 2027) &amp; Full-Time</span>
+              <span className="font-semibold text-[#3D160E] dark:text-[#FAF7F5]">
+                {language === "fr"
+                  ? "Disponible pour Stage PFE (Fév 2027) & Opportunités CDI"
+                  : "Available for PFE Internship (Feb 2027) & Full-Time"}
+              </span>
             </div>
 
             <div className="flex items-center gap-1.5 sm:gap-2 text-[#6B2011] dark:text-[#FFD8D0] text-[10.5px]">

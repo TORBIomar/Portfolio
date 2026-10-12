@@ -1,0 +1,60 @@
+<svg viewBox="0 0 760 330" xmlns="http://www.w3.org/2000/svg" font-family="SFMono-Regular, Menlo, Monaco, Consolas, monospace">
+  <defs>
+    <linearGradient id="accentLineLight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A42F17" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#E35336" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#A42F17" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Window Container with Transparent Background & Rich Darker Terracotta Border -->
+  <rect x="1" y="1" width="758" height="328" rx="12" fill="none" stroke="#A42F17" stroke-width="1.5" stroke-opacity="0.35"/>
+
+  <!-- macOS Window Title Bar (Subtle Terracotta Glass) -->
+  <rect x="1" y="1" width="758" height="36" rx="12" fill="rgba(164, 47, 23, 0.08)"/>
+  <rect x="1" y="24" width="758" height="13" fill="rgba(164, 47, 23, 0.06)"/>
+  <line x1="1" y1="37" x2="759" y2="37" stroke="#A42F17" stroke-width="1" stroke-opacity="0.25"/>
+
+  <circle cx="24" cy="19" r="5" fill="#ff5f56"/>
+  <circle cx="42" cy="19" r="5" fill="#ffbd2e"/>
+  <circle cx="60" cy="19" r="5" fill="#27c93f"/>
+  <text x="380" y="23" text-anchor="middle" fill="#8C4435" font-size="11.5" letter-spacing="0.5">omar@torbi: ~/a-propos (whoami)</text>
+
+  <!-- Terminal Body -->
+  <g font-size="13.5">
+    <!-- Command Prompt -->
+    <text x="28" y="68" fill="#A42F17" font-weight="700">&gt; <tspan fill="#1A1513" font-weight="600">whoami</tspan></text>
+
+    <!-- Name & Subtitle -->
+    <text x="28" y="96" fill="#1A1513" font-size="20" font-weight="700" letter-spacing="-0.3">Omar Torbi</text>
+    <text x="175" y="96" fill="#A42F17" font-size="13" font-weight="600">ingénieur logiciel &amp; devops</text>
+
+    <!-- Dividing Hairline -->
+    <line x1="28" y1="110" x2="732" y2="110" stroke="url(#accentLineLight)" stroke-width="1"/>
+
+    <!-- Key-Value Metadata -->
+    <text x="28" y="136" fill="#8C4435" font-weight="600">rôle</text>
+    <text x="135" y="136" fill="#1A1513" font-weight="500">Ingénieur Logiciel &amp; DevOps</text>
+
+    <text x="28" y="162" fill="#8C4435" font-weight="600">école</text>
+    <text x="135" y="162" fill="#1A1513" font-weight="500">EMSI Rabat — Diplôme d'Ingénieur d'État (DDSI, Promo 2027)</text>
+
+    <text x="28" y="188" fill="#8C4435" font-weight="600">certs</text>
+    <text x="135" y="188" fill="#1A1513" font-weight="500"><tspan fill="#A42F17" font-weight="600">Java SE 17 Pro</tspan> · <tspan fill="#A42F17" font-weight="600">OCI DevOps Pro</tspan> · <tspan fill="#A42F17" font-weight="600">OCI Architect Pro</tspan></text>
+
+    <text x="28" y="214" fill="#8C4435" font-weight="600">stack</text>
+    <text x="135" y="214" fill="#1A1513" font-weight="500">Spring Boot 3 · <tspan fill="#A42F17" font-weight="600">Docker &amp; Linux</tspan> · Cloud OCI · Three.js &amp; Wasm</text>
+
+    <text x="28" y="240" fill="#8C4435" font-weight="600">focus</text>
+    <text x="135" y="240" fill="#1A1513" font-weight="500">Architectures Backend Modulaires · Clean Code &amp; RBAC · Qualité</text>
+
+    <text x="28" y="266" fill="#8C4435" font-weight="600">basé</text>
+    <text x="135" y="266" fill="#1A1513" font-weight="500">Rabat / Béni Mellal, Maroc</text>
+
+    <!-- Status Indicator in darker terracotta aura -->
+    <text x="28" y="298" fill="#8C4435" font-weight="600">statut</text>
+    <circle cx="143" cy="294" r="6" fill="#A42F17" fill-opacity="0.18"/>
+    <circle cx="143" cy="294" r="3.5" fill="#A42F17"/>
+    <text x="157" y="298" fill="#A42F17" font-weight="600">disponible pour stage pfe (fév 2027) &amp; opportunités cdi</text>
+  </g>
+</svg>

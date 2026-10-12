@@ -1,34 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
-import { ArrowRight, Copy, Check, Server, Cloud, Database } from "lucide-react";
+import React from "react";
+import { ArrowRight, Search, Server, Cloud, Database } from "lucide-react";
 import { HeroTerminalCard } from "./HeroTerminalCard";
-import { PERSONAL_INFO, FOUNDATION_PILLARS } from "@/data/portfolioData";
+import { FOUNDATION_PILLARS, FOUNDATION_PILLARS_FR } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
-import { useToast } from "../common/Toast";
 import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
 
 interface HeroSectionProps {
   onOpenContactModal?: () => void;
+  onOpenCommandPalette?: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal, onOpenCommandPalette }) => {
   const { language, t } = useLanguage();
-  const [copied, setCopied] = useState(false);
-  const { showToast } = useToast();
   const pillarIcons = [Server, Cloud, Database];
+  const activePillars = language === "fr" ? FOUNDATION_PILLARS_FR : FOUNDATION_PILLARS;
 
-  const handleCopyCli = () => {
-    navigator.clipboard.writeText(PERSONAL_INFO.npmCommand);
-    setCopied(true);
-    sound.playSuccess();
-    showToast(
-      language === "fr"
-        ? `Copié "${PERSONAL_INFO.npmCommand}" dans le presse-papier !`
-        : `Copied "${PERSONAL_INFO.npmCommand}" to clipboard!`
-    );
-    setTimeout(() => setCopied(false), 2200);
+  const handleOpenPalette = () => {
+    sound.playClick();
+    if (onOpenCommandPalette) {
+      onOpenCommandPalette();
+    } else if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("open-command-palette"));
+    }
   };
 
   return (
@@ -141,23 +137,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
             <ArrowRight className="w-3.5 h-3.5" />
           </motion.a>
 
-          {/* Interactive Copyable CLI Chip */}
+          {/* Interactive Command Palette Trigger Chip */}
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            onClick={handleCopyCli}
-            data-cursor-label="Copy CLI"
-            className="cursor-target inline-flex items-center gap-2 px-4 py-3 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 dark:bg-[#0e0f12] dark:hover:bg-zinc-900 dark:border-zinc-800 text-neutral-900 dark:text-zinc-200 text-xs font-mono font-medium cursor-pointer shadow-2xs"
-            title="Click to copy terminal command"
+            onClick={handleOpenPalette}
+            data-cursor-label="Palette"
+            className="cursor-target inline-flex items-center gap-2 px-4 py-3 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 dark:bg-[#0e0f12] dark:hover:bg-zinc-900 dark:border-zinc-800 text-neutral-900 dark:text-zinc-200 text-xs font-mono font-medium cursor-pointer shadow-2xs transition-colors"
+            title={language === "fr" ? "Ouvrir la palette de commandes (⌘K)" : "Open command palette (⌘K)"}
           >
-            <span className="text-accent font-bold">&gt;</span>
-            <span className="font-bold">{PERSONAL_INFO.npmCommand}</span>
-            <span className="text-zinc-300 dark:text-zinc-700">|</span>
-            {copied ? (
-              <Check className="w-3.5 h-3.5 text-accent font-bold" />
-            ) : (
-              <Copy className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400" />
-            )}
+            <Search className="w-3.5 h-3.5 text-accent" />
+            <span className="font-semibold">
+              {language === "fr" ? "Palette de commandes" : "Command Palette"}
+            </span>
+            <kbd className="ml-0.5 px-1.5 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-[10px] font-mono text-neutral-600 dark:text-neutral-400 border border-zinc-300 dark:border-zinc-700 font-semibold">
+              ⌘K
+            </kbd>
           </motion.button>
         </div>
 
@@ -168,7 +163,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenContactModal }) 
 
         {/* 3 Architectural Pillars (Control, Governance, Value) */}
         <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-          {FOUNDATION_PILLARS.map((pillar, idx) => {
+          {activePillars.map((pillar, idx) => {
             const Icon = pillarIcons[idx];
             return (
               <motion.div
