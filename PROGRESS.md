@@ -129,6 +129,7 @@ This session accomplished a comprehensive modernization and performance optimiza
 | `2f120fc` | `feat(chat): add 3D laptop coding idle animation with glasses and simplify modal header` | 3D laptop coding idle mode & simple chat UI |
 | `ed8eee9` | `refactor(chat): simplify greeting and model indicator` | Simplified Maro greeting and model tag |
 | `da572de` | `feat(seo): prioritize Omar Torbi in title, h1 heading, schema.org JSON-LD, and sitemap` | Name-first SEO, semantic h1, JSON-LD, sitemap, robots |
+| `e1be3c2` | `feat(seo): add Google-compliant 48px multiple favicons, webmanifest, and Organization logo structured data` | Multi-resolution favicons (48px multiples), web manifest, Schema.org logo |
 
 **Vercel Production Deployment**:  
 * Status: **Ready & Live**  
