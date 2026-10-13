@@ -11,6 +11,7 @@ pnpm dev
 # or
 bun dev
 ```
+dont copy anything thats mine and just using this repo to control versions
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
