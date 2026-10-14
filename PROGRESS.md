@@ -3,7 +3,7 @@
 **Project**: Omar Torbi — Personal Portfolio & Engineering Showcase  
 **Live URL**: [https://www.omartorbi.engineer](https://www.omartorbi.engineer)  
 **Repository**: [https://github.com/TORBIomar/Portfolio.git](https://github.com/TORBIomar/Portfolio.git)  
-**Last Updated**: October 12, 2026  
+**Last Updated**: October 14, 2026  
 
 ---
 
@@ -115,6 +115,11 @@ This session accomplished a comprehensive modernization and performance optimiza
 * **Search Crawlers & Robots**: Created `src/app/robots.ts` and `src/app/sitemap.ts` (`priority: 1.0`, `weekly`), pointing search bots directly to the live sitemap XML.
 * **Open Graph & Twitter Cards**: Updated full metadata with canonical URL `https://www.omartorbi.engineer`, localized metadata descriptions, and high-resolution Open Graph vectors.
 
+### J. Anti-Slop Cleanup & Clean Wakeup Message
+* **Emoji Removal**: Eliminated all decorative emojis across the AI assistant and language contexts (adhering strictly to anti-slop guidelines).
+* **Work Wakeup String**: Replaced the previous `Welcome back! 💻` string with clean and direct `"Let's get back to work"` (`"De retour au travail !"` in French) triggered when Maro closes his laptop and snaps back to attention.
+* **AI Knowledge Constraints**: Added explicit instructions forbidding emojis in live model responses to guarantee a clean, professional, and crisp engineering tone.
+
 ---
 
 ## 3. Git & Deployment Log
@@ -130,6 +135,7 @@ This session accomplished a comprehensive modernization and performance optimiza
 | `ed8eee9` | `refactor(chat): simplify greeting and model indicator` | Simplified Maro greeting and model tag |
 | `da572de` | `feat(seo): prioritize Omar Torbi in title, h1 heading, schema.org JSON-LD, and sitemap` | Name-first SEO, semantic h1, JSON-LD, sitemap, robots |
 | `e1be3c2` | `feat(seo): add Google-compliant 48px multiple favicons, webmanifest, and Organization logo structured data` | Multi-resolution favicons (48px multiples), web manifest, Schema.org logo |
+| `507c401` | `refactor(chat): remove emojis and set idle wakeup message to "Let's get back to work"` | Anti-slop emoji removal & updated idle return copy |
 
 **Vercel Production Deployment**:  
 * Status: **Ready & Live**  
