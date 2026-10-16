@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { PROJECTS_DATA, Project } from "@/data/portfolioData";
 import { sound } from "@/utils/sound";
 import { useLanguage } from "@/context/LanguageContext";
@@ -8,7 +8,6 @@ import {
   ExternalLink,
   ArrowRight,
   Box,
-  Layers,
   Sparkles,
   ShieldCheck,
   Workflow,
@@ -23,7 +22,6 @@ interface ProjectsGridProps {
 
 export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) => {
   const { language, t } = useLanguage();
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const renderThumbnailMockup = (project: Project) => {
     switch (project.mockupType) {
@@ -221,9 +219,7 @@ export const ProjectsGrid: React.FC<ProjectsGridProps> = ({ onSelectProject }) =
               whileHover={{ y: -6 }}
               onMouseEnter={() => {
                 sound.playHover();
-                setHoveredId(project.id);
               }}
-              onMouseLeave={() => setHoveredId(null)}
               onClick={() => {
                 sound.playClick();
                 onSelectProject(project);

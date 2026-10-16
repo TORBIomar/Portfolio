@@ -14,7 +14,6 @@ import {
   MapPin,
   ExternalLink,
   MessageSquare,
-  Sparkles,
   Loader2,
   AlertCircle,
 } from "lucide-react";
@@ -337,7 +336,7 @@ export const ReachOutSection: React.FC = () => {
                 Send a Direct Message
               </h3>
               <p className="font-sans text-xs text-zinc-500 dark:text-zinc-400 mb-6">
-                All messages route straight to Omar Torbi's verified inbox.
+                All messages route straight to Omar Torbi&apos;s verified inbox.
               </p>
 
               {submitted ? (

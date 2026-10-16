@@ -5,7 +5,6 @@ export async function GET() {
   const bold = "\x1b[1m";
   const dim = "\x1b[2m";
   const terracotta = "\x1b[38;2;255;176;161m";
-  const terracottaDark = "\x1b[38;2;164;47;23m";
   const white = "\x1b[38;2;255;255;255m";
   const gray = "\x1b[38;2;161;161;170m";
   const green = "\x1b[38;2;74;222;128m";
