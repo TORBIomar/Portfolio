@@ -1,5 +1,7 @@
+# Omar Torbi — Personal Portfolio & Engineering Showcase
 
-
+> Production-grade personal portfolio built with Next.js 16, React 19, Tailwind CSS, Three.js, and TypeScript.  
+> Live at [omartorbi.engineer](https://www.omartorbi.engineer).
 
 First, run the development server:
 ```bash
