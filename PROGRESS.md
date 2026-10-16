@@ -3,7 +3,7 @@
 **Project**: Omar Torbi — Personal Portfolio & Engineering Showcase  
 **Live URL**: [https://www.omartorbi.engineer](https://www.omartorbi.engineer)  
 **Repository**: [https://github.com/TORBIomar/Portfolio.git](https://github.com/TORBIomar/Portfolio.git)  
-**Last Updated**: October 14, 2026  
+**Last Updated**: October 16, 2026  
 
 ---
 
@@ -136,6 +136,8 @@ This session accomplished a comprehensive modernization and performance optimiza
 | `da572de` | `feat(seo): prioritize Omar Torbi in title, h1 heading, schema.org JSON-LD, and sitemap` | Name-first SEO, semantic h1, JSON-LD, sitemap, robots |
 | `e1be3c2` | `feat(seo): add Google-compliant 48px multiple favicons, webmanifest, and Organization logo structured data` | Multi-resolution favicons (48px multiples), web manifest, Schema.org logo |
 | `507c401` | `refactor(chat): remove emojis and set idle wakeup message to "Let's get back to work"` | Anti-slop emoji removal & updated idle return copy |
+| `a8eaede` | `docs(readme): polish header and add live project overview` | README header, quick summary, and live link |
+| `d303a45` | `refactor(components): clean up unused variables and escape JSX entities` | Unused variable cleanups and JSX apostrophe escaping |
 
 **Vercel Production Deployment**:  
 * Status: **Ready & Live**  
