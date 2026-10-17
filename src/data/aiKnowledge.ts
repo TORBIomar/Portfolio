@@ -66,7 +66,7 @@ FEATURED PROJECTS & ARCHITECTURE:
 1. Zahiri Metal — 3D Web CAD Studio:
    - What it is: In-browser 3D parametric CAD modeling tool engineered for industrial tubular sheet metal and CNC fiber laser cutting.
    - Tech: React 19, Three.js, OpenCascade.js WebAssembly (C++ geometric modeling kernel running in the browser), Web Workers offloading geometry meshing to preserve a constant 60 FPS UI thread, custom ISO-6983 G-code post-processor generator.
-   - Demo: https://zahiri-metal-3d-cad.vercel.app/ | Code: https://github.com/TORBIomar/3D-CAD-LASER-CUTTING
+   - Demo: https://zahiri-metal-3d-cad.vercel.app/ | Code: https://github.com/TORBIomar/zahiri-cad-studio
 2. Elevate — Enterprise Recruitment & Candidate Management Platform:
    - What it is: Full-stack recruitment system designed for corporate hiring pipelines.
    - Tech: Spring Boot 3, Java 17, Spring Security with stateless JWT authentication, fine-grained Role-Based Access Control (RBAC), MySQL 8.0 with optimized indexed schema eliminating N+1 query overhead.
@@ -74,7 +74,7 @@ FEATURED PROJECTS & ARCHITECTURE:
 3. Sofia — AI Virtual Library & Semantic Search:
    - What it is: Intelligent document retrieval and summarization platform.
    - Tech: ChromaDB vector database (cosine similarity embeddings), Google Gemini API integration, Spring Boot backend, interactive document search and automated summarization.
-   - Code: https://github.com/TORBIomar/Virtual-Library
+   - Code: https://github.com/TORBIomar/zen-shelf-hub
 4. Creator Outreach Matrix:
    - What it is: Automated creator intelligence and cold outreach pipeline.
    - Tech: Python 3 with Playwright headless browser automation (speed boosted 4x by aborting unnecessary media assets and fonts), n8n workflow orchestrator, Zoho Mail transactional SMTP, local LLM reply classification.
@@ -413,7 +413,7 @@ An industrial production platform for parametric 3D metal tube modeling and fibe
         {
           label: "View CAD GitHub Repo",
           type: "link",
-          payload: proj?.githubUrl || "https://github.com/TORBIomar/3D-CAD-LASER-CUTTING",
+          payload: proj?.githubUrl || "https://github.com/TORBIomar/zahiri-cad-studio",
           icon: "github",
         },
       ],
@@ -484,7 +484,7 @@ A full-stack digital knowledge platform featuring dense vector retrieval and gro
         {
           label: "View Sofia on GitHub",
           type: "link",
-          payload: proj?.githubUrl || "https://github.com/TORBIomar/Virtual-Library",
+          payload: proj?.githubUrl || "https://github.com/TORBIomar/zen-shelf-hub",
           icon: "github",
         },
       ],

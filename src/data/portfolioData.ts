@@ -173,7 +173,7 @@ export const PROJECTS_DATA: Project[] = [
       { label: "Concurrency", value: "Web Workers" },
     ],
     techStack: ["React", "Three.js", "OpenCascade.js", "WebAssembly", "TypeScript", "Tailwind CSS", "Spring Boot"],
-    githubUrl: "https://github.com/TORBIomar/3D-CAD-LASER-CUTTING",
+    githubUrl: "https://github.com/TORBIomar/zahiri-cad-studio",
     liveUrl: "https://zahiri-metal-3d-cad.vercel.app/",
     architectureDetails: {
       overview: "Combines an OpenCascade.js WebAssembly geometry engine with Three.js rendering. Heavy boundary representation (BREP) calculations and STEP exports run in background Web Workers to maintain interactive framerates.",
@@ -242,7 +242,7 @@ export const PROJECTS_DATA: Project[] = [
       { label: "Database", value: "MySQL" },
     ],
     techStack: ["Spring Boot", "React", "Gemini API", "ChromaDB", "MySQL", "REST APIs", "Tailwind CSS"],
-    githubUrl: "https://github.com/TORBIomar/Virtual-Library",
+    githubUrl: "https://github.com/TORBIomar/zen-shelf-hub",
     architectureDetails: {
       overview: "Layered backend architecture separating relational document metadata (MySQL) from high-dimensional vector embeddings (ChromaDB), coordinated with Google Gemini API for generative context synthesis and dense semantic retrieval.",
       keyDecisions: [
